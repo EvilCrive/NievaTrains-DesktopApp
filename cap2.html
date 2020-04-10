@@ -1,0 +1,298 @@
+<head><link rel="stylesheet" type="text/css" href="style.css" /></head>
+
+<h1> Appunti PAO </h1>
+<ol class="none"><li><h2> Capitolo 2: Classi e Oggetti </h2><ul>
+	
+	<li>
+		<p>ADT:</p>
+		<ul>
+			<li>Interfaccia pubblica separata dall'implementazione (della rappresentazione interna)</li>
+			<li>Gli oggetti ADT possono essere manipolati solo con metodi pubblici forniti dal tipo</li>
+			<li>I tipi primitivi sono esempi di ADT; esempi:
+				<ul class="bcircle">
+					<li><b>int</b>, con metodi pubblici di somma, moltiplicazione, uguaglianza, ...</li>
+					<li><b>string</b></li>
+					<li><b>struct</b> invece non e' un ADT, poiche' la rappresentazione interna puo' essere manipolata direttamente,</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<p>CLASSI:</p>
+		<ul>
+			<li>Interfaccia (o dichiarazione) e Definizione (o implementazione)</li>
+			<li>La dichiarazione consiste nel dichiarare i campi dati e i metodi della classe</li>
+			<li>La definizione e' l'implementazione dei vari metodi e l'inizializzazione dei campi dati statici, se viene separata dalla dichiarazione bisogna usare l'operatore di scooping.</li>
+			<li>Dichiarazione e Definizione possono non essere separate, in questo caso si parla di <b>metodi inline</b></li>
+			<li>Puntatore <b>this</b>
+				<ul class="bcircle">
+					<li>this e' una keyword</li>
+					<li>this punta all'oggetto di invocazione</li>
+					<li>this e' un parametro implicito dei metodi</li>
+					<li>Ci si puo' riferito all'oggetto tramite <b>*this</b></li>
+				</ul>
+			</li>
+			<li>Modificatori d'accesso:
+				<ul class="bcircle">
+					<li><b>private</b>
+						<ul class="i">
+							<li>modificatore d'accesso di <b>default</b></li>
+							<li>tipicamente contiene campi dati e metodi di utilita'</li>
+						</ul>
+					</li>
+					<li><b>public</b>
+						<ul class="i">
+							<li>tipicamente contiene l'interfaccia dei metodi pubblici</li>
+						</ul>
+					</li>
+					<li><b>protected</b></li>
+				</ul>
+			</li>
+			<li>Costruttori
+				<ul class="bcircle">
+					<li>I costruttori sono metodi con lo stesso nome della classe e senza tipo di ritorno</li>
+					<li>Vengono invocati quando viene dichiarato (e quindi costruito) un oggetto</li>
+					<li>Tipicamente sono metodi pubbici, ma possono essere privati per implementazione(e in questo caso non possono essere usati fuori dallla classe, per esempio dall'utente)</li>
+					<li>Un costruttore senza parametri e' chiamato <b>Costruttore di Default</b></li>
+					<li>E' possibile dichiarare piu' costruttori, a patto che abbiano lista di parametri diversa (overloading)</li>
+					<li>Se non e' stato dichiarato alcun costruttore(di qualsiasi tipo), allora e' presente il <b>Costruttore Standard</b>:
+						<ul class="i">
+							<li>Il costruttore standard e' un costruttore di default, ovvero senza parametri.</li>
+							<li>Il suo comportamento e' :  Alloca lo spazio ma lascia indefiniti i campi dati di tipo primitivo, e invoca il costruttore di default per i campi dati di tipo class.</li>	
+						</ul>
+						
+					</li>
+					<li><b>Costruttore di Copia</b>
+						<ul class="i">
+							<li>Per una classe C, il costruttore di copia e': <b>C(const& C);</b></li>
+						</ul>
+					</li>
+					<li>I costruttori a un parametro possono essere usati come <b>cast impliciti</b> (o conversioni implicite):
+						<ul class="i">
+							<li>Le conversioni implicite di questo tipo avvengono a run-time</li>
+							<li>si puo' utilizzare la keyword <b>explicit</b>, nella dichiarazione del costruttore interessato, per non renderlo disponibile per cast impliciti</li>
+							<li>Questi cast impliciti avvengono anche con costruttori a piu' parametri e con argomenti di default che possono essere "trasformati" in un costruttore a un parametro.</li>
+						</ul>
+					</li>
+					<li>Esistono anche gli operatori espliciti di conversione (metodo della classe): <b>operator int();</b></li>
+				</ul>
+			</li>
+			<li>Keyword <b>const</b>
+				<ul class="bcircle">
+					<li>Posso marcare costanti con const, sia metodi che campi dati, quindi campi dati costanti e metodi costanti, e anche gli oggetti.</li>
+					<li>Se in un metodo non c'e' alcun side-effect nell'oggetto d'invocazione, posso dichiarare il metodo costante. Il compilatore non da errore se:
+						<ul class="i">
+							<li>Non ci sono assegnazioni, a campi dati dell'oggetto d'invocazione</li>
+							<li>Non ci sono invocazioni, a metodi non costanti sull'oggetto di invocazione, poiche' potrebbero causare side-effect(essendo non costanti)</li>
+						</ul>
+					</li>
+					<li>Anche gli oggetti possono essere marcati costanti
+						<ul class="i">
+							<li>Un oggetto costante non puo' essere modificato dopo la creazione</li>
+							<li>I campi dato di un oggetto costante diventano tutti costanti</li>
+						</ul>
+					</li>
+					<li><b>Un oggetto costante puo' essere invocato SOLO da un metodo costante, apparte per i costruttori (unica eccezione alla regola)</b></li>
+				</ul>
+			</li>
+			<li>Keyword <b>static</b>
+				<ul class="bcircle">
+					<li><b>static</b> e' una keyword</li>
+					<li>posso marcare static campi dati o metodi</li>
+					<li>I campi dati statici
+						<ul class="i">
+							<li>Vengono allocati una volta sola per tutta la classe, alla creazione della classe.</li>
+							<li>Bisogna inizializzarli all'esterno della classe (con operatore di scooping)</li>
+							<li>Sono disponibili per tutta la classe, invece che essercene una copia diversa per ogni oggetto.</li>
+						</ul>
+					</li>
+					<li>Un metodo statico e' un metodo senza oggetto di invocazione, quindi non ha il puntatore this e non ha bisogno del const</li>
+					<li>Quando in un metodo l'oggetto d'invocazione non e' necessario, il metodo si marca static </li>
+				</ul>
+			</li>
+			<li>Overloading Operatori
+				<ul class="bcircle">
+					<li>Ridefinizione operatorOP si ottiene definendo una funzione con identificatore operatorOP 
+						<ul class="i">
+							<li>esempio: <b>operator+()</b></li>
+						</ul>
+					</li>
+					<li>Puo' essere usato un metodo proprio o una funzione esterna alla classe (poiche' i metodi propri hanno un argomento implicito, ovvero l'oggetto d'invocazione)</li>
+					<li>C++ consente di sovraccaricare circa 40 operatori, qui ne elenchiamo i <b>principali</b>:
+						<ol>
+							<li>+ (somma)</li>
+							<li>- (differenza)</li>
+							<li>* (prodotto)</li>
+							<li>/ (divisione)</li>
+							<li>% (resto)</li>
+							<li>== (uguaglianza)</li>
+							<li>!= (disuguaglianza)</li>
+							<li>< (minore)</li>
+							<li><= (minore o uguale)</li>
+							<li>> (maggiore)</li>
+							<li>>= (maggiore o uguale)</li>
+							<li>++ (somma unaria(+1)(un argomento))</li>
+							<li>-- (differenza unaria)</li>
+							<li><< (stampa out)</li>
+							<li>>> (legge in)</li>
+							<li>= (assegnazione)</li>
+							<li>-> (operatore di acesso a membro con puntatore)</li>
+							<li>[] (operatore di indicizzazione)</li>
+							<li>() (parentesi tonde)</li>
+							<li>& (operatore di indirizzo)</li>
+							<li>new (crea nuovo oggetto nell heap)</li>
+							<li>delete (distrugge oggetto nell heap)</li></b>
+						</ol>
+					</li>
+					<li>Non si possono cambiare le proprieta' sintattiche dell'operatore, come:
+						<ul class="i">
+							<li>posizione operatore</li>
+							<li>numero operandi</li>
+							<li>precedenza</li>
+							<li>associativita'</li>
+						</ul>
+					</li>
+					<li>C++ fornisce una versione standard per ogni classe di <b>&</b>, <b>=</b>, <b>,</b></li>
+					<li>Assegnazione Standard
+						<ul class="i">
+							<li>segnatura metodo in una classe C : <b>C& operator=(const C&)</b></li>
+							<li>assegna i campi dati membro a membro</li>
+						</ul>
+					</li>
+					<li>Costruttore di Copia
+						<ul class="i">
+							<li>segnatura costruttore di copia classe C : <b>C(const C&)</b></li>
+							<li>copia i campi dati membro per membro</li>
+							<li>Viene invocato automaticamente quando:
+								<ol>
+									<li>Oggetto dichiarato e inizializzato con un altro oggetto, o con un oggetto temporaneo.</li>
+									<li>Oggetto passato per valore, come parametro per una funzione.</li>
+									<li>Oggetto ritornato per valore, da una funzione.</li>
+								</ol>
+							</li>
+							<li>flag per annullare ottimizzazione C++ sui temporanei anonimi "inutili" : <b>-fno-elide-constructors</b></li>
+						</ul>
+					</li>
+					<li>Differenza tra Assegnazione e Costruttore di Copia
+						<ul class="i">
+							<li>Assegnazione viene invocata, quando si cambiano i campi dati di un oggetto gia' esistente.</li>
+							<li>Costruzione di Copia, quando viene dichaiarato e inizializzato un oggetto nuovo.</li>
+						</ul>
+					</li>
+					<li>Overloading con Funzione Esterna
+						<ul class="i">
+							<li>Esempio: <b>cout</b>
+								<ul class="none">
+									<li>Se lo facessi come  metodo proprio andrei male ad usarlo (orario&lt;&lt;cout), mentre con funzione esterna posso gestire io l'ordine dei parametri, e quindi usarlo come (cout&lt;&lt;orario)</li>
+									<li>ostream& operator&lt;&lt;(ostream& os, const orario& o);</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>Incapsulamento e Modularizzazione
+				<ul class="bcircle">
+					<li>la scelta della rappresentazione interna e' una scelta implementativa del progettista della classe</li>
+					<li>si puo' nascondere la dichiarazione della parte privata della classe, attraverso una classe maniglica(class C Handle; classe pubblica, con campo dati puntatore che punta alla nostra classe di implementazione)</li>
+					<li>le classi permettono la modularizzazione dei programmi:
+						<ul class="i">
+							<li>per la dichiarazione delle classi abbiamo un file <b>.h</b>(file header)</li>
+							<li>per la definizione delle classi abbiamo un file <b>.cpp</b></li>
+						</ul>
+					</li>
+					<li>Preprocessore
+						<ul class="i">
+							<li>Parte iniziale del compilatore, che effettua una prima elaborazione del codice sorgente, prima della compilazione del codice oggetto(logico sintattica) </li>
+							<li>Include i file header nei vari <b>.cpp</b> attraverso la direttiva <b>#include</b></li>
+							<li>Le direttive standard c++ del preprocessore sono:
+								<ul class="none" id="borderblack">
+									<li><strong><p id="nopadding">#include #error #id #else #elif #endif</p><p id="nopadding">#line #pragma</p><p id="nopadding">#define #ifdef #ifndef #undef</p></strong></li>
+								</ul>
+							</li>
+							<li>Macro (per crearle si usa la direttiva <b>#define</b></li>
+							<li>Direttive di compilazione condizionale
+								<ul class="none">
+									<li>per evitare che un file venga incluse piu' volte, <b>esempio:</b></li>
+									
+										<ul class="none"><b>
+											<li>#ifndef FILE</li>
+											<li> &nbsp; ...</li>
+											<li>#endif</li></b>
+										</ul>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>Linker
+						<ul class="i">
+							<li>Parte del compilatore che produce il codice eseguibile, a partire dal codice oggetto</li>
+							<li>Per produrre i codici oggetto, bisogna compilare separatamente i vari <b>.cpp</b>: con <code>"g++ -c file1.cpp;"</code> compilo il file file1.cpp e produco il codice oggetto: file1.o</li>
+							<li>Il linker unisce i vari codici oggetto(<b>.o</b>) e i vari file header(<b>.h</b>) e produce il codice eseguibile (per esempio <b>.exe</b> o <b>.deb</b>)</li>
+							<li>Questo meccanismo di compilazione separata e' conforme al principio di information hiding della OOP</li>
+						</ul>
+					</li>
+					<li>Make
+						<ul class="i">
+							<li>Alcuni comandi ricorrenti: make, make install, make clean</li>
+							<li>Make e' una utility, serve a determinare <em>in modo automatico</em> quali file bisogna ricompilare, e volendo puo' generare i comandi per farlo, ha bisogno di un makefile</li>
+							<li>Makefile, regole di sintassi:
+								<ul class="wcircle">
+									<li >TARGET : DEPENDENCIES ... </li>
+									<li class="none"> COMMAND</li>
+									<li>I target sono le azioni, le dependecies sono i file per quell'azione, e command e' il comando da eseguire (a livello di shell).</li>
+									<li>make richiama il primo target, che tipicamente ne richiama altri, mentre altri comandi come make install , make clean.... richiamano il target install (o clean).</li>
+								</ul>
+							</li>
+							<li>Dato un corretto makefile, il comando make nella shell ricompilera' automaticamente i file modificati dall'ultima compilazione e rigenerera' il codice eseguibile aggiornato.</li>
+							<li>L'utilita' di make e' molto evidente, specialmente con programmi grandi e strutturati in modo complesso</li>
+						</ul>
+					</li>
+					<li>Modularizzazioni classi
+						<ul class="i">
+							<li>Definizioni di classi permettono di avere nuovi tipi di dato, per il programmatore</li>
+							<li>Per avere un costruttore dal comportamento diverso da quello standard, dobbiamo usare la lista di inzializzazione del costruttore</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>Campi Dati costanti
+				<ul class="bcircle">
+					<li>campi dati costanti</li>
+					<li>bisogna inizializzare i campi dati costanti con la lista di inizializzazione del costruttore</li>
+					<li>passare oggetti a funzioni o costruttori, come <b>riferimenti costanti</b>, perche':
+						<ol>
+							<li>Meno bytes necessari per passare gli oggetti </li>
+							<li>Cosi' posso passare anche oggetti anonimi</li>
+						</ol>
+					</li>
+				</ul>
+			</li>
+			<li>Liste di Inizializzazione
+				<ul class="bcircle">
+					<li>Costruttore costruisce i campi dati con ordine rispetto a come sono stati dichiarati nella classe</li>
+					<li>Se il costruttore di un campo dati e' esplicitato nella lista di inizializzazione, viene usato quel costruttore;</li>
+					<li>Altrimenti viene usato il costruttore di default del campo dati.</li>
+					<li>I costruttori di default standard, come al solito, per i tipi non classe, allocano solo lo spazio occupato in memoria, lasciando indefinito il valore.</li>
+				</ul>
+			</li>
+			<li>Puntatori e Riferimenti Costanti
+				<ul class="bcircle">
+					<li>Puntatori costanti
+						<ul class="none"><li><b>int* const p</b></li></ul>
+					</li>
+					<li>Puntatori a dati costanti
+						<ul class="none"><li><b>const int* p</b></li></ul>
+					</li>
+					<li>Riferimenti costanti
+						<ul class="none"><li><b>const int& p</b></li></ul>
+					</li>
+					<li>Riferimenti
+						<ul class="none"><li><b>int& p</b></li></ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+
+</ul></li></ol>

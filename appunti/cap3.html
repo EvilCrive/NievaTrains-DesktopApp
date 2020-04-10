@@ -1,0 +1,36 @@
+<head><link rel="stylesheet" type="text/css" href="style.css" /></head>
+
+<h1> Appunti PAO </h1>
+
+<ol class="none"><li><h2> Capitolo 3: Classi Collezione e Argomenti Correlati </h2><ul class="bcircle">
+<li>Un oggetto di classe collezione (o classe contenitore) rappresenta una collezione di elementi, gestita con varie funzionalita', tra le quali inserimento e rimozione.
+    <ul class="wcircle">
+        <li>Esempi di classi contenitore sono i contenitori della libreria STL, come <code>vector</code>, <code>list</code> e <code>map</code>. (template di classi collezione)</li>
+    </ul>
+</li>
+<li>Classi annidate:
+    <ul class="wcircle">
+        <li>Una classe definita internamente a un'altra classe viene detta <code>classe annidata</code>(<code>nested class</code> ) o <code>classe interna</code></li>
+        <li>Nella classe annidata posso solo usare i membri statici della classe contenitrice</li>
+    </ul>
+</li>
+<li>Problema dell'Interferenza
+    <ul class="wcircle sixteen">
+        <li>interferenza tra oggetti o aliasing:
+            <ol class="twelve">
+                <li>C'e' condivisione di memoria</li>
+                <li>C'e' qualche funzione che modifica gli oggetti</li>
+            </ol>
+        </li>
+        <li>Per evitare quest'interferenza si puo' agire sulla condivisione di memoria:
+            <ol class="circle twelve">
+                <li>Il problema sta nel fatto che la loro versione standard copia i puntatori(campi dati degli oggetti) e non gli oggetti puntati</li>
+                <li>Bisogna ridefinire il costruttore di copia e l'assegnazione</li>
+                <li>Devono fare una <code>copia profonda</code></li>
+                <li>Esiste una tecnica nel quale usiamo la <code>copia profonda</code> solo se necessaria, cioe' quando ci sarebbe interferenza di oggetti altrimenti, poiche' la copia profonda e' molto piu' costosa della copia normale (si pensi a contenitori di milioni di elementi)</li>
+            </ol>
+        </li>
+    </ul>
+</li>
+
+</ul></li></ol>

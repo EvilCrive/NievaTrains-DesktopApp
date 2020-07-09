@@ -1,7 +1,0 @@
-Apri minGW (qt 5.9.9) e vai sulla directory del progetto
-
-1)qmake tris.pro
-2)mingw32-make
-3)mingw32-make install
-4)cd release
-5)windeploy.exe tris.exe 

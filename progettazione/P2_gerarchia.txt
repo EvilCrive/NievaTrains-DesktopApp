@@ -1,0 +1,65 @@
+Modellare treni di proprietà del sistema ferroviario Nieva Treni
+
+TRENO
+	-Nome (string)
+	-ID (int)
+	-Marca (string)
+	-Speed Media (int)
+	-Tipo (enum) [alta velocità, inter city, regionale,, commuter, leggero, maglev] {6}
+	-Tipo di rotaia (enum) [maglev, strap, plate, bridge, barlow, flat bottomed, double headed, bullhead, grooved] {7}
+	+get()[6]
+	+set()[6]
+STEAM
+	-Tipologia (enum) [classica, brotan, mallet, garrat] {5}
+	-Efficenza[km/kg] (double)
+	-Tipo di carburante (enum) [coal, wood, oil] {5}
+	+get()[3]
+	+set()[3]
+	+CarburanteNecessario(int km)
+	+KmPercorribili(int carburante)
+INTERNAL COMBUSTION
+	-Efficenza[km/l] (double)
+	-Capienza serbatoio (int)
+	-Tipo di trasmissione (enum) [fuel-electric, fuel-mechanical, fuel-hydraulic, fuel-steam, fuel-pneumatic] {4}
+	-Tipo di carburante (enum) [kerosene, petrol, diesel]
+	+get()[4]
+	+set()[4]
+	+CarburanteNecessario(int km)
+	+KmPercorribili(int carburante)
+ELECTRIC
+	-PowerTrasmission (enum) [overhead lines, third rail] {3}
+	-Potenza necessaria[km/kw] (double)
+	+get()[2]
+	+set()[2]
+	+CarburanteNecessario(int km)
+	+KmPercorribili(int kilowatt)
+MAGLEV
+	-Tecnologia (enum) [eds, ems, inductrack] {2}
+	+get()[1]
+	+set()[1]
+BIMODE
+	-motore primario (enum) [elettrico, diesel, fullhybrid] {1}
+	+get()[1]
+	+set()[1]
+	+CarburanteNecessario(int km)
+	+KmPercorribili(int carburante1, int carburante2)
+*alcune opzioni sono chiuse
+################################################################################################################################àà
+
+{1}https://en.wikipedia.org/wiki/Electro-diesel_locomotive
+   https://en.wikipedia.org/wiki/Hybrid_train
+
+{2}https://en.wikipedia.org/wiki/Maglev
+
+{3}https://en.wikipedia.org/wiki/Electric_locomotive
+
+{4}https://en.wikipedia.org/wiki/Diesel_locomotive
+
+{5}https://it.wikipedia.org/wiki/Locomotiva_a_vapore
+   https://en.wikipedia.org/wiki/Steam_locomotive
+
+{6}https://en.wikipedia.org/wiki/Train
+
+{7}https://en.wikipedia.org/wiki/Rail_profile
+
+{8}https://en.wikipedia.org/wiki/Locomotive

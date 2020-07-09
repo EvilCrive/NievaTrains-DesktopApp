@@ -1,0 +1,23 @@
+P2
+
+iteratori, eccezioni(non proprio obbligatorio, ma cercare di usarlo), usare polimorfismo per gui
+
+cibo
+cereali
+proteine
+macchine	V
+trattori
+shampoo
+bici/moto/skate/bipedi
+te
+telefoni
+libri
+smartphone/tablet/...
+carte
+giochi
+
+-----------------
+
+macchine
+aerei
+treni

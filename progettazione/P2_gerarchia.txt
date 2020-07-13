@@ -9,6 +9,15 @@ TRENO
 	-Tipo di rotaia (enum) [maglev, strap, plate, bridge, barlow, flat bottomed, double headed, bullhead, grooved] {7}
 	+get()[6]
 	+set()[6]
+	+virtual string getType() const
+	+virtual double CalcolaCosto() const
+	+virtual ~Treno()
+	+virtual void print() const
+	+virtual Treno* clone() const
+	
+	(save/load/serialize/costruttori/tipi linee) (??)
+
+
 STEAM
 	-Tipologia (enum) [classica, brotan, mallet, garrat] {5}
 	-Efficenza[km/kg] (double)

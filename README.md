@@ -1,9 +1,10 @@
 # P2_PROJECT_19/20
 
 ## Cartelle
-* file txt utili
+* file utili
   * come compilare progetto qt con win10
   * password per macchina virtuale
+  * link moodle, specifiche e macchina virtuale
 * progettazione
 * qt project
 ## Progettazione

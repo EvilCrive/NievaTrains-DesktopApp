@@ -5,6 +5,7 @@
   * come compilare progetto qt con win10
   * password per macchina virtuale
   * link moodle, specifiche e macchina virtuale
+  * progetto chinafit, del semestre scorso per prendere spunto
 * progettazione
 * qt project
 ## Progettazione

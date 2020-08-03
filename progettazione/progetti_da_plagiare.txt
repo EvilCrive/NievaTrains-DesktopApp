@@ -14,3 +14,6 @@ Mariano Sciacco:	https://github.com/Maxelweb/qCloudUNIPD
 			https://github.com/AlexRizzus/OOP_project
 			https://github.com/FraDrago/PAO-Progetto
 			https://github.com/NikolasMiz/Progetto-P2
+			https://pao.marianosciacco.it/
+			https://github.com/marcouderzo/QVisualizer
+			(ChinaFit)

@@ -20,9 +20,9 @@ private:
     Ttreno tipo_treno;
 
 public:
-    Treno();
+    Treno(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita );
     virtual ~Treno() = default;
-   // virtual Treno* clone() const = 0;
+
 
     std::string getNome() const;
     unsigned int getId() const;
@@ -31,19 +31,20 @@ public:
     Trotaia getTipo_rotaia() const;
     Ttreno getTipo_treno() const;
 
-    void setNome(std::string nome);
-    void setId(unsigned int id);
-    void setCostruttore(std::string costruttore);
-    void setSpeed(unsigned int speed);
-    void setTipo_rotaia(std::string tipo_rotaia);
-    void setTipo_treno(std::string tipo_treno);
+    void setNome(std::string);
+    void setId(unsigned int);
+    void setCostruttore(std::string);
+    void setSpeed(unsigned int);
+    void setTipo_rotaia(std::string);
+    void setTipo_treno(std::string);
 
-    virtual int calcolaCosto() const;
-    float carburanteNecessario(unsigned int km) const;
-    unsigned int kmPercorribili(unsigned int carburante) const;
+    virtual float carburanteNecessario(unsigned int km) const =0;
+    virtual unsigned int kmPercorribili(unsigned int carburante) const =0;
 
-    virtual void serialize();
-    static Treno* unserialize();
+ // virtual int calcolaCosto() const;
+ // virtual void serialize();
+ // static Treno* unserialize();
+ // virtual Treno* clone() const = 0;
 };
 
 #endif // TRENO_H

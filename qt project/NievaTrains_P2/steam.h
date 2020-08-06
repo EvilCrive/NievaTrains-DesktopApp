@@ -11,7 +11,7 @@ private:
     float efficenza;
     TfuelSteam carburante;
 public:
-    Steam();
+    Steam(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =7, TfuelSteam =TfuelSteam::coal);
     virtual ~Steam() = default;
     virtual Steam* clone() const = 0;
 
@@ -20,6 +20,11 @@ public:
 
     void setEfficenza(float efficenza);
     void setCarburante(std::string carburante);
+
+
+
+    virtual float carburanteNecessario(unsigned int km) const =0;
+    virtual unsigned int kmPercorribili(unsigned int carburante) const =0;
 };
 
 #endif // STEAM_H

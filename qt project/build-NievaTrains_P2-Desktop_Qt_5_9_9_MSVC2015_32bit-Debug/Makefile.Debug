@@ -45,16 +45,16 @@ OBJECTS_DIR   = debug
 
 ####### Files
 
-SOURCES       = ..\NievaTrains_P2\bimode.cpp \
-		..\NievaTrains_P2\electric.cpp \
-		..\NievaTrains_P2\internal_combustion.cpp \
-		..\NievaTrains_P2\maglev.cpp \
+SOURCES       = ..\NievaTrains_P2\model\bimode.cpp \
+		..\NievaTrains_P2\model\electric.cpp \
+		..\NievaTrains_P2\model\internal_combustion.cpp \
+		..\NievaTrains_P2\model\maglev.cpp \
 		..\NievaTrains_P2\main.cpp \
-		..\NievaTrains_P2\mainwindow.cpp \
-		..\NievaTrains_P2\model.cpp \
-		..\NievaTrains_P2\steam.cpp \
-		..\NievaTrains_P2\treno.cpp \
-		..\NievaTrains_P2\view.cpp debug\moc_mainwindow.cpp \
+		..\NievaTrains_P2\view\mainwindow.cpp \
+		..\NievaTrains_P2\model\model.cpp \
+		..\NievaTrains_P2\model\steam.cpp \
+		..\NievaTrains_P2\model\treno.cpp \
+		..\NievaTrains_P2\view\view.cpp debug\moc_mainwindow.cpp \
 		debug\moc_model.cpp \
 		debug\moc_view.cpp
 OBJECTS       = debug\bimode.obj \
@@ -71,24 +71,24 @@ OBJECTS       = debug\bimode.obj \
 		debug\moc_model.obj \
 		debug\moc_view.obj
 
-DIST          =  ..\NievaTrains_P2\bimode.h \
-		..\NievaTrains_P2\electric.h \
-		..\NievaTrains_P2\internal_combustion.h \
-		..\NievaTrains_P2\maglev.h \
-		..\NievaTrains_P2\mainwindow.h \
-		..\NievaTrains_P2\model.h \
-		..\NievaTrains_P2\steam.h \
-		..\NievaTrains_P2\treno.h \
-		..\NievaTrains_P2\view.h ..\NievaTrains_P2\bimode.cpp \
-		..\NievaTrains_P2\electric.cpp \
-		..\NievaTrains_P2\internal_combustion.cpp \
-		..\NievaTrains_P2\maglev.cpp \
+DIST          =  ..\NievaTrains_P2\model\bimode.h \
+		..\NievaTrains_P2\model\electric.h \
+		..\NievaTrains_P2\model\internal_combustion.h \
+		..\NievaTrains_P2\model\maglev.h \
+		..\NievaTrains_P2\view\mainwindow.h \
+		..\NievaTrains_P2\model\model.h \
+		..\NievaTrains_P2\model\steam.h \
+		..\NievaTrains_P2\model\treno.h \
+		..\NievaTrains_P2\view\view.h ..\NievaTrains_P2\model\bimode.cpp \
+		..\NievaTrains_P2\model\electric.cpp \
+		..\NievaTrains_P2\model\internal_combustion.cpp \
+		..\NievaTrains_P2\model\maglev.cpp \
 		..\NievaTrains_P2\main.cpp \
-		..\NievaTrains_P2\mainwindow.cpp \
-		..\NievaTrains_P2\model.cpp \
-		..\NievaTrains_P2\steam.cpp \
-		..\NievaTrains_P2\treno.cpp \
-		..\NievaTrains_P2\view.cpp
+		..\NievaTrains_P2\view\mainwindow.cpp \
+		..\NievaTrains_P2\model\model.cpp \
+		..\NievaTrains_P2\model\steam.cpp \
+		..\NievaTrains_P2\model\treno.cpp \
+		..\NievaTrains_P2\view\view.cpp
 QMAKE_TARGET  = NievaTrains_P2
 DESTDIR        = debug\ #avoid trailing-slash linebreak
 TARGET         = NievaTrains_P2.exe
@@ -138,6 +138,26 @@ DESTDIR_TARGET = debug\NievaTrains_P2.exe
 	$<
 <<
 
+{..\NievaTrains_P2\model}.cpp{debug\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
+
+{..\NievaTrains_P2\model}.cc{debug\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
+
+{..\NievaTrains_P2\model}.cxx{debug\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
+
+{..\NievaTrains_P2\model}.c{debug\}.obj::
+	$(CC) -c $(CFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
+
 {.}.cpp{debug\}.obj::
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
 	$<
@@ -154,6 +174,26 @@ DESTDIR_TARGET = debug\NievaTrains_P2.exe
 <<
 
 {.}.c{debug\}.obj::
+	$(CC) -c $(CFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
+
+{..\NievaTrains_P2\view}.cpp{debug\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
+
+{..\NievaTrains_P2\view}.cc{debug\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
+
+{..\NievaTrains_P2\view}.cxx{debug\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
+
+{..\NievaTrains_P2\view}.c{debug\}.obj::
 	$(CC) -c $(CFLAGS) $(INCPATH) -Fodebug\ @<<
 	$<
 <<
@@ -175,7 +215,7 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) NievaTrains_P2.zip $(SOURCES) $(DIST) ..\NievaTrains_P2\NievaTrains_P2.pro E:\Qt\5.9.9\msvc2015\mkspecs\features\spec_pre.prf E:\Qt\5.9.9\msvc2015\mkspecs\common\angle.conf E:\Qt\5.9.9\msvc2015\mkspecs\common\msvc-desktop.conf E:\Qt\5.9.9\msvc2015\mkspecs\qconfig.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3danimation.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3danimation_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dcore.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dcore_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dextras.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dextras_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dinput.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dinput_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dlogic.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dlogic_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquick.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquick_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickanimation.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickanimation_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickextras.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickextras_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickinput.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickinput_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickrender.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickrender_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickscene2d.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickscene2d_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3drender.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3drender_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_accessibility_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axbase.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axbase_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axcontainer.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axcontainer_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axserver.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axserver_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_bluetooth.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_bluetooth_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_bootstrap_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_charts.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_charts_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_concurrent.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_concurrent_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_core.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_core_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_datavisualization.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_datavisualization_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_dbus.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_dbus_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_designer.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_designer_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_designercomponents_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_devicediscovery_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_egl_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_fb_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_fontdatabase_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_gamepad.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_gamepad_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_gui.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_gui_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_help.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_help_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_location.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_location_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_multimedia.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_multimedia_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_multimediawidgets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_multimediawidgets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_network.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_network_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_networkauth.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_networkauth_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_nfc.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_nfc_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_opengl.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_opengl_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_openglextensions.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_openglextensions_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_packetprotocol_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_platformcompositor_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_positioning.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_positioning_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_printsupport.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_printsupport_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_purchasing.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_purchasing_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qml.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qml_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qmldebug_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qmldevtools_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qmltest.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qmltest_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quick.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quick_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickcontrols2.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickcontrols2_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickparticles_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quicktemplates2_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickwidgets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickwidgets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_remoteobjects.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_remoteobjects_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_repparser.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_repparser_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_script.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_script_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_scripttools.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_scripttools_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_scxml.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_scxml_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_sensors.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_sensors_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_serialbus.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_serialbus_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_serialport.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_serialport_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_sql.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_sql_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_svg.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_svg_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_testlib.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_testlib_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_texttospeech.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_texttospeech_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_theme_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_uiplugin.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_uitools.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_uitools_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webchannel.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webchannel_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webengine.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webengine_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginecore.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginecore_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginewidgets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginewidgets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_websockets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_websockets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webview.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webview_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_widgets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_widgets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_winextras.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_winextras_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_xml.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_xml_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_xmlpatterns.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_xmlpatterns_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_zlib_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\features\qt_functions.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\qt_config.prf E:\Qt\5.9.9\msvc2015\mkspecs\win32-msvc\qmake.conf E:\Qt\5.9.9\msvc2015\mkspecs\features\spec_post.prf .qmake.stash E:\Qt\5.9.9\msvc2015\mkspecs\features\exclusive_builds.prf E:\Qt\5.9.9\msvc2015\mkspecs\common\msvc-version.conf E:\Qt\5.9.9\msvc2015\mkspecs\features\toolchain.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\default_pre.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\win32\default_pre.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\resolve_config.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\exclusive_builds_post.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\default_post.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\build_pass.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\qml_debug.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\precompile_header.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\warn_on.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\qt.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\resources.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\moc.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\win32\opengl.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\uic.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\qmake_use.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\file_copies.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\win32\windows.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\testcase_targets.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\exceptions.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\yacc.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\lex.prf ..\NievaTrains_P2\NievaTrains_P2.pro E:\Qt\5.9.9\msvc2015\lib\qtmaind.prl E:\Qt\5.9.9\msvc2015\lib\Qt5Widgetsd.prl E:\Qt\5.9.9\msvc2015\lib\Qt5Guid.prl E:\Qt\5.9.9\msvc2015\lib\Qt5Cored.prl    E:\Qt\5.9.9\msvc2015\mkspecs\features\data\dummy.cpp ..\NievaTrains_P2\bimode.h ..\NievaTrains_P2\electric.h ..\NievaTrains_P2\internal_combustion.h ..\NievaTrains_P2\maglev.h ..\NievaTrains_P2\mainwindow.h ..\NievaTrains_P2\model.h ..\NievaTrains_P2\steam.h ..\NievaTrains_P2\treno.h ..\NievaTrains_P2\view.h ..\NievaTrains_P2\bimode.cpp ..\NievaTrains_P2\electric.cpp ..\NievaTrains_P2\internal_combustion.cpp ..\NievaTrains_P2\maglev.cpp ..\NievaTrains_P2\main.cpp ..\NievaTrains_P2\mainwindow.cpp ..\NievaTrains_P2\model.cpp ..\NievaTrains_P2\steam.cpp ..\NievaTrains_P2\treno.cpp ..\NievaTrains_P2\view.cpp     
+	$(ZIP) NievaTrains_P2.zip $(SOURCES) $(DIST) ..\NievaTrains_P2\NievaTrains_P2.pro E:\Qt\5.9.9\msvc2015\mkspecs\features\spec_pre.prf E:\Qt\5.9.9\msvc2015\mkspecs\common\angle.conf E:\Qt\5.9.9\msvc2015\mkspecs\common\msvc-desktop.conf E:\Qt\5.9.9\msvc2015\mkspecs\qconfig.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3danimation.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3danimation_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dcore.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dcore_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dextras.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dextras_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dinput.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dinput_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dlogic.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dlogic_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquick.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquick_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickanimation.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickanimation_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickextras.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickextras_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickinput.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickinput_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickrender.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickrender_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickscene2d.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3dquickscene2d_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3drender.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_3drender_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_accessibility_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axbase.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axbase_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axcontainer.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axcontainer_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axserver.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_axserver_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_bluetooth.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_bluetooth_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_bootstrap_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_charts.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_charts_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_concurrent.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_concurrent_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_core.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_core_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_datavisualization.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_datavisualization_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_dbus.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_dbus_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_designer.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_designer_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_designercomponents_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_devicediscovery_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_egl_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_fb_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_fontdatabase_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_gamepad.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_gamepad_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_gui.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_gui_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_help.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_help_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_location.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_location_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_multimedia.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_multimedia_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_multimediawidgets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_multimediawidgets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_network.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_network_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_networkauth.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_networkauth_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_nfc.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_nfc_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_opengl.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_opengl_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_openglextensions.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_openglextensions_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_packetprotocol_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_platformcompositor_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_positioning.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_positioning_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_printsupport.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_printsupport_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_purchasing.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_purchasing_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qml.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qml_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qmldebug_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qmldevtools_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qmltest.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qmltest_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quick.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quick_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickcontrols2.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickcontrols2_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickparticles_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quicktemplates2_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickwidgets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_quickwidgets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_remoteobjects.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_remoteobjects_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_repparser.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_repparser_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_script.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_script_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_scripttools.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_scripttools_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_scxml.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_scxml_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_sensors.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_sensors_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_serialbus.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_serialbus_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_serialport.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_serialport_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_sql.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_sql_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_svg.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_svg_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_testlib.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_testlib_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_texttospeech.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_texttospeech_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_theme_support_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_uiplugin.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_uitools.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_uitools_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webchannel.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webchannel_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webengine.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webengine_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginecore.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginecore_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginewidgets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webenginewidgets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_websockets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_websockets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webview.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_webview_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_widgets.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_widgets_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_winextras.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_winextras_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_xml.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_xml_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_xmlpatterns.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_xmlpatterns_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\modules\qt_lib_zlib_private.pri E:\Qt\5.9.9\msvc2015\mkspecs\features\qt_functions.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\qt_config.prf E:\Qt\5.9.9\msvc2015\mkspecs\win32-msvc\qmake.conf E:\Qt\5.9.9\msvc2015\mkspecs\features\spec_post.prf .qmake.stash E:\Qt\5.9.9\msvc2015\mkspecs\features\exclusive_builds.prf E:\Qt\5.9.9\msvc2015\mkspecs\common\msvc-version.conf E:\Qt\5.9.9\msvc2015\mkspecs\features\toolchain.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\default_pre.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\win32\default_pre.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\resolve_config.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\exclusive_builds_post.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\default_post.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\build_pass.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\qml_debug.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\precompile_header.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\warn_on.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\qt.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\resources.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\moc.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\win32\opengl.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\uic.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\qmake_use.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\file_copies.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\win32\windows.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\testcase_targets.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\exceptions.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\yacc.prf E:\Qt\5.9.9\msvc2015\mkspecs\features\lex.prf ..\NievaTrains_P2\NievaTrains_P2.pro E:\Qt\5.9.9\msvc2015\lib\qtmaind.prl E:\Qt\5.9.9\msvc2015\lib\Qt5Widgetsd.prl E:\Qt\5.9.9\msvc2015\lib\Qt5Guid.prl E:\Qt\5.9.9\msvc2015\lib\Qt5Cored.prl    E:\Qt\5.9.9\msvc2015\mkspecs\features\data\dummy.cpp ..\NievaTrains_P2\model\bimode.h ..\NievaTrains_P2\model\electric.h ..\NievaTrains_P2\model\internal_combustion.h ..\NievaTrains_P2\model\maglev.h ..\NievaTrains_P2\view\mainwindow.h ..\NievaTrains_P2\model\model.h ..\NievaTrains_P2\model\steam.h ..\NievaTrains_P2\model\treno.h ..\NievaTrains_P2\view\view.h ..\NievaTrains_P2\model\bimode.cpp ..\NievaTrains_P2\model\electric.cpp ..\NievaTrains_P2\model\internal_combustion.cpp ..\NievaTrains_P2\model\maglev.cpp ..\NievaTrains_P2\main.cpp ..\NievaTrains_P2\view\mainwindow.cpp ..\NievaTrains_P2\model\model.cpp ..\NievaTrains_P2\model\steam.cpp ..\NievaTrains_P2\model\treno.cpp ..\NievaTrains_P2\view\view.cpp     
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\bimode.obj debug\electric.obj debug\internal_combustion.obj debug\maglev.obj debug\main.obj debug\mainwindow.obj debug\model.obj debug\steam.obj debug\treno.obj debug\view.obj debug\moc_mainwindow.obj debug\moc_model.obj debug\moc_view.obj
@@ -310,10 +350,10 @@ debug\moc_mainwindow.cpp: E:\Qt\5.9.9\msvc2015\include\QtWidgets\QMainWindow \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qtouchdevice.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qtabwidget.h \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qicon.h \
-		..\NievaTrains_P2\mainwindow.h \
+		..\NievaTrains_P2\view\mainwindow.h \
 		debug\moc_predefs.h \
 		E:\Qt\5.9.9\msvc2015\bin\moc.exe
-	E:\Qt\5.9.9\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include debug/moc_predefs.h -IE:/Qt/5.9.9/msvc2015/mkspecs/win32-msvc -I"E:/tutto/uni/p2/progetto/PROJECT/Progetto_P2/qt project/NievaTrains_P2" -IE:/Qt/5.9.9/msvc2015/include -IE:/Qt/5.9.9/msvc2015/include/QtWidgets -IE:/Qt/5.9.9/msvc2015/include/QtGui -IE:/Qt/5.9.9/msvc2015/include/QtANGLE -IE:/Qt/5.9.9/msvc2015/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\NievaTrains_P2\mainwindow.h -o debug\moc_mainwindow.cpp
+	E:\Qt\5.9.9\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include debug/moc_predefs.h -IE:/Qt/5.9.9/msvc2015/mkspecs/win32-msvc -I"E:/tutto/uni/p2/progetto/PROJECT/Progetto_P2/qt project/NievaTrains_P2" -IE:/Qt/5.9.9/msvc2015/include -IE:/Qt/5.9.9/msvc2015/include/QtWidgets -IE:/Qt/5.9.9/msvc2015/include/QtGui -IE:/Qt/5.9.9/msvc2015/include/QtANGLE -IE:/Qt/5.9.9/msvc2015/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\NievaTrains_P2\view\mainwindow.h -o debug\moc_mainwindow.cpp
 
 debug\moc_model.cpp: E:\Qt\5.9.9\msvc2015\include\QtCore\QObject \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qobject.h \
@@ -362,10 +402,10 @@ debug\moc_model.cpp: E:\Qt\5.9.9\msvc2015\include\QtCore\QObject \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qvarlengtharray.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qcontainerfwd.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qobject_impl.h \
-		..\NievaTrains_P2\model.h \
+		..\NievaTrains_P2\model\model.h \
 		debug\moc_predefs.h \
 		E:\Qt\5.9.9\msvc2015\bin\moc.exe
-	E:\Qt\5.9.9\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include debug/moc_predefs.h -IE:/Qt/5.9.9/msvc2015/mkspecs/win32-msvc -I"E:/tutto/uni/p2/progetto/PROJECT/Progetto_P2/qt project/NievaTrains_P2" -IE:/Qt/5.9.9/msvc2015/include -IE:/Qt/5.9.9/msvc2015/include/QtWidgets -IE:/Qt/5.9.9/msvc2015/include/QtGui -IE:/Qt/5.9.9/msvc2015/include/QtANGLE -IE:/Qt/5.9.9/msvc2015/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\NievaTrains_P2\model.h -o debug\moc_model.cpp
+	E:\Qt\5.9.9\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include debug/moc_predefs.h -IE:/Qt/5.9.9/msvc2015/mkspecs/win32-msvc -I"E:/tutto/uni/p2/progetto/PROJECT/Progetto_P2/qt project/NievaTrains_P2" -IE:/Qt/5.9.9/msvc2015/include -IE:/Qt/5.9.9/msvc2015/include/QtWidgets -IE:/Qt/5.9.9/msvc2015/include/QtGui -IE:/Qt/5.9.9/msvc2015/include/QtANGLE -IE:/Qt/5.9.9/msvc2015/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\NievaTrains_P2\model\model.h -o debug\moc_model.cpp
 
 debug\moc_view.cpp: E:\Qt\5.9.9\msvc2015\include\QtCore\QObject \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qobject.h \
@@ -468,10 +508,10 @@ debug\moc_view.cpp: E:\Qt\5.9.9\msvc2015\include\QtCore\QObject \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qfiledevice.h \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qvector2d.h \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qtouchdevice.h \
-		..\NievaTrains_P2\view.h \
+		..\NievaTrains_P2\view\view.h \
 		debug\moc_predefs.h \
 		E:\Qt\5.9.9\msvc2015\bin\moc.exe
-	E:\Qt\5.9.9\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include debug/moc_predefs.h -IE:/Qt/5.9.9/msvc2015/mkspecs/win32-msvc -I"E:/tutto/uni/p2/progetto/PROJECT/Progetto_P2/qt project/NievaTrains_P2" -IE:/Qt/5.9.9/msvc2015/include -IE:/Qt/5.9.9/msvc2015/include/QtWidgets -IE:/Qt/5.9.9/msvc2015/include/QtGui -IE:/Qt/5.9.9/msvc2015/include/QtANGLE -IE:/Qt/5.9.9/msvc2015/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\NievaTrains_P2\view.h -o debug\moc_view.cpp
+	E:\Qt\5.9.9\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include debug/moc_predefs.h -IE:/Qt/5.9.9/msvc2015/mkspecs/win32-msvc -I"E:/tutto/uni/p2/progetto/PROJECT/Progetto_P2/qt project/NievaTrains_P2" -IE:/Qt/5.9.9/msvc2015/include -IE:/Qt/5.9.9/msvc2015/include/QtWidgets -IE:/Qt/5.9.9/msvc2015/include/QtGui -IE:/Qt/5.9.9/msvc2015/include/QtANGLE -IE:/Qt/5.9.9/msvc2015/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\NievaTrains_P2\view\view.h -o debug\moc_view.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -489,21 +529,21 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ####### Compile
 
-debug\bimode.obj: ..\NievaTrains_P2\bimode.cpp ../NievaTrains_P2/bimode.h \
-		../NievaTrains_P2/electric.h \
-		../NievaTrains_P2/treno.h \
-		../NievaTrains_P2/internal_combustion.h
+debug\bimode.obj: ..\NievaTrains_P2\model\bimode.cpp ../NievaTrains_P2/model/bimode.h \
+		../NievaTrains_P2/model/electric.h \
+		../NievaTrains_P2/model/treno.h \
+		../NievaTrains_P2/model/internal_combustion.h
 
-debug\electric.obj: ..\NievaTrains_P2\electric.cpp ../NievaTrains_P2/electric.h \
-		../NievaTrains_P2/treno.h
+debug\electric.obj: ..\NievaTrains_P2\model\electric.cpp ../NievaTrains_P2/model/electric.h \
+		../NievaTrains_P2/model/treno.h
 
-debug\internal_combustion.obj: ..\NievaTrains_P2\internal_combustion.cpp ../NievaTrains_P2/internal_combustion.h \
-		../NievaTrains_P2/treno.h
+debug\internal_combustion.obj: ..\NievaTrains_P2\model\internal_combustion.cpp ../NievaTrains_P2/model/internal_combustion.h \
+		../NievaTrains_P2/model/treno.h
 
-debug\maglev.obj: ..\NievaTrains_P2\maglev.cpp ../NievaTrains_P2/maglev.h \
-		../NievaTrains_P2/treno.h
+debug\maglev.obj: ..\NievaTrains_P2\model\maglev.cpp ../NievaTrains_P2/model/maglev.h \
+		../NievaTrains_P2/model/treno.h
 
-debug\main.obj: ..\NievaTrains_P2\main.cpp ../NievaTrains_P2/mainwindow.h \
+debug\main.obj: ..\NievaTrains_P2\main.cpp ../NievaTrains_P2/view/mainwindow.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QMainWindow \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qmainwindow.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qtwidgetsglobal.h \
@@ -615,7 +655,7 @@ debug\main.obj: ..\NievaTrains_P2\main.cpp ../NievaTrains_P2/mainwindow.h \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qguiapplication.h \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qinputmethod.h
 
-debug\mainwindow.obj: ..\NievaTrains_P2\mainwindow.cpp ../NievaTrains_P2/mainwindow.h \
+debug\mainwindow.obj: ..\NievaTrains_P2\view\mainwindow.cpp ../NievaTrains_P2/view/mainwindow.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QMainWindow \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qmainwindow.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qtwidgetsglobal.h \
@@ -720,7 +760,7 @@ debug\mainwindow.obj: ..\NievaTrains_P2\mainwindow.cpp ../NievaTrains_P2/mainwin
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qtabwidget.h \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qicon.h
 
-debug\model.obj: ..\NievaTrains_P2\model.cpp ../NievaTrains_P2/model.h \
+debug\model.obj: ..\NievaTrains_P2\model\model.cpp ../NievaTrains_P2/model/model.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\QObject \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qobject.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qobjectdefs.h \
@@ -769,12 +809,12 @@ debug\model.obj: ..\NievaTrains_P2\model.cpp ../NievaTrains_P2/model.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qcontainerfwd.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qobject_impl.h
 
-debug\steam.obj: ..\NievaTrains_P2\steam.cpp ../NievaTrains_P2/steam.h \
-		../NievaTrains_P2/treno.h
+debug\steam.obj: ..\NievaTrains_P2\model\steam.cpp ../NievaTrains_P2/model/steam.h \
+		../NievaTrains_P2/model/treno.h
 
-debug\treno.obj: ..\NievaTrains_P2\treno.cpp ../NievaTrains_P2/treno.h
+debug\treno.obj: ..\NievaTrains_P2\model\treno.cpp ../NievaTrains_P2/model/treno.h
 
-debug\view.obj: ..\NievaTrains_P2\view.cpp ../NievaTrains_P2/view.h \
+debug\view.obj: ..\NievaTrains_P2\view\view.cpp ../NievaTrains_P2/view/view.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\QObject \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qobject.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\qobjectdefs.h \

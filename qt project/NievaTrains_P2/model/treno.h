@@ -23,7 +23,6 @@ public:
     Treno(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita );
     virtual ~Treno() = default;
 
-
     std::string getNome() const;
     unsigned int getId() const;
     std::string getCostruttore() const;
@@ -40,7 +39,6 @@ public:
 
     virtual float carburanteNecessario(unsigned int) const =0; //km in input
     virtual unsigned int kmPercorribili(unsigned int) const =0; //carburante in input
-
  // virtual int calcolaCosto() const;
  // virtual void serialize();
  // static Treno* unserialize();

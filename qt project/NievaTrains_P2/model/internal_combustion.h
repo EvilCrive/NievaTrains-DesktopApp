@@ -11,21 +11,23 @@ enum Tfuel {
 
 class Internal_Combustion: virtual public Treno {
 private:
-    float efficenza;
+    float efficenza; // km/l
     Tfuel carburante;
     Ttrasmissione trasmissione;
 public:
-    Internal_Combustion();
-    virtual ~Internal_Combustion() = default;
-    virtual Internal_Combustion* clone() const = 0;
+    Internal_Combustion(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =7, Tfuel =Tfuel::kerosene, Ttrasmissione =Ttrasmissione::electric );
 
     float getEfficenza() const;
     Tfuel getCarburante() const;
     Ttrasmissione getTrasmissione() const;
 
-    void setEfficenza(float efficenza);
-    void setCarburante(std::string carburante);
-    void setTrasmissione(std::string trasmissione);
+    void setEfficenza(float);
+    void setCarburante(std::string);
+    void setTrasmissione(std::string);
+
+    float carburanteNecessario(unsigned int) const; //input km
+    unsigned int kmPercorribili(unsigned int) const; //input l fuel
+//  Internal_Combustion* clone() const = 0;
 };
 
 #endif // INTERNAL_COMBUSTION_H

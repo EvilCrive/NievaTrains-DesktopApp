@@ -10,13 +10,14 @@ class Maglev: public Treno {
 private:
     Ttech tecnologia;
 public:
-    Maglev();
-    virtual ~Maglev() = default;
-    virtual Maglev* clone() const = 0;
+    Maglev(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, Ttech =Ttech::eds);
 
     Ttech getTecnologia() const;
 
-    void setTecnologia(std::string tecnologia);
+    void setTecnologia(std::string);
+
+    //  Maglev* clone() const = 0;
+
 };
 
 #endif // MAGLEV_H

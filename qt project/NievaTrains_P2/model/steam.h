@@ -21,8 +21,7 @@ public:
 
     float carburanteNecessario(unsigned int) const;
     unsigned int kmPercorribili(unsigned int) const;
-
-//     virtual Steam* clone() const = 0;
+//   Steam* clone() const = 0;
 };
 
 #endif // STEAM_H

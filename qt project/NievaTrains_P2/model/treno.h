@@ -38,8 +38,8 @@ public:
     void setTipo_rotaia(std::string);
     void setTipo_treno(std::string);
 
-    virtual float carburanteNecessario(unsigned int km) const =0;
-    virtual unsigned int kmPercorribili(unsigned int carburante) const =0;
+    virtual float carburanteNecessario(unsigned int) const =0; //km in input
+    virtual unsigned int kmPercorribili(unsigned int) const =0; //carburante in input
 
  // virtual int calcolaCosto() const;
  // virtual void serialize();

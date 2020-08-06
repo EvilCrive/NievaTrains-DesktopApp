@@ -16,27 +16,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    bimode.cpp \
-    electric.cpp \
-    internal_combustion.cpp \
-    maglev.cpp \
+    model/bimode.cpp \
+    model/electric.cpp \
+    model/internal_combustion.cpp \
+    model/maglev.cpp \
     main.cpp \
-    mainwindow.cpp \
-    model.cpp \
-    steam.cpp \
-    treno.cpp \
-    view.cpp
+    view/mainwindow.cpp \
+    model/model.cpp \
+    model/steam.cpp \
+    model/treno.cpp \
+    view/view.cpp
 
 HEADERS += \
-    bimode.h \
-    electric.h \
-    internal_combustion.h \
-    maglev.h \
-    mainwindow.h \
-    model.h \
-    steam.h \
-    treno.h \
-    view.h
+    model/bimode.h \
+    model/electric.h \
+    model/internal_combustion.h \
+    model/maglev.h \
+    view/mainwindow.h \
+    model/model.h \
+    model/steam.h \
+    model/treno.h \
+    view/view.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

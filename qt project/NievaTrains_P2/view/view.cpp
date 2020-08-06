@@ -4,3 +4,4 @@ View::View(QWidget *parent) : QWidget(parent)
 {
 
 }
+

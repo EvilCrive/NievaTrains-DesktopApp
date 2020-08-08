@@ -40,3 +40,8 @@ unsigned int Electric::kmPercorribili(unsigned int kw) const
 {
     return static_cast<unsigned int>(kw*efficenzaElettrico);
 }
+
+Electric *Electric::clone() const
+{
+    return new Electric(*this);
+}

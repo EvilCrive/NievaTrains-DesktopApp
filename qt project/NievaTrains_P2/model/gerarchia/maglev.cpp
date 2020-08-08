@@ -21,3 +21,18 @@ void Maglev::setTecnologia(std::string tr)
     }
 }
 
+Maglev *Maglev::clone() const
+{
+    return new Maglev(*this);
+}
+
+float Maglev::carburanteNecessario(unsigned int) const
+{
+    return -1;
+}
+
+unsigned int Maglev::kmPercorribili(unsigned int) const
+{
+    return -1;
+}
+

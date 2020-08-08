@@ -22,7 +22,7 @@ public:
 
     float carburanteNecessario(unsigned int) const;  //input km da percorrere
     unsigned int kmPercorribili(unsigned int) const; //input kw di carburante
- // Electric* clone() const = 0;
+    Electric* clone() const;
 };
 
 #endif // ELECTRIC_H

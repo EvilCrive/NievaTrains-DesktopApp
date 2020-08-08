@@ -28,7 +28,7 @@ public:
 
     float carburanteNecessario(unsigned int) const; //input km
     unsigned int kmPercorribili(unsigned int) const; //input l fuel
-//  Internal_Combustion* clone() const = 0;
+    Internal_Combustion* clone() const;
 };
 
 #endif // INTERNAL_COMBUSTION_H

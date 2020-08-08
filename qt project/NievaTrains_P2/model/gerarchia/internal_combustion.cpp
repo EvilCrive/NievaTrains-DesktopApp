@@ -67,8 +67,9 @@ unsigned int Internal_Combustion::kmPercorribili(unsigned int l) const
     //return static_cast<unsigned int>(efficenzaFuel*l);
     return static_cast<unsigned int>(efficenzaFuel*l);
 }
-
+/*
 Internal_Combustion *Internal_Combustion::clone() const
 {
     return new Internal_Combustion(*this);
 }
+*/

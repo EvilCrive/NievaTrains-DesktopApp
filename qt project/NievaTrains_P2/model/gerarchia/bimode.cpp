@@ -49,9 +49,9 @@ unsigned int Bimode::kmPercorribili(unsigned int f) const
     }
     return result;
 }
-
+/*
 Bimode *Bimode::clone() const
 {
     return new Bimode(*this);
 }
-
+*/

@@ -44,8 +44,9 @@ unsigned int Steam::kmPercorribili(unsigned int kg) const
 {
     return static_cast<unsigned int>(efficenza*kg);
 }
-
+/*
 Steam *Steam::clone() const
 {
     return new Steam(*this);
 }
+*/

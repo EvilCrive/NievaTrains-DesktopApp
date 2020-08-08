@@ -42,7 +42,7 @@ public:
  // virtual int calcolaCosto() const;
  // virtual void serialize();
  // static Treno* unserialize();
-  virtual Treno* clone() const = 0;
+ // virtual Treno* clone() const = 0;
 };
 
 #endif // TRENO_H

@@ -20,7 +20,8 @@ public:
 
     float carburanteNecessario(unsigned int) const;  //input km da percorrere
     unsigned int kmPercorribili(unsigned int) const; //input kw o kg di carburante(in base al motore primario)(se hybrid e' fuel kg)
-    Bimode* clone() const;
+ //   Bimode* clone() const;
+
 };
 
 #endif // BIMODE_H

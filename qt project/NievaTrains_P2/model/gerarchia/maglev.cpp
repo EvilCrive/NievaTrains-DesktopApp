@@ -20,12 +20,12 @@ void Maglev::setTecnologia(std::string tr)
         tecnologia=Ttech::ems;
     }
 }
-
+/*
 Maglev *Maglev::clone() const
 {
     return new Maglev(*this);
 }
-
+*/
 float Maglev::carburanteNecessario(unsigned int) const
 {
     return -1;

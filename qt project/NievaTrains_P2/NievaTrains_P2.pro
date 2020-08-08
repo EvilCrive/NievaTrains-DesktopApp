@@ -16,26 +16,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    model/bimode.cpp \
-    model/electric.cpp \
-    model/internal_combustion.cpp \
-    model/maglev.cpp \
     main.cpp \
-    view/mainwindow.cpp \
     model/model.cpp \
-    model/steam.cpp \
-    model/treno.cpp \
+    model/gerarchia/bimode.cpp \
+    model/gerarchia/electric.cpp \
+    model/gerarchia/internal_combustion.cpp \
+    model/gerarchia/maglev.cpp \
+    model/gerarchia/steam.cpp \
+    model/gerarchia/treno.cpp \
+    view/mainwindow.cpp \
     view/view.cpp
 
 HEADERS += \
-    model/bimode.h \
-    model/electric.h \
-    model/internal_combustion.h \
-    model/maglev.h \
-    view/mainwindow.h \
     model/model.h \
-    model/steam.h \
-    model/treno.h \
+    model/gerarchia/bimode.h \
+    model/gerarchia/electric.h \
+    model/gerarchia/internal_combustion.h \
+    model/gerarchia/maglev.h \
+    model/gerarchia/steam.h \
+    model/gerarchia/treno.h \
+    view/mainwindow.h \
     view/view.h
 
 # Default rules for deployment.

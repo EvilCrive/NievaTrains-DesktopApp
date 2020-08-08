@@ -42,5 +42,10 @@ float Steam::carburanteNecessario(unsigned int km) const
 
 unsigned int Steam::kmPercorribili(unsigned int kg) const
 {
-    return efficenza*kg;
+    return static_cast<unsigned int>(efficenza*kg);
+}
+
+Steam *Steam::clone() const
+{
+    return new Steam(*this);
 }

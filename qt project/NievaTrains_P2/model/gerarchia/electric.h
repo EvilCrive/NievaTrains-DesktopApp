@@ -9,7 +9,8 @@ enum Ttrasmission {
 class Electric: virtual public Treno {
 private:
     Ttrasmission trasmissione;
-    float efficenza;
+protected:
+    float efficenzaElettrico;
 public:
     Electric(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita,  Ttrasmission =Ttrasmission::overhead_lines, float =7);
 

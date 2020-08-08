@@ -11,9 +11,10 @@ enum Tfuel {
 
 class Internal_Combustion: virtual public Treno {
 private:
-    float efficenza; // km/l
     Tfuel carburante;
     Ttrasmissione trasmissione;
+protected:
+        float efficenzaFuel; // km/l
 public:
     Internal_Combustion(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =7, Tfuel =Tfuel::kerosene, Ttrasmissione =Ttrasmissione::electric );
 

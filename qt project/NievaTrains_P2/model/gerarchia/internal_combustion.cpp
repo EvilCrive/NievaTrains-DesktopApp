@@ -3,11 +3,11 @@
 #include <cctype>
 
 
-Internal_Combustion::Internal_Combustion(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, Tfuel tf, Ttrasmissione ttr): Treno(n,i,c,s,tr,tt), efficenza(e), carburante(tf), trasmissione(ttr){}
+Internal_Combustion::Internal_Combustion(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, Tfuel tf, Ttrasmissione ttr): Treno(n,i,c,s,tr,tt), carburante(tf), trasmissione(ttr), efficenzaFuel(e){}
 
 float Internal_Combustion::getEfficenza() const
 {
-    return efficenza;
+    return efficenzaFuel;
 }
 
 Tfuel Internal_Combustion::getCarburante() const
@@ -22,7 +22,7 @@ Ttrasmissione Internal_Combustion::getTrasmissione() const
 
 void Internal_Combustion::setEfficenza(float e)
 {
-    efficenza=e;
+    efficenzaFuel=e;
 }
 
 void Internal_Combustion::setCarburante(std::string tr)
@@ -59,10 +59,11 @@ void Internal_Combustion::setTrasmissione(std::string tr)
 
 float Internal_Combustion::carburanteNecessario(unsigned int km) const
 {
-    return km/efficenza;
+    return km/efficenzaFuel;
 }
 
 unsigned int Internal_Combustion::kmPercorribili(unsigned int l) const
 {
-    return l*efficenza;
+    //return static_cast<unsigned int>(efficenzaFuel*l);
+    return static_cast<unsigned int>(efficenzaFuel*l);
 }

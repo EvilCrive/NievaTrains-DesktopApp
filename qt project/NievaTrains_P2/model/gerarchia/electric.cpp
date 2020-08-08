@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <cctype>
 
-Electric::Electric(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, Ttrasmission ttr, float e): Treno(n,i,c,s,tr,tt), trasmissione(ttr), efficenza(e){}
+Electric::Electric(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, Ttrasmission ttr, float e): Treno(n,i,c,s,tr,tt), trasmissione(ttr), efficenzaElettrico(e){}
 
 Ttrasmission Electric::getTrasmissione() const
 {
@@ -11,7 +11,7 @@ Ttrasmission Electric::getTrasmissione() const
 
 float Electric::getEfficenza() const
 {
-    return efficenza;
+    return efficenzaElettrico;
 }
 
 void Electric::setTrasmissione(std::string tr)
@@ -28,15 +28,15 @@ void Electric::setTrasmissione(std::string tr)
 
 void Electric::setEfficenza(float e)
 {
-    efficenza=e;
+    efficenzaElettrico=e;
 }
 
 float Electric::carburanteNecessario(unsigned int km) const
 {
-    return km*efficenza;
+    return km/efficenzaElettrico;
 }
 
 unsigned int Electric::kmPercorribili(unsigned int kw) const
 {
-    return kw*efficenza;
+    return static_cast<unsigned int>(kw*efficenzaElettrico);
 }

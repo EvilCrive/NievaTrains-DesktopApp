@@ -1,12 +1,15 @@
 #include "electric.h"
 #include <algorithm>
 #include <cctype>
+#include <iostream>
 
-Electric::Electric(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, Ttrasmission ttr, float e): Treno(n,i,c,s,tr,tt), trasmissione(ttr), efficenzaElettrico(e){}
+Electric::Electric(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, TtrasmissioneElettrico ttr, float e): Treno(n,i,c,s,tr,tt), trasmissione(ttr), efficenzaElettrico(e){}
 
-Ttrasmission Electric::getTrasmissione() const
+std::string Electric::getTrasmissione() const
 {
-    return trasmissione;
+    if(trasmissione==TtrasmissioneElettrico::third_rail)    return "Third_Rail";
+    if(trasmissione==TtrasmissioneElettrico::overhead_lines)    return "Overhead_Lines";
+    return "NoType";
 }
 
 float Electric::getEfficenza() const
@@ -20,9 +23,9 @@ void Electric::setTrasmissione(std::string tr)
         [](unsigned char c){ return std::tolower(c); });
     //porta la stringa tutta lowercase
     if(tr=="overhead_lines"){
-        trasmissione=Ttrasmission::overhead_lines;
+        trasmissione=TtrasmissioneElettrico::overhead_lines;
     }else if(tr=="third_rail"){
-        trasmissione=Ttrasmission::third_rail;
+        trasmissione=TtrasmissioneElettrico::third_rail;
     }
 }
 
@@ -39,6 +42,15 @@ float Electric::carburanteNecessario(unsigned int km) const
 unsigned int Electric::kmPercorribili(unsigned int kw) const
 {
     return static_cast<unsigned int>(kw*efficenzaElettrico);
+}
+
+std::string Electric::type() const
+{
+    return "Electric";
+}
+void Electric::print() const{
+    Treno::print();
+    std::cout<<"\nTrasmissione: "<<getTrasmissione()<<"\nEfficenza: "<<getEfficenza()*100<<"%";
 }
 /*
 Electric *Electric::clone() const

@@ -1,6 +1,7 @@
 #include "treno.h"
 #include <algorithm>
 #include <cctype>
+#include <iostream>
 
 Treno::Treno(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt):
     nome(n), id(i), costruttore(c),speed(s),tipo_rotaia(tr),tipo_treno(tt){}
@@ -25,14 +26,26 @@ unsigned int Treno::getSpeed() const
     return speed;
 }
 
-Trotaia Treno::getTipo_rotaia() const
+std::string Treno::getTipo_rotaia() const
 {
-    return tipo_rotaia;
+    if(tipo_rotaia==Trotaia::maglev)            return "Maglev";
+    if(tipo_rotaia==Trotaia::strap)             return "Strap";
+    if(tipo_rotaia==Trotaia::plate)             return "Plate";
+    if(tipo_rotaia==Trotaia::bridge)            return "Bridge";
+    if(tipo_rotaia==Trotaia::barlow)            return "Barlow";
+    if(tipo_rotaia==Trotaia::flat_bottomed)     return "Flat Bottomed";
+    if(tipo_rotaia==Trotaia::double_headed)     return "Double Headed";
+    if(tipo_rotaia==Trotaia::bullhead)          return "Bullhead";
+    return "NoType";
 }
 
-Ttreno Treno::getTipo_treno() const
+std::string Treno::getTipo_treno() const
 {
-    return tipo_treno;
+    if(tipo_treno==Ttreno::commuter)        return "Commuter";
+    if(tipo_treno==Ttreno::regionale)       return "Regionale";
+    if(tipo_treno==Ttreno::inter_city)      return "Inner City";
+    if(tipo_treno==Ttreno::alta_velocita)   return "Alta velocita'";
+    return "NoType";
 }
 
 void Treno::setNome(std::string n)
@@ -87,4 +100,14 @@ void Treno::setTipo_treno(std::string tt)
 
     }
 
+}
+
+std::string Treno::type() const
+{
+ return "Treno";
+}
+
+void Treno::print() const
+{
+    std::cout<<"Id: "<<getId()<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h\nTipo Rotaia: "<<getTipo_rotaia()<<"\nTipo Treno: "<<getTipo_treno();
 }

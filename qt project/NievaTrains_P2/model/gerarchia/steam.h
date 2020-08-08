@@ -11,16 +11,18 @@ private:
     float efficenza;        // km/kg
     TfuelSteam carburante;  //kg
 public:
-    Steam(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =7, TfuelSteam =TfuelSteam::coal);
+    Steam(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =0.7f, TfuelSteam =TfuelSteam::coal);
 
     float getEfficenza() const;
-    TfuelSteam getCarburante() const;
+    std::string getCarburante() const;
 
     void setEfficenza(float);
     void setCarburante(std::string);
 
     float carburanteNecessario(unsigned int) const;
     unsigned int kmPercorribili(unsigned int) const;
+    std::string type() const;
+    void print() const;
    // Steam* clone() const;
 };
 

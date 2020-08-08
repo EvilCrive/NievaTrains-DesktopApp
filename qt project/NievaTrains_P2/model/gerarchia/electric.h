@@ -2,19 +2,19 @@
 #define ELECTRIC_H
 #include "treno.h"
 
-enum Ttrasmission {
+enum TtrasmissioneElettrico {
     overhead_lines, third_rail
 };
 
 class Electric: virtual public Treno {
 private:
-    Ttrasmission trasmissione;
+    TtrasmissioneElettrico trasmissione;
 protected:
     float efficenzaElettrico;
 public:
-    Electric(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita,  Ttrasmission =Ttrasmission::overhead_lines, float =7);
+    Electric(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita,  TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, float =0.7f);
 
-    Ttrasmission getTrasmissione() const;
+    std::string getTrasmissione() const;
     float getEfficenza() const;
 
     void setTrasmissione(std::string);
@@ -22,7 +22,9 @@ public:
 
     float carburanteNecessario(unsigned int) const;  //input km da percorrere
     unsigned int kmPercorribili(unsigned int) const; //input kw di carburante
-   // Electric* clone() const;
+    std::string type() const;
+    void print() const;
+    // Electric* clone() const;
 };
 
 #endif // ELECTRIC_H

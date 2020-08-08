@@ -2,7 +2,7 @@
 #define INTERNAL_COMBUSTION_H
 #include "treno.h"
 
-enum Ttrasmissione {
+enum TtrasmissioneFuel {
     electric, mechanical, hydraulic, steam, pneumatic
 };
 enum Tfuel {
@@ -12,15 +12,15 @@ enum Tfuel {
 class Internal_Combustion: virtual public Treno {
 private:
     Tfuel carburante;
-    Ttrasmissione trasmissione;
+    TtrasmissioneFuel trasmissione;
 protected:
         float efficenzaFuel; // km/l
 public:
-    Internal_Combustion(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =7, Tfuel =Tfuel::kerosene, Ttrasmissione =Ttrasmissione::electric );
+    Internal_Combustion(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =0.7f, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric );
 
     float getEfficenza() const;
-    Tfuel getCarburante() const;
-    Ttrasmissione getTrasmissione() const;
+    std::string getCarburante() const;
+    std::string getTrasmissione() const;
 
     void setEfficenza(float);
     void setCarburante(std::string);
@@ -28,6 +28,8 @@ public:
 
     float carburanteNecessario(unsigned int) const; //input km
     unsigned int kmPercorribili(unsigned int) const; //input l fuel
+    std::string type() const;
+    void print() const;
     //Internal_Combustion* clone() const;
 };
 

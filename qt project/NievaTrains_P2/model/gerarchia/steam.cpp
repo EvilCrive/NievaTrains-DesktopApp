@@ -1,7 +1,7 @@
 #include "steam.h"
 #include <algorithm>
 #include <cctype>
-
+#include <iostream>
 
 
 Steam::Steam(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, TfuelSteam tfs): Treno(n,i,c,s,tr,tt),efficenza(e),carburante(tfs){}
@@ -11,9 +11,12 @@ float Steam::getEfficenza() const
     return efficenza;
 }
 
-TfuelSteam Steam::getCarburante() const
+std::string Steam::getCarburante() const
 {
-    return carburante;
+    if(carburante==TfuelSteam::oil)     return "Oil";
+    if(carburante==TfuelSteam::coal)    return "Coal";
+    if(carburante==TfuelSteam::wood)    return "Wood";
+    return "NoType";
 }
 
 void Steam::setEfficenza(float e)
@@ -44,9 +47,20 @@ unsigned int Steam::kmPercorribili(unsigned int kg) const
 {
     return static_cast<unsigned int>(efficenza*kg);
 }
+
+std::string Steam::type() const
+{
+    return "Steam";
+}
 /*
 Steam *Steam::clone() const
 {
     return new Steam(*this);
 }
 */
+
+void Steam::print() const
+{
+    Treno::print();
+    std::cout<<"\nEfficenza: "<<getEfficenza()*100<<"%"<<"\nCarburante: "<<getCarburante();
+}

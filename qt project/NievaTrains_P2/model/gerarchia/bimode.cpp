@@ -1,13 +1,17 @@
 #include "bimode.h"
 #include <algorithm>
 #include <cctype>
+#include <iostream>
 
-Bimode::Bimode(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt,Ttrasmission ttr1, float e1,float e2, Tfuel tf, Ttrasmissione ttr2,Tmotore tm1)
+Bimode::Bimode(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt,TtrasmissioneElettrico ttr1, float e1,float e2, Tfuel tf, TtrasmissioneFuel ttr2,Tmotore tm1)
     : Electric(n,i,c,s,tr,tt,ttr1,e1),Internal_Combustion(n,i,c,s,tr,tt,e2,tf,ttr2), motorePrimario(tm1){}
 
-Tmotore Bimode::getMotorePrimario() const
+std::string Bimode::getMotorePrimario() const
 {
-    return motorePrimario;
+    if(motorePrimario==Tmotore::elettrico)      return "Elettrico";
+    if(motorePrimario==Tmotore::fullhybrid)     return "FullHybrid";
+    if(motorePrimario==Tmotore::combustione)    return "Diesel";
+    return "NoType";
 }
 
 void Bimode::setMotorePrimario(std::string tr)
@@ -48,6 +52,18 @@ unsigned int Bimode::kmPercorribili(unsigned int f) const
         result= static_cast<unsigned int>(efficenzaFuel*f);
     }
     return result;
+}
+
+std::string Bimode::type() const
+{
+    return "Bimode";
+}
+
+void Bimode::print() const
+{
+    Treno::print();
+    std::cout<<"\nMotore Primario: "<<getMotorePrimario()<<"\nTrasmissione Motore Elettrico: "<<Electric::getTrasmissione()<<"\nEfficenza Motore Elettrico: "<<Electric::getEfficenza()*100<<"%"<<"\nTrasmissione Motore a Combustione Interna: "<<Internal_Combustion::getTrasmissione()<<"\nEfficenza Motore a Combustione Interna: "<<Internal_Combustion::getEfficenza()*100<<"%"<<"\nCarburante Motore a Combustione Interna: "<<getCarburante();
+
 }
 /*
 Bimode *Bimode::clone() const

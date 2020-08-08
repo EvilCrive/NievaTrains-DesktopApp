@@ -1,23 +1,31 @@
 #include "internal_combustion.h"
 #include <algorithm>
 #include <cctype>
+#include <iostream>
 
-
-Internal_Combustion::Internal_Combustion(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, Tfuel tf, Ttrasmissione ttr): Treno(n,i,c,s,tr,tt), carburante(tf), trasmissione(ttr), efficenzaFuel(e){}
+Internal_Combustion::Internal_Combustion(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, Tfuel tf, TtrasmissioneFuel ttr): Treno(n,i,c,s,tr,tt), carburante(tf), trasmissione(ttr), efficenzaFuel(e){}
 
 float Internal_Combustion::getEfficenza() const
 {
     return efficenzaFuel;
 }
 
-Tfuel Internal_Combustion::getCarburante() const
+std::string Internal_Combustion::getCarburante() const
 {
-    return carburante;
+    if(carburante==Tfuel::diesel)   return "Diesel";
+    if(carburante==Tfuel::petrol)   return "Petrol";
+    if(carburante==Tfuel::kerosene) return "Kerosene";
+    return "NoType";
 }
 
-Ttrasmissione Internal_Combustion::getTrasmissione() const
+std::string Internal_Combustion::getTrasmissione() const
 {
-    return trasmissione;
+    if(trasmissione==TtrasmissioneFuel::steam)  return "Steam";
+    if(trasmissione==TtrasmissioneFuel::electric)   return "Electric";
+    if(trasmissione==TtrasmissioneFuel::hydraulic)  return "Hydraulic";
+    if(trasmissione==TtrasmissioneFuel::pneumatic)  return "Pneumatic";
+    if(trasmissione==TtrasmissioneFuel::mechanical) return "Mechanical";
+    return "NoType";
 }
 
 void Internal_Combustion::setEfficenza(float e)
@@ -45,15 +53,15 @@ void Internal_Combustion::setTrasmissione(std::string tr)
         [](unsigned char c){ return std::tolower(c); });
     //porta la stringa tutta lowercase
     if(tr=="electric"){
-        trasmissione=Ttrasmissione::electric;
+        trasmissione=TtrasmissioneFuel::electric;
     }else if(tr=="mechanical"){
-        trasmissione=Ttrasmissione::mechanical;
+        trasmissione=TtrasmissioneFuel::mechanical;
     }else if(tr=="hydraulic"){
-        trasmissione=Ttrasmissione::hydraulic;
+        trasmissione=TtrasmissioneFuel::hydraulic;
     }else if(tr=="steam"){
-        trasmissione=Ttrasmissione::steam;
+        trasmissione=TtrasmissioneFuel::steam;
     }else if(tr=="pneumatic"){
-        trasmissione=Ttrasmissione::pneumatic;
+        trasmissione=TtrasmissioneFuel::pneumatic;
     }
 }
 
@@ -66,6 +74,17 @@ unsigned int Internal_Combustion::kmPercorribili(unsigned int l) const
 {
     //return static_cast<unsigned int>(efficenzaFuel*l);
     return static_cast<unsigned int>(efficenzaFuel*l);
+}
+
+std::string Internal_Combustion::type() const
+{
+    return "Internal_Combustion";
+}
+
+void Internal_Combustion::print() const
+{
+    Treno::print();
+    std::cout<<"\nTrasmissione: "<<getTrasmissione()<<"\nCarburante: "<<getCarburante()<<"\nEfficenza: "<<getEfficenza()*100<<"%";
 }
 /*
 Internal_Combustion *Internal_Combustion::clone() const

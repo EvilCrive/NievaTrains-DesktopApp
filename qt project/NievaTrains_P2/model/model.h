@@ -1,15 +1,30 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <QObject>
+#include "model/Qontainer.h"
+#include "model/gerarchia/bimode.h"
 
-class model : public QObject
+class Model
 {
-    Q_OBJECT
+private:
+    Qontainer<Treno*> list;
 public:
-    explicit model(QObject *parent = nullptr);
+    Model()=default;
+    ~Model()=default;
 
-signals:
+//    void print_all()const;
+    void push_end(Treno*);
+    void print(unsigned int =0) const;
+
+    /*Treno* operator[](unsigned int) const;
+    void erase(unsigned int);
+    void clear();
+
+    void addrandomtrain(std::string);
+    unsigned int numerotreni() const;
+    unsigned int numeroproduttori()const;
+    float carburanteTreno(unsigned int)const;
+    unsigned int kmPercorribili(unsigned int)const;*/
 
 };
 

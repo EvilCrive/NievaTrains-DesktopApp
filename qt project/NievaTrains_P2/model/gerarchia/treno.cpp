@@ -3,17 +3,12 @@
 #include <cctype>
 #include <iostream>
 
-Treno::Treno(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt):
-    nome(n), id(i), costruttore(c),speed(s),tipo_rotaia(tr),tipo_treno(tt){}
+Treno::Treno(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt):
+    nome(n), costruttore(c),speed(s),tipo_rotaia(tr),tipo_treno(tt){}
 
 std::string Treno::getNome() const
 {
     return nome;
-}
-
-unsigned int Treno::getId() const
-{
-    return id;
 }
 
 std::string Treno::getCostruttore() const
@@ -51,11 +46,6 @@ std::string Treno::getTipo_treno() const
 void Treno::setNome(std::string n)
 {
     nome=n;
-}
-
-void Treno::setId(unsigned int i)
-{
-    id=i;
 }
 
 void Treno::setCostruttore(std::string b)
@@ -109,5 +99,5 @@ std::string Treno::type() const
 
 void Treno::print() const
 {
-    std::cout<<"Id: "<<getId()<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h\nTipo Rotaia: "<<getTipo_rotaia()<<"\nTipo Treno: "<<getTipo_treno();
+    std::cout<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h\nTipo Rotaia: "<<getTipo_rotaia()<<"\nTipo Treno: "<<getTipo_treno();
 }

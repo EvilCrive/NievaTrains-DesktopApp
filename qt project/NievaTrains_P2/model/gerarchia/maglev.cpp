@@ -3,7 +3,7 @@
 #include <cctype>
 #include <iostream>
 
-Maglev::Maglev(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, Ttech ttt): Treno(n,i,c,s,tr,tt), tecnologia(ttt){}
+Maglev::Maglev(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, Ttech ttt): Treno(n,c,s,tr,tt), tecnologia(ttt){}
 
 std::string Maglev::getTecnologia() const
 {

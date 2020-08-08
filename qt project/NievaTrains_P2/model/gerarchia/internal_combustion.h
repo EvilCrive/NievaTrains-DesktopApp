@@ -16,7 +16,7 @@ private:
 protected:
         float efficenzaFuel; // km/l
 public:
-    Internal_Combustion(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =0.7f, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric );
+    Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =0.7f, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric );
 
     float getEfficenza() const;
     std::string getCarburante() const;

@@ -3,7 +3,7 @@
 #include <cctype>
 #include <iostream>
 
-Internal_Combustion::Internal_Combustion(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, Tfuel tf, TtrasmissioneFuel ttr): Treno(n,i,c,s,tr,tt), carburante(tf), trasmissione(ttr), efficenzaFuel(e){}
+Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, Tfuel tf, TtrasmissioneFuel ttr): Treno(n,c,s,tr,tt), carburante(tf), trasmissione(ttr), efficenzaFuel(e){}
 
 float Internal_Combustion::getEfficenza() const
 {

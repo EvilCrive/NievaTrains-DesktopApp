@@ -10,7 +10,7 @@ class Maglev: public Treno {
 private:
     Ttech tecnologia;
 public:
-    Maglev(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, Ttech =Ttech::eds);
+    Maglev(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, Ttech =Ttech::eds);
 
     std::string getTecnologia() const;
 

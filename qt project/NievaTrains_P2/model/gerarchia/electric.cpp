@@ -3,7 +3,7 @@
 #include <cctype>
 #include <iostream>
 
-Electric::Electric(const std::string & n, unsigned int i, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, TtrasmissioneElettrico ttr, float e): Treno(n,i,c,s,tr,tt), trasmissione(ttr), efficenzaElettrico(e){}
+Electric::Electric(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, TtrasmissioneElettrico ttr, float e): Treno(n,c,s,tr,tt), trasmissione(ttr), efficenzaElettrico(e){}
 
 std::string Electric::getTrasmissione() const
 {

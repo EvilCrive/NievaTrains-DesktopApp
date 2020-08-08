@@ -25,5 +25,5 @@ int main()
     Electric secondo;
     m.push_end(&primo);
     m.push_end(&secondo);
-    m.print();
+    m.print_all();
 }

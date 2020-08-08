@@ -15,7 +15,7 @@ public:
 //    void print_all()const;
     void push_end(Treno*);
     void print(unsigned int =0) const;
-
+    void print_all() const;
     /*Treno* operator[](unsigned int) const;
     void erase(unsigned int);
     void clear();

@@ -13,7 +13,7 @@ private:
     Tmotore motorePrimario;
 
 public:
-    Bimode(const std::string& = "NoName", unsigned int =10, const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, float =0.7f, float =0.4f, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric, Tmotore =Tmotore::elettrico);
+    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, float =0.7f, float =0.4f, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric, Tmotore =Tmotore::elettrico);
     std::string getMotorePrimario() const;
 
     void setMotorePrimario(std::string);

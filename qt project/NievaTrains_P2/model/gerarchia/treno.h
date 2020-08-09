@@ -25,11 +25,8 @@ public:
     std::string getNome() const;
     std::string getCostruttore() const;
     unsigned int getSpeed() const;
-
     std::string getTipo_rotaia() const;
     std::string getTipo_treno() const;
-    Trotaia getEnumTipo_Rotaia() const;
-    Ttreno getEnumTIpo_Treno() const;
 
     void setNome(std::string);
     void setCostruttore(std::string);

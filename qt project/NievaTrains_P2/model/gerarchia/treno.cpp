@@ -43,11 +43,6 @@ std::string Treno::getTipo_treno() const
     return "NoType";
 }
 
-Trotaia Treno::getEnumTipo_Rotaia() const
-{
-
-}
-
 void Treno::setNome(std::string n)
 {
     nome=n;
@@ -104,5 +99,10 @@ std::string Treno::type() const
 
 void Treno::print() const
 {
-    std::cout<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h\nTipo Rotaia: "<<getTipo_rotaia()<<"\nTipo Treno: "<<getTipo_treno();
+
+
+    std::string tr=type();
+    std::transform(tr.begin(), tr.end(), tr.begin(),
+        [](unsigned char c){ return std::toupper(c); });
+    std::cout<<"\nTipo: "<<tr<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h\nTipo Rotaia: "<<getTipo_rotaia()<<"\nTipo Treno: "<<getTipo_treno();
 }

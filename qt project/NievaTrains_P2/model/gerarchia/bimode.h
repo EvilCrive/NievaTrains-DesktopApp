@@ -17,6 +17,13 @@ public:
     std::string getMotorePrimario() const;
 
     void setMotorePrimario(std::string);
+    void setCarburanteIC(std::string);
+    void setTrasmissioneIC(std::string);
+    void setEfficenzaIC(float);
+    void setTrasmissioneElettrico(std::string);
+    void setEfficenzaElettrico(float);
+
+
 
     float carburanteNecessario(unsigned int) const;  //input km da percorrere
     unsigned int kmPercorribili(unsigned int) const; //input kw o kg di carburante(in base al motore primario)(se hybrid e' fuel kg)

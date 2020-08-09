@@ -28,6 +28,31 @@ void Bimode::setMotorePrimario(std::string tr)
     }
 }
 
+void Bimode::setCarburanteIC(std::string t)
+{
+    Internal_Combustion::setCarburante(t);
+}
+
+void Bimode::setTrasmissioneIC(std::string t)
+{
+    Internal_Combustion::setTrasmissione(t);
+}
+
+void Bimode::setEfficenzaIC(float e)
+{
+    Internal_Combustion::setEfficenza(e);
+}
+
+void Bimode::setTrasmissioneElettrico(std::string t)
+{
+    Electric::setTrasmissione(t);
+}
+
+void Bimode::setEfficenzaElettrico(float e)
+{
+    Electric::setEfficenza(e);
+}
+
 float Bimode::carburanteNecessario(unsigned int km) const
 {
     float result=0;

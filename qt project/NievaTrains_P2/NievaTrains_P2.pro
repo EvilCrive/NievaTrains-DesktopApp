@@ -28,7 +28,7 @@ SOURCES += \
     view/view.cpp
 
 HEADERS += \
-    model/Qontainer.h \
+    Qontainer.h \
     model/model.h \
     model/gerarchia/bimode.h \
     model/gerarchia/electric.h \

@@ -43,6 +43,11 @@ std::string Treno::getTipo_treno() const
     return "NoType";
 }
 
+Trotaia Treno::getEnumTipo_Rotaia() const
+{
+
+}
+
 void Treno::setNome(std::string n)
 {
     nome=n;

@@ -84,15 +84,13 @@ void Qontainer<T>::push(T* t){
 }
 
 template <class T>
-void Qontainer<T>::pop(unsigned int tmp){
-    if(size!=0 && tmp< size){
+void Qontainer<T>::pop(unsigned int i){
+    if(size!=0 && i< size){
         size--;
-        T aux=array[tmp];
-        for(unsigned int i=tmp; i<size; i++){
-            array[i]=array[i+1];
+        for(unsigned int j=i; j<size; j++){
+            array[j]=array[j+1];
         }
         array[size]=nullptr;
-        delete aux;
     }
 }
 

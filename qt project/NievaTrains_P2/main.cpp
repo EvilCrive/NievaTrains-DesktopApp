@@ -24,6 +24,6 @@ int main()
     Bimode primo;
     Electric secondo;
     m.push_end(&primo);
-    m.push_end(&secondo);
-    m.print_all();
+    m.push_end(&secondo); 
+    m.erase(0);
 }

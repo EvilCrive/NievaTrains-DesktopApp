@@ -1,6 +1,6 @@
 #ifndef MAGLEV_H
 #define MAGLEV_H
-#include "treno.h"
+#include "model/gerarchia/treno.h"
 
 enum Ttech {
   eds, ems

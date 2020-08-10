@@ -1,8 +1,8 @@
 #ifndef BIMODE_H
 #define BIMODE_H
 
-#include "electric.h"
-#include "internal_combustion.h"
+#include "model/gerarchia/electric.h"
+#include "model/gerarchia/internal_combustion.h"
 
 enum Tmotore {
     elettrico, combustione, fullhybrid

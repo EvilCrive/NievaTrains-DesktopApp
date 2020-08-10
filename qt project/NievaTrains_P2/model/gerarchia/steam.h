@@ -1,6 +1,6 @@
 #ifndef STEAM_H
 #define STEAM_H
-#include "treno.h"
+#include "model/gerarchia/treno.h"
 
 enum TfuelSteam {
     coal, wood, oil
@@ -8,16 +8,16 @@ enum TfuelSteam {
 
 class Steam: public Treno {
 private:
-    float efficenza;        // km/kg
-    TfuelSteam carburante;  //kg
+    float efficenzaSteam;        // km/kg
+    TfuelSteam carburanteSteam;  //kg
 public:
     Steam(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =0.7f, TfuelSteam =TfuelSteam::coal);
 
-    float getEfficenza() const;
-    std::string getCarburante() const;
+    float getEfficenzaSteam() const;
+    std::string getCarburanteSteam() const;
 
-    void setEfficenza(float);
-    void setCarburante(std::string);
+    void setEfficenzaSteam(float);
+    void setCarburanteSteam(std::string);
 
     float carburanteNecessario(unsigned int) const;
     unsigned int kmPercorribili(unsigned int) const;

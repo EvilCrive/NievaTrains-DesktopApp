@@ -1,4 +1,4 @@
-#include "bimode.h"
+#include "model/gerarchia/bimode.h"
 #include <algorithm>
 #include <cctype>
 #include <iostream>
@@ -30,38 +30,38 @@ void Bimode::setMotorePrimario(std::string tr)
 
 void Bimode::setCarburanteIC(std::string t)
 {
-    Internal_Combustion::setCarburante(t);
+    Internal_Combustion::setCarburanteIC(t);
 }
 
 void Bimode::setTrasmissioneIC(std::string t)
 {
-    Internal_Combustion::setTrasmissione(t);
+    Internal_Combustion::setTrasmissioneIC(t);
 }
 
 void Bimode::setEfficenzaIC(float e)
 {
-    Internal_Combustion::setEfficenza(e);
+    Internal_Combustion::setEfficenzaIC(e);
 }
 
 void Bimode::setTrasmissioneElettrico(std::string t)
 {
-    Electric::setTrasmissione(t);
+    Electric::setTrasmissioneElettrico(t);
 }
 
 void Bimode::setEfficenzaElettrico(float e)
 {
-    Electric::setEfficenza(e);
+    Electric::setEfficenzaElettrico(e);
 }
 
 float Bimode::carburanteNecessario(unsigned int km) const
 {
     float result=0;
     if(motorePrimario==Tmotore::elettrico){
-        result= (((km/efficenzaElettrico)*0.75f)+((km/efficenzaFuel)*0.25f));
+        result= (((km/efficenzaElettrico)*0.75f)+((km/efficenzaIC)*0.25f));
     }else if(motorePrimario==Tmotore::combustione){
-        result= (((km/efficenzaElettrico)*0.25f)+((km/efficenzaFuel)*0.75f));
+        result= (((km/efficenzaElettrico)*0.25f)+((km/efficenzaIC)*0.75f));
     }else{
-        result= (((km/efficenzaElettrico)*0.5f)+((km/efficenzaFuel)*0.5f));
+        result= (((km/efficenzaElettrico)*0.5f)+((km/efficenzaIC)*0.5f));
     }
     return result;
 }
@@ -72,9 +72,9 @@ unsigned int Bimode::kmPercorribili(unsigned int f) const
     if(motorePrimario==Tmotore::elettrico){
         result= static_cast<unsigned int>(efficenzaElettrico*f);
     }else if(motorePrimario==Tmotore::combustione){
-        result= static_cast<unsigned int>(efficenzaFuel*f);
+        result= static_cast<unsigned int>(efficenzaIC*f);
     }else{
-        result= static_cast<unsigned int>(efficenzaFuel*f);
+        result= static_cast<unsigned int>(efficenzaIC*f);
     }
     return result;
 }
@@ -87,7 +87,7 @@ std::string Bimode::type() const
 void Bimode::print() const
 {
     Treno::print();
-    std::cout<<"\nMotore Primario: "<<getMotorePrimario()<<"\nTrasmissione Motore Elettrico: "<<Electric::getTrasmissione()<<"\nEfficenza Motore Elettrico: "<<Electric::getEfficenza()*100<<"%"<<"\nTrasmissione Motore a Combustione Interna: "<<Internal_Combustion::getTrasmissione()<<"\nEfficenza Motore a Combustione Interna: "<<Internal_Combustion::getEfficenza()*100<<"%"<<"\nCarburante Motore a Combustione Interna: "<<getCarburante();
+    std::cout<<"\nMotore Primario: "<<getMotorePrimario()<<"\nTrasmissione Motore Elettrico: "<<Electric::getTrasmissioneElettrico()<<"\nEfficenza Motore Elettrico: "<<Electric::getEfficenzaElettrico()*100<<"%"<<"\nTrasmissione Motore a Combustione Interna: "<<Internal_Combustion::getTrasmissioneIC()<<"\nEfficenza Motore a Combustione Interna: "<<Internal_Combustion::getEfficenzaIC()*100<<"%"<<"\nCarburante Motore a Combustione Interna: "<<getCarburanteIC();
 
 }
 /*

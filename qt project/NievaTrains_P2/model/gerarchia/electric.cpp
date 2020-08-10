@@ -1,35 +1,35 @@
-#include "electric.h"
+#include "model/gerarchia/electric.h"
 #include <algorithm>
 #include <cctype>
 #include <iostream>
 
-Electric::Electric(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, TtrasmissioneElettrico ttr, float e): Treno(n,c,s,tr,tt), trasmissione(ttr), efficenzaElettrico(e){}
+Electric::Electric(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, TtrasmissioneElettrico ttr, float e): Treno(n,c,s,tr,tt), trasmissioneElettrico(ttr), efficenzaElettrico(e){}
 
-std::string Electric::getTrasmissione() const
+std::string Electric::getTrasmissioneElettrico() const
 {
-    if(trasmissione==TtrasmissioneElettrico::third_rail)    return "Third_Rail";
-    if(trasmissione==TtrasmissioneElettrico::overhead_lines)    return "Overhead_Lines";
+    if(trasmissioneElettrico==TtrasmissioneElettrico::third_rail)    return "Third_Rail";
+    if(trasmissioneElettrico==TtrasmissioneElettrico::overhead_lines)    return "Overhead_Lines";
     return "NoType";
 }
 
-float Electric::getEfficenza() const
+float Electric::getEfficenzaElettrico() const
 {
     return efficenzaElettrico;
 }
 
-void Electric::setTrasmissione(std::string tr)
+void Electric::setTrasmissioneElettrico(std::string tr)
 {
     std::transform(tr.begin(), tr.end(), tr.begin(),
         [](unsigned char c){ return std::tolower(c); });
     //porta la stringa tutta lowercase
     if(tr=="overhead_lines"){
-        trasmissione=TtrasmissioneElettrico::overhead_lines;
+        trasmissioneElettrico=TtrasmissioneElettrico::overhead_lines;
     }else if(tr=="third_rail"){
-        trasmissione=TtrasmissioneElettrico::third_rail;
+        trasmissioneElettrico=TtrasmissioneElettrico::third_rail;
     }
 }
 
-void Electric::setEfficenza(float e)
+void Electric::setEfficenzaElettrico(float e)
 {
     efficenzaElettrico=e;
 }
@@ -50,7 +50,7 @@ std::string Electric::type() const
 }
 void Electric::print() const{
     Treno::print();
-    std::cout<<"\nTrasmissione: "<<getTrasmissione()<<"\nEfficenza: "<<getEfficenza()*100<<"%";
+    std::cout<<"\nTrasmissione: "<<getTrasmissioneElettrico()<<"\nEfficenza: "<<getEfficenzaElettrico()*100<<"%";
 }
 /*
 Electric *Electric::clone() const

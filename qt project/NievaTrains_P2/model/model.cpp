@@ -1,8 +1,10 @@
-#include "model.h"
+#include "model/model.h"
 #include <iostream>
 using std::cout;
 using std::string;
-
+#include <QFile>
+#include <QXmlStreamReader>
+#include <QFileDialog>
 void Model::print(unsigned int i) const
 {
     int numero=i+1;
@@ -35,7 +37,7 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         Treno* t=new Steam();
         //set dei vari campi dati tramite setters
         t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);t->setTipo_rotaia(EnumtipoRotaia);t->setTipo_treno(EnumtipoTreno);
-        static_cast<Steam*>(t)->setEfficenza(efficenza);static_cast<Steam*>(t)->setCarburante(EnumtipoCarburanteSteam);
+        static_cast<Steam*>(t)->setEfficenzaSteam(efficenza);static_cast<Steam*>(t)->setCarburanteSteam(EnumtipoCarburanteSteam);
         //push in coda al contenitore
         push_end(t);
     }
@@ -61,7 +63,7 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         Treno* t= new Internal_Combustion();
         //set campi dati
         t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);t->setTipo_rotaia(EnumtipoRotaia);t->setTipo_treno(EnumtipoTreno);
-        dynamic_cast<Internal_Combustion*>(t)->setCarburante(carburante); dynamic_cast<Internal_Combustion*>(t)->setTrasmissione(trasmissione); dynamic_cast<Internal_Combustion*>(t)->setEfficenza(efficenza);
+        dynamic_cast<Internal_Combustion*>(t)->setCarburanteIC(carburante); dynamic_cast<Internal_Combustion*>(t)->setTrasmissioneIC(trasmissione); dynamic_cast<Internal_Combustion*>(t)->setEfficenzaIC(efficenza);
         //push nel contenitore
         push_end(t);
     }
@@ -74,7 +76,7 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         Treno* t= new Electric();
         //set campi dati
         t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);t->setTipo_rotaia(EnumtipoRotaia);t->setTipo_treno(EnumtipoTreno);
-        dynamic_cast<Electric*>(t)->setTrasmissione(trasmissione);dynamic_cast<Electric*>(t)->setEfficenza(efficenza);
+        dynamic_cast<Electric*>(t)->setTrasmissioneElettrico(trasmissione);dynamic_cast<Electric*>(t)->setEfficenzaElettrico(efficenza);
         //push nel contenitore
         push_end(t);
     }
@@ -100,6 +102,29 @@ unsigned int Model::numerotreni() const
         count++;
     }
     return count;
+}
+
+void Model::load(std::string path)
+{
+   // QString path= QFileDialog::getOpenFileName(this,"open","../","XML(*.xml)");
+    QFile file(QString::fromStdString(path));
+    if(!file.open(QIODevice::ReadOnly)){
+        std::cout<<"errore";
+    }
+    QXmlStreamReader reader(&file);
+    if(reader.readNextStartElement()){
+        if(reader.name()=="root"){
+            while(reader.readNextStartElement()){
+                const QXmlStreamAttributes att=reader.attributes();
+                QStringRef alfa(reader.name());
+                const QString* a=alfa.string();
+                QString b=*a;
+                std::cout<<b.QString::toStdString();
+                if(!reader.isEndDocument()) reader.skipCurrentElement();
+            }
+        }
+    }
+    file.close();
 }
 
 void Model::push_end(Treno *t)

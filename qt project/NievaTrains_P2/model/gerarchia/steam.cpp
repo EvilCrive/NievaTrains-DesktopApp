@@ -1,51 +1,51 @@
-#include "steam.h"
+#include "model/gerarchia/steam.h"
 #include <algorithm>
 #include <cctype>
 #include <iostream>
 
 
-Steam::Steam(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, TfuelSteam tfs): Treno(n,c,s,tr,tt),efficenza(e),carburante(tfs){}
+Steam::Steam(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, TfuelSteam tfs): Treno(n,c,s,tr,tt),efficenzaSteam(e),carburanteSteam(tfs){}
 
-float Steam::getEfficenza() const
+float Steam::getEfficenzaSteam() const
 {
-    return efficenza;
+    return efficenzaSteam;
 }
 
-std::string Steam::getCarburante() const
+std::string Steam::getCarburanteSteam() const
 {
-    if(carburante==TfuelSteam::oil)     return "Oil";
-    if(carburante==TfuelSteam::coal)    return "Coal";
-    if(carburante==TfuelSteam::wood)    return "Wood";
+    if(carburanteSteam==TfuelSteam::oil)     return "Oil";
+    if(carburanteSteam==TfuelSteam::coal)    return "Coal";
+    if(carburanteSteam==TfuelSteam::wood)    return "Wood";
     return "NoType";
 }
 
-void Steam::setEfficenza(float e)
+void Steam::setEfficenzaSteam(float e)
 {
-    efficenza=e;
+    efficenzaSteam=e;
 }
 
-void Steam::setCarburante(std::string tr)
+void Steam::setCarburanteSteam(std::string tr)
 {
     std::transform(tr.begin(), tr.end(), tr.begin(),
         [](unsigned char c){ return std::tolower(c); });
     //porta la stringa tutta lowercase
     if(tr=="coal"){
-        carburante=TfuelSteam::coal;
+        carburanteSteam=TfuelSteam::coal;
     }else if(tr=="wood"){
-        carburante=TfuelSteam::wood;
+        carburanteSteam=TfuelSteam::wood;
     }else if(tr=="oil"){
-        carburante=TfuelSteam::oil;
+        carburanteSteam=TfuelSteam::oil;
     }
 }
 
 float Steam::carburanteNecessario(unsigned int km) const
 {
-    return km/efficenza;
+    return km/efficenzaSteam;
 }
 
 unsigned int Steam::kmPercorribili(unsigned int kg) const
 {
-    return static_cast<unsigned int>(efficenza*kg);
+    return static_cast<unsigned int>(efficenzaSteam*kg);
 }
 
 std::string Steam::type() const
@@ -62,5 +62,5 @@ Steam *Steam::clone() const
 void Steam::print() const
 {
     Treno::print();
-    std::cout<<"\nEfficenza: "<<getEfficenza()*100<<"%"<<"\nCarburante: "<<getCarburante();
+    std::cout<<"\nEfficenza: "<<getEfficenzaSteam()*100<<"%"<<"\nCarburante: "<<getCarburanteSteam();
 }

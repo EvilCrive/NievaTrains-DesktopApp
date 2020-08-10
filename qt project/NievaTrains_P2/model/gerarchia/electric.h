@@ -2,11 +2,13 @@
 #define ELECTRIC_H
 #include "model/gerarchia/treno.h"
 
-enum TtrasmissioneElettrico {
-    overhead_lines, third_rail
-};
+
 
 class Electric: virtual public Treno {
+protected:
+    enum TtrasmissioneElettrico {
+        overhead_lines, third_rail
+    };
 private:
     TtrasmissioneElettrico trasmissioneElettrico;
 protected:

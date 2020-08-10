@@ -8,9 +8,9 @@ Bimode::Bimode(const std::string & n, const std::string & c, unsigned int s, Tro
 
 std::string Bimode::getMotorePrimario() const
 {
-    if(motorePrimario==Tmotore::elettrico)      return "Elettrico";
+    if(motorePrimario==Tmotore::electric)      return "Electric";
     if(motorePrimario==Tmotore::fullhybrid)     return "FullHybrid";
-    if(motorePrimario==Tmotore::combustione)    return "Diesel";
+    if(motorePrimario==Tmotore::internal_combustion)   return "Internal_Combustion";
     return "NoType";
 }
 
@@ -20,9 +20,9 @@ void Bimode::setMotorePrimario(std::string tr)
         [](unsigned char c){ return std::tolower(c); });
     //porta la stringa tutta lowercase
     if(tr=="elettrico"){
-        motorePrimario=Tmotore::elettrico;
+        motorePrimario=Tmotore::electric;
     }else if(tr=="combustione"){
-        motorePrimario=Tmotore::combustione;
+        motorePrimario=Tmotore::internal_combustion;
     }else if(tr=="fullhybrid"){
         motorePrimario=Tmotore::fullhybrid;
     }
@@ -56,9 +56,9 @@ void Bimode::setEfficenzaElettrico(float e)
 float Bimode::carburanteNecessario(unsigned int km) const
 {
     float result=0;
-    if(motorePrimario==Tmotore::elettrico){
+    if(motorePrimario==Tmotore::electric){
         result= (((km/efficenzaElettrico)*0.75f)+((km/efficenzaIC)*0.25f));
-    }else if(motorePrimario==Tmotore::combustione){
+    }else if(motorePrimario==Tmotore::internal_combustion){
         result= (((km/efficenzaElettrico)*0.25f)+((km/efficenzaIC)*0.75f));
     }else{
         result= (((km/efficenzaElettrico)*0.5f)+((km/efficenzaIC)*0.5f));
@@ -69,9 +69,9 @@ float Bimode::carburanteNecessario(unsigned int km) const
 unsigned int Bimode::kmPercorribili(unsigned int f) const
 {
     unsigned int result=0;
-    if(motorePrimario==Tmotore::elettrico){
+    if(motorePrimario==Tmotore::electric){
         result= static_cast<unsigned int>(efficenzaElettrico*f);
-    }else if(motorePrimario==Tmotore::combustione){
+    }else if(motorePrimario==Tmotore::internal_combustion){
         result= static_cast<unsigned int>(efficenzaIC*f);
     }else{
         result= static_cast<unsigned int>(efficenzaIC*f);

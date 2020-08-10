@@ -16,10 +16,11 @@ int main(int argc, char *argv[])
  *   m.print_all();
  *   m.load("../data.xml");
  */
-
     QCoreApplication a(argc, argv);
     Model m;
+    m.print_all();
    // m.load("E:/tutto/uni/p2/progetto/Progetto_P2/qt project/NievaTrains_P2/file risorse/data.json");
     m.load(":/file risorse/data.json");
+    m.print_all();
 }
 

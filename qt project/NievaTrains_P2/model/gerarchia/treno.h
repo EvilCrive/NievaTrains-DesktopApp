@@ -2,16 +2,18 @@
 #define TRENO_H
 #include <string>
 #include <QJsonObject>
-enum Trotaia {
-    maglev, strap, plate, bridge, barlow, flat_bottomed, double_headed,
-        bullhead
-};
-enum Ttreno {
-    alta_velocita, inter_city, regionale, commuter
-};
 
 
 class Treno {
+protected:
+    enum Trotaia {
+        maglev, strap, plate, bridge, barlow, flat_bottomed, double_headed,
+            bullhead
+    };
+    enum Ttreno {
+        alta_velocita, inter_city, regionale, commuter
+    };
+
 private:
     std::string nome;
     std::string costruttore;

@@ -4,16 +4,15 @@
 #include "model/gerarchia/electric.h"
 #include "model/gerarchia/internal_combustion.h"
 
-enum Tmotore {
-    elettrico, combustione, fullhybrid
-};
-
 class Bimode: public Electric, Internal_Combustion {
+protected:
+    enum Tmotore {electric, internal_combustion, fullhybrid};
 private:
     Tmotore motorePrimario;
 
 public:
-    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, float =0.7f, float =0.4f, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric, Tmotore =Tmotore::elettrico);
+
+    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, float =0.7f, float =0.4f, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric, Tmotore =Tmotore::electric);
     std::string getMotorePrimario() const;
 
     void setMotorePrimario(std::string);

@@ -2,19 +2,20 @@
 #define INTERNAL_COMBUSTION_H
 #include "model/gerarchia/treno.h"
 
-enum TtrasmissioneFuel {
-    electric, mechanical, hydraulic, steam, pneumatic
-};
-enum Tfuel {
-    kerosene, petrol, diesel
-};
+
 
 class Internal_Combustion: virtual public Treno {
+protected:
+    enum TtrasmissioneFuel {
+        electric, mechanical, hydraulic, steam, pneumatic
+    };
+    enum Tfuel {
+        kerosene, petrol, diesel
+    };
+    float efficenzaIC; // km/l
 private:
     Tfuel carburanteIC;
     TtrasmissioneFuel trasmissioneIC;
-protected:
-        float efficenzaIC; // km/l
 public:
     Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =0.7f, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric );
 

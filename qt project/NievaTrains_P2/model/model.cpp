@@ -115,10 +115,9 @@ void Model::load(std::string path)
         std::cout<<"no";
         //ecccezione
     }
-
     QByteArray savedata=loadFile.readAll();
     loadFile.close();
-    cout<<savedata.data();
+
     QJsonDocument doc(QJsonDocument::fromJson(savedata));
     QJsonArray array(doc.array());
     clear();
@@ -131,7 +130,6 @@ void Model::load(std::string path)
         }
     //eccezione
     }
-
 }
 
 void Model::save(std::string)

@@ -2,11 +2,13 @@
 #define STEAM_H
 #include "model/gerarchia/treno.h"
 
-enum TfuelSteam {
-    coal, wood, oil
-};
+
 
 class Steam: public Treno {
+protected:
+    enum TfuelSteam {
+        coal, wood, oil
+    };
 private:
     float efficenzaSteam;        // km/kg
     TfuelSteam carburanteSteam;  //kg

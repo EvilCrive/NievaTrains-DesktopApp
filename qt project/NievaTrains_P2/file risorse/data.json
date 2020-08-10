@@ -28,5 +28,30 @@
         "tipo_carburanteIC":"diesel",
         "tipo_trasmissioneIC":"electric",
         "efficenzaIC": 0.6
+    },
+    {
+        "type": "Electric",
+        "nome": "Treno Delta",
+        "builder": "Marco",
+        "speed": 39,
+        "tipo_rotaia": "bridge",
+        "tipo_treno": "commuter",
+        "tipo_trasmissioneElettrico":"third_rail",
+        "efficenzaElettrico": 0.9
+
+    },
+    {
+        "type": "Bimode",
+        "nome": "Treno Delta",
+        "builder": "Marco",
+        "speed": 39,
+        "tipo_rotaia": "bridge",
+        "tipo_treno": "commuter",
+        "tipo_carburanteIC":"diesel",
+        "tipo_trasmissioneIC":"electric",
+        "efficenzaIC": 0.6,
+        "tipo_trasmissioneElettrico":"third_rail",
+        "efficenzaElettrico": 0.9,
+        "motore_primario":"electric"
     }
 ]

@@ -1,17 +1,22 @@
-#include "model/gerarchia/treno.h"
+#include "model/gerarchia/bimode.h"
+#include "model/gerarchia/maglev.h"
+#include "model/gerarchia/steam.h"
 #include <algorithm>
 #include <cctype>
 #include <iostream>
+using std::string;
+using std::cerr;
+using std::cout;
 
-Treno::Treno(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt):
+Treno::Treno(const string & n, const string & c, unsigned int s, Trotaia tr, Ttreno tt):
     nome(n), costruttore(c),speed(s),tipo_rotaia(tr),tipo_treno(tt){}
 
-std::string Treno::getNome() const
+string Treno::getNome() const
 {
     return nome;
 }
 
-std::string Treno::getCostruttore() const
+string Treno::getCostruttore() const
 {
     return costruttore;
 }
@@ -21,7 +26,7 @@ unsigned int Treno::getSpeed() const
     return speed;
 }
 
-std::string Treno::getTipo_rotaia() const
+string Treno::getTipo_rotaia() const
 {
     if(tipo_rotaia==Trotaia::maglev)            return "Maglev";
     if(tipo_rotaia==Trotaia::strap)             return "Strap";
@@ -34,7 +39,7 @@ std::string Treno::getTipo_rotaia() const
     return "NoType";
 }
 
-std::string Treno::getTipo_treno() const
+string Treno::getTipo_treno() const
 {
     if(tipo_treno==Ttreno::commuter)        return "Commuter";
     if(tipo_treno==Ttreno::regionale)       return "Regionale";
@@ -43,12 +48,12 @@ std::string Treno::getTipo_treno() const
     return "NoType";
 }
 
-void Treno::setNome(std::string n)
+void Treno::setNome(string n)
 {
     nome=n;
 }
 
-void Treno::setCostruttore(std::string b)
+void Treno::setCostruttore(string b)
 {
     costruttore=b;
 }
@@ -58,10 +63,10 @@ void Treno::setSpeed(unsigned int s)
     speed=s;
 }
 
-void Treno::setTipo_rotaia(std::string tr)
+void Treno::setTipo_rotaia(string tr)
 {
-    std::transform(tr.begin(), tr.end(), tr.begin(),
-        [](unsigned char c){ return std::tolower(c); });
+    transform(tr.begin(), tr.end(), tr.begin(),
+        [](unsigned char c){ return tolower(c); });
     //porta la stringa tutta lowercase
 
     if(tr=="maglev" || tr=="strap" || tr=="plate" || tr=="bridge" || tr=="barlow" || tr=="flat_bottomed" || tr=="double_headed" || tr=="bullhead"){
@@ -77,10 +82,10 @@ void Treno::setTipo_rotaia(std::string tr)
 
 }
 
-void Treno::setTipo_treno(std::string tt)
+void Treno::setTipo_treno(string tt)
 {
-    std::transform(tt.begin(), tt.end(), tt.begin(),
-        [](unsigned char c){ return std::tolower(c); });
+    transform(tt.begin(), tt.end(), tt.begin(),
+        [](unsigned char c){ return tolower(c); });
     //porta la stringa tutta lowercase
     if(tt=="alta_velocita" || tt=="inter_city" || tt=="regionale" || tt=="commuter"){
         if(tt=="alta_velocita")         tipo_treno=Ttreno::alta_velocita;
@@ -92,7 +97,7 @@ void Treno::setTipo_treno(std::string tt)
 
 }
 
-std::string Treno::type() const
+string Treno::type() const
 {
  return "Treno";
 }
@@ -101,14 +106,98 @@ void Treno::print() const
 {
 
 
-    std::string tr=type();
-    std::transform(tr.begin(), tr.end(), tr.begin(),
-        [](unsigned char c){ return std::toupper(c); });
-    std::cout<<"\nTipo: "<<tr<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h\nTipo Rotaia: "<<getTipo_rotaia()<<"\nTipo Treno: "<<getTipo_treno();
+    string tr=type();
+    transform(tr.begin(), tr.end(), tr.begin(),
+        [](unsigned char c){ return toupper(c); });
+    cout<<"\nTipo: "<<tr<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h\nTipo Rotaia: "<<getTipo_rotaia()<<"\nTipo Treno: "<<getTipo_treno();
 }
 
 Treno *Treno::unserialize(QJsonObject & json)
 {
-    std::cout<<"shiet";
-    return 0;
+    Treno* t=nullptr;
+    string type=json["type"].toString().toStdString();
+    if(type=="Steam" || type=="Maglev" || type=="Internal_Combustion" || type=="Electric" || type=="Bimode"){
+
+        string nome=json["nome"].toString().toStdString();
+        string builder=json["builder"].toString().toStdString();
+        int speed0=json["speed"].toInt();
+        unsigned int speed=100;
+        if(speed0>=0)   speed=speed0;
+        string tiporotaia=json["tipo_rotaia"].toString().toStdString();
+        string tipotreno=json["tipo_treno"].toString().toStdString();
+
+        if(type=="Steam"){
+            string tipo_carburanteSteam=json["tipo_carburanteSteam"].toString().toStdString();
+            float efficenzaSteam=static_cast<float>(json["efficenzaSteam"].toDouble());
+            t=new Steam();
+            t->setNome(nome);
+            t->setCostruttore(builder);
+            t->setSpeed(speed);
+            t->setTipo_rotaia(tiporotaia);
+            t->setTipo_treno(tipotreno);
+            static_cast<Steam*>(t)->setEfficenzaSteam(efficenzaSteam);
+            static_cast<Steam*>(t)->setCarburanteSteam(tipo_carburanteSteam);
+        }
+        if(type=="Maglev"){
+            string tipotecnologia=json["tipo_tecnologia"].toString().toStdString();
+            t=new Maglev();
+            t->setNome(nome);
+            t->setCostruttore(builder);
+            t->setSpeed(speed);
+            t->setTipo_rotaia(tiporotaia);
+            t->setTipo_treno(tipotreno);
+            static_cast<Maglev*>(t)->setTecnologia(tipotecnologia);
+        }
+        if(type=="Internal_Combustion"){
+            float efficenzaIC=static_cast<float>(json["efficenzaIC"].toDouble());
+            string tipocarburanteIC=json["tipo_carburanteIC"].toString().toStdString();
+            string tipotrasmissioneIC=json["tipo_trasmissioneIC"].toString().toStdString();
+            t=new Internal_Combustion();
+            t->setNome(nome);
+            t->setCostruttore(builder);
+            t->setSpeed(speed);
+            t->setTipo_rotaia(tiporotaia);
+            t->setTipo_treno(tipotreno);
+            dynamic_cast<Internal_Combustion*>(t)->setEfficenzaIC(efficenzaIC);
+            dynamic_cast<Internal_Combustion*>(t)->setCarburanteIC(tipocarburanteIC);
+            dynamic_cast<Internal_Combustion*>(t)->setTrasmissioneIC(tipotrasmissioneIC);
+        }
+        if(type=="Electric"){
+            float efficenzaElettrico=static_cast<float>(json["efficenzaElettrico"].toDouble());
+            string tipotrasmissioneElettrico=json["tipo_trasmissioneElettrico"].toString().toStdString();
+            t=new Electric();
+            t->setNome(nome);
+            t->setCostruttore(builder);
+            t->setSpeed(speed);
+            t->setTipo_rotaia(tiporotaia);
+            t->setTipo_treno(tipotreno);
+            dynamic_cast<Electric*>(t)->setEfficenzaElettrico(efficenzaElettrico);
+            dynamic_cast<Electric*>(t)->setTrasmissioneElettrico(tipotrasmissioneElettrico);
+
+        }
+        if(type=="Bimode"){
+            float efficenzaElettrico=static_cast<float>(json["efficenzaElettrico"].toDouble());
+            string tipotrasmissioneElettrico=json["tipo_trasmissioneElettrico"].toString().toStdString();
+            float efficenzaIC=static_cast<float>(json["efficenzaIC"].toDouble());
+            string tipocarburanteIC=json["tipo_carburanteIC"].toString().toStdString();
+            string tipotrasmissioneIC=json["tipo_trasmissioneIC"].toString().toStdString();
+            string motoreprimario=json["motore_primario"].toString().toStdString();
+            t=new Bimode();
+            t->setNome(nome);
+            t->setCostruttore(builder);
+            t->setSpeed(speed);
+            t->setTipo_rotaia(tiporotaia);
+            t->setTipo_treno(tipotreno);
+            dynamic_cast<Bimode*>(t)->setEfficenzaElettrico(efficenzaElettrico);
+            dynamic_cast<Bimode*>(t)->setTrasmissioneElettrico(tipotrasmissioneElettrico);
+            dynamic_cast<Bimode*>(t)->setEfficenzaIC(efficenzaIC);
+            dynamic_cast<Bimode*>(t)->setCarburanteIC(tipocarburanteIC);
+            dynamic_cast<Bimode*>(t)->setTrasmissioneIC(tipotrasmissioneIC);
+            dynamic_cast<Bimode*>(t)->setMotorePrimario(motoreprimario);
+        }
+    }else{
+        //eccezione
+        cerr<<"tipo non valido";
+    }
+    return t;
 }

@@ -2,11 +2,13 @@
 #define MAGLEV_H
 #include "model/gerarchia/treno.h"
 
-enum Ttech {
-  eds, ems
-};
+
 
 class Maglev: public Treno {
+protected:
+    enum Ttech {
+      eds, ems
+    };
 private:
     Ttech tecnologia;
 public:

@@ -2,9 +2,7 @@
 #include <iostream>
 using std::cout;
 using std::string;
-#include <QFile>
-#include <QXmlStreamReader>
-#include <QFileDialog>
+
 void Model::print(unsigned int i) const
 {
     int numero=i+1;
@@ -29,7 +27,6 @@ void Model::clear()
     for(unsigned int i=0; i<list.getSize();i++) erase(0);
     erase(0);
 }
-
 void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, float efficenza, std::string EnumtipoCarburanteSteam, std::string tipo)
 {
     if(tipo=="Steam"){
@@ -42,7 +39,6 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         push_end(t);
     }
 }
-
 void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string tecnologia, std::string tipo)
 {
     if(tipo=="Maglev"){
@@ -55,7 +51,6 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         push_end(t);
     }
 }
-
 void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburante, std::string trasmissione, float efficenza, std::string tipo)
 {
     if(tipo=="Internal_Combustion"){
@@ -68,7 +63,6 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         push_end(t);
     }
 }
-
 void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string trasmissione, float efficenza, std::string tipo)
 {
     if(tipo=="Electric"){
@@ -81,7 +75,6 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         push_end(t);
     }
 }
-
 void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburanteIC, std::string trasmissioneIC, float efficenzaIC, std::string trasmissioneElettrico, float efficenzaElettrico, std::string motorePrimario, std::string tipo)
 {
     if(tipo=="Bimode"){
@@ -103,31 +96,76 @@ unsigned int Model::numerotreni() const
     }
     return count;
 }
-
-void Model::load(std::string path)
-{
-   // QString path= QFileDialog::getOpenFileName(this,"open","../","XML(*.xml)");
-    QFile file(QString::fromStdString(path));
-    if(!file.open(QIODevice::ReadOnly)){
-        std::cout<<"errore";
-    }
-    QXmlStreamReader reader(&file);
-    if(reader.readNextStartElement()){
-        if(reader.name()=="root"){
-            while(reader.readNextStartElement()){
-                const QXmlStreamAttributes att=reader.attributes();
-                QStringRef alfa(reader.name());
-                const QString* a=alfa.string();
-                QString b=*a;
-                std::cout<<b.QString::toStdString();
-                if(!reader.isEndDocument()) reader.skipCurrentElement();
-            }
-        }
-    }
-    file.close();
-}
-
 void Model::push_end(Treno *t)
 {
     list.push(&t);
 }
+
+// INPUT OUTPUT JSON
+#include <QFile>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
+using std::cout;
+
+void Model::load(std::string path)
+{
+    QFile loadFile(QString::fromStdString(path));
+    if(!loadFile.open(QIODevice::ReadOnly)){
+        std::cout<<"no";
+        //ecccezione
+    }
+
+    QByteArray savedata=loadFile.readAll();
+    loadFile.close();
+    QJsonDocument doc(QJsonDocument::fromJson(savedata));
+    QJsonArray array(doc.array());
+
+    clear();
+    for(auto it=array.begin(); it!=array.end();it++){
+        QJsonObject object=it->toObject();
+        if(object.contains("type") && object["type"].isString()){
+            Treno* treno=treno->unserialize(object);
+            //eccezione
+            push_end(treno);
+        }
+    //eccezione
+    }
+
+}
+
+void Model::save(std::string)
+{
+
+}
+
+/*
+ #include "character.h"
+#include <QFile>
+#include <iostream>
+#include <QJsonObject>
+#include <QJsonDocument>
+void Character::read(const QJsonObject &json)
+{
+       if(json.contains("name") && json["name"].isString())
+           mName= json["name"].toString();
+}
+
+void Character::save(QJsonObject &json) const
+{
+    json["name"]=mName;
+}
+
+void Character::load()
+{
+    QFile loadi(QStringLiteral("save.json"));
+    if(!loadi.open(QIODevice::ReadOnly)){
+        std::cout<<"no";
+    }
+    QByteArray savedata=loadi.readAll();
+    QJsonDocument loadDoc(QJsonDocument::fromJson(savedata));
+    read(loadDoc.object());
+}
+
+
+*/

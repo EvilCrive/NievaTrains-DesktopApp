@@ -1,0 +1,11 @@
+ 
+   {
+        "type": "Steam",
+        "nome": "Treno Alfa",
+        "builder": "Giuseppe",
+        "speed": 100,
+        "tipo_rotaia": "strap",
+        "tipo_treno": "regionale",
+        "efficenzaSteam": 0.4,
+        "tipo_carburanteSteam": "oil"
+    }

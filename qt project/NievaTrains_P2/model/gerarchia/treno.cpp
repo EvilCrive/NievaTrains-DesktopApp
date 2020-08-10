@@ -106,3 +106,8 @@ void Treno::print() const
         [](unsigned char c){ return std::toupper(c); });
     std::cout<<"\nTipo: "<<tr<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h\nTipo Rotaia: "<<getTipo_rotaia()<<"\nTipo Treno: "<<getTipo_treno();
 }
+
+Treno *Treno::unserialize(QJsonObject & json)
+{
+
+}

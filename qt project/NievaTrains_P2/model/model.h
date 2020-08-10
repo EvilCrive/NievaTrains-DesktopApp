@@ -5,7 +5,7 @@
 #include "model/gerarchia/bimode.h"
 #include "model/gerarchia/maglev.h"
 #include "model/gerarchia/steam.h"
-
+#include <QJsonObject>
 class Model
 {
 private:
@@ -29,6 +29,7 @@ public:
     void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburanteIC, std::string trasmissioneIC, float efficenzaIC, std::string trasmissioneElettrico, float efficenzaElettrico, std::string motorePrimario, std::string tipo ="Bimode");
     unsigned int numerotreni() const;
     void load(std::string);
+    void save(std::string);
   //unsigned int numeroproduttori()const;
   //varie ricerche
   //calcolo costo

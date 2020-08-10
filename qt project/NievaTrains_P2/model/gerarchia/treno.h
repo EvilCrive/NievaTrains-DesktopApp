@@ -1,6 +1,7 @@
 #ifndef TRENO_H
 #define TRENO_H
 #include <string>
+#include <QJsonObject>
 enum Trotaia {
     maglev, strap, plate, bridge, barlow, flat_bottomed, double_headed,
         bullhead
@@ -40,7 +41,7 @@ public:
     virtual void print()const;
  // virtual int calcolaCosto() const;
  // virtual void serialize();
- // static Treno* unserialize();
+    static Treno* unserialize(QJsonObject&);
  // virtual Treno* clone() const = 0;
 };
 

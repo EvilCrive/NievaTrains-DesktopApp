@@ -4,9 +4,9 @@
 #include <iostream>
 
 
-Steam::Steam(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, TfuelSteam tfs): Treno(n,c,s,tr,tt),efficenzaSteam(e),carburanteSteam(tfs){}
+Steam::Steam(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, double e, TfuelSteam tfs): Treno(n,c,s,tr,tt),efficenzaSteam(e),carburanteSteam(tfs){}
 
-float Steam::getEfficenzaSteam() const
+double Steam::getEfficenzaSteam() const
 {
     return efficenzaSteam;
 }
@@ -19,7 +19,7 @@ std::string Steam::getCarburanteSteam() const
     return "NoType";
 }
 
-void Steam::setEfficenzaSteam(float e)
+void Steam::setEfficenzaSteam(double e)
 {
     efficenzaSteam=e;
 }
@@ -38,7 +38,7 @@ void Steam::setCarburanteSteam(std::string tr)
     }
 }
 
-float Steam::carburanteNecessario(unsigned int km) const
+double Steam::carburanteNecessario(unsigned int km) const
 {
     return km/efficenzaSteam;
 }

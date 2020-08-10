@@ -22,11 +22,11 @@ public:
     void clear();
 
     //add train overloaded in base al tipo
-    void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, float efficenza, std::string EnumtipoCarburanteSteam, std::string tipo ="Steam");
+    void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, double efficenza, std::string EnumtipoCarburanteSteam, std::string tipo ="Steam");
     void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string tecnologia, std::string tipo ="Maglev");
-    void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburante, std::string trasmissione, float efficenza, std::string tipo ="Internal_Combustion");
-    void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string trasmissione, float efficenza, std::string tipo ="Electric");
-    void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburanteIC, std::string trasmissioneIC, float efficenzaIC, std::string trasmissioneElettrico, float efficenzaElettrico, std::string motorePrimario, std::string tipo ="Bimode");
+    void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburante, std::string trasmissione, double efficenza, std::string tipo ="Internal_Combustion");
+    void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string trasmissione, double efficenza, std::string tipo ="Electric");
+    void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburanteIC, std::string trasmissioneIC, double efficenzaIC, std::string trasmissioneElettrico, double efficenzaElettrico, std::string motorePrimario, std::string tipo ="Bimode");
     unsigned int numerotreni() const;
     void load(std::string);
     void save(std::string);

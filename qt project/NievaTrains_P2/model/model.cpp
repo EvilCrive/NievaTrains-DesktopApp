@@ -27,7 +27,7 @@ void Model::clear()
     for(unsigned int i=0; i<list.getSize();i++) erase(0);
     erase(0);
 }
-void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, float efficenza, std::string EnumtipoCarburanteSteam, std::string tipo)
+void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, double efficenza, std::string EnumtipoCarburanteSteam, std::string tipo)
 {
     if(tipo=="Steam"){
         //creazione oggetto treno_Steam di default
@@ -51,7 +51,7 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         push_end(t);
     }
 }
-void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburante, std::string trasmissione, float efficenza, std::string tipo)
+void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburante, std::string trasmissione, double efficenza, std::string tipo)
 {
     if(tipo=="Internal_Combustion"){
         //creazione oggetto treno_Interrnal_Combustion di default
@@ -63,7 +63,7 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         push_end(t);
     }
 }
-void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string trasmissione, float efficenza, std::string tipo)
+void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string trasmissione, double efficenza, std::string tipo)
 {
     if(tipo=="Electric"){
         //creazione oggetto treno_Electric di default
@@ -75,7 +75,7 @@ void Model::addtrain(std::string nome, std::string builder, unsigned int speed, 
         push_end(t);
     }
 }
-void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburanteIC, std::string trasmissioneIC, float efficenzaIC, std::string trasmissioneElettrico, float efficenzaElettrico, std::string motorePrimario, std::string tipo)
+void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string carburanteIC, std::string trasmissioneIC, double efficenzaIC, std::string trasmissioneElettrico, double efficenzaElettrico, std::string motorePrimario, std::string tipo)
 {
     if(tipo=="Bimode"){
         //creazione oggetto treno_Bimode di default

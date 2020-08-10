@@ -3,9 +3,9 @@
 #include <cctype>
 #include <iostream>
 
-Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, float e, Tfuel tf, TtrasmissioneFuel ttr): Treno(n,c,s,tr,tt), carburanteIC(tf), trasmissioneIC(ttr), efficenzaIC(e){}
+Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, double e, Tfuel tf, TtrasmissioneFuel ttr): Treno(n,c,s,tr,tt), carburanteIC(tf), trasmissioneIC(ttr), efficenzaIC(e){}
 
-float Internal_Combustion::getEfficenzaIC() const
+double Internal_Combustion::getEfficenzaIC() const
 {
     return efficenzaIC;
 }
@@ -28,7 +28,7 @@ std::string Internal_Combustion::getTrasmissioneIC() const
     return "NoType";
 }
 
-void Internal_Combustion::setEfficenzaIC(float e)
+void Internal_Combustion::setEfficenzaIC(double e)
 {
     efficenzaIC=e;
 }
@@ -65,7 +65,7 @@ void Internal_Combustion::setTrasmissioneIC(std::string tr)
     }
 }
 
-float Internal_Combustion::carburanteNecessario(unsigned int km) const
+double Internal_Combustion::carburanteNecessario(unsigned int km) const
 {
     return km/efficenzaIC;
 }

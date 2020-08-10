@@ -38,7 +38,7 @@ public:
     void setTipo_treno(std::string);
 
     virtual std::string type() const;
-    virtual float carburanteNecessario(unsigned int) const =0; //km in input
+    virtual double carburanteNecessario(unsigned int) const =0; //km in input
     virtual unsigned int kmPercorribili(unsigned int) const =0; //carburante in input
     virtual void print()const;
  // virtual int calcolaCosto() const;

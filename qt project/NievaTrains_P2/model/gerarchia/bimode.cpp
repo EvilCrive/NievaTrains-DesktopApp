@@ -3,7 +3,7 @@
 #include <cctype>
 #include <iostream>
 
-Bimode::Bimode(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt,TtrasmissioneElettrico ttr1, float e1,float e2, Tfuel tf, TtrasmissioneFuel ttr2,Tmotore tm1)
+Bimode::Bimode(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt,TtrasmissioneElettrico ttr1, double e1,double e2, Tfuel tf, TtrasmissioneFuel ttr2,Tmotore tm1)
     : Electric(n,c,s,tr,tt,ttr1,e1),Internal_Combustion(n,c,s,tr,tt,e2,tf,ttr2), motorePrimario(tm1){}
 
 std::string Bimode::getMotorePrimario() const
@@ -38,7 +38,7 @@ void Bimode::setTrasmissioneIC(std::string t)
     Internal_Combustion::setTrasmissioneIC(t);
 }
 
-void Bimode::setEfficenzaIC(float e)
+void Bimode::setEfficenzaIC(double e)
 {
     Internal_Combustion::setEfficenzaIC(e);
 }
@@ -48,20 +48,20 @@ void Bimode::setTrasmissioneElettrico(std::string t)
     Electric::setTrasmissioneElettrico(t);
 }
 
-void Bimode::setEfficenzaElettrico(float e)
+void Bimode::setEfficenzaElettrico(double e)
 {
     Electric::setEfficenzaElettrico(e);
 }
 
-float Bimode::carburanteNecessario(unsigned int km) const
+double Bimode::carburanteNecessario(unsigned int km) const
 {
-    float result=0;
+    double result=0;
     if(motorePrimario==Tmotore::electric){
-        result= (((km/efficenzaElettrico)*0.75f)+((km/efficenzaIC)*0.25f));
+        result= (((km/efficenzaElettrico)*0.75)+((km/efficenzaIC)*0.25));
     }else if(motorePrimario==Tmotore::internal_combustion){
-        result= (((km/efficenzaElettrico)*0.25f)+((km/efficenzaIC)*0.75f));
+        result= (((km/efficenzaElettrico)*0.25)+((km/efficenzaIC)*0.75));
     }else{
-        result= (((km/efficenzaElettrico)*0.5f)+((km/efficenzaIC)*0.5f));
+        result= (((km/efficenzaElettrico)*0.5)+((km/efficenzaIC)*0.5));
     }
     return result;
 }

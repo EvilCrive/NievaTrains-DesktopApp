@@ -29,7 +29,7 @@ Maglev *Maglev::clone() const
     return new Maglev(*this);
 }
 */
-float Maglev::carburanteNecessario(unsigned int) const
+double Maglev::carburanteNecessario(unsigned int) const
 {
     return -1;
 }

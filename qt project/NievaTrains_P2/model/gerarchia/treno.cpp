@@ -128,7 +128,7 @@ Treno *Treno::unserialize(QJsonObject & json)
 
         if(type=="Steam"){
             string tipo_carburanteSteam=json["tipo_carburanteSteam"].toString().toStdString();
-            float efficenzaSteam=static_cast<float>(json["efficenzaSteam"].toDouble());
+            double efficenzaSteam=(json["efficenzaSteam"].toDouble());
             t=new Steam();
             t->setNome(nome);
             t->setCostruttore(builder);
@@ -149,7 +149,7 @@ Treno *Treno::unserialize(QJsonObject & json)
             static_cast<Maglev*>(t)->setTecnologia(tipotecnologia);
         }
         if(type=="Internal_Combustion"){
-            float efficenzaIC=static_cast<float>(json["efficenzaIC"].toDouble());
+            double efficenzaIC=(json["efficenzaIC"].toDouble());
             string tipocarburanteIC=json["tipo_carburanteIC"].toString().toStdString();
             string tipotrasmissioneIC=json["tipo_trasmissioneIC"].toString().toStdString();
             t=new Internal_Combustion();
@@ -163,7 +163,7 @@ Treno *Treno::unserialize(QJsonObject & json)
             dynamic_cast<Internal_Combustion*>(t)->setTrasmissioneIC(tipotrasmissioneIC);
         }
         if(type=="Electric"){
-            float efficenzaElettrico=static_cast<float>(json["efficenzaElettrico"].toDouble());
+            double efficenzaElettrico=(json["efficenzaElettrico"].toDouble());
             string tipotrasmissioneElettrico=json["tipo_trasmissioneElettrico"].toString().toStdString();
             t=new Electric();
             t->setNome(nome);
@@ -176,9 +176,9 @@ Treno *Treno::unserialize(QJsonObject & json)
 
         }
         if(type=="Bimode"){
-            float efficenzaElettrico=static_cast<float>(json["efficenzaElettrico"].toDouble());
+            double efficenzaElettrico=(json["efficenzaElettrico"].toDouble());
             string tipotrasmissioneElettrico=json["tipo_trasmissioneElettrico"].toString().toStdString();
-            float efficenzaIC=static_cast<float>(json["efficenzaIC"].toDouble());
+            double efficenzaIC=(json["efficenzaIC"].toDouble());
             string tipocarburanteIC=json["tipo_carburanteIC"].toString().toStdString();
             string tipotrasmissioneIC=json["tipo_trasmissioneIC"].toString().toStdString();
             string motoreprimario=json["motore_primario"].toString().toStdString();

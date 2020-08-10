@@ -12,22 +12,22 @@ protected:
     enum Tfuel {
         kerosene, petrol, diesel
     };
-    float efficenzaIC; // km/l
+    double efficenzaIC; // km/l
 private:
     Tfuel carburanteIC;
     TtrasmissioneFuel trasmissioneIC;
 public:
-    Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =0.7f, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric );
+    Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, double =0.7, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric );
 
-    float getEfficenzaIC() const;
+    double getEfficenzaIC() const;
     std::string getCarburanteIC() const;
     std::string getTrasmissioneIC() const;
 
-    void setEfficenzaIC(float);
+    void setEfficenzaIC(double);
     void setCarburanteIC(std::string);
     void setTrasmissioneIC(std::string);
 
-    float carburanteNecessario(unsigned int) const; //input km
+    double carburanteNecessario(unsigned int) const; //input km
     unsigned int kmPercorribili(unsigned int) const; //input l fuel
     std::string type() const;
     void print() const;

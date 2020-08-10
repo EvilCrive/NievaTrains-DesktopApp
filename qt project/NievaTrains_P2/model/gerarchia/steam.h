@@ -10,18 +10,18 @@ protected:
         coal, wood, oil
     };
 private:
-    float efficenzaSteam;        // km/kg
+    double efficenzaSteam;        // km/kg
     TfuelSteam carburanteSteam;  //kg
 public:
-    Steam(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, float =0.7f, TfuelSteam =TfuelSteam::coal);
+    Steam(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, double =0.7, TfuelSteam =TfuelSteam::coal);
 
-    float getEfficenzaSteam() const;
+    double getEfficenzaSteam() const;
     std::string getCarburanteSteam() const;
 
-    void setEfficenzaSteam(float);
+    void setEfficenzaSteam(double);
     void setCarburanteSteam(std::string);
 
-    float carburanteNecessario(unsigned int) const;
+    double carburanteNecessario(unsigned int) const;
     unsigned int kmPercorribili(unsigned int) const;
     std::string type() const;
     void print() const;

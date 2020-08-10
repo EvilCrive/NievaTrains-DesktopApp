@@ -19,7 +19,7 @@ public:
     void setTecnologia(std::string);
 
   //  Maglev* clone() const;
-    float carburanteNecessario(unsigned int) const;
+    double carburanteNecessario(unsigned int) const;
     unsigned int kmPercorribili(unsigned int) const;
     std::string type() const;
     void print() const;

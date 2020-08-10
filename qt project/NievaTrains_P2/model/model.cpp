@@ -118,9 +118,9 @@ void Model::load(std::string path)
 
     QByteArray savedata=loadFile.readAll();
     loadFile.close();
+    cout<<savedata.data();
     QJsonDocument doc(QJsonDocument::fromJson(savedata));
     QJsonArray array(doc.array());
-
     clear();
     for(auto it=array.begin(); it!=array.end();it++){
         QJsonObject object=it->toObject();

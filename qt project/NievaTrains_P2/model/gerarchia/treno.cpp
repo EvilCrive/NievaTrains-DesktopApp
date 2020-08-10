@@ -109,5 +109,6 @@ void Treno::print() const
 
 Treno *Treno::unserialize(QJsonObject & json)
 {
-
+    std::cout<<"shiet";
+    return 0;
 }

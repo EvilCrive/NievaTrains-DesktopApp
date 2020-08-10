@@ -1,5 +1,5 @@
- 
-   {
+[
+    {
         "type": "Steam",
         "nome": "Treno Alfa",
         "builder": "Giuseppe",
@@ -8,4 +8,25 @@
         "tipo_treno": "regionale",
         "efficenzaSteam": 0.4,
         "tipo_carburanteSteam": "oil"
+    },
+    {
+        "type": "Maglev",
+        "nome": "Treno Beta",
+        "builder": "Claudio",
+        "speed": 70,
+        "tipo_rotaia": "barlow",
+        "tipo_treno": "alta_velocita",
+        "tipo_tecnologia": "ems"
+    },
+    {
+        "type": "Internal_Combustion",
+        "nome": "Treno Gamma",
+        "builder": "Giuseppe",
+        "speed": 140,
+        "tipo_rotaia": "plate",
+        "tipo_treno": "alta_velocita",
+        "tipo_carburanteIC":"diesel",
+        "tipo_trasmissioneIC":"electric",
+        "efficenzaIC": 0.6
     }
+]

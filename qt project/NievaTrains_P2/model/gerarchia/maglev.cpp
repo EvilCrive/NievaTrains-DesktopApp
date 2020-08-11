@@ -50,3 +50,14 @@ void Maglev::print() const
     std::cout<<"\nTecnologia Maglev: "<<getTecnologia();
 }
 
+void Maglev::serialize(QJsonObject & json)
+{
+    json["type"]="Maglev";
+    json["nome"]=QString::fromStdString(getNome());
+    json["builder"]=QString::fromStdString(getCostruttore());
+    json["speed"]=static_cast<int>(getSpeed());
+    json["tipo_rotaia"]=QString::fromStdString(getTipo_rotaia());
+    json["tipo_treno"]=QString::fromStdString(getTipo_treno());
+    json["tipo_tecnologia"]=QString::fromStdString(getTecnologia());
+}
+

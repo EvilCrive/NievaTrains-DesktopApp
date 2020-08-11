@@ -3,24 +3,16 @@
 #include <string>
 #include <QJsonObject>
 
-
 class Treno {
 protected:
-    enum Trotaia {
-        maglev, strap, plate, bridge, barlow, flat_bottomed, double_headed,
-            bullhead
-    };
-    enum Ttreno {
-        alta_velocita, inter_city, regionale, commuter
-    };
-
+    enum Trotaia {maglev, strap, plate, bridge, barlow, flat_bottomed, double_headed,bullhead};
+    enum Ttreno {alta_velocita, inter_city, regionale, commuter};
 private:
     std::string nome;
     std::string costruttore;
     unsigned int speed;
     Trotaia tipo_rotaia;
     Ttreno tipo_treno;
-
 public:
     Treno(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita );
     virtual ~Treno() = default;
@@ -42,7 +34,7 @@ public:
     virtual unsigned int kmPercorribili(unsigned int) const =0; //carburante in input
     virtual void print()const;
  // virtual int calcolaCosto() const;
- // virtual void serialize();
+    virtual void serialize(QJsonObject&)=0;
     static Treno* unserialize(QJsonObject&);
  // virtual Treno* clone() const = 0;
 };

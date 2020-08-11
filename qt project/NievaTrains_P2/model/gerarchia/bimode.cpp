@@ -90,6 +90,22 @@ void Bimode::print() const
     std::cout<<"\nMotore Primario: "<<getMotorePrimario()<<"\nTrasmissione Motore Elettrico: "<<Electric::getTrasmissioneElettrico()<<"\nEfficenza Motore Elettrico: "<<Electric::getEfficenzaElettrico()*100<<"%"<<"\nTrasmissione Motore a Combustione Interna: "<<Internal_Combustion::getTrasmissioneIC()<<"\nEfficenza Motore a Combustione Interna: "<<Internal_Combustion::getEfficenzaIC()*100<<"%"<<"\nCarburante Motore a Combustione Interna: "<<getCarburanteIC();
 
 }
+
+void Bimode::serialize(QJsonObject & json)
+{
+    json["type"]="Bimode";
+    json["nome"]=QString::fromStdString(getNome());
+    json["builder"]=QString::fromStdString(getCostruttore());
+    json["speed"]=static_cast<int>(getSpeed());
+    json["tipo_rotaia"]=QString::fromStdString(getTipo_rotaia());
+    json["tipo_treno"]=QString::fromStdString(getTipo_treno());
+    json["tipo_trasmissioneElettrico"]=QString::fromStdString(getTrasmissioneElettrico());
+    json["efficenzaElettrico"]=getEfficenzaElettrico();
+    json["tipo_carburanteIC"]=QString::fromStdString(getCarburanteIC());
+    json["tipo_trasmissioneIC"]=QString::fromStdString(getTrasmissioneIC());
+    json["efficenzaIC"]=getEfficenzaIC();
+    json["motore_primario"]=QString::fromStdString(getMotorePrimario());
+}
 /*
 Bimode *Bimode::clone() const
 {

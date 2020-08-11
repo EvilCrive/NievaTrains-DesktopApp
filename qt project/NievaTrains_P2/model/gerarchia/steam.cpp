@@ -64,3 +64,15 @@ void Steam::print() const
     Treno::print();
     std::cout<<"\nEfficenza: "<<getEfficenzaSteam()*100<<"%"<<"\nCarburante: "<<getCarburanteSteam();
 }
+
+void Steam::serialize(QJsonObject & json)
+{
+    json["type"]="Steam";
+    json["nome"]=QString::fromStdString(getNome());
+    json["builder"]=QString::fromStdString(getCostruttore());
+    json["speed"]=static_cast<int>(getSpeed());
+    json["tipo_rotaia"]=QString::fromStdString(getTipo_rotaia());
+    json["tipo_treno"]=QString::fromStdString(getTipo_treno());
+    json["efficenzaSteam"]=getEfficenzaSteam();
+    json["tipo_carburanteSteam"]=QString::fromStdString(getCarburanteSteam());
+}

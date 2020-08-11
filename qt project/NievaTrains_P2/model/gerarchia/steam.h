@@ -2,13 +2,9 @@
 #define STEAM_H
 #include "model/gerarchia/treno.h"
 
-
-
 class Steam: public Treno {
 protected:
-    enum TfuelSteam {
-        coal, wood, oil
-    };
+    enum TfuelSteam {coal, wood, oil};
 private:
     double efficenzaSteam;        // km/kg
     TfuelSteam carburanteSteam;  //kg
@@ -25,7 +21,7 @@ public:
     unsigned int kmPercorribili(unsigned int) const;
     std::string type() const;
     void print() const;
-   // Steam* clone() const;
+    virtual void serialize(QJsonObject&);
 };
 
 #endif // STEAM_H

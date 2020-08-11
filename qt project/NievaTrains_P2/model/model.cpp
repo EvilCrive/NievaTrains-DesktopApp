@@ -1,7 +1,12 @@
 #include "model/model.h"
 #include <iostream>
+#include <QFile>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
 using std::cout;
 using std::string;
+
 
 void Model::print(unsigned int i) const
 {
@@ -102,11 +107,7 @@ void Model::push_end(Treno *t)
 }
 
 // INPUT OUTPUT JSON
-#include <QFile>
-#include <QJsonObject>
-#include <QJsonDocument>
-#include <QJsonArray>
-using std::cout;
+
 
 void Model::load(std::string path)
 {
@@ -131,39 +132,22 @@ void Model::load(std::string path)
     //eccezione
     }
 }
-
-void Model::save(std::string)
+void Model::save(std::string path) const
 {
-
-}
-
-/*
- #include "character.h"
-#include <QFile>
-#include <iostream>
-#include <QJsonObject>
-#include <QJsonDocument>
-void Character::read(const QJsonObject &json)
-{
-       if(json.contains("name") && json["name"].isString())
-           mName= json["name"].toString();
-}
-
-void Character::save(QJsonObject &json) const
-{
-    json["name"]=mName;
-}
-
-void Character::load()
-{
-    QFile loadi(QStringLiteral("save.json"));
-    if(!loadi.open(QIODevice::ReadOnly)){
+    QFile saveFile(QString::fromStdString(path));
+    if(!saveFile.open(QIODevice::WriteOnly)){
         std::cout<<"no";
+        //eccezione
     }
-    QByteArray savedata=loadi.readAll();
-    QJsonDocument loadDoc(QJsonDocument::fromJson(savedata));
-    read(loadDoc.object());
+    QJsonArray array;
+    for(unsigned int i=0; i<numerotreni();i++){
+        QJsonObject obj;
+        list[i]->serialize(obj);
+        QJsonValue nodo(obj);
+        array.push_back(nodo);
+    }
+    QJsonDocument doc(array);
+    saveFile.write(doc.toJson());
+    saveFile.close();
 }
 
-
-*/

@@ -86,6 +86,19 @@ void Internal_Combustion::print() const
     Treno::print();
     std::cout<<"\nTrasmissione: "<<getTrasmissioneIC()<<"\nCarburante: "<<getCarburanteIC()<<"\nEfficenza: "<<getEfficenzaIC()*100<<"%";
 }
+
+void Internal_Combustion::serialize(QJsonObject & json)
+{
+    json["type"]="Internal_Combustion";
+    json["nome"]=QString::fromStdString(getNome());
+    json["builder"]=QString::fromStdString(getCostruttore());
+    json["speed"]=static_cast<int>(getSpeed());
+    json["tipo_rotaia"]=QString::fromStdString(getTipo_rotaia());
+    json["tipo_treno"]=QString::fromStdString(getTipo_treno());
+    json["tipo_carburanteIC"]=QString::fromStdString(getCarburanteIC());
+    json["tipo_trasmissioneIC"]=QString::fromStdString(getTrasmissioneIC());
+    json["efficenzaIC"]=getEfficenzaIC();
+}
 /*
 Internal_Combustion *Internal_Combustion::clone() const
 {

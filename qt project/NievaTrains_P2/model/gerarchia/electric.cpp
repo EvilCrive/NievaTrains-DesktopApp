@@ -52,6 +52,18 @@ void Electric::print() const{
     Treno::print();
     std::cout<<"\nTrasmissione: "<<getTrasmissioneElettrico()<<"\nEfficenza: "<<getEfficenzaElettrico()*100<<"%";
 }
+
+void Electric::serialize(QJsonObject & json)
+{
+    json["type"]="Electric";
+    json["nome"]=QString::fromStdString(getNome());
+    json["builder"]=QString::fromStdString(getCostruttore());
+    json["speed"]=static_cast<int>(getSpeed());
+    json["tipo_rotaia"]=QString::fromStdString(getTipo_rotaia());
+    json["tipo_treno"]=QString::fromStdString(getTipo_treno());
+    json["tipo_trasmissioneElettrico"]=QString::fromStdString(getTrasmissioneElettrico());
+    json["efficenzaElettrico"]=getEfficenzaElettrico();
+}
 /*
 Electric *Electric::clone() const
 {

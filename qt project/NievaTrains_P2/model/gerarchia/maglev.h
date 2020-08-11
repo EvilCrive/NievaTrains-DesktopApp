@@ -2,13 +2,9 @@
 #define MAGLEV_H
 #include "model/gerarchia/treno.h"
 
-
-
 class Maglev: public Treno {
 protected:
-    enum Ttech {
-      eds, ems
-    };
+    enum Ttech {eds, ems};
 private:
     Ttech tecnologia;
 public:
@@ -18,11 +14,11 @@ public:
 
     void setTecnologia(std::string);
 
-  //  Maglev* clone() const;
     double carburanteNecessario(unsigned int) const;
     unsigned int kmPercorribili(unsigned int) const;
     std::string type() const;
     void print() const;
+    virtual void serialize(QJsonObject&);
 };
 
 #endif // MAGLEV_H

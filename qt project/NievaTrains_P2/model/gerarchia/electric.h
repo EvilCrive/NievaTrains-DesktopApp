@@ -2,13 +2,9 @@
 #define ELECTRIC_H
 #include "model/gerarchia/treno.h"
 
-
-
 class Electric: virtual public Treno {
 protected:
-    enum TtrasmissioneElettrico {
-        overhead_lines, third_rail
-    };
+    enum TtrasmissioneElettrico {overhead_lines, third_rail};
 private:
     TtrasmissioneElettrico trasmissioneElettrico;
 protected:
@@ -26,7 +22,7 @@ public:
     unsigned int kmPercorribili(unsigned int) const; //input kw di carburante
     std::string type() const;
     void print() const;
-    // Electric* clone() const;
+    virtual void serialize(QJsonObject&);
 };
 
 #endif // ELECTRIC_H

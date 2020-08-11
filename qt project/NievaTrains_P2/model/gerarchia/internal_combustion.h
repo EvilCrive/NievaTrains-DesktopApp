@@ -2,16 +2,10 @@
 #define INTERNAL_COMBUSTION_H
 #include "model/gerarchia/treno.h"
 
-
-
 class Internal_Combustion: virtual public Treno {
 protected:
-    enum TtrasmissioneFuel {
-        electric, mechanical, hydraulic, steam, pneumatic
-    };
-    enum Tfuel {
-        kerosene, petrol, diesel
-    };
+    enum TtrasmissioneFuel {electric, mechanical, hydraulic, steam, pneumatic};
+    enum Tfuel {kerosene, petrol, diesel};
     double efficenzaIC; // km/l
 private:
     Tfuel carburanteIC;
@@ -31,7 +25,7 @@ public:
     unsigned int kmPercorribili(unsigned int) const; //input l fuel
     std::string type() const;
     void print() const;
-    //Internal_Combustion* clone() const;
+    virtual void serialize(QJsonObject&);
 };
 
 #endif // INTERNAL_COMBUSTION_H

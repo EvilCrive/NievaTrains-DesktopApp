@@ -28,7 +28,9 @@ SOURCES += \
     model/gerarchia/maglev.cpp \
     model/gerarchia/steam.cpp \
     model/gerarchia/treno.cpp \
+    view/combotype.cpp \
     view/mainwindow.cpp \
+    view/menubartrain.cpp \
     view/view.cpp
 
 HEADERS += \
@@ -40,7 +42,9 @@ HEADERS += \
     model/gerarchia/maglev.h \
     model/gerarchia/steam.h \
     model/gerarchia/treno.h \
+    view/combotype.h \
     view/mainwindow.h \
+    view/menubartrain.h \
     view/view.h
 
 # Default rules for deployment.

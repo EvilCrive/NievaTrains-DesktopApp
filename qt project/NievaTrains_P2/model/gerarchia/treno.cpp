@@ -26,6 +26,11 @@ unsigned int Treno::getSpeed() const
     return speed;
 }
 
+unsigned int Treno::getPeso() const
+{
+    return peso;
+}
+
 string Treno::getTipo_rotaia() const
 {
     if(tipo_rotaia==Trotaia::maglev)            return "Maglev";
@@ -61,6 +66,11 @@ void Treno::setCostruttore(string b)
 void Treno::setSpeed(unsigned int s)
 {
     speed=s;
+}
+
+void Treno::setPeso(unsigned int p)
+{
+    peso=p;
 }
 
 void Treno::setTipo_rotaia(string tr)

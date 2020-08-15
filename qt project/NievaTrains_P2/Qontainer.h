@@ -6,6 +6,7 @@ template <class T>
 class Qontainer{
 private:
     T* array;
+    T* aux;
     unsigned int size;
     unsigned int capacity;
     void resize();

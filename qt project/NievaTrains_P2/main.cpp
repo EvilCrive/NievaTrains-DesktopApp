@@ -1,5 +1,4 @@
 #include "view/mainwindow.h"
-#include <QCoreApplication>
 #include <QApplication>
 #include <iostream>
 #include "model/model.h"
@@ -16,12 +15,17 @@ int main(int argc, char *argv[])
  *   m.print_all();
  *   m.load("../data.xml");
  */
-    QCoreApplication a(argc, argv);
+    QApplication a(argc, argv);
     Model m;
 
+    MainWindow w;
+    w.show();
+
+
    // m.load("E:/tutto/uni/p2/progetto/Progetto_P2/qt project/NievaTrains_P2/file risorse/data.json");
-    m.load(":/file risorse/data.json");
-    m.save("E:/tutto/xd.json");
+   // m.load(":/file risorse/data.json");
+   // m.save("E:/tutto/xd.json");
+    return a.exec();
 
 }
 

@@ -21,6 +21,13 @@ public:
     void erase(unsigned int =0);
     void clear();
 
+
+    unsigned int getSpeedM() const;
+    double getPesoM() const;
+    unsigned int getSpeedT() const;
+    double getPesoT() const;
+
+
     //add train overloaded in base al tipo
     void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, double efficenza, std::string EnumtipoCarburanteSteam, std::string tipo ="Steam");
     void addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, std::string tecnologia, std::string tipo ="Maglev");

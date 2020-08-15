@@ -32,6 +32,47 @@ void Model::clear()
     for(unsigned int i=0; i<list.getSize();i++) erase(0);
     erase(0);
 }
+
+ unsigned int  Model::getSpeedM() const
+{
+     unsigned int count=0;
+     unsigned int i=0;
+     for(;i< list.getSize(); i++){
+       count+=list[i]->getSpeed();
+     }
+
+
+     return count/i; /*cast implicito a unsigned int*/
+}
+
+double Model::getPesoM() const
+{
+    double count=0;
+    unsigned int i=0;
+    for(;i< list.getSize(); i++){
+        count+=list[i]->getPeso();
+    }
+
+    return count/i;
+}
+double Model::getPesoT() const
+{
+    double toRet=0;
+    unsigned int i=0;
+    for(;i< list.getSize(); i++){
+        if(toRet<list[i]->getPeso()) toRet=list[i]->getPeso();
+    }
+    return toRet;
+}
+unsigned int Model::getSpeedT() const
+{
+    double toRet=0;
+    unsigned int i=0;
+    for(;i< list.getSize(); i++){
+        if(toRet<list[i]->getSpeed()) toRet=list[i]->getPeso();
+    }
+    return toRet;
+}
 void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string EnumtipoRotaia, std::string EnumtipoTreno, double efficenza, std::string EnumtipoCarburanteSteam, std::string tipo)
 {
     if(tipo=="Steam"){

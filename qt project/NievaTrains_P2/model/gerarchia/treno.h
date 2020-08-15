@@ -11,6 +11,7 @@ private:
     std::string nome;
     std::string costruttore;
     unsigned int speed;
+    unsigned int peso;
     Trotaia tipo_rotaia;
     Ttreno tipo_treno;
 public:
@@ -20,12 +21,14 @@ public:
     std::string getNome() const;
     std::string getCostruttore() const;
     unsigned int getSpeed() const;
+    unsigned int getPeso() const;
     std::string getTipo_rotaia() const;
     std::string getTipo_treno() const;
 
     void setNome(std::string);
     void setCostruttore(std::string);
     void setSpeed(unsigned int);
+    void setPeso(unsigned int);
     void setTipo_rotaia(std::string);
     void setTipo_treno(std::string);
 

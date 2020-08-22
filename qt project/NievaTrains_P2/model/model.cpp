@@ -23,6 +23,9 @@ Treno *Model::operator[](unsigned int i) const
 {
     return list[i];
 }
+Treno* Model::getTreno(unsigned int i) const{
+    return list[i];
+}
 void Model::erase(unsigned int i)
 {
     list.pop(i);

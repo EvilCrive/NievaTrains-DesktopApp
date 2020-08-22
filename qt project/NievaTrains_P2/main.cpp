@@ -16,9 +16,7 @@ int main(int argc, char *argv[])
  *   m.load("../data.xml");
  */
     QApplication a(argc, argv);
-    Model m;
-
-    MainWindow w;
+    MainWindow w(new Model());
     w.show();
 
 

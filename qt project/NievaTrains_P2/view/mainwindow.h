@@ -13,32 +13,40 @@
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include "menubartrain.h"
+#include "trainlist.h"
+#include "mainlayout.h"
+#include "model/model.h"
+#include "model/gerarchia/treno.h"
 
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
-
-    QLabel* text1;
-    QLabel* text2;
-    QLabel* text3;
-    QLabel* text4;
-
-    ComboType* selectType;
-
-    QListWidget* trainList;
-    QTextBrowser* infoTrain;
-    QPushButton* flush;
-    QPushButton* search;
-    QPushButton* annulla;
-    QPushButton* modifica;
-    QPushButton* elimina;
-    QPushButton* inserisci;
-    QLineEdit* searchBar;
+private:
     MenuBarTrain* menu;
+    Model* modello;
+    MainLayout* layout;
 
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(Model* m,QWidget *parent = nullptr);
     ~MainWindow();
+
+public slots:
+    void slotShowInfoGenerali();
+    void slotCarica();
+    void slotSalva();
+/*    void slotMostraTreno(Treno*);
+    void slotEsporta();
+    void slotImporta();
+
+    void slotFlush();
+    void slotModificaTreno(Treno*);
+    void slotEliminaTreno(Treno*);
+    void slotShowInserisci();
+    void slotCerca();
+    void slotAnnullaRicerca();
+
+    //void slotConfermaCreazione(VISTA::getDialogCreazione, VISTA::getTendina);
+    void slotAnnullaCreazione();*/
 };
 #endif // MAINWINDOW_H

@@ -1,74 +1,44 @@
 #include "mainwindow.h"
 #include "combotype.h"
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent),
+#include <QMessageBox>
+#include <QString>
+#include "infolayout.h"
+#include <iostream>
+using std::string;
 
-      text1(new QLabel(this)),
-      text2(new QLabel(this)),
-      text3(new QLabel(this)),
-      text4(new QLabel(this)),
-      selectType(new ComboType(this)),
-      trainList(new QListWidget(this)),
-      infoTrain(new QTextBrowser(this)),
-      flush(new QPushButton(this)),
-      search(new QPushButton(this)),
-      annulla(new QPushButton(this)),
-      modifica(new QPushButton(this)),
-      elimina(new QPushButton(this)),
-      inserisci(new QPushButton(this)),
-      searchBar(new QLineEdit(this)),
-      menu(new MenuBarTrain(this))
-
+MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this))
 {
     setWindowTitle("Nieva Trains");
-    text1->setText("Treni nel sistema");
-    text2->setText("Informazioni specifiche");
-    text3->setText("Inserisci treno");
-    text4->setText("Cerca per nome");
-
-    flush->setText("Flush");
-    search->setText("Search");
-    annulla->setText("Annulla");
-    modifica->setText("Modifica");
-    elimina->setText("Elimina");
-    inserisci->setText("Inserisci");
-
-    QHBoxLayout* layout=new QHBoxLayout(this);
-    //layout->setMenuBar(new menuBarTrain);
-    QVBoxLayout* left=new QVBoxLayout(this);
-    QVBoxLayout* right=new QVBoxLayout(this);
-    QHBoxLayout* searchField=new QHBoxLayout(this);
-    QHBoxLayout* bts2=new QHBoxLayout(this);
-    QHBoxLayout* bts3=new QHBoxLayout(this);
-
-    left->addWidget(text1);
-    left->addWidget(trainList);
-    left->addWidget(flush);
-    searchField->addWidget(searchBar);
-    searchField->addWidget(search);
-    searchField->addWidget(annulla);
-    bts2->addWidget(modifica);
-    bts2->addWidget(elimina);
-    bts3->addWidget(selectType);
-    bts3->addWidget(inserisci);
-    right->addWidget(text4);
-    right->addLayout(searchField);
-    right->addWidget(text2);
-    right->addWidget(infoTrain);
-    right->addLayout(bts2);
-    right->addWidget(text3);
-    right->addLayout(bts3);
-    layout->setMenuBar(menu);
-    layout->addLayout(left, 35);
-    layout->addLayout(right, 65);
+    QHBoxLayout* mainLayout= new QHBoxLayout(this);
+    mainLayout->addWidget(layout);
+    mainLayout->setMenuBar(menu);
+    setLayout(mainLayout);
 
 
-    QWidget *placeholderWidget = new QWidget;
-    placeholderWidget->setLayout(layout);
-    setCentralWidget(placeholderWidget);
 
 }
+void MainWindow::slotShowInfoGenerali(){
+   /* double pesoM=modello->getPesoM();
+    double pesoT=modello->getPesoT();
+    unsigned int velM=modello->getSpeedM();
+    unsigned int velT=modello->getSpeedT();*/
 
+    //occhio che magari il puntatore viene cancellato all'uscita ma non l'oggetto
+    InfoLayout* info=new InfoLayout(this,1,2,3,4,5);
+    info->show();
+}
+void MainWindow::slotCarica(){
+    std::cout<<"pre-carica";
+    modello->load("C:\\Users\\matbr\\Desktop\\data.json");
+    for(unsigned int i=0; i<modello->numerotreni(); i++)
+        layout->getList()->addTrenoList(modello->getTreno(i));
+    std::cout<<"post-carica";
+}
+void MainWindow::slotSalva(){
+    std::cout<<"pre-save";
+    modello->save("C:\\Users\\matbr\\Desktop\\nodata.jso");
+    std::cout<<"post-save";
+}
 MainWindow::~MainWindow()
 {
 }

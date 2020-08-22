@@ -28,10 +28,14 @@ SOURCES += \
     model/gerarchia/maglev.cpp \
     model/gerarchia/steam.cpp \
     model/gerarchia/treno.cpp \
+    view/aggiuntalayout.cpp \
     view/combotype.cpp \
+    view/infolayout.cpp \
+    view/mainlayout.cpp \
     view/mainwindow.cpp \
     view/menubartrain.cpp \
-    view/view.cpp
+    view/ricercalayout.cpp \
+    view/trainlist.cpp
 
 HEADERS += \
     Qontainer.h \
@@ -42,10 +46,14 @@ HEADERS += \
     model/gerarchia/maglev.h \
     model/gerarchia/steam.h \
     model/gerarchia/treno.h \
+    view/aggiuntalayout.h \
     view/combotype.h \
+    view/infolayout.h \
+    view/mainlayout.h \
     view/mainwindow.h \
     view/menubartrain.h \
-    view/view.h
+    view/ricercalayout.h \
+    view/trainlist.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -54,4 +62,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    ../../../../../data.json
 

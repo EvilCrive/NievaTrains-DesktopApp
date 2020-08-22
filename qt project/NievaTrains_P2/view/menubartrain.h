@@ -6,7 +6,7 @@
 
 class MenuBarTrain : public QMenuBar
 {  Q_OBJECT
-
+    QWidget* parent;
     QMenu* file ;
 
     QAction* infoGenerali;

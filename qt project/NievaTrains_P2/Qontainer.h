@@ -48,7 +48,7 @@ public:
     Const_Iterator cbegin() const;
     Const_Iterator cend() const;
 };
-#endif // QONTAINER_H
+
 
 //DEFINIZIONE QONTAINER
 
@@ -214,3 +214,4 @@ template <class T>
 bool Qontainer<T>::Const_Iterator::operator!=(const Const_Iterator& it) const{
     return p!=it.p;
 }
+#endif // QONTAINER_H

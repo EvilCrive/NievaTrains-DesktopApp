@@ -1,12 +1,13 @@
 #include "trainlist.h"
-
+#include <iostream>
 TrainListWidget::TrainListWidget(QWidget *parent):QListWidget (parent){
     connect(this,SIGNAL(itemSelectionChanged()),parent->parent(),SLOT(slotShowTreno()));
 }
 
 unsigned int TrainListWidget::getIndex() const
 {
-    return (unsigned int)this->selectedIndexes()[0].row();
+    std::cout<<currentRow();
+    return currentRow();
 }
 bool TrainListWidget::isSelected() const
 {
@@ -20,7 +21,10 @@ void TrainListWidget::addTrenoList(Treno* treno){
 
 void TrainListWidget::clear()
 {
-    for(int i=0; i<count(); )   delete takeItem(0);
+    for(int i=0; i<count(); ){
+        delete takeItem(0);
+        std::cout<<"esketit";
+    }
 }
 
 TrainListWidgetItem::TrainListWidgetItem(Treno* t, QWidget *p): QListWidgetItem(), t(t), parent(p){

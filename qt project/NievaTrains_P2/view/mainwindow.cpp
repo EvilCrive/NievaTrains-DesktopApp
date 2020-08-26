@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-//#include "combotype.h"
+#include "combotype.h"
 #include <QMessageBox>
 #include <QString>
 #include "infolayout.h"
@@ -75,23 +75,16 @@ void MainWindow::slotAutori()
     info->show();
 }
 
-void MainWindow::slotFlush()
-{
-    layout->flushList();
-}
 
-void MainWindow::slotRemoveTreno(Treno * t)
+/*void MainWindow::slotRemoveTreno(Treno * t)
 {
 
-}
+}*/
 void MainWindow::slotShowTreno(){
-    std::cout<<"pre-show";
-    string str=modello->print2(layout->estraiTrenoSelezionato());
-
-    //chiamo la funzione in
+    string str="";
+    if(layout->estraiTrenoSelezionato()!=-1)
+        str=modello->print2(layout->estraiTrenoSelezionato());
     layout->stampaDettagliTreno(str);
-
-    std::cout<<"post-show";
 }
 void MainWindow::slotFlush(){
     std::cout<<"pre";

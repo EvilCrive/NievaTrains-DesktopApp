@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
-//#include "combotype.h"
+#include "combotype.h"
 #include <QListWidget>
 #include <QTextBrowser>
 #include <QPushButton>
@@ -39,7 +39,7 @@ public slots:
     void slotAutori();
     void slotShowTreno();
     void slotFlush();
-    void slotRemoveTreno(Treno*);
+    //void slotRemoveTreno(Treno*);
     void slotInserimentoTreno();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();

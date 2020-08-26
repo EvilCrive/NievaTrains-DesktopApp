@@ -60,7 +60,20 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     layout->addLayout(left, 35);
     layout->addLayout(right, 65);
     setLayout(layout);
+
+    connect(flush, SIGNAL(clicked()), p, SLOT(slotFlush()));
+}
+unsigned int MainLayout::estraiTrenoSelezionato() const{
+    return trainList->getIndex();
 }
 TrainListWidget* MainLayout::getList() const{
     return trainList;
+}
+void MainLayout::stampaDettagliTreno(std::string s) const{
+    infoTrain->clear();
+    infoTrain->setText(QString::fromStdString(s));
+}
+void MainLayout::flushList(){
+    infoTrain->clear();
+    trainList->clear();
 }

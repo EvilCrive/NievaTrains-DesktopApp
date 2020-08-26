@@ -15,6 +15,7 @@
 #include "trainlist.h"
 #include "model/model.h"
 #include "model/gerarchia/treno.h"
+#include <string>
 
 class MainLayout: public QWidget
 {
@@ -40,6 +41,9 @@ class MainLayout: public QWidget
 
 
 public:
+    unsigned int estraiTrenoSelezionato() const;
+    void stampaDettagliTreno(std::string s) const;
+    void flushList();
     MainLayout(QWidget * =nullptr);
     TrainListWidget *getList() const;
 

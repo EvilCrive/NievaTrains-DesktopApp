@@ -12,7 +12,8 @@ public:
     TrainListWidget(QWidget * =nullptr);
 
     unsigned int getIndex() const;
-    void unSelectIndex() const;
+    bool isSelected() const;
+
     void addTrenoList(Treno* );
 };
 

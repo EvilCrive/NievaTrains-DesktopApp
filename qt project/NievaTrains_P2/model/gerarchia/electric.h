@@ -18,10 +18,11 @@ public:
     void setTrasmissioneElettrico(std::string);
     void setEfficenzaElettrico(double);
 
-    double carburanteNecessario(unsigned int) const;  //input km da percorrere
-    unsigned int kmPercorribili(unsigned int) const; //input kw di carburante
+    virtual double carburanteNecessario(unsigned int) const;  //input km da percorrere
+    virtual unsigned int kmPercorribili(unsigned int) const; //input kw di carburante
     std::string type() const;
     void print() const;
+    std::string print2() const;
     virtual void serialize(QJsonObject&);
 };
 

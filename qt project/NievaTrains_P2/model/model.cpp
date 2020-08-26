@@ -15,6 +15,13 @@ void Model::print(unsigned int i) const
     list[i]->print();
     cout<<"\n\n\n";
 }
+std::string Model::print2(unsigned int i) const{
+    int numero=i+1;
+    std::string s="TRENO "+ std::to_string(numero)+": \n";
+    s.append(list[i]->print2());
+    s.append("\n\n\n");
+    return s;
+}
 void Model::print_all() const
 {
     for(unsigned int i=0; i<list.getSize();i++) print(i);

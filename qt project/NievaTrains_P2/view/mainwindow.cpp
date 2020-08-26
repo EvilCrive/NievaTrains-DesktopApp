@@ -36,9 +36,25 @@ void MainWindow::slotCarica(){
 }
 void MainWindow::slotSalva(){
     std::cout<<"pre-save";
-    modello->save("C:\\Users\\matbr\\Desktop\\nodata.jso");
+    modello->save("C:\\Users\\matbr\\Desktop\\nodata.json");
     std::cout<<"post-save";
 }
+void MainWindow::slotShowTreno(){
+    std::cout<<"pre-show";
+    string str=modello->print2(layout->estraiTrenoSelezionato());
+
+    //chiamo la funzione in
+    layout->stampaDettagliTreno(str);
+
+    std::cout<<"post-show";
+}
+void MainWindow::slotFlush(){
+    std::cout<<"pre";
+    layout->flushList();
+    modello->clear();
+    std::cout<<"post";
+}
+
 MainWindow::~MainWindow()
 {
 }

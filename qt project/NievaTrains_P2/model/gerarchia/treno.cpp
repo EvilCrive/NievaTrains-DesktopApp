@@ -114,12 +114,17 @@ string Treno::type() const
 
 void Treno::print() const
 {
-
-
     string tr=type();
     transform(tr.begin(), tr.end(), tr.begin(),
         [](unsigned char c){ return toupper(c); });
     cout<<"\nTipo: "<<tr<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h\nTipo Rotaia: "<<getTipo_rotaia()<<"\nTipo Treno: "<<getTipo_treno();
+}
+std::string Treno::print2()const{
+    string tr=type();
+    transform(tr.begin(), tr.end(), tr.begin(),
+        [](unsigned char c){ return toupper(c); });
+    std::string s="\nTipo: "+tr+"\nNome: "+getNome()+"\nCostruttore: "+getCostruttore()+"\nVelocita': "+std::to_string(getSpeed())+"km/h\nTipo Rotaia: "+getTipo_rotaia()+"\nTipo Treno: "+getTipo_treno();
+    return s;
 }
 
 Treno *Treno::unserialize(QJsonObject & json)

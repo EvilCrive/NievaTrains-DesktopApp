@@ -14,10 +14,11 @@ public:
 
     void setTecnologia(std::string);
 
-    double carburanteNecessario(unsigned int) const;
-    unsigned int kmPercorribili(unsigned int) const;
+
+
     std::string type() const;
     void print() const;
+    std::string print2() const;
     virtual void serialize(QJsonObject&);
 };
 

@@ -3,10 +3,10 @@
 ComboType::ComboType(QWidget* parent):
     QComboBox (parent)
 {
-    addItem("Tipo");
+    addItem("Vapore");
     addItem("Bimode");
     addItem("Elettrico");
     addItem("Internal Combustion");
     addItem("Maglev");
-    addItem("Vapore");
+
 }

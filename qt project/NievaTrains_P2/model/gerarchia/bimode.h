@@ -23,6 +23,7 @@ public:
     unsigned int kmPercorribili(unsigned int) const; //input kw o kg di carburante(in base al motore primario)(se hybrid e' fuel kg)
     std::string type() const;
     void print() const;
+    std::string print2() const;
     virtual void serialize(QJsonObject&);
 };
 

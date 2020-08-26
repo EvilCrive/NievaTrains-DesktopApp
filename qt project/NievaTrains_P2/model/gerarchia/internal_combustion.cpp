@@ -3,7 +3,7 @@
 #include <cctype>
 #include <iostream>
 
-Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, double e, Tfuel tf, TtrasmissioneFuel ttr): Treno(n,c,s,tr,tt), carburanteIC(tf), trasmissioneIC(ttr), efficenzaIC(e){}
+Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, double e, Tfuel tf, TtrasmissioneFuel ttr): Treno(n,c,s,tr,tt), efficenzaIC(e), carburanteIC(tf), trasmissioneIC(ttr){}
 
 double Internal_Combustion::getEfficenzaIC() const
 {
@@ -86,7 +86,11 @@ void Internal_Combustion::print() const
     Treno::print();
     std::cout<<"\nTrasmissione: "<<getTrasmissioneIC()<<"\nCarburante: "<<getCarburanteIC()<<"\nEfficenza: "<<getEfficenzaIC()*100<<"%";
 }
-
+std::string Internal_Combustion::print2() const{
+    std::string s=Treno::print2();
+    s.append("\nTrasmissione: "+getTrasmissioneIC()+"\nCarburante: "+getCarburanteIC()+"\nEfficenza: "+std::to_string(getEfficenzaIC()*100)+"%");
+    return s;
+}
 void Internal_Combustion::serialize(QJsonObject & json)
 {
     json["type"]="Internal_Combustion";

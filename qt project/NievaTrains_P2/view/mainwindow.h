@@ -27,7 +27,6 @@ private:
     Model* modello;
     MainLayout* layout;
 
-
 public:
     MainWindow(Model* m,QWidget *parent = nullptr);
     ~MainWindow();
@@ -39,7 +38,7 @@ public slots:
     void slotAutori();
     void slotShowTreno();
     void slotFlush();
-    //void slotRemoveTreno(Treno*);
+    void slotRemoveTreno();
     void slotInserimentoTreno();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();

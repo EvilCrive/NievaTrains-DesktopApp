@@ -1,4 +1,5 @@
 #include "mainlayout.h"
+#include <iostream>
 
 MainLayout::MainLayout(QWidget* p): QWidget(p),
     text1(new QLabel(this)),
@@ -60,6 +61,7 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     layout->addLayout(right, 65);
     setLayout(layout);
 
+
     connect(flush, SIGNAL(clicked()),p,SLOT(slotFlush()));
     connect(elimina, SIGNAL(clicked()),p,SLOT(slotRemoveTreno()));
     connect(inserisci, SIGNAL(clicked()),p,SLOT(slotInserimentoTreno()));
@@ -77,6 +79,13 @@ void MainLayout::stampaDettagliTreno(std::string s) const{
 void MainLayout::flushList(){
     infoTrain->clear();
     trainList->clear();
+}
+
+void MainLayout::eliminaTreno(unsigned int t)
+{
+    std::cout<<"pre";
+    trainList->erase(t);
+    std::cout<<"Post";
 }
 int MainLayout::getTrenoInserimento() const{
     return selectType->currentIndex();

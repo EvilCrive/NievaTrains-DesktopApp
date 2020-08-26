@@ -76,10 +76,15 @@ void MainWindow::slotAutori()
 }
 
 
-/*void MainWindow::slotRemoveTreno(Treno * t)
+void MainWindow::slotRemoveTreno()
 {
+    std::cout<<"pre";
+    unsigned int t=layout->estraiTrenoSelezionato();
+    layout->eliminaTreno(t);
+    modello->erase(t);
+    std::cout<<"post";
+}
 
-}*/
 void MainWindow::slotShowTreno(){
     string str="";
     if(layout->estraiTrenoSelezionato()!=-1)

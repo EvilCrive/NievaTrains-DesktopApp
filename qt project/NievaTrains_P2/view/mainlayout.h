@@ -45,6 +45,7 @@ public:
     void stampaDettagliTreno(std::string s) const;
     int getTrenoInserimento() const;
     void flushList();
+    void eliminaTreno(unsigned int);
     MainLayout(QWidget * =nullptr);
     TrainListWidget *getList() const;
 

@@ -8,7 +8,7 @@
 #include <QFileDialog>
 using std::string;
 
-MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this))
+MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this)), layoutAdd(nullptr)
 {
     setWindowTitle("Nieva Trains");
     QHBoxLayout* mainLayout= new QHBoxLayout(this);
@@ -98,15 +98,77 @@ void MainWindow::slotFlush(){
     std::cout<<"post";
 }
 
-void MainWindow::slotInserimentoTreno(){
+void MainWindow::slotShowInserimentoTreno(){
     std::cout<<"pre";
     int x=layout->getTrenoInserimento();
-    AggiuntaLayout* tmp=new AggiuntaLayout(this,x);
-    tmp->show();
+    layoutAdd=new AggiuntaLayout(this,x);
+    layoutAdd->show();
     std::cout<<"post";
 }
+void MainWindow::slotInsersciTreno(){
+    std::cout<<"pre";
+    unsigned int x=layoutAdd->getTipo();
+    std::string nome=layoutAdd->getNome();
+    std::string costruttore=layoutAdd->getCostruttore();
+    unsigned int speed=layoutAdd->getSpeed();
+    unsigned int peso=layoutAdd->getPeso(); //da implementare nei costruttori
+    if(x==0){
+        double efficenzaS=layoutAdd->getEfficenzaS();
+        std::string carburanteS=layoutAdd->getCarburanteS();
+        modello->addtrain(nome, costruttore, speed, efficenzaS, carburanteS);
+    }else if(x==1){
+        double efficenzaE=layoutAdd->getEfficenzaE();
+        std::string trasmissione=layoutAdd->getTrasmissione();
+        modello->addtrain(nome, costruttore, speed, efficenzaE, trasmissione);
+    }else if(x==2){
+        std::string carburanteIC=layoutAdd->getCarburanteIC();
+        modello->addtrain(nome, costruttore, speed, carburanteIC);
+    }else if(x==3){
+        std::string tecnologia=layoutAdd->getTecnologia();
+        modello->addtrain(nome, costruttore, speed, tecnologia);
+    }else{
+        std::string primario=layoutAdd->getPrimario();
+        modello->addtrain(nome, costruttore, speed, primario);
+    }
+    int ultimo=modello->numerotreni()-1;
+    layout->getList()->addTrenoList(modello->getTreno(ultimo));
+    //refresh vari
+    //for(unsigned int i=0; i<modello->numerotreni(); i++)
+     //   layout->getList()->addTrenoList(modello->getTreno(i));
 
+    std::cout<<"post";
+}
 MainWindow::~MainWindow()
 {
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

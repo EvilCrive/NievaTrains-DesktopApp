@@ -26,6 +26,7 @@ private:
     MenuBarTrain* menu;
     Model* modello;
     MainLayout* layout;
+    AggiuntaLayout *layoutAdd;
 
 public:
     MainWindow(Model* m,QWidget *parent = nullptr);
@@ -39,7 +40,8 @@ public slots:
     void slotShowTreno();
     void slotFlush();
     void slotRemoveTreno();
-    void slotInserimentoTreno();
+    void slotShowInserimentoTreno();
+    void slotInsersciTreno();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();
     void slotImporta();

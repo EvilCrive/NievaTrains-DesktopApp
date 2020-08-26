@@ -23,6 +23,11 @@ void TrainListWidget::clear()
     for(int i=0; i<count(); )   delete takeItem(0);
 }
 
+void TrainListWidget::erase(unsigned int x)
+{
+    delete takeItem(x);
+}
+
 TrainListWidgetItem::TrainListWidgetItem(Treno* t, QWidget *p): QListWidgetItem(), t(t), parent(p){
     setText(QString::fromStdString(t->getNome()));
 }

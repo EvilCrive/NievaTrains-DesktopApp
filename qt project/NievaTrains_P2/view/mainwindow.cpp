@@ -75,14 +75,13 @@ void MainWindow::slotAutori()
     info->show();
 }
 
-void MainWindow::slotFlush()
+void MainWindow::slotRemoveTreno()
 {
-    layout->flushList();
-}
-
-void MainWindow::slotRemoveTreno(Treno * t)
-{
-
+    std::cout<<"pre";
+    unsigned int t=layout->estraiTrenoSelezionato();
+    layout->eliminaTreno(t);
+    modello->erase(t);
+    std::cout<<"post";
 }
 void MainWindow::slotShowTreno(){
     std::cout<<"pre-show";

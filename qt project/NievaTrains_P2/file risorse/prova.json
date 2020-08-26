@@ -1,0 +1,44 @@
+[
+    {
+        "builder": "Giuseppe",
+        "efficenzaSteam": 0.4,
+        "nome": "Treno Alfa",
+        "speed": 100,
+        "tipo_carburanteSteam": "Oil",
+        "type": "Steam"
+    },
+    {
+        "builder": "Claudio",
+        "nome": "Treno Beta",
+        "speed": 70,
+        "tipo_tecnologia": "Ems",
+        "type": "Maglev"
+    },
+    {
+        "builder": "Giuseppe",
+        "efficenzaIC": 0.6,
+        "nome": "Treno Gamma",
+        "speed": 140,
+        "tipo_carburanteIC": "Diesel",
+        "type": "Internal_Combustion"
+    },
+    {
+        "builder": "Marco",
+        "efficenzaElettrico": 0.9,
+        "nome": "Treno Delta",
+        "speed": 39,
+        "tipo_trasmissioneElettrico": "Third_Rail",
+        "type": "Electric"
+    },
+    {
+        "builder": "Marco",
+        "efficenzaElettrico": 0.9,
+        "efficenzaIC": 0.6,
+        "motore_primario": "Electric",
+        "nome": "Treno Epsilon",
+        "speed": 39,
+        "tipo_carburanteIC": "Diesel",
+        "tipo_trasmissioneElettrico": "Third_Rail",
+        "type": "Bimode"
+    }
+]

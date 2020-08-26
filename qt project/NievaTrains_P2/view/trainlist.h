@@ -16,6 +16,7 @@ public:
 
     void addTrenoList(Treno* );
     void clear();
+    void erase(unsigned int);
 };
 
 class TrainListWidgetItem : public QListWidgetItem

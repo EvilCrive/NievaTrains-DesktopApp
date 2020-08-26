@@ -1,5 +1,5 @@
 #include "trainlist.h"
-
+#include <iostream>
 TrainListWidget::TrainListWidget(QWidget *parent):QListWidget (parent){
     connect(this,SIGNAL(itemSelectionChanged()),parent->parent(),SLOT(slotShowTreno()));
 }
@@ -20,7 +20,10 @@ void TrainListWidget::addTrenoList(Treno* treno){
 
 void TrainListWidget::clear()
 {
-    for(int i=0; i<count(); )   delete takeItem(0);
+    for(int i=0; i<count(); ){
+        delete takeItem(0);
+        std::cout<<"esketit";
+    }
 }
 
 void TrainListWidget::erase(unsigned int x)

@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
-//#include "combotype.h"
+#include "combotype.h"
 #include <QListWidget>
 #include <QTextBrowser>
 #include <QPushButton>

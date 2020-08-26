@@ -1,5 +1,6 @@
-#ifndef MAINLAYOUT_H
-#define MAINLAYOUT_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
 #include <QMainWindow>
 #include <QLabel>
 #include "combotype.h"
@@ -14,13 +15,11 @@
 #include "menubartrain.h"
 #include "trainlist.h"
 #include "model/model.h"
-#include "model/gerarchia/treno.h"
-#include <string>
 
-class MainLayout: public QWidget
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+    Model* list;
     QLabel* text1;
     QLabel* text2;
     QLabel* text3;
@@ -28,27 +27,21 @@ class MainLayout: public QWidget
 
     ComboType* selectType;
 
-    TrainListWidget *trainList;
-
+    TrainListWidget *trainListWidget;
     QTextBrowser* infoTrain;
     QPushButton* flush;
     QPushButton* search;
     QPushButton* annulla;
-    QPushButton* modifica;
     QPushButton* elimina;
     QPushButton* inserisci;
     QLineEdit* searchBar;
+    MenuBarTrain* menu;
+
+public slots:
 
 
 public:
-    int estraiTrenoSelezionato() const;
-    void stampaDettagliTreno(std::string s) const;
-    int getTrenoInserimento() const;
-    void flushList();
-    void eliminaTreno(unsigned int);
-    MainLayout(QWidget * =nullptr);
-    TrainListWidget *getList() const;
-
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 };
-
-#endif // MAINLAYOUT_H
+#endif // MAINWINDOW_H

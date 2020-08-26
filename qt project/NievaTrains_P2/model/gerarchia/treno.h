@@ -33,9 +33,8 @@ public:
     void setTipo_treno(std::string);
 
     virtual std::string type() const;
-    virtual double carburanteNecessario(unsigned int) const =0; //km in input
-    virtual unsigned int kmPercorribili(unsigned int) const =0; //carburante in input
     virtual void print()const;
+    virtual std::string print2()const;
  // virtual int calcolaCosto() const;
     virtual void serialize(QJsonObject&)=0;
     static Treno* unserialize(QJsonObject&);

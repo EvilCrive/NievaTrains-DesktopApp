@@ -36,6 +36,7 @@ public slots:
     void slotCarica();
     void slotSalva();
     void slotAutori();
+    void slotShowTreno();
     void slotFlush();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();

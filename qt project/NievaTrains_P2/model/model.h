@@ -16,6 +16,7 @@ public:
 
     void push_end(Treno*);
     void print(unsigned int =0) const;
+    std::string print2(unsigned int =0) const;
     void print_all() const;
     Treno* operator[](unsigned int) const;
     Treno* getTreno(unsigned int) const;

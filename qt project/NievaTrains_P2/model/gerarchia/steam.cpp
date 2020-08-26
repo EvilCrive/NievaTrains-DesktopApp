@@ -64,6 +64,11 @@ void Steam::print() const
     Treno::print();
     std::cout<<"\nEfficenza: "<<getEfficenzaSteam()*100<<"%"<<"\nCarburante: "<<getCarburanteSteam();
 }
+std::string Steam::print2() const{
+    std::string s=Treno::print2();
+    s.append("\nEfficenza: "+std::to_string(getEfficenzaSteam()*100)+"%"+"\nCarburante: "+getCarburanteSteam());
+    return s;
+}
 
 void Steam::serialize(QJsonObject & json)
 {

@@ -82,7 +82,15 @@ void MainWindow::slotFlush()
 {
     layout->getList()->clear();
 }
+void MainWindow::slotShowTreno(){
+    std::cout<<"pre-show";
+    string str=modello->print2(layout->estraiTrenoSelezionato());
 
+    //chiamo la funzione in
+    layout->stampaDettagliTreno(str);
+
+    std::cout<<"post-show";
+}
 MainWindow::~MainWindow()
 {
 }

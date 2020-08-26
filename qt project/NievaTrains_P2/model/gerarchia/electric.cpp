@@ -52,6 +52,11 @@ void Electric::print() const{
     Treno::print();
     std::cout<<"\nTrasmissione: "<<getTrasmissioneElettrico()<<"\nEfficenza: "<<getEfficenzaElettrico()*100<<"%";
 }
+std::string Electric::print2() const{
+    std::string s=Treno::print2();
+    s.append("\nTrasmissione: "+getTrasmissioneElettrico()+"\nEfficenza: "+std::to_string(getEfficenzaElettrico()*100)+"%");
+    return s;
+}
 
 void Electric::serialize(QJsonObject & json)
 {

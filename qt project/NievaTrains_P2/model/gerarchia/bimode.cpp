@@ -90,7 +90,11 @@ void Bimode::print() const
     std::cout<<"\nMotore Primario: "<<getMotorePrimario()<<"\nTrasmissione Motore Elettrico: "<<Electric::getTrasmissioneElettrico()<<"\nEfficenza Motore Elettrico: "<<Electric::getEfficenzaElettrico()*100<<"%"<<"\nTrasmissione Motore a Combustione Interna: "<<Internal_Combustion::getTrasmissioneIC()<<"\nEfficenza Motore a Combustione Interna: "<<Internal_Combustion::getEfficenzaIC()*100<<"%"<<"\nCarburante Motore a Combustione Interna: "<<getCarburanteIC();
 
 }
-
+std::string Bimode::print2() const{
+    std::string s=Treno::print2();
+    s.append("\nMotore Primario: "+getMotorePrimario()+"\nTrasmissione Motore Elettrico: "+Electric::getTrasmissioneElettrico()+"\nEfficenza Motore Elettrico: "+std::to_string(Electric::getEfficenzaElettrico()*100)+"%"+"\nTrasmissione Motore a Combustione Interna: "+Internal_Combustion::getTrasmissioneIC()+"\nEfficenza Motore a Combustione Interna: "+std::to_string(Internal_Combustion::getEfficenzaIC()*100)+"%"+"\nCarburante Motore a Combustione Interna: "+getCarburanteIC());
+    return s;
+}
 void Bimode::serialize(QJsonObject & json)
 {
     json["type"]="Bimode";

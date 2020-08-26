@@ -1,15 +1,18 @@
 #include "trainlist.h"
-#include <iostream>
-TrainListWidget::TrainListWidget(QWidget *parent):QListWidget (parent){}
+
+TrainListWidget::TrainListWidget(QWidget *parent):QListWidget (parent){
+    connect(this,SIGNAL(itemSelectionChanged()),parent->parent(),SLOT(slotShowTreno()));
+}
 
 unsigned int TrainListWidget::getIndex() const
 {
     return (unsigned int)this->selectedIndexes()[0].row();
 }
-void TrainListWidget::unSelectIndex() const
+bool TrainListWidget::isSelected() const
 {
-    this->selectedIndexes().clear();
+    return !this->selectedIndexes().empty();
 }
+
 void TrainListWidget::addTrenoList(Treno* treno){
     TrainListWidgetItem* item= new TrainListWidgetItem(treno);
 
@@ -19,6 +22,7 @@ void TrainListWidget::addTrenoList(Treno* treno){
 void TrainListWidget::clear()
 {
     for(int i=0; i<count(); )   delete takeItem(0);
+    clear();
 
 }
 

@@ -21,10 +21,11 @@ public:
     void setCarburanteIC(std::string);
     void setTrasmissioneIC(std::string);
 
-    double carburanteNecessario(unsigned int) const; //input km
-    unsigned int kmPercorribili(unsigned int) const; //input l fuel
+    virtual double carburanteNecessario(unsigned int) const; //input km
+    virtual unsigned int kmPercorribili(unsigned int) const; //input l fuel
     std::string type() const;
     void print() const;
+    std::string print2() const;
     virtual void serialize(QJsonObject&);
 };
 

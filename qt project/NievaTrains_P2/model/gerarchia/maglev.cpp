@@ -29,15 +29,7 @@ Maglev *Maglev::clone() const
     return new Maglev(*this);
 }
 */
-double Maglev::carburanteNecessario(unsigned int) const
-{
-    return -1;
-}
 
-unsigned int Maglev::kmPercorribili(unsigned int) const
-{
-    return -1;
-}
 
 std::string Maglev::type() const
 {
@@ -48,6 +40,11 @@ void Maglev::print() const
 {
     Treno::print();
     std::cout<<"\nTecnologia Maglev: "<<getTecnologia();
+}
+std::string Maglev::print2() const{
+    std::string s=Treno::print2();
+    s.append("\nTecnologia Maglev: "+getTecnologia());
+    return s;
 }
 
 void Maglev::serialize(QJsonObject & json)

@@ -11,8 +11,3 @@ public:
 };
 
 #endif // COMBOTYPE_H
-
-
-
-
-

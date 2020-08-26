@@ -9,7 +9,7 @@ protected:
 private:
     Tmotore motorePrimario;
 public:
-    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita, TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, double =0.7, double =0.4, Tfuel =Tfuel::kerosene, TtrasmissioneFuel =TtrasmissioneFuel::electric, Tmotore =Tmotore::electric);
+    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, double =0.7, double =0.4, Tfuel =Tfuel::kerosene, Tmotore =Tmotore::electric);
     std::string getMotorePrimario() const;
 
     void setMotorePrimario(std::string);

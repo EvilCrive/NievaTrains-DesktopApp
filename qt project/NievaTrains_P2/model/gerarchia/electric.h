@@ -10,7 +10,7 @@ private:
 protected:
     double efficenzaElettrico;
 public:
-    Electric(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, Trotaia =Trotaia::maglev, Ttreno =Ttreno::alta_velocita,  TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, double =0.7);
+    Electric(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, double =0.7);
 
     std::string getTrasmissioneElettrico() const;
     double getEfficenzaElettrico() const;

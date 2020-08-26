@@ -3,7 +3,7 @@
 #include <cctype>
 #include <iostream>
 
-Electric::Electric(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, TtrasmissioneElettrico ttr, double e): Treno(n,c,s,tr,tt), trasmissioneElettrico(ttr), efficenzaElettrico(e){}
+Electric::Electric(const std::string & n, const std::string & c, unsigned int s, TtrasmissioneElettrico ttr, double e): Treno(n,c,s), trasmissioneElettrico(ttr), efficenzaElettrico(e){}
 
 std::string Electric::getTrasmissioneElettrico() const
 {
@@ -64,8 +64,6 @@ void Electric::serialize(QJsonObject & json)
     json["nome"]=QString::fromStdString(getNome());
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
-    json["tipo_rotaia"]=QString::fromStdString(getTipo_rotaia());
-    json["tipo_treno"]=QString::fromStdString(getTipo_treno());
     json["tipo_trasmissioneElettrico"]=QString::fromStdString(getTrasmissioneElettrico());
     json["efficenzaElettrico"]=getEfficenzaElettrico();
 }

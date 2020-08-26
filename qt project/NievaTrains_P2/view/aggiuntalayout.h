@@ -1,23 +1,32 @@
 #ifndef AGGIUNTALAYOUT_H
 #define AGGIUNTALAYOUT_H
 #include <QWidget>
-#include <QLabel>
+#include <QDialog>
+#include <QVBoxLayout>
 #include <QLineEdit>
-#include <QComboBox>
 #include <QStringList>
 #include <QPushButton>
+#include "comboboxcarburanteic.h"
+#include "comboboxcarburantes.h"
+#include "comboboxmotoreprimario.h"
+#include "comboboxtech.h"
+#include "comboboxtrasmissione.h"
 
-class AggiuntaLayout: public QWidget
+
+class AggiuntaLayout: public QDialog
 {
     Q_OBJECT
 
-    QLabel *lab1,*lab2,*lab3,*lab4,*lab5,*lab6,*lab7,*lab8,*lab9,*lab10,*lab11,*lab12,*lab13;
     QLineEdit *nome, *costruttore, *efficenzaS, *efficenzaE, *speed, *peso;
-    QComboBox *rotaia,*tipo, *carburante,*carburanteIC,*trasmissioneIC,*tecnologia,*primario;
+    ComboBoxCarburanteS *carburanteS;
+    ComboBoxCarburanteIC *carburanteIC;
+    ComboBoxTech *tecnologia;
+    ComboBoxMotorePrimario *primario;
+    ComboBoxTrasmissione *trasmissione;
     QPushButton *conferma, *annulla;
 
 public:
-    AggiuntaLayout(unsigned int x=0);
+    AggiuntaLayout(QWidget * =nullptr, int tipoT=0);
 };
 
 #endif // AGGIUNTALAYOUT_H

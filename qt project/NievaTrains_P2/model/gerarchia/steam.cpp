@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-Steam::Steam(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, double e, TfuelSteam tfs): Treno(n,c,s,tr,tt),efficenzaSteam(e),carburanteSteam(tfs){}
+Steam::Steam(const std::string & n, const std::string & c, unsigned int s, double e, TfuelSteam tfs): Treno(n,c,s),efficenzaSteam(e),carburanteSteam(tfs){}
 
 double Steam::getEfficenzaSteam() const
 {
@@ -76,8 +76,7 @@ void Steam::serialize(QJsonObject & json)
     json["nome"]=QString::fromStdString(getNome());
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
-    json["tipo_rotaia"]=QString::fromStdString(getTipo_rotaia());
-    json["tipo_treno"]=QString::fromStdString(getTipo_treno());
+
     json["efficenzaSteam"]=getEfficenzaSteam();
     json["tipo_carburanteSteam"]=QString::fromStdString(getCarburanteSteam());
 }

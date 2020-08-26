@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "combotype.h"
+//#include "combotype.h"
 #include <QMessageBox>
 #include <QString>
 #include "infolayout.h"
@@ -93,6 +93,21 @@ void MainWindow::slotShowTreno(){
 
     std::cout<<"post-show";
 }
+void MainWindow::slotFlush(){
+    std::cout<<"pre";
+    layout->flushList();
+    modello->clear();
+    std::cout<<"post";
+}
+
+void MainWindow::slotInserimentoTreno(){
+    std::cout<<"pre";
+    int x=layout->getTrenoInserimento();
+    AggiuntaLayout* tmp=new AggiuntaLayout(this,x);
+    tmp->show();
+    std::cout<<"post";
+}
+
 MainWindow::~MainWindow()
 {
 }

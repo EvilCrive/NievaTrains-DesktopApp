@@ -33,7 +33,6 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     inserisci->setText("Inserisci");
 
     QHBoxLayout* layout=new QHBoxLayout(this);
-    //layout->setMenuBar(new menuBarTrain);
     QVBoxLayout* left=new QVBoxLayout(this);
     QVBoxLayout* right=new QVBoxLayout(this);
     QHBoxLayout* searchField=new QHBoxLayout(this);
@@ -63,6 +62,7 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
 
     connect(flush, SIGNAL(clicked()),p,SLOT(slotFlush()));
     connect(elimina, SIGNAL(clicked()),p,SLOT(slotRemoveTreno(estraiTrenoSelezionato())));
+    connect(inserisci, SIGNAL(clicked()),p,SLOT(slotInserimentoTreno()));
 }
 unsigned int MainLayout::estraiTrenoSelezionato() const{
     return trainList->getIndex();
@@ -77,4 +77,7 @@ void MainLayout::stampaDettagliTreno(std::string s) const{
 void MainLayout::flushList(){
     infoTrain->clear();
     trainList->clear();
+}
+int MainLayout::getTrenoInserimento() const{
+    return selectType->currentIndex();
 }

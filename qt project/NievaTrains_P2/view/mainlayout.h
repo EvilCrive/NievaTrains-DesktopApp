@@ -29,7 +29,7 @@ class MainLayout: public QWidget
     ComboType* selectType;
 
     TrainListWidget *trainList;
-    //questi sotto hanno signal
+
     QTextBrowser* infoTrain;
     QPushButton* flush;
     QPushButton* search;
@@ -43,6 +43,7 @@ class MainLayout: public QWidget
 public:
     unsigned int estraiTrenoSelezionato() const;
     void stampaDettagliTreno(std::string s) const;
+    int getTrenoInserimento() const;
     void flushList();
     MainLayout(QWidget * =nullptr);
     TrainListWidget *getList() const;

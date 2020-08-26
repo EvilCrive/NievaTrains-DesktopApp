@@ -15,9 +15,6 @@ MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new Men
     mainLayout->addWidget(layout);
     mainLayout->setMenuBar(menu);
     setLayout(mainLayout);
-
-
-
 }
 void MainWindow::slotShowInfoGenerali(){
 
@@ -80,7 +77,12 @@ void MainWindow::slotAutori()
 
 void MainWindow::slotFlush()
 {
-    layout->getList()->clear();
+    layout->flushList();
+}
+
+void MainWindow::slotRemoveTreno(Treno * t)
+{
+
 }
 void MainWindow::slotShowTreno(){
     std::cout<<"pre-show";

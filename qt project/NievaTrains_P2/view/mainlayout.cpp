@@ -61,8 +61,8 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     layout->addLayout(right, 65);
     setLayout(layout);
 
-    //connect(flush,SIGNAL(clicked()),p,SLOT(slotFlush()));
-    connect(flush, SIGNAL(clicked()), p, SLOT(slotFlush()));
+    connect(flush, SIGNAL(clicked()),p,SLOT(slotFlush()));
+    connect(elimina, SIGNAL(clicked()),p,SLOT(slotRemoveTreno(estraiTrenoSelezionato())));
 }
 unsigned int MainLayout::estraiTrenoSelezionato() const{
     return trainList->getIndex();

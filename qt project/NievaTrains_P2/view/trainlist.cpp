@@ -6,7 +6,7 @@ TrainListWidget::TrainListWidget(QWidget *parent):QListWidget (parent){
 
 unsigned int TrainListWidget::getIndex() const
 {
-    return (unsigned int)this->selectedIndexes()[0].row();
+    return currentRow();
 }
 bool TrainListWidget::isSelected() const
 {

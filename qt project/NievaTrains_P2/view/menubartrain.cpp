@@ -17,4 +17,5 @@ MenuBarTrain::MenuBarTrain(QWidget* p):
     connect(infoGenerali,SIGNAL(triggered()),parent,SLOT(slotShowInfoGenerali()));
     connect(serialize,SIGNAL(triggered()),parent,SLOT(slotSalva()));
     connect(unserialize,SIGNAL(triggered()),parent,SLOT(slotCarica()));
+    connect(autori,SIGNAL(triggered()),parent,SLOT(slotAutori()));
 }

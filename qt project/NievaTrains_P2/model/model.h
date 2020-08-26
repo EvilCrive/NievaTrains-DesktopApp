@@ -21,7 +21,7 @@ public:
     Treno* getTreno(unsigned int) const;
     void erase(unsigned int =0);
     void clear();
-
+    bool isEmpty() const;
 
     unsigned int getSpeedM() const;
     double getPesoM() const;

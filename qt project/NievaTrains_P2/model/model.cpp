@@ -36,6 +36,12 @@ void Model::clear()
     erase(0);
 }
 
+bool Model::isEmpty() const
+{
+    if(list.getSize()==0)   return 1;
+    else    return 0;
+}
+
  unsigned int  Model::getSpeedM() const
 {
      unsigned int count=0;
@@ -45,7 +51,8 @@ void Model::clear()
      }
 
 
-     return count/i; /*cast implicito a unsigned int*/
+     if(!count)  return 0;
+     else    return count/i;
 }
 
 double Model::getPesoM() const
@@ -56,7 +63,8 @@ double Model::getPesoM() const
         count+=list[i]->getPeso();
     }
 
-    return count/i;
+    if(!count)  return 0;
+    else    return count/i;
 }
 double Model::getPesoT() const
 {

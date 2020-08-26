@@ -35,11 +35,13 @@ public slots:
     void slotShowInfoGenerali();
     void slotCarica();
     void slotSalva();
+    void slotAutori();
+    void slotFlush();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();
     void slotImporta();
 
-    void slotFlush();
+
     void slotModificaTreno(Treno*);
     void slotEliminaTreno(Treno*);
     void slotShowInserisci();

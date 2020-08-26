@@ -60,6 +60,8 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     layout->addLayout(left, 35);
     layout->addLayout(right, 65);
     setLayout(layout);
+
+    //connect(flush,SIGNAL(clicked()),p,SLOT(slotFlush()));
 }
 TrainListWidget* MainLayout::getList() const{
     return trainList;

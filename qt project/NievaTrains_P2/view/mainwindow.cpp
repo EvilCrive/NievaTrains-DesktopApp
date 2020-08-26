@@ -4,6 +4,8 @@
 #include <QString>
 #include "infolayout.h"
 #include <iostream>
+#include <QFile>
+#include <QFileDialog>
 using std::string;
 
 MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this))
@@ -18,27 +20,69 @@ MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new Men
 
 }
 void MainWindow::slotShowInfoGenerali(){
-   /* double pesoM=modello->getPesoM();
-    double pesoT=modello->getPesoT();
-    unsigned int velM=modello->getSpeedM();
-    unsigned int velT=modello->getSpeedT();*/
 
     //occhio che magari il puntatore viene cancellato all'uscita ma non l'oggetto
-    InfoLayout* info=new InfoLayout(this,1,2,3,4,5);
+    QString str1= "La quantità di treni presenti nel sistema è: "+QString::number(modello->numerotreni());
+    QString str2= "Il peso medio dei treni nel sistema è: "+QString::number(modello->getPesoM());
+    QString str3= "La velocità media dei treni nel sistema è: "+QString::number(modello->getPesoT());
+    QString str4= "Il peso maggiore registrato è: "+QString::number(modello->getSpeedM());
+    QString str5= "La velocità maggiore registrata è: "+QString::number(modello->getSpeedT());
+
+    InfoLayout* info=new InfoLayout(this,str1,str2,str3,str4,str5);
+    info->setMargin(13);
+    info->setDimensioni(300,250);
     info->show();
 }
 void MainWindow::slotCarica(){
-    std::cout<<"pre-carica";
-    modello->load("C:\\Users\\matbr\\Desktop\\data.json");
-    for(unsigned int i=0; i<modello->numerotreni(); i++)
-        layout->getList()->addTrenoList(modello->getTreno(i));
-    std::cout<<"post-carica";
+    QString file= QFileDialog::getOpenFileName(
+                this,
+                tr("Choose file"),
+                "../NievaTrains_P2/file risorse",
+                "File JSON(*.json)"
+                );
+    if(file!=""){
+    //reset ricerca?
+        modello->clear();
+        //flush
+        layout->getList()->clear();
+        modello->load(file.toStdString());
+        if(modello->isEmpty()){
+            QMessageBox::warning(this,"Attenzione!","Il file del programma e' vuoto.");
+        }
+        else{
+            for(unsigned int i=0; i<modello->numerotreni(); i++)
+                layout->getList()->addTrenoList(modello->getTreno(i));
+        }
+    }
 }
 void MainWindow::slotSalva(){
-    std::cout<<"pre-save";
-    modello->save("C:\\Users\\matbr\\Desktop\\nodata.jso");
-    std::cout<<"post-save";
+    QString file= QFileDialog::getSaveFileName(
+                this,
+                tr("Choose file"),
+                "../NievaTrains_P2/file risorse",
+                "File JSON(*.json)"
+                );
+    if(file!=""){
+    //reset ricerca?
+        modello->save(file.toStdString());
+    }
 }
+
+void MainWindow::slotAutori()
+{
+    QDialog* info=new QDialog(this);
+    QLabel* text=new QLabel(info);
+    text->setText("Gli autori:\n Alberto Crivellari, Matteo Brosolo, Francesco Bugno.");
+    text->setMargin(5);
+    info->resize(300,50);
+    info->show();
+}
+
+void MainWindow::slotFlush()
+{
+    layout->getList()->clear();
+}
+
 MainWindow::~MainWindow()
 {
 }

@@ -8,13 +8,15 @@ class InfoLayout: public QDialog
 {
     Q_OBJECT
 
-    QLabel* tot;
-    QLabel* PesoM;
-    QLabel* VelM;
-    QLabel* PesoT;
-    QLabel* VelT;
+    QLabel* first;
+    QLabel* second;
+    QLabel* third;
+    QLabel* fourth;
+    QLabel* fifth;
 public:
-    InfoLayout(QWidget * =nullptr, unsigned int tot=0, unsigned int varVelT=0, unsigned int varPesoT=0, double varVelM=0, double varPesoM=0);
+    InfoLayout(QWidget * =nullptr, QString prima ="", QString seconda ="",QString terza ="",QString quarta ="",QString quinta ="");
+    void setMargin(int margin =20);
+    void setDimensioni(int width =100, int height =100);
 };
 
 #endif // INFOLAYOUT_H

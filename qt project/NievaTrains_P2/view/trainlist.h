@@ -14,6 +14,7 @@ public:
     unsigned int getIndex() const;
     void unSelectIndex() const;
     void addTrenoList(Treno* );
+    void clear();
 };
 
 class TrainListWidgetItem : public QListWidgetItem

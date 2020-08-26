@@ -3,7 +3,7 @@
 #include <cctype>
 #include <iostream>
 
-Maglev::Maglev(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, Ttech ttt): Treno(n,c,s,tr,tt), tecnologia(ttt){}
+Maglev::Maglev(const std::string & n, const std::string & c, unsigned int s, Ttech ttt): Treno(n,c,s), tecnologia(ttt){}
 
 std::string Maglev::getTecnologia() const
 {
@@ -53,8 +53,6 @@ void Maglev::serialize(QJsonObject & json)
     json["nome"]=QString::fromStdString(getNome());
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
-    json["tipo_rotaia"]=QString::fromStdString(getTipo_rotaia());
-    json["tipo_treno"]=QString::fromStdString(getTipo_treno());
     json["tipo_tecnologia"]=QString::fromStdString(getTecnologia());
 }
 

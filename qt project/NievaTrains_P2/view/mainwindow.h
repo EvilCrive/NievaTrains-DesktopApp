@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
-#include "combotype.h"
+//#include "combotype.h"
 #include <QListWidget>
 #include <QTextBrowser>
 #include <QPushButton>
@@ -17,6 +17,7 @@
 #include "mainlayout.h"
 #include "model/model.h"
 #include "model/gerarchia/treno.h"
+#include "aggiuntalayout.h"
 
 class MainWindow : public QWidget
 {
@@ -37,6 +38,7 @@ public slots:
     void slotSalva();
     void slotShowTreno();
     void slotFlush();
+    void slotInserimentoTreno();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();
     void slotImporta();
@@ -44,7 +46,6 @@ public slots:
     void slotFlush();
     void slotModificaTreno(Treno*);
     void slotEliminaTreno(Treno*);
-    void slotShowInserisci();
     void slotCerca();
     void slotAnnullaRicerca();
 

@@ -3,7 +3,7 @@
 #include <cctype>
 #include <iostream>
 
-Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, Trotaia tr, Ttreno tt, double e, Tfuel tf, TtrasmissioneFuel ttr): Treno(n,c,s,tr,tt), efficenzaIC(e), carburanteIC(tf), trasmissioneIC(ttr){}
+Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, double e, Tfuel tf): Treno(n,c,s), efficenzaIC(e), carburanteIC(tf){}
 
 double Internal_Combustion::getEfficenzaIC() const
 {
@@ -18,15 +18,6 @@ std::string Internal_Combustion::getCarburanteIC() const
     return "NoType";
 }
 
-std::string Internal_Combustion::getTrasmissioneIC() const
-{
-    if(trasmissioneIC==TtrasmissioneFuel::steam)  return "Steam";
-    if(trasmissioneIC==TtrasmissioneFuel::electric)   return "Electric";
-    if(trasmissioneIC==TtrasmissioneFuel::hydraulic)  return "Hydraulic";
-    if(trasmissioneIC==TtrasmissioneFuel::pneumatic)  return "Pneumatic";
-    if(trasmissioneIC==TtrasmissioneFuel::mechanical) return "Mechanical";
-    return "NoType";
-}
 
 void Internal_Combustion::setEfficenzaIC(double e)
 {
@@ -44,24 +35,6 @@ void Internal_Combustion::setCarburanteIC(std::string tr)
         carburanteIC=Tfuel::petrol;
     }else if(tr=="diesel"){
         carburanteIC=Tfuel::diesel;
-    }
-}
-
-void Internal_Combustion::setTrasmissioneIC(std::string tr)
-{
-    std::transform(tr.begin(), tr.end(), tr.begin(),
-        [](unsigned char c){ return std::tolower(c); });
-    //porta la stringa tutta lowercase
-    if(tr=="electric"){
-        trasmissioneIC=TtrasmissioneFuel::electric;
-    }else if(tr=="mechanical"){
-        trasmissioneIC=TtrasmissioneFuel::mechanical;
-    }else if(tr=="hydraulic"){
-        trasmissioneIC=TtrasmissioneFuel::hydraulic;
-    }else if(tr=="steam"){
-        trasmissioneIC=TtrasmissioneFuel::steam;
-    }else if(tr=="pneumatic"){
-        trasmissioneIC=TtrasmissioneFuel::pneumatic;
     }
 }
 
@@ -84,11 +57,11 @@ std::string Internal_Combustion::type() const
 void Internal_Combustion::print() const
 {
     Treno::print();
-    std::cout<<"\nTrasmissione: "<<getTrasmissioneIC()<<"\nCarburante: "<<getCarburanteIC()<<"\nEfficenza: "<<getEfficenzaIC()*100<<"%";
+    std::cout<<"\nCarburante: "<<getCarburanteIC()<<"\nEfficenza: "<<getEfficenzaIC()*100<<"%";
 }
 std::string Internal_Combustion::print2() const{
     std::string s=Treno::print2();
-    s.append("\nTrasmissione: "+getTrasmissioneIC()+"\nCarburante: "+getCarburanteIC()+"\nEfficenza: "+std::to_string(getEfficenzaIC()*100)+"%");
+    s.append("\nCarburante: "+getCarburanteIC()+"\nEfficenza: "+std::to_string(getEfficenzaIC()*100)+"%");
     return s;
 }
 void Internal_Combustion::serialize(QJsonObject & json)
@@ -97,10 +70,7 @@ void Internal_Combustion::serialize(QJsonObject & json)
     json["nome"]=QString::fromStdString(getNome());
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
-    json["tipo_rotaia"]=QString::fromStdString(getTipo_rotaia());
-    json["tipo_treno"]=QString::fromStdString(getTipo_treno());
     json["tipo_carburanteIC"]=QString::fromStdString(getCarburanteIC());
-    json["tipo_trasmissioneIC"]=QString::fromStdString(getTrasmissioneIC());
     json["efficenzaIC"]=getEfficenzaIC();
 }
 /*

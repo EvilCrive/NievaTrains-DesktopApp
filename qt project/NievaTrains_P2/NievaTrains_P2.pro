@@ -29,6 +29,11 @@ SOURCES += \
     model/gerarchia/steam.cpp \
     model/gerarchia/treno.cpp \
     view/aggiuntalayout.cpp \
+    view/comboboxcarburanteic.cpp \
+    view/comboboxcarburantes.cpp \
+    view/comboboxmotoreprimario.cpp \
+    view/comboboxtech.cpp \
+    view/comboboxtrasmissione.cpp \
     view/combotype.cpp \
     view/infolayout.cpp \
     view/mainlayout.cpp \
@@ -47,6 +52,11 @@ HEADERS += \
     model/gerarchia/steam.h \
     model/gerarchia/treno.h \
     view/aggiuntalayout.h \
+    view/comboboxcarburanteic.h \
+    view/comboboxcarburantes.h \
+    view/comboboxmotoreprimario.h \
+    view/comboboxtech.h \
+    view/comboboxtrasmissione.h \
     view/combotype.h \
     view/infolayout.h \
     view/mainlayout.h \

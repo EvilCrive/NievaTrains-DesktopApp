@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "combotype.h"
+//#include "combotype.h"
 #include <QMessageBox>
 #include <QString>
 #include "infolayout.h"
@@ -13,9 +13,6 @@ MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new Men
     mainLayout->addWidget(layout);
     mainLayout->setMenuBar(menu);
     setLayout(mainLayout);
-
-
-
 }
 void MainWindow::slotShowInfoGenerali(){
    /* double pesoM=modello->getPesoM();
@@ -52,6 +49,14 @@ void MainWindow::slotFlush(){
     std::cout<<"pre";
     layout->flushList();
     modello->clear();
+    std::cout<<"post";
+}
+
+void MainWindow::slotInserimentoTreno(){
+    std::cout<<"pre";
+    int x=layout->getTrenoInserimento();
+    AggiuntaLayout* tmp=new AggiuntaLayout(this,x);
+    tmp->show();
     std::cout<<"post";
 }
 

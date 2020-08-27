@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
-#include "combotype.h"
+#include "supporto/combotype.h"
 #include <QListWidget>
 #include <QTextBrowser>
 #include <QPushButton>
@@ -13,12 +13,12 @@
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include "menubartrain.h"
-#include "trainlist.h"
+#include "supporto/trainlist.h"
 #include "mainlayout.h"
 #include "model/model.h"
 #include "model/gerarchia/treno.h"
-#include "aggiuntalayout.h"
-#include "modificalayout.h"
+#include "supporto/aggiuntalayout.h"
+#include "supporto/modificalayout.h"
 
 class MainWindow : public QWidget
 {

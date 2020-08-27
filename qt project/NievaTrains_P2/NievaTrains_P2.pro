@@ -28,21 +28,21 @@ SOURCES += \
     model/gerarchia/maglev.cpp \
     model/gerarchia/steam.cpp \
     model/gerarchia/treno.cpp \
-    view/aggiuntalayout.cpp \
-    view/comboboxcarburanteic.cpp \
-    view/comboboxcarburantes.cpp \
-    view/comboboxmotoreprimario.cpp \
-    view/comboboxtech.cpp \
-    view/comboboxtrasmissione.cpp \
-    view/combotype.cpp \
-    view/infolayout.cpp \
+    view/supporto/aggiuntalayout.cpp \
+    view/supporto/comboboxcarburanteic.cpp \
+    view/supporto/comboboxcarburantes.cpp \
+    view/supporto/comboboxmotoreprimario.cpp \
+    view/supporto/comboboxtech.cpp \
+    view/supporto/comboboxtrasmissione.cpp \
+    view/supporto/combotype.cpp \
+    view/supporto/infolayout.cpp \
     view/mainlayout.cpp \
     view/mainwindow.cpp \
     view/menubartrain.cpp \
-    view/nievaexception.cpp \
-    view/modificalayout.cpp \
-    view/ricercalayout.cpp \
-    view/trainlist.cpp
+    view/supporto/nievaexception.cpp \
+    view/supporto/modificalayout.cpp \
+    view/supporto/ricercalayout.cpp \
+    view/supporto/trainlist.cpp
 
 HEADERS += \
     Qontainer.h \
@@ -53,21 +53,21 @@ HEADERS += \
     model/gerarchia/maglev.h \
     model/gerarchia/steam.h \
     model/gerarchia/treno.h \
-    view/aggiuntalayout.h \
-    view/comboboxcarburanteic.h \
-    view/comboboxcarburantes.h \
-    view/comboboxmotoreprimario.h \
-    view/comboboxtech.h \
-    view/comboboxtrasmissione.h \
-    view/combotype.h \
-    view/infolayout.h \
+    view/supporto/aggiuntalayout.h \
+    view/supporto/comboboxcarburanteic.h \
+    view/supporto/comboboxcarburantes.h \
+    view/supporto/comboboxmotoreprimario.h \
+    view/supporto/comboboxtech.h \
+    view/supporto/comboboxtrasmissione.h \
+    view/supporto/combotype.h \
+    view/supporto/infolayout.h \
     view/mainlayout.h \
     view/mainwindow.h \
     view/menubartrain.h \
-    view/nievaexception.h \
-    view/modificalayout.h \
-    view/ricercalayout.h \
-    view/trainlist.h
+    view/supporto/nievaexception.h \
+    view/supporto/modificalayout.h \
+    view/supporto/ricercalayout.h \
+    view/supporto/trainlist.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

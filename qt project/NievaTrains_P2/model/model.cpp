@@ -6,7 +6,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonParseError>
-#include "view/nievaexception.h"
+#include "view/supporto/nievaexception.h"
 
 
 using std::cout;

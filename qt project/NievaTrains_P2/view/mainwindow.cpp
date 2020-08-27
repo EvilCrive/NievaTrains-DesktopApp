@@ -1,8 +1,8 @@
 #include "mainwindow.h"
-#include "combotype.h"
+#include "supporto/combotype.h"
 #include <QMessageBox>
 #include <QString>
-#include "infolayout.h"
+#include "supporto/infolayout.h"
 #include <iostream>
 #include <QFile>
 #include <QFileDialog>

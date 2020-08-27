@@ -5,7 +5,7 @@
 #include <cctype>
 #include <iostream>
 #include <QJsonParseError>
-#include "view/nievaexception.h"
+#include "view/supporto/nievaexception.h"
 
 using std::string;
 using std::cerr;

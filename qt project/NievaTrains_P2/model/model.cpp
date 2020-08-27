@@ -56,8 +56,6 @@ bool Model::isEmpty() const
      for(;i< list.getSize(); i++){
        count+=list[i]->getSpeed();
      }
-
-
      if(!count)  return 0;
      else    return count/i;
 }
@@ -87,7 +85,7 @@ unsigned int Model::getSpeedT() const
     double toRet=0;
     unsigned int i=0;
     for(;i< list.getSize(); i++){
-        if(toRet<list[i]->getSpeed()) toRet=list[i]->getPeso();
+        if(toRet<list[i]->getSpeed()) toRet=list[i]->getSpeed();
     }
     return toRet;
 }

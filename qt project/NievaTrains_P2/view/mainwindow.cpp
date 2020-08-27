@@ -21,8 +21,8 @@ void MainWindow::slotShowInfoGenerali(){
     //occhio che magari il puntatore viene cancellato all'uscita ma non l'oggetto
     QString str1= "La quantità di treni presenti nel sistema è: "+QString::number(modello->numerotreni());
     QString str2= "Il peso medio dei treni nel sistema è: "+QString::number(modello->getPesoM());
-    QString str3= "La velocità media dei treni nel sistema è: "+QString::number(modello->getPesoT());
-    QString str4= "Il peso maggiore registrato è: "+QString::number(modello->getSpeedM());
+    QString str3= "La velocità media dei treni nel sistema è: "+QString::number(modello->getSpeedM());
+    QString str4= "Il peso maggiore registrato è: "+QString::number(modello->getPesoT());
     QString str5= "La velocità maggiore registrata è: "+QString::number(modello->getSpeedT());
 
     InfoLayout* info=new InfoLayout(this,str1,str2,str3,str4,str5);

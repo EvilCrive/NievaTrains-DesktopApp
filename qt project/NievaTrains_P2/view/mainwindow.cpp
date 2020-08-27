@@ -140,7 +140,59 @@ void MainWindow::slotInserisciTreno(){
 
     layoutAdd->hide();
     delete layoutAdd;
-
+}
+void MainWindow::slotShowModificaTreno(){
+    Treno* TrenoDaModificare=modello->getTreno(layout->getList()->getIndex());
+    //capire il tipo di treno
+    std::string tipo=TrenoDaModificare->type();
+    int x=-1;
+    if(tipo=="Electric"){
+        x=1;
+    }
+    else if(tipo=="Bimode"){
+        x=4;
+    }
+    else if(tipo=="Steam"){
+        x=0;
+    }
+    else if (tipo=="Internal_Combustion"){
+        x=2;
+    }
+    else if (tipo=="Maglev"){
+        x=3;
+    }
+    else{
+        //throw
+    }
+    //creare ModificaLayout
+    ModificaLayout* layoutMod=new ModificaLayout(this,x);
+    //estrarre i parametri che mi servono e settarli in ModificaLayout
+    layoutMod->setNome(TrenoDaModificare->getNome());
+    layoutMod->setCostruttore(TrenoDaModificare->getCostruttore());
+    layoutMod->setPeso(TrenoDaModificare->getPeso());
+    layoutMod->setSpeed(TrenoDaModificare->getSpeed());
+    if(Bimode*tmp=dynamic_cast<Bimode*>(TrenoDaModificare)){
+        layoutMod->setPrimario(tmp->getMotorePrimario());
+    }
+    if(Steam*tmp=dynamic_cast<Steam*>(TrenoDaModificare)){
+        layoutMod->setEfficenzaS(tmp->getEfficenzaSteam());
+        layoutMod->setCarburanteS(tmp->getCarburanteSteam());
+    }
+    if(Internal_Combustion*tmp=dynamic_cast<Internal_Combustion*>(TrenoDaModificare)){
+        layoutMod->setEfficenzaIC(tmp->getEfficenzaIC());
+        layoutMod->setCarburanteIC(tmp->getCarburanteIC());
+    }
+    if(Electric*tmp=dynamic_cast<Electric*>(TrenoDaModificare)){
+        layoutMod->setEfficenzaE(tmp->getEfficenzaElettrico());
+        layoutMod->setTrasmissione(tmp->getTrasmissioneElettrico());
+    }
+    if(Maglev*tmp=dynamic_cast<Maglev*>(TrenoDaModificare)){
+        layoutMod->setTecnologia(tmp->getTecnologia());
+    }
+    //displayarlo il modificalayout
+    //layoutMod->repaint();
+    layoutMod->show();
+    //*ci sono da fare magie con la connect prolly
 }
 MainWindow::~MainWindow()
 {

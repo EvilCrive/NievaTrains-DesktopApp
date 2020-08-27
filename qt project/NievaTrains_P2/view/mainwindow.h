@@ -18,6 +18,7 @@
 #include "model/model.h"
 #include "model/gerarchia/treno.h"
 #include "aggiuntalayout.h"
+#include "modificalayout.h"
 
 class MainWindow : public QWidget
 {
@@ -42,6 +43,7 @@ public slots:
     void slotRemoveTreno();
     void slotShowInserimentoTreno();
     void slotInserisciTreno();
+    void slotShowModificaTreno();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();
     void slotImporta();

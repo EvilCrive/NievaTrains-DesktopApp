@@ -72,7 +72,6 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLin
     layoutPopUp->addWidget(annulla);
 
     setLayout(layoutPopUp);
-    //connect
 }
 std::string AggiuntaLayout::getNome() const{
     return nome->text().toStdString();

@@ -41,7 +41,6 @@ SOURCES += \
     view/menubartrain.cpp \
 <<<<<<< HEAD
     view/nievaexception.cpp \
-=======
     view/modificalayout.cpp \
 >>>>>>> 5d1f6171d40657de21e1b358d8d2b295c2d3b92d
     view/ricercalayout.cpp \
@@ -67,11 +66,8 @@ HEADERS += \
     view/mainlayout.h \
     view/mainwindow.h \
     view/menubartrain.h \
-<<<<<<< HEAD
     view/nievaexception.h \
-=======
     view/modificalayout.h \
->>>>>>> 5d1f6171d40657de21e1b358d8d2b295c2d3b92d
     view/ricercalayout.h \
     view/trainlist.h
 

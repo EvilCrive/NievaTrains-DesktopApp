@@ -39,6 +39,7 @@ SOURCES += \
     view/mainlayout.cpp \
     view/mainwindow.cpp \
     view/menubartrain.cpp \
+    view/nievaexception.cpp \
     view/ricercalayout.cpp \
     view/trainlist.cpp
 
@@ -62,6 +63,7 @@ HEADERS += \
     view/mainlayout.h \
     view/mainwindow.h \
     view/menubartrain.h \
+    view/nievaexception.h \
     view/ricercalayout.h \
     view/trainlist.h
 

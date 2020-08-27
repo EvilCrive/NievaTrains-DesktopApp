@@ -22,7 +22,6 @@ void TrainListWidget::clear()
 {
     for(int i=0; i<count(); ){
         delete takeItem(0);
-        std::cout<<"esketit";
     }
 }
 

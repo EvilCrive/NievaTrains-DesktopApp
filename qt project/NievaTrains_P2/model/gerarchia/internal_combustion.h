@@ -13,7 +13,6 @@ public:
 
     double getEfficenzaIC() const;
     std::string getCarburanteIC() const;
-    std::string getTrasmissioneIC() const;
 
     void setEfficenzaIC(double);
     void setCarburanteIC(std::string);

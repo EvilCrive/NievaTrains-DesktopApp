@@ -28,5 +28,8 @@ int main(int argc, char *argv[])
      *   m.save("E:/tutto/xd.json");
      *   std::cout<<m.getPesoM();
      */
+    /*Model m;
+    m.load("E:/tutto/uni/p2/progetto/Progetto_P2/qt project/NievaTrains_P2/file risorse/prova.json");*/
+
 }
 

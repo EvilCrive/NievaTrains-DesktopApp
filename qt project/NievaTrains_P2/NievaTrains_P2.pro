@@ -39,10 +39,8 @@ SOURCES += \
     view/mainlayout.cpp \
     view/mainwindow.cpp \
     view/menubartrain.cpp \
-<<<<<<< HEAD
     view/nievaexception.cpp \
     view/modificalayout.cpp \
->>>>>>> 5d1f6171d40657de21e1b358d8d2b295c2d3b92d
     view/ricercalayout.cpp \
     view/trainlist.cpp
 

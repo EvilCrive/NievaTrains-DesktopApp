@@ -39,6 +39,7 @@ SOURCES += \
     view/mainlayout.cpp \
     view/mainwindow.cpp \
     view/menubartrain.cpp \
+    view/modificalayout.cpp \
     view/ricercalayout.cpp \
     view/trainlist.cpp
 
@@ -62,6 +63,7 @@ HEADERS += \
     view/mainlayout.h \
     view/mainwindow.h \
     view/menubartrain.h \
+    view/modificalayout.h \
     view/ricercalayout.h \
     view/trainlist.h
 

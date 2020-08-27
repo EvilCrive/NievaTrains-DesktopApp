@@ -1,4 +1,10 @@
 # P2_PROJECT_19/20
+## COSE DA FARE
+* eccezioni
+* modifica
+* ricerca
+
+
 
 ## Cartelle
 * file utili
@@ -28,7 +34,3 @@
 * Main
 * Risorse
 * File progetto (*.pro)
-## COSE DA FARE
-* finire la progettazione gerarchia
-* iniziare progettazione gui
-* iniziare progettazione mvc 

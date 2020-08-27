@@ -11,6 +11,7 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLin
     costruttore->setText("Costruttore treno");
     efficenzaE->setText("Efficenza motore elettrico");
     efficenzaS->setText("Efficenza motore a vapore");
+    efficenzaIC->setText("Efficenza motore a combustione interna");
     speed->setText("Velocità massima");
     peso->setText("Peso");
     carburanteIC->hide();
@@ -41,22 +42,24 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLin
         layoutPopUp->addWidget(trasmissione);
         break;
     case 2:
-        carburanteIC->show();
         efficenzaIC->show();
-        layoutPopUp->addWidget(carburanteIC);
+        carburanteIC->show();
         layoutPopUp->addWidget(efficenzaIC);
+        layoutPopUp->addWidget(carburanteIC);
         break;
     case 3:
         tecnologia->show();
         layoutPopUp->addWidget(tecnologia);
         break;
     case 4:
-        carburanteIC->show();
         efficenzaE->show();
+        efficenzaIC->show();
+        carburanteIC->show();
         trasmissione->show();
         primario->show();
-        layoutPopUp->addWidget(carburanteIC);
         layoutPopUp->addWidget(efficenzaE);
+        layoutPopUp->addWidget(efficenzaIC);
+        layoutPopUp->addWidget(carburanteIC);
         layoutPopUp->addWidget(trasmissione);
         layoutPopUp->addWidget(primario);
         break;

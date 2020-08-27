@@ -4,18 +4,16 @@
         "efficenzaSteam": 0.4,
         "nome": "Treno Alfa",
         "speed": 100,
+        "peso": 40,
         "tipo_carburanteSteam": "Oil",
-        "tipo_rotaia": "Strap",
-        "tipo_treno": "Regionale",
         "type": "Steam"
     },
     {
         "builder": "Claudio",
         "nome": "Treno Beta",
         "speed": 70,
-        "tipo_rotaia": "Barlow",
+        "peso": 30,
         "tipo_tecnologia": "Ems",
-        "tipo_treno": "Alta velocita'",
         "type": "Maglev"
     },
     {
@@ -23,10 +21,9 @@
         "efficenzaIC": 0.6,
         "nome": "Treno Gamma",
         "speed": 140,
+        "peso": 20,
         "tipo_carburanteIC": "Diesel",
-        "tipo_rotaia": "Plate",
         "tipo_trasmissioneIC": "Electric",
-        "tipo_treno": "Alta velocita'",
         "type": "Internal_Combustion"
     },
     {
@@ -34,9 +31,8 @@
         "efficenzaElettrico": 0.9,
         "nome": "Treno Delta",
         "speed": 39,
-        "tipo_rotaia": "Bridge",
+        "peso": 60,
         "tipo_trasmissioneElettrico": "Third_Rail",
-        "tipo_treno": "Commuter",
         "type": "Electric"
     },
     {
@@ -46,11 +42,10 @@
         "motore_primario": "Electric",
         "nome": "Treno Epsilon",
         "speed": 39,
+        "peso": 50,
         "tipo_carburanteIC": "Diesel",
-        "tipo_rotaia": "Bridge",
         "tipo_trasmissioneElettrico": "Third_Rail",
         "tipo_trasmissioneIC": "Electric",
-        "tipo_treno": "Commuter",
         "type": "Bimode"
     }
 ]

@@ -66,7 +66,7 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLin
     //default:
         //throwa qualcosa
     }
-    connect(conferma, SIGNAL(clicked()), p, SLOT(slotInsersciTreno()));
+    connect(conferma, SIGNAL(clicked()), p, SLOT(slotInserisciTreno()));
     connect(annulla, SIGNAL(clicked()), this, SLOT(close()));
     layoutPopUp->addWidget(conferma);
     layoutPopUp->addWidget(annulla);

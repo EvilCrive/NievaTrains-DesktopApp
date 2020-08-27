@@ -19,11 +19,11 @@ MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new Men
 void MainWindow::slotShowInfoGenerali(){
 
     //occhio che magari il puntatore viene cancellato all'uscita ma non l'oggetto
-    QString str1= "La quantità di treni presenti nel sistema è: "+QString::number(modello->numerotreni());
-    QString str2= "Il peso medio dei treni nel sistema è: "+QString::number(modello->getPesoM());
-    QString str3= "La velocità media dei treni nel sistema è: "+QString::number(modello->getSpeedM());
-    QString str4= "Il peso maggiore registrato è: "+QString::number(modello->getPesoT());
-    QString str5= "La velocità maggiore registrata è: "+QString::number(modello->getSpeedT());
+    QString str1= "La quantità di treni presenti nel sistema è:  "+QString::number(modello->numerotreni())+"treni";
+    QString str2= "Il peso medio dei treni nel sistema è:  "+QString::number(modello->getPesoM())+"t";
+    QString str3= "La velocità media dei treni nel sistema è:  "+QString::number(modello->getSpeedM())+"km/h";
+    QString str4= "Il peso maggiore registrato è:  "+QString::number(modello->getPesoT())+"t";
+    QString str5= "La velocità maggiore registrata è:  "+QString::number(modello->getSpeedT())+"km/h";
 
     InfoLayout* info=new InfoLayout(this,str1,str2,str3,str4,str5);
     info->setMargin(13);
@@ -88,7 +88,7 @@ void MainWindow::slotRemoveTreno()
 void MainWindow::slotShowTreno(){
     string str="";
     if(layout->estraiTrenoSelezionato()!=-1)
-        str=modello->print2(layout->estraiTrenoSelezionato());
+        str=modello->treno2string(layout->estraiTrenoSelezionato());
     layout->stampaDettagliTreno(str);
 }
 void MainWindow::slotFlush(){
@@ -105,7 +105,7 @@ void MainWindow::slotShowInserimentoTreno(){
     layoutAdd->show();
     std::cout<<"post";
 }
-void MainWindow::slotInsersciTreno(){
+void MainWindow::slotInserisciTreno(){
     std::cout<<"pre";
     unsigned int x=layoutAdd->getTipo();
     std::string nome=layoutAdd->getNome();

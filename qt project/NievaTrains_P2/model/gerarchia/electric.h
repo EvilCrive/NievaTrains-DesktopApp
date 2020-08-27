@@ -5,10 +5,9 @@
 class Electric: virtual public Treno {
 protected:
     enum TtrasmissioneElettrico {overhead_lines, third_rail};
+    double efficenzaElettrico;
 private:
     TtrasmissioneElettrico trasmissioneElettrico;
-protected:
-    double efficenzaElettrico;
 public:
     Electric(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int p=100, TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, double =0.7);
 
@@ -22,7 +21,7 @@ public:
     virtual unsigned int kmPercorribili(unsigned int) const; //input kw di carburante
     std::string type() const;
     void print() const;
-    std::string print2() const;
+    std::string treno2string() const;
     virtual void serialize(QJsonObject&);
 };
 

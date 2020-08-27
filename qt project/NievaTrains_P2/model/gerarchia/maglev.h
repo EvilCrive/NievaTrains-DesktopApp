@@ -14,11 +14,9 @@ public:
 
     void setTecnologia(std::string);
 
-
-
     std::string type() const;
     void print() const;
-    std::string print2() const;
+    std::string treno2string() const;
     virtual void serialize(QJsonObject&);
 };
 

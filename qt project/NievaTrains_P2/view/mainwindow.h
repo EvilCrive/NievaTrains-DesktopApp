@@ -41,7 +41,7 @@ public slots:
     void slotFlush();
     void slotRemoveTreno();
     void slotShowInserimentoTreno();
-    void slotInsersciTreno();
+    void slotInserisciTreno();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();
     void slotImporta();

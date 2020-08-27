@@ -59,9 +59,11 @@ void Internal_Combustion::print() const
     Treno::print();
     std::cout<<"\nCarburante: "<<getCarburanteIC()<<"\nEfficenza: "<<getEfficenzaIC()*100<<"%";
 }
-std::string Internal_Combustion::print2() const{
-    std::string s=Treno::print2();
-    s.append("\nCarburante: "+getCarburanteIC()+"\nEfficenza: "+std::to_string(getEfficenzaIC()*100)+"%");
+std::string Internal_Combustion::treno2string() const{
+    std::string s=Treno::treno2string();
+    std::string efficenza=std::to_string(getEfficenzaIC()*100);
+    efficenza.erase ( efficenza.find(".")+3, std::string::npos );
+    s.append("\nCarburante: "+getCarburanteIC()+"\nEfficenza: "+efficenza+"%");
     return s;
 }
 void Internal_Combustion::serialize(QJsonObject & json)
@@ -70,6 +72,8 @@ void Internal_Combustion::serialize(QJsonObject & json)
     json["nome"]=QString::fromStdString(getNome());
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
+    json["peso"]=static_cast<int>(getPeso());
+
     json["tipo_carburanteIC"]=QString::fromStdString(getCarburanteIC());
     json["efficenzaIC"]=getEfficenzaIC();
 }

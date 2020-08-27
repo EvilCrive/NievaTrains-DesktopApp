@@ -52,9 +52,11 @@ void Electric::print() const{
     Treno::print();
     std::cout<<"\nTrasmissione: "<<getTrasmissioneElettrico()<<"\nEfficenza: "<<getEfficenzaElettrico()*100<<"%";
 }
-std::string Electric::print2() const{
-    std::string s=Treno::print2();
-    s.append("\nTrasmissione: "+getTrasmissioneElettrico()+"\nEfficenza: "+std::to_string(getEfficenzaElettrico()*100)+"%");
+std::string Electric::treno2string() const{
+    std::string s=Treno::treno2string();
+    std::string efficenza=std::to_string(getEfficenzaElettrico()*100);
+    efficenza.erase ( efficenza.find(".")+3, std::string::npos );
+    s.append("\nTrasmissione: "+getTrasmissioneElettrico()+"\nEfficenza: "+efficenza+"%");
     return s;
 }
 
@@ -64,6 +66,8 @@ void Electric::serialize(QJsonObject & json)
     json["nome"]=QString::fromStdString(getNome());
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
+    json["peso"]=static_cast<int>(getPeso());
+
     json["tipo_trasmissioneElettrico"]=QString::fromStdString(getTrasmissioneElettrico());
     json["efficenzaElettrico"]=getEfficenzaElettrico();
 }

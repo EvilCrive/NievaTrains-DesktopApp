@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <cctype>
 #include <iostream>
-
+#include <math.h>
 
 Steam::Steam(const std::string & n, const std::string & c, unsigned int s, unsigned int p, double e, TfuelSteam tfs): Treno(n,c,s,p),efficenzaSteam(e),carburanteSteam(tfs){}
 
@@ -64,9 +64,11 @@ void Steam::print() const
     Treno::print();
     std::cout<<"\nEfficenza: "<<getEfficenzaSteam()*100<<"%"<<"\nCarburante: "<<getCarburanteSteam();
 }
-std::string Steam::print2() const{
-    std::string s=Treno::print2();
-    s.append("\nEfficenza: "+std::to_string(getEfficenzaSteam()*100)+"%"+"\nCarburante: "+getCarburanteSteam());
+std::string Steam::treno2string() const{
+    std::string s=Treno::treno2string();
+    std::string efficenza=std::to_string(getEfficenzaSteam()*100);
+    efficenza.erase ( efficenza.find(".")+3, std::string::npos );
+    s.append("\nEfficenza: "+efficenza+"%"+"\nCarburante: "+getCarburanteSteam());
     return s;
 }
 
@@ -76,6 +78,7 @@ void Steam::serialize(QJsonObject & json)
     json["nome"]=QString::fromStdString(getNome());
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
+    json["peso"]=static_cast<int>(getPeso());
 
     json["efficenzaSteam"]=getEfficenzaSteam();
     json["tipo_carburanteSteam"]=QString::fromStdString(getCarburanteSteam());

@@ -23,7 +23,7 @@ public:
     virtual unsigned int kmPercorribili(unsigned int) const; //input l fuel
     std::string type() const;
     void print() const;
-    std::string print2() const;
+    std::string treno2string() const;
     virtual void serialize(QJsonObject&);
 };
 

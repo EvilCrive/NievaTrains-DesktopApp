@@ -15,10 +15,10 @@ void Model::print(unsigned int i) const
     list[i]->print();
     cout<<"\n\n\n";
 }
-std::string Model::print2(unsigned int i) const{
+std::string Model::treno2string(unsigned int i) const{
     int numero=i+1;
     std::string s="TRENO "+ std::to_string(numero)+": \n";
-    s.append(list[i]->print2());
+    s.append(list[i]->treno2string());
     s.append("\n\n\n");
     return s;
 }

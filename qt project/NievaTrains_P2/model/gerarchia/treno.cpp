@@ -65,7 +65,7 @@ void Treno::print() const
         [](unsigned char c){ return toupper(c); });
     cout<<"\nTipo: "<<tr<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h";
 }
-std::string Treno::print2()const{
+std::string Treno::treno2string()const{
     string tr=type();
     transform(tr.begin(), tr.end(), tr.begin(),
         [](unsigned char c){ return toupper(c); });
@@ -82,7 +82,10 @@ Treno *Treno::unserialize(QJsonObject & json)
         string nome=json["nome"].toString().toStdString();
         string builder=json["builder"].toString().toStdString();
         int speed0=json["speed"].toInt();
+        int peso0=json["peso"].toInt();
+        unsigned int peso=40;
         unsigned int speed=100;
+        if(peso0>=0)    peso=peso0;
         if(speed0>=0)   speed=speed0;
 
         if(type=="Steam"){
@@ -92,6 +95,7 @@ Treno *Treno::unserialize(QJsonObject & json)
             t->setNome(nome);
             t->setCostruttore(builder);
             t->setSpeed(speed);
+            t->setPeso(peso);
             static_cast<Steam*>(t)->setEfficenzaSteam(efficenzaSteam);
             static_cast<Steam*>(t)->setCarburanteSteam(tipo_carburanteSteam);
         }
@@ -101,6 +105,7 @@ Treno *Treno::unserialize(QJsonObject & json)
             t->setNome(nome);
             t->setCostruttore(builder);
             t->setSpeed(speed);
+            t->setPeso(peso);
             static_cast<Maglev*>(t)->setTecnologia(tipotecnologia);
         }
         if(type=="Internal_Combustion"){
@@ -111,6 +116,7 @@ Treno *Treno::unserialize(QJsonObject & json)
             t->setNome(nome);
             t->setCostruttore(builder);
             t->setSpeed(speed);
+            t->setPeso(peso);
             dynamic_cast<Internal_Combustion*>(t)->setEfficenzaIC(efficenzaIC);
             dynamic_cast<Internal_Combustion*>(t)->setCarburanteIC(tipocarburanteIC);
         }
@@ -121,6 +127,7 @@ Treno *Treno::unserialize(QJsonObject & json)
             t->setNome(nome);
             t->setCostruttore(builder);
             t->setSpeed(speed);
+            t->setPeso(peso);
             dynamic_cast<Electric*>(t)->setEfficenzaElettrico(efficenzaElettrico);
             dynamic_cast<Electric*>(t)->setTrasmissioneElettrico(tipotrasmissioneElettrico);
 
@@ -136,6 +143,7 @@ Treno *Treno::unserialize(QJsonObject & json)
             t->setNome(nome);
             t->setCostruttore(builder);
             t->setSpeed(speed);
+            t->setPeso(peso);
             dynamic_cast<Bimode*>(t)->setEfficenzaElettrico(efficenzaElettrico);
             dynamic_cast<Bimode*>(t)->setTrasmissioneElettrico(tipotrasmissioneElettrico);
             dynamic_cast<Bimode*>(t)->setEfficenzaIC(efficenzaIC);

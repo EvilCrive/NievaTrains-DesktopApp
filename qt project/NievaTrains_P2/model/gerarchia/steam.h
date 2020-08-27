@@ -9,7 +9,7 @@ private:
     double efficenzaSteam;        // km/kg
     TfuelSteam carburanteSteam;  //kg
 public:
-    Steam(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, double =0.7, TfuelSteam =TfuelSteam::coal);
+    Steam(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int p=100, double =0.7, TfuelSteam =TfuelSteam::coal);
 
     double getEfficenzaSteam() const;
     std::string getCarburanteSteam() const;

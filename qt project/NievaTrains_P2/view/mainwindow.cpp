@@ -8,7 +8,7 @@
 #include <QFileDialog>
 using std::string;
 
-MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this))
+MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this)), layoutAdd(nullptr)
 {
     setWindowTitle("Nieva Trains");
     QHBoxLayout* mainLayout= new QHBoxLayout(this);
@@ -98,15 +98,81 @@ void MainWindow::slotFlush(){
     std::cout<<"post";
 }
 
-void MainWindow::slotInserimentoTreno(){
+void MainWindow::slotShowInserimentoTreno(){
     std::cout<<"pre";
     int x=layout->getTrenoInserimento();
-    AggiuntaLayout* tmp=new AggiuntaLayout(this,x);
-    tmp->show();
+    layoutAdd=new AggiuntaLayout(this,x);
+    layoutAdd->show();
     std::cout<<"post";
 }
+void MainWindow::slotInsersciTreno(){
+    std::cout<<"pre";
+    unsigned int x=layoutAdd->getTipo();
+    std::string nome=layoutAdd->getNome();
+    std::string costruttore=layoutAdd->getCostruttore();
+    unsigned int speed=layoutAdd->getSpeed();
+    unsigned int peso=layoutAdd->getPeso();
+    if(x==0){
+        double efficenzaS=layoutAdd->getEfficenzaS();
+        std::string carburanteS=layoutAdd->getCarburanteS();
+        modello->addtrainSteam(nome, costruttore, peso, speed, efficenzaS, carburanteS);
+    }else if(x==1){
+        double efficenzaE=layoutAdd->getEfficenzaE();
+        std::string trasmissione=layoutAdd->getTrasmissione();
+        modello->addtrainElectric(nome, costruttore, peso, speed, trasmissione, efficenzaE);
+    }else if(x==2){
+        std::string carburanteIC=layoutAdd->getCarburanteIC();
+        double efficenzaIC=layoutAdd->getEfficenzaIC();
+        modello->addtrainIC(nome, costruttore, peso, speed, carburanteIC, efficenzaIC);
+    }else if(x==3){
+        std::string tecnologia=layoutAdd->getTecnologia();
+        modello->addtrainMaglev(nome, costruttore, peso, speed, tecnologia);
+    }else{
+        double efficenzaE=layoutAdd->getEfficenzaE();
+        std::string trasmissione=layoutAdd->getTrasmissione();
+        std::string carburanteIC=layoutAdd->getCarburanteIC();
+        double efficenzaIC=layoutAdd->getEfficenzaIC();
+        std::string primario=layoutAdd->getPrimario();
+        modello->addtrainBimode(nome, costruttore, peso, speed, carburanteIC, efficenzaIC, trasmissione, efficenzaE, primario);
+    }
+    int ultimo=modello->numerotreni()-1;
+    layout->getList()->addTrenoList(modello->getTreno(ultimo));
 
+    layoutAdd->hide();
+    delete layoutAdd;
+
+}
 MainWindow::~MainWindow()
 {
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

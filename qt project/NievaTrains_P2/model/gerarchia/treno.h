@@ -15,7 +15,7 @@ private:
    // Trotaia tipo_rotaia; //togliere
   //  Ttreno tipo_treno; //togliere
 public:
-    Treno(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100);
+    Treno(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int p=100);
     virtual ~Treno() = default;
 
     std::string getNome() const;

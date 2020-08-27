@@ -8,8 +8,8 @@ using std::string;
 using std::cerr;
 using std::cout;
 
-Treno::Treno(const string & n, const string & c, unsigned int s):
-    nome(n), costruttore(c),speed(s){}
+Treno::Treno(const string & n, const string & c, unsigned int s, unsigned int p):
+    nome(n), costruttore(c),speed(s), peso(p){}
 
 string Treno::getNome() const
 {
@@ -69,7 +69,7 @@ std::string Treno::print2()const{
     string tr=type();
     transform(tr.begin(), tr.end(), tr.begin(),
         [](unsigned char c){ return toupper(c); });
-    std::string s="\nTipo: "+tr+"\nNome: "+getNome()+"\nCostruttore: "+getCostruttore()+"\nVelocita': "+std::to_string(getSpeed())+"km/h";
+    std::string s="\nTipo: "+tr+"\nNome: "+getNome()+"\nCostruttore: "+getCostruttore()+"\nVelocita': "+std::to_string(getSpeed())+"km/h"+"\nPeso: "+std::to_string(getPeso())+"kg";
     return s;
 }
 

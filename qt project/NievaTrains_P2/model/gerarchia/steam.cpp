@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-Steam::Steam(const std::string & n, const std::string & c, unsigned int s, double e, TfuelSteam tfs): Treno(n,c,s),efficenzaSteam(e),carburanteSteam(tfs){}
+Steam::Steam(const std::string & n, const std::string & c, unsigned int s, unsigned int p, double e, TfuelSteam tfs): Treno(n,c,s,p),efficenzaSteam(e),carburanteSteam(tfs){}
 
 double Steam::getEfficenzaSteam() const
 {

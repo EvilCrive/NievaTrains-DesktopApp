@@ -8,13 +8,18 @@
 #include <QFileDialog>
 using std::string;
 
-MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this)), layoutAdd(nullptr)
+MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this)), layoutAdd(nullptr), layoutMod(nullptr)
 {
     setWindowTitle("Nieva Trains");
     QHBoxLayout* mainLayout= new QHBoxLayout(this);
     mainLayout->addWidget(layout);
     mainLayout->setMenuBar(menu);
     setLayout(mainLayout);
+}
+void MainWindow::refreshList(){
+    layout->getList()->clear();
+    for(unsigned int i=0; i<modello->numerotreni(); i++)
+        layout->getList()->addTrenoList(modello->getTreno(i));
 }
 void MainWindow::slotShowInfoGenerali(){
 
@@ -47,8 +52,7 @@ void MainWindow::slotCarica(){
             QMessageBox::warning(this,"Attenzione!","Il file del programma e' vuoto.");
         }
         else{
-            for(unsigned int i=0; i<modello->numerotreni(); i++)
-                layout->getList()->addTrenoList(modello->getTreno(i));
+            refreshList();
         }
     }
 }
@@ -135,14 +139,15 @@ void MainWindow::slotInserisciTreno(){
         std::string primario=layoutAdd->getPrimario();
         modello->addtrainBimode(nome, costruttore, peso, speed, carburanteIC, efficenzaIC, trasmissione, efficenzaE, primario);
     }
-    int ultimo=modello->numerotreni()-1;
-    layout->getList()->addTrenoList(modello->getTreno(ultimo));
 
+    layout->getList()->addTrenoList(modello->getTreno(modello->numerotreni()-1));
+    //aggiornamento lista view
     layoutAdd->hide();
     delete layoutAdd;
 }
 void MainWindow::slotShowModificaTreno(){
-    Treno* TrenoDaModificare=modello->getTreno(layout->getList()->getIndex());
+    unsigned int indecs=layout->getList()->getIndex();
+    Treno* TrenoDaModificare=modello->getTreno(indecs);
     //capire il tipo di treno
     std::string tipo=TrenoDaModificare->type();
     int x=-1;
@@ -165,7 +170,7 @@ void MainWindow::slotShowModificaTreno(){
         //throw
     }
     //creare ModificaLayout
-    ModificaLayout* layoutMod=new ModificaLayout(this,x);
+    layoutMod=new ModificaLayout(this,x,indecs);
     //estrarre i parametri che mi servono e settarli in ModificaLayout
     layoutMod->setNome(TrenoDaModificare->getNome());
     layoutMod->setCostruttore(TrenoDaModificare->getCostruttore());
@@ -190,9 +195,38 @@ void MainWindow::slotShowModificaTreno(){
         layoutMod->setTecnologia(tmp->getTecnologia());
     }
     //displayarlo il modificalayout
-    //layoutMod->repaint();
     layoutMod->show();
+
     //*ci sono da fare magie con la connect prolly
+}
+void MainWindow::slotModificaTreno(){
+    unsigned int x=layoutMod->getInd();
+    Treno* TrenoDaModificare=modello->getTreno(x);
+    TrenoDaModificare->setNome(layoutMod->getNome());
+    TrenoDaModificare->setCostruttore(layoutMod->getCostruttore());
+    TrenoDaModificare->setSpeed(layoutMod->getSpeed());
+    TrenoDaModificare->setPeso(layoutMod->getPeso());
+
+
+    if(Steam*tmp=dynamic_cast<Steam*>(TrenoDaModificare)){
+        tmp->setEfficenzaSteam(layoutMod->getEfficenzaS());
+        tmp->setCarburanteSteam(layoutMod->getCarburanteS());
+    }if(Electric*tmp=dynamic_cast<Electric*>(TrenoDaModificare)){
+        tmp->setEfficenzaElettrico(layoutMod->getEfficenzaE());
+        tmp->setTrasmissioneElettrico(layoutMod->getTrasmissione());
+    }if(Internal_Combustion*tmp=dynamic_cast<Internal_Combustion*>(TrenoDaModificare)){
+        tmp->setCarburanteIC(layoutMod->getCarburanteIC());
+        tmp->setEfficenzaIC(layoutMod->getEfficenzaIC());
+    }if(Maglev*tmp=dynamic_cast<Maglev*>(TrenoDaModificare)){
+        tmp->setTecnologia(layoutMod->getTecnologia());
+    }if(Bimode*tmp=dynamic_cast<Bimode*>(TrenoDaModificare)){
+        tmp->setMotorePrimario(layoutMod->getPrimario());
+    }
+    //refresh lista
+    refreshList();
+    layout->getList()->setCurrentRow(x);
+    layoutMod->hide();
+    delete layoutMod;
 }
 MainWindow::~MainWindow()
 {

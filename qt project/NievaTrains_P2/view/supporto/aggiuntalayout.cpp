@@ -1,6 +1,6 @@
 #include "aggiuntalayout.h"
 
-AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), efficenzaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), efficenzaIC(new QLineEdit(this)), speed(new QLineEdit(this)),
+AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(new QVBoxLayout(this)),nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), efficenzaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), efficenzaIC(new QLineEdit(this)), speed(new QLineEdit(this)),
     peso(new QLineEdit(this)), carburanteS(new ComboBoxCarburanteS(this)),carburanteIC(new ComboBoxCarburanteIC(this)),
     tecnologia(new ComboBoxTech(this)),primario(new ComboBoxMotorePrimario(this)), trasmissione(new ComboBoxTrasmissione(this)), conferma(new QPushButton(this)), annulla(new QPushButton(this)), tipo(tipoT)
 {
@@ -23,7 +23,6 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLin
     efficenzaS->hide();
     carburanteS->hide();
     //aggiunte
-    QVBoxLayout* layoutPopUp= new QVBoxLayout(this);
     layoutPopUp->addWidget(nome);
     layoutPopUp->addWidget(costruttore);
     layoutPopUp->addWidget(speed);
@@ -68,8 +67,9 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLin
     }
     connect(conferma, SIGNAL(clicked()), p, SLOT(slotInserisciTreno()));
     connect(annulla, SIGNAL(clicked()), this, SLOT(close()));
-    layoutPopUp->addWidget(conferma);
     layoutPopUp->addWidget(annulla);
+    layoutPopUp->addWidget(conferma);
+
 
     setLayout(layoutPopUp);
 }

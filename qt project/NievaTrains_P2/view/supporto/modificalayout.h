@@ -4,8 +4,10 @@
 
 
 class ModificaLayout: public AggiuntaLayout {
+    unsigned int ind;
+    QPushButton* modifica;
 public:
-    ModificaLayout(QWidget *parent = nullptr, unsigned int tipo=0);
+    ModificaLayout(QWidget *parent = nullptr, unsigned int tipo=0, unsigned int ind=0);
 
     void setNome(std::string);
     void setCostruttore(std::string);
@@ -19,6 +21,7 @@ public:
     void setPrimario(std::string);
     void setTrasmissione(std::string);
     void setTecnologia(std::string);
+    unsigned int getInd() const;
 
 };
 

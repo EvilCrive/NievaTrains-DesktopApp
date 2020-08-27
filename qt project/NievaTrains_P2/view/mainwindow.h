@@ -28,11 +28,12 @@ private:
     Model* modello;
     MainLayout* layout;
     AggiuntaLayout *layoutAdd;
+    ModificaLayout *layoutMod;
 
 public:
     MainWindow(Model* m,QWidget *parent = nullptr);
     ~MainWindow();
-
+    void refreshList();
 public slots:
     void slotShowInfoGenerali();
     void slotCarica();
@@ -44,6 +45,7 @@ public slots:
     void slotShowInserimentoTreno();
     void slotInserisciTreno();
     void slotShowModificaTreno();
+    void slotModificaTreno();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();
     void slotImporta();

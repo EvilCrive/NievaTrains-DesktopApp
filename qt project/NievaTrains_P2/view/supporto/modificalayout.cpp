@@ -1,7 +1,11 @@
 #include "modificalayout.h"
-ModificaLayout::ModificaLayout(QWidget *parent, unsigned int tipo): AggiuntaLayout(parent,tipo)
+ModificaLayout::ModificaLayout(QWidget *parent, unsigned int tipo, unsigned int i): AggiuntaLayout(parent,tipo), ind(i), modifica(new QPushButton(this))
 {
+    conferma->hide();
+    modifica->setText("Modifica");
+    layoutPopUp->addWidget(modifica);
 
+    connect(modifica, SIGNAL(clicked()), parent, SLOT(slotModificaTreno()));
 }
 void ModificaLayout::setNome(std::string str){
     nome->setText(QString::fromStdString(str));
@@ -47,45 +51,9 @@ void ModificaLayout::setTecnologia(std::string str){
     if(str=="Eds") tecnologia->setCurrentIndex(0);
     else tecnologia->setCurrentIndex(1);
 }
-/*
-ModificaLayout::ModificaLayout(QWidget *parent, Treno* treno, unsigned int tipo): AggiuntaLayout(parent,tipo)
-{
-    nome->setText(QString::fromStdString(treno->getNome()));
-    costruttore->setText(QString::fromStdString(treno->getCostruttore()));
-    speed->setText(QString::number(treno->getSpeed()));
-    peso->setText(QString::number(treno->getPeso()));
-
-    if(tipo==0){
-        Steam* trenoS=dynamic_cast<Steam*>(treno);
-        efficenzaS->setText(QString::number(trenoS->getEfficenzaSteam()));
-        std::string carburanteSIndex=trenoS->getCarburanteSteam();
-        //carburanteS->setItemData();
-        //carburanteS->setItemData();
-        //carburanteS->setItemData();
-    }else if(tipo==1){
-        Electric* trenoE=dynamic_cast<Electric*>(treno);
-        std::string trasmissioneIndex=trenoE->getTrasmissioneElettrico();
-        efficenzaE->setText(QString::number(trenoE->getEfficenzaElettrico()));
-        trasmissione->hide();
-    }else if(tipo==2){
-        Internal_Combustion* trenoIC=dynamic_cast<Internal_Combustion*>(treno);
-        std::string carburanteICIndex=trenoIC->getCarburanteIC();
-        efficenzaIC->setText(QString::number(trenoIC->getEfficenzaIC()));
-        carburanteIC->hide();
-    }else if(tipo==3){
-        Maglev* trenoM=dynamic_cast<Maglev*>(treno);
-        std::string tecnologiaIndex=trenoM->getTecnologia();
-        tecnologia->hide();
-    }else{
-        Bimode* trenoB=dynamic_cast<Bimode*>(treno);
-        efficenzaE->setText(QString::number(trenoB->getEfficenzaElettrico()));
-        //efficenzaIC->setText(QString::number(trenoB->getEfficenzaIC()));
-        std::string primarioIndex=trenoB->getTrasmissioneElettrico();
-        std::string carburanteICIndex=trenoB->getCarburanteIC();
-        primario->hide();
-    }
+unsigned int ModificaLayout::getInd() const{
+    return ind;
 }
-*/
 
 
 

@@ -18,6 +18,7 @@ class AggiuntaLayout: public QDialog
 {
     Q_OBJECT
 protected:
+    QVBoxLayout* layoutPopUp;
     QLineEdit *nome, *costruttore, *efficenzaS, *efficenzaE, *efficenzaIC, *speed, *peso;
     ComboBoxCarburanteS *carburanteS;
     ComboBoxCarburanteIC *carburanteIC;

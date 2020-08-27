@@ -111,32 +111,36 @@ void MainWindow::slotInsersciTreno(){
     std::string nome=layoutAdd->getNome();
     std::string costruttore=layoutAdd->getCostruttore();
     unsigned int speed=layoutAdd->getSpeed();
-    unsigned int peso=layoutAdd->getPeso(); //da implementare nei costruttori
+    unsigned int peso=layoutAdd->getPeso();
     if(x==0){
         double efficenzaS=layoutAdd->getEfficenzaS();
         std::string carburanteS=layoutAdd->getCarburanteS();
-        modello->addtrain(nome, costruttore, speed, efficenzaS, carburanteS);
+        modello->addtrainSteam(nome, costruttore, peso, speed, efficenzaS, carburanteS);
     }else if(x==1){
         double efficenzaE=layoutAdd->getEfficenzaE();
         std::string trasmissione=layoutAdd->getTrasmissione();
-        modello->addtrain(nome, costruttore, speed, efficenzaE, trasmissione);
+        modello->addtrainElectric(nome, costruttore, peso, speed, trasmissione, efficenzaE);
     }else if(x==2){
         std::string carburanteIC=layoutAdd->getCarburanteIC();
-        modello->addtrain(nome, costruttore, speed, carburanteIC);
+        double efficenzaIC=layoutAdd->getEfficenzaIC();
+        modello->addtrainIC(nome, costruttore, peso, speed, carburanteIC, efficenzaIC);
     }else if(x==3){
         std::string tecnologia=layoutAdd->getTecnologia();
-        modello->addtrain(nome, costruttore, speed, tecnologia);
+        modello->addtrainMaglev(nome, costruttore, peso, speed, tecnologia);
     }else{
+        double efficenzaE=layoutAdd->getEfficenzaE();
+        std::string trasmissione=layoutAdd->getTrasmissione();
+        std::string carburanteIC=layoutAdd->getCarburanteIC();
+        double efficenzaIC=layoutAdd->getEfficenzaIC();
         std::string primario=layoutAdd->getPrimario();
-        modello->addtrain(nome, costruttore, speed, primario);
+        modello->addtrainBimode(nome, costruttore, peso, speed, carburanteIC, efficenzaIC, trasmissione, efficenzaE, primario);
     }
     int ultimo=modello->numerotreni()-1;
     layout->getList()->addTrenoList(modello->getTreno(ultimo));
-    //refresh vari
-    //for(unsigned int i=0; i<modello->numerotreni(); i++)
-     //   layout->getList()->addTrenoList(modello->getTreno(i));
 
-    std::cout<<"post";
+    layoutAdd->hide();
+    delete layoutAdd;
+
 }
 MainWindow::~MainWindow()
 {

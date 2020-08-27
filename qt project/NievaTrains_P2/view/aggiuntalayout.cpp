@@ -1,6 +1,6 @@
 #include "aggiuntalayout.h"
 
-AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), efficenzaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), speed(new QLineEdit(this)),
+AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), efficenzaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), efficenzaIC(new QLineEdit(this)), speed(new QLineEdit(this)),
     peso(new QLineEdit(this)), carburanteS(new ComboBoxCarburanteS(this)),carburanteIC(new ComboBoxCarburanteIC(this)),
     tecnologia(new ComboBoxTech(this)),primario(new ComboBoxMotorePrimario(this)), trasmissione(new ComboBoxTrasmissione(this)), conferma(new QPushButton(this)), annulla(new QPushButton(this)), tipo(tipoT)
 {
@@ -18,9 +18,7 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLin
     trasmissione->hide();
     primario->hide();
     tecnologia->hide();
-    carburanteIC->hide();
-    efficenzaE->hide();
-    trasmissione->hide();
+    efficenzaIC->hide();
     efficenzaS->hide();
     carburanteS->hide();
     //aggiunte
@@ -44,7 +42,9 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLin
         break;
     case 2:
         carburanteIC->show();
+        efficenzaIC->show();
         layoutPopUp->addWidget(carburanteIC);
+        layoutPopUp->addWidget(efficenzaIC);
         break;
     case 3:
         tecnologia->show();
@@ -64,6 +64,7 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), nome(new QLin
         //throwa qualcosa
     }
     connect(conferma, SIGNAL(clicked()), p, SLOT(slotInsersciTreno()));
+    connect(annulla, SIGNAL(clicked()), this, SLOT(close()));
     layoutPopUp->addWidget(conferma);
     layoutPopUp->addWidget(annulla);
 
@@ -83,6 +84,9 @@ double AggiuntaLayout::getEfficenzaS()const{
 
 double AggiuntaLayout::getEfficenzaE()const{
     return efficenzaE->text().toDouble();
+}
+double AggiuntaLayout::getEfficenzaIC()const{
+    return efficenzaIC->text().toDouble();
 }
 unsigned int AggiuntaLayout::getSpeed() const{
     return speed->text().toInt();

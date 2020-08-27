@@ -91,61 +91,61 @@ unsigned int Model::getSpeedT() const
     }
     return toRet;
 }
-void Model::addtrain(std::string nome, std::string builder, unsigned int speed, double efficenza, std::string EnumtipoCarburanteSteam, std::string tipo)
+void Model::addtrainSteam(std::string nome, std::string builder, unsigned int peso, unsigned int speed, double efficenza, std::string EnumtipoCarburanteSteam, std::string tipo)
 {
     if(tipo=="Steam"){
         //creazione oggetto treno_Steam di default
         Treno* t=new Steam();
         //set dei vari campi dati tramite setters
-        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);
+        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);t->setPeso(peso);
         static_cast<Steam*>(t)->setEfficenzaSteam(efficenza);static_cast<Steam*>(t)->setCarburanteSteam(EnumtipoCarburanteSteam);
         //push in coda al contenitore
         push_end(t);
     }
 }
-void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string tecnologia, std::string tipo)
+void Model::addtrainMaglev(std::string nome, std::string builder,unsigned int peso, unsigned int speed, std::string tecnologia, std::string tipo)
 {
     if(tipo=="Maglev"){
         //creazione oggetto treno_Maglev di default
         Treno* t=new Maglev();
         //set dei vari campi dati tramite setters
-        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);
+        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);t->setPeso(peso);
         static_cast<Maglev*>(t)->setTecnologia(tecnologia);
         //push in coda al contenitore
         push_end(t);
     }
 }
-void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string carburante, std::string trasmissione, double efficenza, std::string tipo)
+void Model::addtrainIC(std::string nome, std::string builder,unsigned int peso, unsigned int speed, std::string carburante, double efficenza, std::string tipo)
 {
     if(tipo=="Internal_Combustion"){
         //creazione oggetto treno_Interrnal_Combustion di default
         Treno* t= new Internal_Combustion();
         //set campi dati
-        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);
+        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);t->setPeso(peso);
         dynamic_cast<Internal_Combustion*>(t)->setCarburanteIC(carburante); dynamic_cast<Internal_Combustion*>(t)->setEfficenzaIC(efficenza);
         //push nel contenitore
         push_end(t);
     }
 }
-void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string trasmissione, double efficenza, std::string tipo)
+void Model::addtrainElectric(std::string nome, std::string builder,unsigned int peso, unsigned int speed, std::string trasmissione, double efficenza, std::string tipo)
 {
     if(tipo=="Electric"){
         //creazione oggetto treno_Electric di default
         Treno* t= new Electric();
         //set campi dati
-        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);
+        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);t->setPeso(peso);
         dynamic_cast<Electric*>(t)->setTrasmissioneElettrico(trasmissione);dynamic_cast<Electric*>(t)->setEfficenzaElettrico(efficenza);
         //push nel contenitore
         push_end(t);
     }
 }
-void Model::addtrain(std::string nome, std::string builder, unsigned int speed, std::string carburanteIC, double efficenzaIC, std::string trasmissioneElettrico, double efficenzaElettrico, std::string motorePrimario, std::string tipo)
+void Model::addtrainBimode(std::string nome, std::string builder,unsigned int peso, unsigned int speed, std::string carburanteIC, double efficenzaIC, std::string trasmissioneElettrico, double efficenzaElettrico, std::string motorePrimario, std::string tipo)
 {
     if(tipo=="Bimode"){
         //creazione oggetto treno_Bimode di default
         Treno* t= new Bimode();
         //set campi dati
-        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);
+        t->setNome(nome);t->setSpeed(speed);t->setCostruttore(builder);t->setPeso(peso);
         dynamic_cast<Bimode*>(t)->setCarburanteIC(carburanteIC);dynamic_cast<Bimode*>(t)->setEfficenzaIC(efficenzaIC);
         dynamic_cast<Bimode*>(t)->setTrasmissioneElettrico(trasmissioneElettrico);dynamic_cast<Bimode*>(t)->setEfficenzaElettrico(efficenzaElettrico);dynamic_cast<Bimode*>(t)->setMotorePrimario(motorePrimario);
         //push nel contenitore

@@ -3,8 +3,8 @@
 #include <cctype>
 #include <iostream>
 
-Bimode::Bimode(const std::string & n, const std::string & c, unsigned int s,TtrasmissioneElettrico ttr1, double e1,double e2, Tfuel tf,Tmotore tm1)
-    : Electric(n,c,s,ttr1,e1),Internal_Combustion(n,c,s,e2,tf), motorePrimario(tm1){}
+Bimode::Bimode(const std::string & n, const std::string & c, unsigned int s, unsigned int p,TtrasmissioneElettrico ttr1, double e1,double e2, Tfuel tf,Tmotore tm1)
+    : Electric(n,c,s,p,ttr1,e1),Internal_Combustion(n,c,s,p,e2,tf), motorePrimario(tm1){}
 
 std::string Bimode::getMotorePrimario() const
 {

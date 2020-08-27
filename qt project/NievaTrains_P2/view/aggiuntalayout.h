@@ -18,7 +18,7 @@ class AggiuntaLayout: public QDialog
 {
     Q_OBJECT
 
-    QLineEdit *nome, *costruttore, *efficenzaS, *efficenzaE, *speed, *peso;
+    QLineEdit *nome, *costruttore, *efficenzaS, *efficenzaE, *efficenzaIC, *speed, *peso;
     ComboBoxCarburanteS *carburanteS;
     ComboBoxCarburanteIC *carburanteIC;
     ComboBoxTech *tecnologia;
@@ -32,6 +32,7 @@ public:
     std::string getCostruttore()const;
     double getEfficenzaS()const;
     double getEfficenzaE()const;
+    double getEfficenzaIC()const;
     unsigned int getSpeed() const;
     unsigned int getPeso()const;
     std::string getCarburanteS()const;

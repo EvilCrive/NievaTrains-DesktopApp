@@ -9,7 +9,7 @@ protected:
 private:
     Tfuel carburanteIC;
 public:
-    Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, double =0.7, Tfuel =Tfuel::kerosene);
+    Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int =100, double efficenza=0.5, Tfuel =Tfuel::kerosene);
 
     double getEfficenzaIC() const;
     std::string getCarburanteIC() const;

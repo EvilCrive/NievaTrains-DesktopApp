@@ -3,13 +3,11 @@
 #include <cctype>
 #include <iostream>
 
-Electric::Electric(const std::string & n, const std::string & c, unsigned int s, unsigned int p, TtrasmissioneElettrico ttr, double e): Treno(n,c,s,p), trasmissioneElettrico(ttr), efficenzaElettrico(e){}
+Electric::Electric(const std::string & n, const std::string & c, unsigned int s, unsigned int p, bool ttr, double e): Treno(n,c,s,p), efficenzaElettrico(e), trasmissioneElettrico(ttr){}
 
-std::string Electric::getTrasmissioneElettrico() const
+bool Electric::getTrasmissioneElettrico() const
 {
-    if(trasmissioneElettrico==TtrasmissioneElettrico::third_rail)    return "Third_Rail";
-    if(trasmissioneElettrico==TtrasmissioneElettrico::overhead_lines)    return "Overhead_Lines";
-    return "NoType";
+    return trasmissioneElettrico;
 }
 
 double Electric::getEfficenzaElettrico() const
@@ -17,16 +15,9 @@ double Electric::getEfficenzaElettrico() const
     return efficenzaElettrico;
 }
 
-void Electric::setTrasmissioneElettrico(std::string tr)
+void Electric::setTrasmissioneElettrico(bool tr)
 {
-    std::transform(tr.begin(), tr.end(), tr.begin(),
-        [](unsigned char c){ return std::tolower(c); });
-    //porta la stringa tutta lowercase
-    if(tr=="overhead_lines"){
-        trasmissioneElettrico=TtrasmissioneElettrico::overhead_lines;
-    }else if(tr=="third_rail"){
-        trasmissioneElettrico=TtrasmissioneElettrico::third_rail;
-    }
+    trasmissioneElettrico=tr;
 }
 
 void Electric::setEfficenzaElettrico(double e)
@@ -56,7 +47,10 @@ std::string Electric::treno2string() const{
     std::string s=Treno::treno2string();
     std::string efficenza=std::to_string(getEfficenzaElettrico()*100);
     efficenza.erase ( efficenza.find(".")+3, std::string::npos );
-    s.append("\nTrasmissione: "+getTrasmissioneElettrico()+"\nEfficenza: "+efficenza+"%");
+    std::string tmp="";
+    if(getTrasmissioneElettrico()) tmp="Third Rail";
+    else tmp="Overhead Lines";
+    s.append("\nTrasmissione: "+tmp+"\nEfficenza: "+efficenza+"%");
     return s;
 }
 
@@ -67,8 +61,10 @@ void Electric::serialize(QJsonObject & json)
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
     json["peso"]=static_cast<int>(getPeso());
-
-    json["tipo_trasmissioneElettrico"]=QString::fromStdString(getTrasmissioneElettrico());
+    std::string tmp="";
+    if(getTrasmissioneElettrico()) tmp="Third Rail";
+    else tmp="Overhead Lines";
+    json["tipo_trasmissioneElettrico"]=QString::fromStdString(tmp);
     json["efficenzaElettrico"]=getEfficenzaElettrico();
 }
 /*

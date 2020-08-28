@@ -3,16 +3,14 @@
 #include "model/gerarchia/treno.h"
 
 class Maglev: public Treno {
-protected:
-    enum Ttech {eds, ems};
 private:
-    Ttech tecnologia;
+    bool tecnologia;
 public:
-    Maglev(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int p=100, Ttech =Ttech::eds);
+    Maglev(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int p=100, bool=false);
 
-    std::string getTecnologia() const;
+    bool getTecnologia() const;
 
-    void setTecnologia(std::string);
+    void setTecnologia(bool);
 
     std::string type() const;
     void print() const;

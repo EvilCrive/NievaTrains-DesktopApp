@@ -3,18 +3,17 @@
 #include "model/gerarchia/treno.h"
 
 class Electric: virtual public Treno {
-protected:
-    enum TtrasmissioneElettrico {overhead_lines, third_rail};
-    double efficenzaElettrico;
-private:
-    TtrasmissioneElettrico trasmissioneElettrico;
-public:
-    Electric(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int p=100, TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, double =0.7);
 
-    std::string getTrasmissioneElettrico() const;
+private:
+    double efficenzaElettrico;
+    bool trasmissioneElettrico;
+public:
+    Electric(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int p=100, bool =false, double =0.7);
+
+    bool getTrasmissioneElettrico() const;
     double getEfficenzaElettrico() const;
 
-    void setTrasmissioneElettrico(std::string);
+    void setTrasmissioneElettrico(bool);
     void setEfficenzaElettrico(double);
 
     virtual double carburanteNecessario(unsigned int) const;  //input km da percorrere

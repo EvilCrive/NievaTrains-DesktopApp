@@ -4,12 +4,10 @@
 #include "model/gerarchia/internal_combustion.h"
 
 class Bimode: public Electric, public Internal_Combustion {
-protected:
-    enum Tmotore {electric, internal_combustion, fullhybrid};
 private:
-    Tmotore motorePrimario;
+    bool motorePrimario;
 public:
-    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int =100,TtrasmissioneElettrico =TtrasmissioneElettrico::overhead_lines, double =0.7, double =0.4, Tfuel =Tfuel::kerosene, Tmotore =Tmotore::electric);
+    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int =100,bool =false, double =0.7, double =0.4, Tfuel =Tfuel::kerosene, bool =false);
     std::string getMotorePrimario() const;
 
     void setMotorePrimario(std::string);

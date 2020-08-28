@@ -3,25 +3,16 @@
 #include <cctype>
 #include <iostream>
 
-Maglev::Maglev(const std::string & n, const std::string & c, unsigned int s, unsigned int p, Ttech ttt): Treno(n,c,s,p), tecnologia(ttt){}
+Maglev::Maglev(const std::string & n, const std::string & c, unsigned int s, unsigned int p, bool ttt): Treno(n,c,s,p), tecnologia(ttt){}
 
-std::string Maglev::getTecnologia() const
+bool Maglev::getTecnologia() const
 {
-    if(tecnologia==Ttech::eds)  return "Eds";
-    if(tecnologia==Ttech::ems)  return "Ems";
-    return "NoType";
+    return tecnologia;
 }
 
-void Maglev::setTecnologia(std::string tr)
+void Maglev::setTecnologia(bool tr)
 {
-    std::transform(tr.begin(), tr.end(), tr.begin(),
-        [](unsigned char c){ return std::tolower(c); });
-    //porta la stringa tutta lowercase
-    if(tr=="eds"){
-        tecnologia=Ttech::eds;
-    }else if(tr=="ems"){
-        tecnologia=Ttech::ems;
-    }
+    tecnologia=tr;
 }
 /*
 Maglev *Maglev::clone() const
@@ -43,7 +34,11 @@ void Maglev::print() const
 }
 std::string Maglev::treno2string() const{
     std::string s=Treno::treno2string();
-    s.append("\nTecnologia Maglev: "+getTecnologia());
+    std::string tmp="";
+    if(getTecnologia()) tmp="EDS";
+    else tmp="EMS";
+
+    s.append("\nTecnologia Maglev: "+tmp);
     return s;
 }
 
@@ -54,7 +49,9 @@ void Maglev::serialize(QJsonObject & json)
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
     json["peso"]=static_cast<int>(getPeso());
-
-    json["tipo_tecnologia"]=QString::fromStdString(getTecnologia());
+    std::string tmp="";
+    if(getTecnologia()) tmp="EDS";
+    else tmp="EMS";
+    json["tipo_tecnologia"]=QString::fromStdString(tmp);
 }
 

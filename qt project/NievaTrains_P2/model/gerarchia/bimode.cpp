@@ -4,7 +4,7 @@
 #include <iostream>
 
 Bimode::Bimode(const std::string & n, const std::string & c, unsigned int s, unsigned int p,bool ttr1, double e1,double e2, std::string tf,bool tm1)
-    : Electric(n,c,s,p,ttr1,e1),Internal_Combustion(n,c,s,p,e2,tf), motorePrimario(tm1){}
+    : Treno(n,c,s,p),Electric(n,c,s,p,ttr1,e1),Internal_Combustion(n,c,s,p,e2,tf), motorePrimario(tm1){}
 
 bool Bimode::getMotorePrimario() const
 {

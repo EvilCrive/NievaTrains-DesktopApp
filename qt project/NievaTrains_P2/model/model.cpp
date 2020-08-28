@@ -33,10 +33,11 @@ void Model::print_all() const
 }
 Treno *Model::operator[](unsigned int i) const
 {
-    return list[i];
+    if(i<list.getSize())    return list[i];
+    else    return 0;
 }
 Treno* Model::getTreno(unsigned int i) const{
-    return list[i];
+    return (*this)[i];
 }
 void Model::erase(unsigned int i)
 {
@@ -165,63 +166,71 @@ unsigned int Model::numerotreni() const
 }
 void Model::push_end(Treno *t)
 {
-    list.push(&t);
+    if(t)   list.push(&t);
 }
 
 // INPUT OUTPUT JSON
 
 //lista eccezioni
-void Model::load(std::string path) {
-    try{
-        QFile loadFile(QString::fromStdString(path));
-        if(!loadFile.open(QIODevice::ReadOnly)){
-            //ecccezione
-            throw new NievaException("Errore Caricamento Documento JSON");
-        }
-        QByteArray savedata=loadFile.readAll();
-        loadFile.close();
-        QJsonDocument doc(QJsonDocument::fromJson(savedata));
-        //eccezione
-        if(!doc.isArray())  throw new NievaException("Errore Sintassi Documento JSON:\n\tIl documento JSON deve essere un array di piu' oggetti (unico array JSON)");
-        QJsonArray array(doc.array());
-        clear();
+void Model::load(std::string path) try{
+    std::string errors="";
 
-        NievaException* errorTmp=new NievaException();
-        NievaException* errorFor=new NievaException();
-
-        for(auto it=array.begin(); it!=array.end();it++){
-            QJsonObject object=it->toObject();
-            if(object.contains("type") && object["type"].isString()){
-                try{
-                    //eccezione :da unserialize
-                    Treno* treno=treno->unserialize(object);
-                    if(treno)   push_end(treno);
+    QFile loadFile(QString::fromStdString(path));
+    if(!loadFile.open(QIODevice::ReadOnly)){
+        //ecccezione
+        throw new NievaException("Errore Caricamento Documento JSON");
+    }
+    QByteArray savedata=loadFile.readAll();
+    loadFile.close();
+    QJsonDocument doc(QJsonDocument::fromJson(savedata));
+    //eccezione
+    if(!doc.isArray())  throw new NievaException("Errore Sintassi Documento JSON:\n\tIl documento JSON deve essere un array di piu' oggetti (unico array JSON)");
+    QJsonArray array(doc.array());
+    clear();
+    int count=0;
+    for(auto it=array.begin(); it!=array.end();it++){
+        try {
+            QJsonObject object;
+            if(it->isObject())  object=it->toObject();
+            else    throw new NievaException("Errore Sintassi Documento JSON:\n\tIl documento JSON deve essere un array di piu' oggetti (errore nel trovare oggetto)");
+            if(object.contains("type")){
+                Treno* treno=nullptr;
+                //eccezione :da unserialize
+                try {
+                    treno=treno->unserialize(object);
+                } catch (NievaException* e) {
+                    count++;
+                    if(errors=="")  errors+=e->getMessage();
+                    else    errors+="\n"+e->getMessage();
                 }
-                catch(NievaException* e){errorFor->setMessage(e->getMessage());}
+                if(treno)   push_end(treno);
             }else{
                 //eccezione
-                if(!object.contains("type"))
-                    throw new NievaException("Errore Sintassi Documento JSON:\n\tIl documento JSON deve contenere la variabile type");
-                else    errorTmp->setMessage("Valore illegale su Type");
+                throw new NievaException("Errore Sintassi Documento JSON:\n\tIl documento JSON deve contenere la variabile type");
             }
+        } catch (NievaException* e) {
+            if(errors=="")  errors+=e->getMessage();
+            else    errors+="\n"+e->getMessage();
         }
-
-        //eccezione
-        if(errorTmp->getMessage()!="")  throw errorTmp;
-        if(errorFor->getMessage()!="")  throw errorFor;
-    }catch(NievaException* e){
-        //catcho le eccezioni
-        cout<<e->print();
-        //throw e;
     }
+    //eccezione
+    if(errors!=""){
+        if(errors.find("Errore Sintassi Documento JSON")!=string::npos)   errors+="\nIl file non e' stato caricato";
+        else    errors+="\n\n"+std::to_string(count)+" treni non sono stati caricati";
+        throw new NievaException(errors);
+    }
+
+}catch(NievaException* e){
+    //rithrowo le eccezioni al chiamante(controller)
+    throw e;
 }
 
-void Model::save(std::string path) const
-{
+//lista eccezioni
+void Model::save(std::string path) const try{
     QFile saveFile(QString::fromStdString(path));
     if(!saveFile.open(QIODevice::WriteOnly)){
-        std::cout<<"no";
         //eccezione
+        throw new NievaException("Errore Salvataggio Documento JSON");
     }
     QJsonArray array;
     for(unsigned int i=0; i<numerotreni();i++){
@@ -234,4 +243,8 @@ void Model::save(std::string path) const
     saveFile.write(doc.toJson());
     saveFile.close();
 }
+catch(NievaException* e){
+    throw e;
+}
+
 

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <QFile>
 #include <QFileDialog>
+#include "supporto/nievaexception.h"
 using std::string;
 
 MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this)), layoutAdd(nullptr), layoutMod(nullptr)
@@ -35,6 +36,7 @@ void MainWindow::slotShowInfoGenerali(){
     info->setDimensioni(300,250);
     info->show();
 }
+//lista eccezioni
 void MainWindow::slotCarica(){
     QString file= QFileDialog::getOpenFileName(
                 this,
@@ -45,17 +47,19 @@ void MainWindow::slotCarica(){
     if(file!=""){
     //reset ricerca?
         modello->clear();
-        //flush
-        layout->getList()->clear();
-        modello->load(file.toStdString());
+        //eccezione
+        try{modello->load(file.toStdString());}catch(NievaException* e){QMessageBox* tmp=new QMessageBox();tmp->setText(QString::fromStdString(e->getMessage()));tmp->setWindowTitle("Warning");tmp->show();}
         if(modello->isEmpty()){
-            QMessageBox::warning(this,"Attenzione!","Il file del programma e' vuoto.");
+            QMessageBox::warning(this,"Attenzione!","Il file e' vuoto.");
         }
         else{
             refreshList();
         }
+    }else{
+        QMessageBox* tmp=new QMessageBox();tmp->setText("Seleziona un file.");tmp->setWindowTitle("Warning");tmp->show();
     }
 }
+//lista eccezioni
 void MainWindow::slotSalva(){
     QString file= QFileDialog::getSaveFileName(
                 this,
@@ -65,7 +69,10 @@ void MainWindow::slotSalva(){
                 );
     if(file!=""){
     //reset ricerca?
-        modello->save(file.toStdString());
+        //eccezione
+        try{modello->save(file.toStdString());}catch(NievaException* e){QMessageBox* tmp=new QMessageBox();tmp->setText(QString::fromStdString(e->getMessage()));tmp->setWindowTitle("Warning");tmp->show();}
+    }else{
+        QMessageBox* tmp=new QMessageBox();tmp->setText("Seleziona un file.");tmp->setWindowTitle("Warning");tmp->show();
     }
 }
 
@@ -82,11 +89,10 @@ void MainWindow::slotAutori()
 
 void MainWindow::slotRemoveTreno()
 {
-    std::cout<<"pre";
     unsigned int t=layout->estraiTrenoSelezionato();
     layout->eliminaTreno(t);
     modello->erase(t);
-    std::cout<<"post";
+    refreshList();
 }
 
 void MainWindow::slotShowTreno(){
@@ -96,21 +102,16 @@ void MainWindow::slotShowTreno(){
     layout->stampaDettagliTreno(str);
 }
 void MainWindow::slotFlush(){
-    std::cout<<"pre";
     layout->flushList();
     modello->clear();
-    std::cout<<"post";
 }
 
 void MainWindow::slotShowInserimentoTreno(){
-    std::cout<<"pre";
     int x=layout->getTrenoInserimento();
     layoutAdd=new AggiuntaLayout(this,x);
     layoutAdd->show();
-    std::cout<<"post";
 }
 void MainWindow::slotInserisciTreno(){
-    std::cout<<"pre";
     unsigned int x=layoutAdd->getTipo();
     std::string nome=layoutAdd->getNome();
     std::string costruttore=layoutAdd->getCostruttore();

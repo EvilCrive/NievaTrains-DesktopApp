@@ -84,9 +84,7 @@ void MainLayout::flushList(){
 
 void MainLayout::eliminaTreno(unsigned int t)
 {
-    std::cout<<"pre";
     trainList->erase(t);
-    std::cout<<"Post";
 }
 int MainLayout::getTrenoInserimento() const{
     return selectType->currentIndex();

@@ -6,7 +6,7 @@
         "peso": 40,
         "speed": 100,
         "tipo_carburanteSteam": "Oil",
-        "type": "Steam"
+        "type": 1
     },
     {
         "builder": "Claudio",
@@ -14,7 +14,7 @@
         "peso": 30,
         "speed": 70,
         "tipo_tecnologia": "Ems",
-        "type": "Maglev"
+        "type": 2
     },
     {
         "builder": "Giuseppe",
@@ -32,7 +32,7 @@
         "peso": 60,
         "speed": 39,
         "tipo_trasmissioneElettrico": "Third_Rail",
-        "type": "Electric"
+        "type": 4
     },
     {
         "builder": "Marco",

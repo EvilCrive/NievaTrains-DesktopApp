@@ -12,10 +12,7 @@ double Internal_Combustion::getEfficenzaIC() const
 
 std::string Internal_Combustion::getCarburanteIC() const
 {
-    if(carburanteIC==Tfuel::diesel)   return "Diesel";
-    if(carburanteIC==Tfuel::petrol)   return "Petrol";
-    if(carburanteIC==Tfuel::kerosene) return "Kerosene";
-    return "NoType";
+    return carburanteIC;
 }
 
 
@@ -26,16 +23,7 @@ void Internal_Combustion::setEfficenzaIC(double e)
 
 void Internal_Combustion::setCarburanteIC(std::string tr)
 {
-    std::transform(tr.begin(), tr.end(), tr.begin(),
-        [](unsigned char c){ return std::tolower(c); });
-    //porta la stringa tutta lowercase
-    if(tr=="kerosene"){
-        carburanteIC=Tfuel::kerosene;
-    }else if(tr=="petrol"){
-        carburanteIC=Tfuel::petrol;
-    }else if(tr=="diesel"){
-        carburanteIC=Tfuel::diesel;
-    }
+    carburanteIC=tr;
 }
 
 double Internal_Combustion::carburanteNecessario(unsigned int km) const
@@ -45,7 +33,6 @@ double Internal_Combustion::carburanteNecessario(unsigned int km) const
 
 unsigned int Internal_Combustion::kmPercorribili(unsigned int l) const
 {
-    //return static_cast<unsigned int>(efficenzaFuel*l);
     return static_cast<unsigned int>(efficenzaIC*l);
 }
 
@@ -77,9 +64,3 @@ void Internal_Combustion::serialize(QJsonObject & json)
     json["tipo_carburanteIC"]=QString::fromStdString(getCarburanteIC());
     json["efficenzaIC"]=getEfficenzaIC();
 }
-/*
-Internal_Combustion *Internal_Combustion::clone() const
-{
-    return new Internal_Combustion(*this);
-}
-*/

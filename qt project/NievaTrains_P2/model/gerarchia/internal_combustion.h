@@ -4,12 +4,11 @@
 
 class Internal_Combustion: virtual public Treno {
 protected:
-    enum Tfuel {kerosene, petrol, diesel};
     double efficenzaIC; // km/l
-    Tfuel carburanteIC;
+    std::string carburanteIC;
 
 public:
-    Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int =100, double efficenza=0.5, Tfuel =Tfuel::kerosene);
+    Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int =100, double efficenza=0.5, std::string ="diesel");
 
     double getEfficenzaIC() const;
     std::string getCarburanteIC() const;

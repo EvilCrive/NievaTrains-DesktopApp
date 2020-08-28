@@ -7,7 +7,9 @@ class Bimode: public Electric, public Internal_Combustion {
 private:
     bool motorePrimario;
 public:
-    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int =100,bool =false, double =0.7, double =0.4, Tfuel =Tfuel::kerosene, bool =false);
+
+    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int =100,bool =false, double =0.7, double =0.4, std::string ="diesel", bool =false);
+
     std::string getMotorePrimario() const;
 
     void setMotorePrimario(std::string);

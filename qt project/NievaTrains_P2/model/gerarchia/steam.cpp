@@ -4,7 +4,7 @@
 #include <iostream>
 #include <math.h>
 
-Steam::Steam(const std::string & n, const std::string & c, unsigned int s, unsigned int p, double e, TfuelSteam tfs): Treno(n,c,s,p),efficenzaSteam(e),carburanteSteam(tfs){}
+Steam::Steam(const std::string & n, const std::string & c, unsigned int s, unsigned int p, double e, std::string tfs): Treno(n,c,s,p),efficenzaSteam(e),carburanteSteam(tfs){}
 
 double Steam::getEfficenzaSteam() const
 {
@@ -13,10 +13,7 @@ double Steam::getEfficenzaSteam() const
 
 std::string Steam::getCarburanteSteam() const
 {
-    if(carburanteSteam==TfuelSteam::oil)     return "Oil";
-    if(carburanteSteam==TfuelSteam::coal)    return "Coal";
-    if(carburanteSteam==TfuelSteam::wood)    return "Wood";
-    return "NoType";
+    return carburanteSteam;
 }
 
 void Steam::setEfficenzaSteam(double e)
@@ -26,16 +23,7 @@ void Steam::setEfficenzaSteam(double e)
 
 void Steam::setCarburanteSteam(std::string tr)
 {
-    std::transform(tr.begin(), tr.end(), tr.begin(),
-        [](unsigned char c){ return std::tolower(c); });
-    //porta la stringa tutta lowercase
-    if(tr=="coal"){
-        carburanteSteam=TfuelSteam::coal;
-    }else if(tr=="wood"){
-        carburanteSteam=TfuelSteam::wood;
-    }else if(tr=="oil"){
-        carburanteSteam=TfuelSteam::oil;
-    }
+    carburanteSteam=tr;
 }
 
 double Steam::carburanteNecessario(unsigned int km) const
@@ -52,12 +40,6 @@ std::string Steam::type() const
 {
     return "Steam";
 }
-/*
-Steam *Steam::clone() const
-{
-    return new Steam(*this);
-}
-*/
 
 void Steam::print() const
 {

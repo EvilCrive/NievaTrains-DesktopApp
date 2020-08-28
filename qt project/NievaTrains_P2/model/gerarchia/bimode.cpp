@@ -108,9 +108,4 @@ void Bimode::serialize(QJsonObject & json)
     json["efficenzaIC"]=getEfficenzaIC();
     json["motore_primario"]=QString::fromStdString(getMotorePrimario());
 }
-/*
-Bimode *Bimode::clone() const
-{
-    return new Bimode(*this);
-}
-*/
+

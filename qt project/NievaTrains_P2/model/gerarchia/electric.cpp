@@ -71,9 +71,3 @@ void Electric::serialize(QJsonObject & json)
     json["tipo_trasmissioneElettrico"]=QString::fromStdString(getTrasmissioneElettrico());
     json["efficenzaElettrico"]=getEfficenzaElettrico();
 }
-/*
-Electric *Electric::clone() const
-{
-    return new Electric(*this);
-}
-*/

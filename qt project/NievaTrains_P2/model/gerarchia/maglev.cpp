@@ -23,14 +23,6 @@ void Maglev::setTecnologia(std::string tr)
         tecnologia=Ttech::ems;
     }
 }
-/*
-Maglev *Maglev::clone() const
-{
-    return new Maglev(*this);
-}
-*/
-
-
 std::string Maglev::type() const
 {
     return "Maglev";

@@ -18,9 +18,9 @@ public:
     void setEfficenzaE(double);
     void setCarburanteS(std::string);
     void setCarburanteIC(std::string);
-    void setPrimario(std::string);
-    void setTrasmissione(std::string);
-    void setTecnologia(std::string);
+    void setPrimario(bool);
+    void setTrasmissione(bool);
+    void setTecnologia(bool);
     unsigned int getInd() const;
 
 };

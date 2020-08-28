@@ -119,26 +119,30 @@ void MainWindow::slotInserisciTreno(){
     if(x==0){
         double efficenzaS=layoutAdd->getEfficenzaS();
         std::string carburanteS=layoutAdd->getCarburanteS();
-       // Steam* train=new Steam(nome, costruttore, speed, peso, efficenzaS, carburanteS);
-        modello->addtrainSteam(nome, costruttore, peso, speed, efficenzaS, carburanteS);
+        Steam* train=new Steam(nome, costruttore, speed, peso, efficenzaS, carburanteS);
+        modello->push_end(train);
     }else if(x==1){
         double efficenzaE=layoutAdd->getEfficenzaE();
-        std::string trasmissione=layoutAdd->getTrasmissione();
-        modello->addtrainElectric(nome, costruttore, peso, speed, trasmissione, efficenzaE);
+        bool trasmissione=layoutAdd->getTrasmissione();
+        Electric* train=new Electric(nome, costruttore, peso, speed, trasmissione, efficenzaE);
+        modello->push_end(train);
     }else if(x==2){
         std::string carburanteIC=layoutAdd->getCarburanteIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
-        modello->addtrainIC(nome, costruttore, peso, speed, carburanteIC, efficenzaIC);
+        Internal_Combustion* train= new Internal_Combustion(nome, costruttore, peso, speed, carburanteIC, efficenzaIC);
+        modello->push_end(train);
     }else if(x==3){
-        std::string tecnologia=layoutAdd->getTecnologia();
-        modello->addtrainMaglev(nome, costruttore, peso, speed, tecnologia);
+        bool tecnologia=layoutAdd->getTecnologia();
+        Maglev* train= new Maglev(nome, costruttore, peso, speed, tecnologia);
+        modello->push_end(train);
     }else{
         double efficenzaE=layoutAdd->getEfficenzaE();
-        std::string trasmissione=layoutAdd->getTrasmissione();
+        bool trasmissione=layoutAdd->getTrasmissione();
         std::string carburanteIC=layoutAdd->getCarburanteIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
-        std::string primario=layoutAdd->getPrimario();
-        modello->addtrainBimode(nome, costruttore, peso, speed, carburanteIC, efficenzaIC, trasmissione, efficenzaE, primario);
+        bool primario=layoutAdd->getPrimario();
+        Bimode* train=new Bimode(nome, costruttore, peso, speed, carburanteIC, efficenzaIC, trasmissione, efficenzaE, primario);
+        modello->push_end(train);
     }
 
     layout->getList()->addTrenoList(modello->getTreno(modello->numerotreni()-1));

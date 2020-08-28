@@ -29,26 +29,21 @@ void ModificaLayout::setEfficenzaE(double x){
      efficenzaE->setText(QString::number(x));
 }
 void ModificaLayout::setCarburanteS(std::string str){
-    if(str=="Coal") carburanteS->setCurrentIndex(0);
-    else if(str=="Wood") carburanteS->setCurrentIndex(1);
-    else carburanteS->setCurrentIndex(2);
+    carburanteS->setText(QString::fromStdString(str));
 }
 void ModificaLayout::setCarburanteIC(std::string str){
-    if(str=="Kerosene") carburanteIC->setCurrentIndex(0);
-    else if(str=="Petrol") carburanteIC->setCurrentIndex(1);
-    else carburanteIC->setCurrentIndex(2);
+    carburanteIC->setText(QString::fromStdString(str));
 }
-void ModificaLayout::setPrimario(std::string str){
-    if(str=="Electric") primario->setCurrentIndex(0);
-    else if(str=="Internal_Combustion") primario->setCurrentIndex(1);
-    else primario->setCurrentIndex(2);
+void ModificaLayout::setPrimario(bool x){
+    if(x==false) primario->setCurrentIndex(0);
+    else primario->setCurrentIndex(1);
 }
-void ModificaLayout::setTrasmissione(std::string str){
-    if(str=="Overhead_Lines") trasmissione->setCurrentIndex(0);
+void ModificaLayout::setTrasmissione(bool x){
+    if(x==false) trasmissione->setCurrentIndex(0);
     else trasmissione->setCurrentIndex(1);//
 }
-void ModificaLayout::setTecnologia(std::string str){
-    if(str=="Eds") tecnologia->setCurrentIndex(0);
+void ModificaLayout::setTecnologia(bool x){
+    if(x==false) tecnologia->setCurrentIndex(0);
     else tecnologia->setCurrentIndex(1);
 }
 unsigned int ModificaLayout::getInd() const{

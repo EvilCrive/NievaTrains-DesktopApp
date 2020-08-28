@@ -1,7 +1,7 @@
 #include "aggiuntalayout.h"
 
 AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(new QVBoxLayout(this)),nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), efficenzaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), efficenzaIC(new QLineEdit(this)), speed(new QLineEdit(this)),
-    peso(new QLineEdit(this)), carburanteS(new ComboBoxCarburanteS(this)),carburanteIC(new ComboBoxCarburanteIC(this)),
+    peso(new QLineEdit(this)), carburanteS(new QLineEdit(this)),carburanteIC(new QLineEdit(this)),
     tecnologia(new ComboBoxTech(this)),primario(new ComboBoxMotorePrimario(this)), trasmissione(new ComboBoxTrasmissione(this)), conferma(new QPushButton(this)), annulla(new QPushButton(this)), tipo(tipoT)
 {
     //inizializzazioni
@@ -97,19 +97,19 @@ unsigned int AggiuntaLayout::getPeso()const{
     return peso->text().toInt();
 }
 std::string AggiuntaLayout::getCarburanteS()const{
-    return carburanteS->currentText().toStdString();
+    return carburanteS->text().toStdString();
 }
 std::string AggiuntaLayout::getCarburanteIC()const{
-    return carburanteIC->currentText().toStdString();
+    return carburanteIC->text().toStdString();
 }
-std::string AggiuntaLayout::getTecnologia()const{
-    return tecnologia->currentText().toStdString();
+bool AggiuntaLayout::getTecnologia()const{
+    return tecnologia->currentIndex();
 }
-std::string AggiuntaLayout::getPrimario()const{
-    return primario->currentText().toStdString();
+bool AggiuntaLayout::getPrimario()const{
+    return primario->currentIndex();
 }
-std::string AggiuntaLayout::getTrasmissione()const{
-    return trasmissione->currentText().toStdString();
+bool AggiuntaLayout::getTrasmissione()const{
+    return trasmissione->currentIndex();
 }
 unsigned int AggiuntaLayout::getTipo()const{
     return tipo;

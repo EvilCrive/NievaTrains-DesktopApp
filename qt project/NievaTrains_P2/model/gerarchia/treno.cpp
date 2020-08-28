@@ -117,7 +117,10 @@ Treno *Treno::unserialize(QJsonObject & json){
         else    throw new NievaException("Valore illegale su tipo_tecnologia");
 
         t=new Maglev();
-        static_cast<Maglev*>(t)->setTecnologia(tipotecnologia);
+        bool x=false;
+        if(tipotecnologia=="EDS") x=true;
+        else x=false;
+        static_cast<Maglev*>(t)->setTecnologia(x);
     }
     if(type=="Internal_Combustion"){
         double efficenzaIC;string tipocarburanteIC, tipotrasmissioneIC;
@@ -141,7 +144,10 @@ Treno *Treno::unserialize(QJsonObject & json){
 
         t=new Electric();
         dynamic_cast<Electric*>(t)->setEfficenzaElettrico(efficenzaElettrico);
-        dynamic_cast<Electric*>(t)->setTrasmissioneElettrico(tipotrasmissioneElettrico);
+        bool x=false;
+        if(tipotrasmissioneElettrico=="Overhead Line") x=false;
+        else x=true;
+        dynamic_cast<Electric*>(t)->setTrasmissioneElettrico(x);
     }
     if(type=="Bimode"){
         double efficenzaElettrico,efficenzaIC;string tipotrasmissioneElettrico,tipocarburanteIC,tipotrasmissioneIC,motorePrimario;
@@ -159,10 +165,16 @@ Treno *Treno::unserialize(QJsonObject & json){
 
         t=new Bimode();
         dynamic_cast<Bimode*>(t)->setEfficenzaElettrico(efficenzaElettrico);
-        dynamic_cast<Bimode*>(t)->setTrasmissioneElettrico(tipotrasmissioneElettrico);
+        bool x=false;
+        if(tipotrasmissioneElettrico=="Overhead Line") x=false;
+        else x=true;
+        dynamic_cast<Bimode*>(t)->setTrasmissioneElettrico(x);
         dynamic_cast<Bimode*>(t)->setEfficenzaIC(efficenzaIC);
         dynamic_cast<Bimode*>(t)->setCarburanteIC(tipocarburanteIC);
-        dynamic_cast<Bimode*>(t)->setMotorePrimario(motorePrimario);
+        bool y=false;
+        if(motorePrimario=="Electric") y=true;
+        else y=false;
+        dynamic_cast<Bimode*>(t)->setMotorePrimario(y);
     }
     t->setNome(nome);
     t->setCostruttore(builder);

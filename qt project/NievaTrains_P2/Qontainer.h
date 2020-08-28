@@ -16,6 +16,7 @@ public:
     T& operator [](unsigned int) const;
     void push(T*);
     void pop(unsigned int =0);
+    void switchItem(T*,unsigned int =0);
     unsigned int getSize() const;
     unsigned int getCapacity() const;
     void clear();
@@ -93,6 +94,11 @@ void Qontainer<T>::pop(unsigned int i){
         }
         array[size]=nullptr;
     }
+}
+template <class T>
+void Qontainer<T>::switchItem(T* t, unsigned int i){
+    delete array[i];
+    array[i]=*t;
 }
 
 template<class T>

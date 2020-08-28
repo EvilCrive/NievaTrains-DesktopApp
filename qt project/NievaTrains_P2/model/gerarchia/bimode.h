@@ -10,13 +10,13 @@ public:
 
     Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int =100,bool =false, double =0.7, double =0.4, std::string ="diesel", bool =false);
 
-    std::string getMotorePrimario() const;
+    bool getMotorePrimario() const;
 
-    void setMotorePrimario(std::string);
+    void setMotorePrimario(bool);
     void setCarburanteIC(std::string);
-    void setTrasmissioneIC(std::string);
+    void setTrasmissioneIC(bool);
     void setEfficenzaIC(double);
-    void setTrasmissioneElettrico(std::string);
+    void setTrasmissioneElettrico(bool);
     void setEfficenzaElettrico(double);
 
     double carburanteNecessario(unsigned int) const;  //input km da percorrere

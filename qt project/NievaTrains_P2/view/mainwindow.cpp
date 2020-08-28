@@ -129,7 +129,7 @@ void MainWindow::slotInserisciTreno(){
     }else if(x==2){
         std::string carburanteIC=layoutAdd->getCarburanteIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
-        Internal_Combustion* train= new Internal_Combustion(nome, costruttore, peso, speed, carburanteIC, efficenzaIC);
+        Internal_Combustion* train= new Internal_Combustion(nome, costruttore, peso, speed, efficenzaIC, carburanteIC);
         modello->push_end(train);
     }else if(x==3){
         bool tecnologia=layoutAdd->getTecnologia();
@@ -141,7 +141,7 @@ void MainWindow::slotInserisciTreno(){
         std::string carburanteIC=layoutAdd->getCarburanteIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
         bool primario=layoutAdd->getPrimario();
-        Bimode* train=new Bimode(nome, costruttore, peso, speed, carburanteIC, efficenzaIC, trasmissione, efficenzaE, primario);
+        Bimode* train= new Bimode(nome, costruttore, peso, speed, trasmissione, efficenzaE, efficenzaIC, carburanteIC, primario);
         modello->push_end(train);
     }
 
@@ -154,7 +154,8 @@ void MainWindow::slotShowModificaTreno(){
     unsigned int indecs=layout->getList()->getIndex();
     Treno* TrenoDaModificare=modello->getTreno(indecs);
     std::string tipo=TrenoDaModificare->type();
-
+    /*Vengono usati i dynamic cast dove è necessario poichè non c'è altro modo per estrarre i campi di tipi derivati senza andare a modificare la gerarchia con
+    metodi ad hoc*/
     if(tipo=="Electric"){
         layoutMod=new ModificaLayout(this,1,indecs);
         Electric*tmp=dynamic_cast<Electric*>(TrenoDaModificare);
@@ -199,50 +200,49 @@ void MainWindow::slotShowModificaTreno(){
 }
 void MainWindow::slotModificaTreno(){
     unsigned int x=layoutMod->getInd();
-    /*unsigned int tip=layoutMod->getTipo();
+    unsigned int tip=layoutMod->getTipo();
+    //in base al tipo identificato da tip creo un nuovo treno e lo inserisco nel modello
+    std::string nomeNew=layoutMod->getNome();
+    std::string costruttoreNew=layoutMod->getCostruttore();
+    unsigned int speedNew=layoutMod->getSpeed();
+    unsigned int pesoNew=layoutMod->getPeso();
     if(tip==0){
-
+        double efficenzaSNew=layoutMod->getEfficenzaS();
+        std::string carburanteSNew=layoutMod->getCarburanteS();
+        Steam* trenoDaSostituire=new Steam(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaSNew, carburanteSNew);
+        modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==1){
-
+        double efficenzaENew=layoutMod->getEfficenzaE();
+        bool trasmissioneNew=layoutMod->getTrasmissione();
+        Electric* trenoDaSostituire=new Electric(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew);
+        modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==2){
-
+        std::string carburanteICNew=layoutMod->getCarburanteIC();
+        double efficenzaICNew=layoutMod->getEfficenzaIC();
+        Internal_Combustion* trenoDaSostituire=new Internal_Combustion(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaICNew, carburanteICNew);
+        modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==3){
-
+        bool tecnologiaNew=layoutMod->getTecnologia();
+        Maglev* trenoDaSostituire=new Maglev(nomeNew, costruttoreNew, speedNew, pesoNew, tecnologiaNew);
+        modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==4){
-
+        std::string carburanteICNew=layoutMod->getCarburanteIC();
+        double efficenzaICNew=layoutMod->getEfficenzaIC();
+        double efficenzaENew=layoutMod->getEfficenzaE();
+        bool trasmissioneNew=layoutMod->getTrasmissione();
+        bool primarioNew=layoutMod->getPrimario();
+        Bimode* trenoDaSostituire=new Bimode(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew, efficenzaICNew, carburanteICNew, primarioNew);
+        modello->sostituisci(trenoDaSostituire, x);
     }else{
         //throw
     }
-*/
-    Treno* TrenoDaModificare=modello->getTreno(x);
-    TrenoDaModificare->setNome(layoutMod->getNome());
-    TrenoDaModificare->setCostruttore(layoutMod->getCostruttore());
-    TrenoDaModificare->setSpeed(layoutMod->getSpeed());
-    TrenoDaModificare->setPeso(layoutMod->getPeso());
-
-
-    if(Steam*tmp=dynamic_cast<Steam*>(TrenoDaModificare)){
-        tmp->setEfficenzaSteam(layoutMod->getEfficenzaS());
-        tmp->setCarburanteSteam(layoutMod->getCarburanteS());
-    }if(Electric*tmp=dynamic_cast<Electric*>(TrenoDaModificare)){
-        tmp->setEfficenzaElettrico(layoutMod->getEfficenzaE());
-        tmp->setTrasmissioneElettrico(layoutMod->getTrasmissione());
-    }if(Internal_Combustion*tmp=dynamic_cast<Internal_Combustion*>(TrenoDaModificare)){
-        tmp->setCarburanteIC(layoutMod->getCarburanteIC());
-        tmp->setEfficenzaIC(layoutMod->getEfficenzaIC());
-    }if(Maglev*tmp=dynamic_cast<Maglev*>(TrenoDaModificare)){
-        tmp->setTecnologia(layoutMod->getTecnologia());
-    }if(Bimode*tmp=dynamic_cast<Bimode*>(TrenoDaModificare)){
-        tmp->setMotorePrimario(layoutMod->getPrimario());
-    }
-    //sostituzione treno
-
     //refresh lista
     refreshList();
     layout->getList()->setCurrentRow(x);
     layoutMod->hide();
     delete layoutMod;
 }
+
 MainWindow::~MainWindow()
 {
 }

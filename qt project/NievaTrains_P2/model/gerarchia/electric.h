@@ -4,7 +4,7 @@
 
 class Electric: virtual public Treno {
 
-private:
+protected:
     double efficenzaElettrico;
     bool trasmissioneElettrico;
 public:

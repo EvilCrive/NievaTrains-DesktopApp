@@ -3,29 +3,17 @@
 #include <cctype>
 #include <iostream>
 
-Bimode::Bimode(const std::string & n, const std::string & c, unsigned int s, unsigned int p,TtrasmissioneElettrico ttr1, double e1,double e2, Tfuel tf,Tmotore tm1)
+Bimode::Bimode(const std::string & n, const std::string & c, unsigned int s, unsigned int p,bool ttr1, double e1,double e2, std::string tf,bool tm1)
     : Electric(n,c,s,p,ttr1,e1),Internal_Combustion(n,c,s,p,e2,tf), motorePrimario(tm1){}
 
-std::string Bimode::getMotorePrimario() const
+bool Bimode::getMotorePrimario() const
 {
-    if(motorePrimario==Tmotore::electric)      return "Electric";
-    if(motorePrimario==Tmotore::fullhybrid)     return "FullHybrid";
-    if(motorePrimario==Tmotore::internal_combustion)   return "Internal_Combustion";
-    return "NoType";
+    return motorePrimario;
 }
 
-void Bimode::setMotorePrimario(std::string tr)
+void Bimode::setMotorePrimario(bool tr)
 {
-    std::transform(tr.begin(), tr.end(), tr.begin(),
-        [](unsigned char c){ return std::tolower(c); });
-    //porta la stringa tutta lowercase
-    if(tr=="elettrico"){
-        motorePrimario=Tmotore::electric;
-    }else if(tr=="combustione"){
-        motorePrimario=Tmotore::internal_combustion;
-    }else if(tr=="fullhybrid"){
-        motorePrimario=Tmotore::fullhybrid;
-    }
+    motorePrimario=tr;
 }
 
 void Bimode::setCarburanteIC(std::string t)
@@ -38,7 +26,7 @@ void Bimode::setEfficenzaIC(double e)
     Internal_Combustion::setEfficenzaIC(e);
 }
 
-void Bimode::setTrasmissioneElettrico(std::string t)
+void Bimode::setTrasmissioneElettrico(bool t)
 {
     Electric::setTrasmissioneElettrico(t);
 }
@@ -51,26 +39,20 @@ void Bimode::setEfficenzaElettrico(double e)
 double Bimode::carburanteNecessario(unsigned int km) const
 {
     double result=0;
-    if(motorePrimario==Tmotore::electric){
+    if(motorePrimario)
         result= (((km/efficenzaElettrico)*0.75)+((km/efficenzaIC)*0.25));
-    }else if(motorePrimario==Tmotore::internal_combustion){
+    else
         result= (((km/efficenzaElettrico)*0.25)+((km/efficenzaIC)*0.75));
-    }else{
-        result= (((km/efficenzaElettrico)*0.5)+((km/efficenzaIC)*0.5));
-    }
     return result;
 }
 
 unsigned int Bimode::kmPercorribili(unsigned int f) const
 {
     unsigned int result=0;
-    if(motorePrimario==Tmotore::electric){
+    if(motorePrimario)
         result= static_cast<unsigned int>(efficenzaElettrico*f);
-    }else if(motorePrimario==Tmotore::internal_combustion){
+    else
         result= static_cast<unsigned int>(efficenzaIC*f);
-    }else{
-        result= static_cast<unsigned int>(efficenzaIC*f);
-    }
     return result;
 }
 
@@ -91,7 +73,13 @@ std::string Bimode::treno2string() const{
     efficenzaIC.erase ( efficenzaIC.find(".")+3, std::string::npos );
     std::string efficenzaE=std::to_string(getEfficenzaElettrico()*100);
     efficenzaE.erase ( efficenzaE.find(".")+3, std::string::npos );
-    s.append("\nMotore Primario: "+getMotorePrimario()+"\nTrasmissione Motore Elettrico: "+Electric::getTrasmissioneElettrico()+"\nEfficenza Motore Elettrico: "+efficenzaE+"%"+"\nEfficenza Motore a Combustione Interna: "+efficenzaIC+"%"+"\nCarburante Motore a Combustione Interna: "+getCarburanteIC());
+    std::string tmp="";
+    if(getMotorePrimario()) tmp="Internal Combustion";
+    else tmp="Electric";
+    std::string tmp2="";
+    if(Electric::getTrasmissioneElettrico()) tmp2="Third Rail";
+    else tmp2="Third Rail";
+    s.append("\nMotore Primario: "+tmp+"\nTrasmissione Motore Elettrico: "+tmp2+"\nEfficenza Motore Elettrico: "+efficenzaE+"%"+"\nEfficenza Motore a Combustione Interna: "+efficenzaIC+"%"+"\nCarburante Motore a Combustione Interna: "+getCarburanteIC());
     return s;
 }
 void Bimode::serialize(QJsonObject & json)
@@ -101,11 +89,16 @@ void Bimode::serialize(QJsonObject & json)
     json["builder"]=QString::fromStdString(getCostruttore());
     json["speed"]=static_cast<int>(getSpeed());
     json["peso"]=static_cast<int>(getPeso());
-
-    json["tipo_trasmissioneElettrico"]=QString::fromStdString(getTrasmissioneElettrico());
+    std::string tmp="";
+    if(getMotorePrimario()) tmp="Internal Combustion";
+    else tmp="Electric";
+    std::string tmp2="";
+    if(Electric::getTrasmissioneElettrico()) tmp2="Overhead Line";
+    else tmp2="Third Rail";
+    json["tipo_trasmissioneElettrico"]=QString::fromStdString(tmp2);
     json["efficenzaElettrico"]=getEfficenzaElettrico();
     json["tipo_carburanteIC"]=QString::fromStdString(getCarburanteIC());
     json["efficenzaIC"]=getEfficenzaIC();
-    json["motore_primario"]=QString::fromStdString(getMotorePrimario());
+    json["motore_primario"]=QString::fromStdString(tmp);
 }
 

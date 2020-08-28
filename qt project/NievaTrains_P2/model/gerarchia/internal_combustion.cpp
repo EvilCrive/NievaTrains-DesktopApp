@@ -3,7 +3,7 @@
 #include <cctype>
 #include <iostream>
 
-Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, unsigned int p, double eff, Tfuel tf): Treno(n,c,s,p), efficenzaIC(eff), carburanteIC(tf){}
+Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, unsigned int p, double eff, std::string tf): Treno(n,c,s,p), efficenzaIC(eff), carburanteIC(tf){}
 
 double Internal_Combustion::getEfficenzaIC() const
 {

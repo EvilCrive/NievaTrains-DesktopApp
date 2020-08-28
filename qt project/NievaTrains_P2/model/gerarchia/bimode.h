@@ -3,7 +3,7 @@
 #include "model/gerarchia/electric.h"
 #include "model/gerarchia/internal_combustion.h"
 
-class Bimode: public Electric, Internal_Combustion {
+class Bimode: public Electric, public Internal_Combustion {
 protected:
     enum Tmotore {electric, internal_combustion, fullhybrid};
 private:

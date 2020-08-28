@@ -16,7 +16,7 @@
 #include "supporto/trainlist.h"
 #include "mainlayout.h"
 #include "model/model.h"
-#include "model/gerarchia/treno.h"
+
 #include "supporto/aggiuntalayout.h"
 #include "supporto/modificalayout.h"
 

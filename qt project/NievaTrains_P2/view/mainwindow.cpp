@@ -22,7 +22,6 @@ void MainWindow::refreshList(){
         layout->getList()->addTrenoList(modello->getTreno(i));
 }
 void MainWindow::slotShowInfoGenerali(){
-
     //occhio che magari il puntatore viene cancellato all'uscita ma non l'oggetto
     QString str1= "La quantità di treni presenti nel sistema è:  "+QString::number(modello->numerotreni())+"treni";
     QString str2= "Il peso medio dei treni nel sistema è:  "+QString::number(modello->getPesoM())+"t";
@@ -119,6 +118,7 @@ void MainWindow::slotInserisciTreno(){
     if(x==0){
         double efficenzaS=layoutAdd->getEfficenzaS();
         std::string carburanteS=layoutAdd->getCarburanteS();
+       // Steam* train=new Steam(nome, costruttore, speed, peso, efficenzaS, carburanteS);
         modello->addtrainSteam(nome, costruttore, peso, speed, efficenzaS, carburanteS);
     }else if(x==1){
         double efficenzaE=layoutAdd->getEfficenzaE();
@@ -148,59 +148,67 @@ void MainWindow::slotInserisciTreno(){
 void MainWindow::slotShowModificaTreno(){
     unsigned int indecs=layout->getList()->getIndex();
     Treno* TrenoDaModificare=modello->getTreno(indecs);
-    //capire il tipo di treno
     std::string tipo=TrenoDaModificare->type();
-    int x=-1;
+
     if(tipo=="Electric"){
-        x=1;
+        layoutMod=new ModificaLayout(this,1,indecs);
+        Electric*tmp=dynamic_cast<Electric*>(TrenoDaModificare);
+        layoutMod->setEfficenzaE(tmp->getEfficenzaElettrico());
+        layoutMod->setTrasmissione(tmp->getTrasmissioneElettrico());
     }
     else if(tipo=="Bimode"){
-        x=4;
+        layoutMod=new ModificaLayout(this,4,indecs);
+        Bimode*tmp=dynamic_cast<Bimode*>(TrenoDaModificare);
+        layoutMod->setPrimario(tmp->getMotorePrimario());
+        layoutMod->setEfficenzaIC(tmp->getEfficenzaIC());
+        layoutMod->setCarburanteIC(tmp->getCarburanteIC());
+        layoutMod->setEfficenzaE(tmp->getEfficenzaElettrico());
+        layoutMod->setTrasmissione(tmp->getTrasmissioneElettrico());
     }
     else if(tipo=="Steam"){
-        x=0;
+        layoutMod=new ModificaLayout(this,0,indecs);
+        Steam*tmp=static_cast<Steam*>(TrenoDaModificare);
+        layoutMod->setEfficenzaS(tmp->getEfficenzaSteam());
+        layoutMod->setCarburanteS(tmp->getCarburanteSteam());
     }
     else if (tipo=="Internal_Combustion"){
-        x=2;
+        layoutMod=new ModificaLayout(this,2,indecs);
+        Internal_Combustion*tmp=dynamic_cast<Internal_Combustion*>(TrenoDaModificare);
+        layoutMod->setEfficenzaIC(tmp->getEfficenzaIC());
+        layoutMod->setCarburanteIC(tmp->getCarburanteIC());
     }
     else if (tipo=="Maglev"){
-        x=3;
+        layoutMod=new ModificaLayout(this,3,indecs);
+        Maglev*tmp=static_cast<Maglev*>(TrenoDaModificare);
+        layoutMod->setTecnologia(tmp->getTecnologia());
     }
     else{
         //throw
     }
-    //creare ModificaLayout
-    layoutMod=new ModificaLayout(this,x,indecs);
-    //estrarre i parametri che mi servono e settarli in ModificaLayout
     layoutMod->setNome(TrenoDaModificare->getNome());
     layoutMod->setCostruttore(TrenoDaModificare->getCostruttore());
     layoutMod->setPeso(TrenoDaModificare->getPeso());
     layoutMod->setSpeed(TrenoDaModificare->getSpeed());
-    if(Bimode*tmp=dynamic_cast<Bimode*>(TrenoDaModificare)){
-        layoutMod->setPrimario(tmp->getMotorePrimario());
-    }
-    if(Steam*tmp=dynamic_cast<Steam*>(TrenoDaModificare)){
-        layoutMod->setEfficenzaS(tmp->getEfficenzaSteam());
-        layoutMod->setCarburanteS(tmp->getCarburanteSteam());
-    }
-    if(Internal_Combustion*tmp=dynamic_cast<Internal_Combustion*>(TrenoDaModificare)){
-        layoutMod->setEfficenzaIC(tmp->getEfficenzaIC());
-        layoutMod->setCarburanteIC(tmp->getCarburanteIC());
-    }
-    if(Electric*tmp=dynamic_cast<Electric*>(TrenoDaModificare)){
-        layoutMod->setEfficenzaE(tmp->getEfficenzaElettrico());
-        layoutMod->setTrasmissione(tmp->getTrasmissioneElettrico());
-    }
-    if(Maglev*tmp=dynamic_cast<Maglev*>(TrenoDaModificare)){
-        layoutMod->setTecnologia(tmp->getTecnologia());
-    }
-    //displayarlo il modificalayout
-    layoutMod->show();
 
-    //*ci sono da fare magie con la connect prolly
+    layoutMod->show();
 }
 void MainWindow::slotModificaTreno(){
     unsigned int x=layoutMod->getInd();
+    /*unsigned int tip=layoutMod->getTipo();
+    if(tip==0){
+
+    }else if(tip==1){
+
+    }else if(tip==2){
+
+    }else if(tip==3){
+
+    }else if(tip==4){
+
+    }else{
+        //throw
+    }
+*/
     Treno* TrenoDaModificare=modello->getTreno(x);
     TrenoDaModificare->setNome(layoutMod->getNome());
     TrenoDaModificare->setCostruttore(layoutMod->getCostruttore());
@@ -222,6 +230,8 @@ void MainWindow::slotModificaTreno(){
     }if(Bimode*tmp=dynamic_cast<Bimode*>(TrenoDaModificare)){
         tmp->setMotorePrimario(layoutMod->getPrimario());
     }
+    //sostituzione treno
+
     //refresh lista
     refreshList();
     layout->getList()->setCurrentRow(x);

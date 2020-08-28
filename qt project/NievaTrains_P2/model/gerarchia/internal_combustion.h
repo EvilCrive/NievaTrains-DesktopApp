@@ -6,8 +6,8 @@ class Internal_Combustion: virtual public Treno {
 protected:
     enum Tfuel {kerosene, petrol, diesel};
     double efficenzaIC; // km/l
-private:
     Tfuel carburanteIC;
+
 public:
     Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int =100, double efficenza=0.5, Tfuel =Tfuel::kerosene);
 
@@ -16,7 +16,7 @@ public:
 
     void setEfficenzaIC(double);
     void setCarburanteIC(std::string);
-    void setTrasmissioneIC(std::string);
+
 
     virtual double carburanteNecessario(unsigned int) const; //input km
     virtual unsigned int kmPercorribili(unsigned int) const; //input l fuel

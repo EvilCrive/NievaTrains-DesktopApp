@@ -208,7 +208,7 @@ void Model::searchEfficenzaelettrico(double n, bool b){
             if(b && n<t->getEfficenzaElettrico()){
                 lista_ricerca.erase(*it);
                 --it;
-            }else if(b && n>=t->getEfficenzaElettrico()){
+            }else if(!b && n>=t->getEfficenzaElettrico()){
                 lista_ricerca.erase(*it);
                 --it;
             }

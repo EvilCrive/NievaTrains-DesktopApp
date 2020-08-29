@@ -279,7 +279,69 @@ void MainWindow::slotModificaTreno(){
     layoutMod->hide();
     delete layoutMod;
 }
+void MainWindow::slotCerca(){
+    unsigned int filtro=layout->getFiltro();
+    std::string parametro=layout->getParametroRicerca();
 
+
+/*
+    switch(filtro){
+    case 0:
+        modello->searchNome(parametro);
+    case 1:
+        modello->searchCostruttore(parametro);
+    case 2:
+    if(parametro.substr(0,0)==">"){
+        modello->searchVelocita(std::stoi(parametro.substr(1)), false);
+    }else if(parametro.substr(0,0)=="<"){
+        modello->searchVelocita(std::stoi(parametro=parametro.substr(1)), true);
+    }else
+        modello->searchPeso(std::stoi(parametro), false);
+    case 3:
+    if(parametro.substr(0,0)==">"){
+        modello->searchVelocita(std::stoi(parametro.substr(1)), true);
+    }else if(parametro.substr(0,0)=="<"){
+        modello->searchVelocita(std::stoi(parametro=parametro.substr(1)), false);
+    }else
+        modello->searchPeso(std::stoi(parametro), false);
+    case 4:
+        modello->searchCarburanteVapore(parametro);
+    case 5:
+           if(parametro.substr(0,0)==">"){
+               modello->searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str(), true);
+           }else if(parametro.substr(0,0)=="<"){
+               modello->searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str(), false);
+           }else
+                modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str(), false);
+    case 6:
+        //modello->searchTrasmissioneElettrico(parametro);
+    case 7:
+           if(parametro.substr(0,0)==">"){
+               modello->searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str(), true);
+           }else if(parametro.substr(0,0)=="<"){
+               modello->searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str(), false);
+           }else
+        modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str(), false);
+    case 8:
+           if(parametro.substr(0,0)==">"){
+               modello->searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str(), true);
+           }else if(parametro.substr(0,0)=="<"){
+               modello->searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str(), false);
+           }else
+        modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str(), false);
+    case 9:
+        modello->searchMotoreIC(parametro);
+    case 10:
+        modello->searchMotorePrimario(parametro);
+    case 11:
+        modello->searchTecnologiaMaglev(parametro);
+    }*/
+        //catcho le eccezioni dei cast errati
+        //refresh lista
+}
+void MainWindow::slotResetSearch(){
+    //modello->resettaEntrambeLeListe();
+}
 MainWindow::~MainWindow()
 {
 }

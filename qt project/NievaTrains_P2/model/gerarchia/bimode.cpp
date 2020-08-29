@@ -78,7 +78,7 @@ std::string Bimode::treno2string() const{
     else tmp="Electric";
     std::string tmp2="";
     if(Electric::getTrasmissioneElettrico()) tmp2="Third Rail";
-    else tmp2="Third Rail";
+    else tmp2="Overhead Line";
     s.append("\nMotore Primario: "+tmp+"\nTrasmissione Motore Elettrico: "+tmp2+"\nEfficenza Motore Elettrico: "+efficenzaE+"%"+"\nEfficenza Motore a Combustione Interna: "+efficenzaIC+"%"+"\nCarburante Motore a Combustione Interna: "+getCarburanteIC());
     return s;
 }
@@ -93,8 +93,8 @@ void Bimode::serialize(QJsonObject & json)
     if(getMotorePrimario()) tmp="Internal Combustion";
     else tmp="Electric";
     std::string tmp2="";
-    if(Electric::getTrasmissioneElettrico()) tmp2="Overhead Line";
-    else tmp2="Third Rail";
+    if(Electric::getTrasmissioneElettrico()) tmp2="Third Rail";
+    else tmp2="Overhead Line";
     json["tipo_trasmissioneElettrico"]=QString::fromStdString(tmp2);
     json["efficenzaElettrico"]=getEfficenzaElettrico();
     json["tipo_carburanteIC"]=QString::fromStdString(getCarburanteIC());

@@ -7,6 +7,7 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     text3(new QLabel(this)),
     text4(new QLabel(this)),
     selectType(new ComboType(this)),
+    selectFilter(new ComboFilter(this)),
     infoTrain(new QTextBrowser(this)),
     flush(new QPushButton(this)),
     search(new QPushButton(this)),
@@ -43,8 +44,11 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     left->addWidget(text1);
     left->addWidget(trainList);
     left->addWidget(flush);
+    searchBar->setPlaceholderText("Cerca");
+    searchBar->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
     searchField->addWidget(searchBar);
     searchField->addWidget(search);
+    searchField->addWidget(selectFilter);
     searchField->addWidget(annulla);
     bts2->addWidget(modifica);
     bts2->addWidget(elimina);
@@ -66,6 +70,9 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     connect(elimina, SIGNAL(clicked()),p,SLOT(slotRemoveTreno()));
     connect(inserisci, SIGNAL(clicked()),p,SLOT(slotShowInserimentoTreno()));
     connect(modifica, SIGNAL(clicked()),p,SLOT(slotShowModificaTreno()));
+    connect(search, SIGNAL(clicked()), p, SLOT(slotCerca()));
+    connect(annulla, SIGNAL(clicked()), p, SLOT(slotResetSearch()));
+    //connect ricerca
 }
 int MainLayout::estraiTrenoSelezionato() const{
     return trainList->getIndex();
@@ -88,4 +95,10 @@ void MainLayout::eliminaTreno(unsigned int t)
 }
 int MainLayout::getTrenoInserimento() const{
     return selectType->currentIndex();
+}
+int MainLayout::getFiltro() const{
+    return selectFilter->currentIndex();
+}
+std::string MainLayout::getParametroRicerca() const{
+    return searchBar->text().toStdString();
 }

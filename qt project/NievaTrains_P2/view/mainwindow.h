@@ -47,6 +47,8 @@ public slots:
     void slotInserisciTreno();
     void slotShowModificaTreno();
     void slotModificaTreno();
+    void slotCerca();
+    void slotResetSearch();
 /*    void slotMostraTreno(Treno*);
     void slotEsporta();
     void slotImporta();

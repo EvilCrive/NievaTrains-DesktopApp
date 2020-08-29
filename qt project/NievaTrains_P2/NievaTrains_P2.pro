@@ -32,6 +32,7 @@ SOURCES += \
     view/supporto/comboboxmotoreprimario.cpp \
     view/supporto/comboboxtech.cpp \
     view/supporto/comboboxtrasmissione.cpp \
+    view/supporto/combofilter.cpp \
     view/supporto/combotype.cpp \
     view/supporto/infolayout.cpp \
     view/mainlayout.cpp \
@@ -55,6 +56,7 @@ HEADERS += \
     view/supporto/comboboxmotoreprimario.h \
     view/supporto/comboboxtech.h \
     view/supporto/comboboxtrasmissione.h \
+    view/supporto/combofilter.h \
     view/supporto/combotype.h \
     view/supporto/infolayout.h \
     view/mainlayout.h \

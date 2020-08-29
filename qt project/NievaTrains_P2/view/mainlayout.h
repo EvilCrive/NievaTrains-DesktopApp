@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include "supporto/combotype.h"
+#include "supporto/combofilter.h"
 #include <QListWidget>
 #include <QTextBrowser>
 #include <QPushButton>
@@ -27,6 +28,7 @@ class MainLayout: public QWidget
     QLabel* text4;
 
     ComboType* selectType;
+    ComboFilter* selectFilter;
 
     TrainListWidget *trainList;
 
@@ -44,6 +46,8 @@ public:
     int estraiTrenoSelezionato() const;
     void stampaDettagliTreno(std::string s) const;
     int getTrenoInserimento() const;
+    int getFiltro() const;
+    std::string getParametroRicerca() const;
     void flushList();
     void eliminaTreno(unsigned int);
     MainLayout(QWidget * =nullptr);

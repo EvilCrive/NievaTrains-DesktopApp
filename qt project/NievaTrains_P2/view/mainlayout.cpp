@@ -47,7 +47,7 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     left->addWidget(trainList);
     left->addWidget(flush);
     searchBar->setPlaceholderText("Cerca");
-    searchBar->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
+    searchBar->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z<>= ]{0,50}")));
     searchField->addWidget(searchBar);
     searchField->addWidget(search);
     searchField->addWidget(selectFilter);

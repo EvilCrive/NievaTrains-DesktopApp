@@ -280,6 +280,7 @@ void MainWindow::slotModificaTreno(){
     delete layoutMod;
 }
 void MainWindow::slotCerca(){
+    try{
     unsigned int filtro=layout->getFiltro();
     std::string parametro=layout->getParametroRicerca();
     std::cout<<layout->getFiltro();
@@ -347,6 +348,11 @@ void MainWindow::slotCerca(){
         break;
 
     }
+    }catch(...){    QMessageBox *warning=new QMessageBox();
+        warning->setText("eccezione ricerca");
+        warning->setWindowTitle("Warning");
+        warning->show(); }
+
         //catcho le eccezioni dei cast errati
         //refresh lista
 }

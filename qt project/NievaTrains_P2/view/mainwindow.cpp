@@ -282,12 +282,14 @@ void MainWindow::slotModificaTreno(){
 void MainWindow::slotCerca(){
     unsigned int filtro=layout->getFiltro();
     std::string parametro=layout->getParametroRicerca();
-
+    std::cout<<layout->getFiltro();
     switch(filtro){
     case 0:
         modello->searchNome(parametro);
+        break;
     case 1:
         modello->searchCostruttore(parametro);
+        break;
     case 2:
     if(parametro.substr(0,0)==">")
         modello->searchPeso(std::stoi(parametro.substr(1)), false);
@@ -295,6 +297,7 @@ void MainWindow::slotCerca(){
         modello->searchPeso(std::stoi(parametro=parametro.substr(1)), true);
     else
         modello->searchPeso(std::stoi(parametro), false);
+    break;
     case 3:
     if(parametro.substr(0,0)==">")
         modello->searchVelocita(std::stoi(parametro.substr(1)), true);
@@ -302,8 +305,10 @@ void MainWindow::slotCerca(){
         modello->searchVelocita(std::stoi(parametro=parametro.substr(1)), false);
     else
         modello->searchVelocita(std::stoi(parametro), false);
+    break;
     case 4:
         modello->searchMotoreIC(parametro);
+        break;
     case 5:
            if(parametro.substr(0,0)==">")
                modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), true);
@@ -311,8 +316,10 @@ void MainWindow::slotCerca(){
                modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
            else
                modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
+           break;
     case 6:
         modello->searchTrasmissioneelettrico(parametro);
+        break;
     case 7:
            if(parametro.substr(0,0)==">")
                modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), true);
@@ -320,6 +327,7 @@ void MainWindow::slotCerca(){
                modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
            else
                 modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
+           break;
     case 8:
            if(parametro.substr(0,0)==">")
                modello->searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), true);
@@ -327,12 +335,16 @@ void MainWindow::slotCerca(){
                modello->searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
            else
         modello->searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
+           break;
     case 9:
         modello->searchCarburantevapore(parametro);
+        break;
     case 10:
         modello->searchTecnologiamaglev(parametro);
+        break;
     case 11:
         modello->searchMotoreprimario(parametro);
+        break;
 
     }
         //catcho le eccezioni dei cast errati

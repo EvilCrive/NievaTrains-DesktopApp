@@ -1,4 +1,5 @@
 #include "modificalayout.h"
+#include "nievaexception.h"
 ModificaLayout::ModificaLayout(QWidget *parent, unsigned int tipo, unsigned int i): AggiuntaLayout(parent,tipo), ind(i), modifica(new QPushButton(this))
 {
     conferma->hide();
@@ -20,10 +21,10 @@ void ModificaLayout::setPeso(unsigned int x){
      peso->setText(QString::number(x));
 }
 void ModificaLayout::setEfficenzaIC(double x){
-     efficenzaIC->setText(QString::number(x));
+    efficenzaIC->setText(QString::number(x));
 }
 void ModificaLayout::setEfficenzaS(double x){
-     efficenzaS->setText(QString::number(x));
+    efficenzaS->setText(QString::number(x));
 }
 void ModificaLayout::setEfficenzaE(double x){
      efficenzaE->setText(QString::number(x));

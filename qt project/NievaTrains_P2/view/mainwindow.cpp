@@ -9,6 +9,15 @@
 #include "supporto/nievaexception.h"
 using std::string;
 
+double MainWindow::correctEfficenza(double& e)
+{
+    QMessageBox* error= new QMessageBox();error->setText("Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+    error->setWindowTitle("Warning");
+    error->show();
+    e=0.5;
+    return e;
+}
+
 MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this)), layoutAdd(nullptr), layoutMod(nullptr)
 {
     setWindowTitle("Nieva Trains");
@@ -108,6 +117,7 @@ void MainWindow::slotFlush(){
 void MainWindow::slotShowInserimentoTreno(){
     int x=layout->getTrenoInserimento();
     layoutAdd=new AggiuntaLayout(this,x);
+    layoutAdd->resize(250,350);
     layoutAdd->show();
 }
 void MainWindow::slotInserisciTreno(){
@@ -118,17 +128,23 @@ void MainWindow::slotInserisciTreno(){
     unsigned int peso=layoutAdd->getPeso();
     if(x==0){
         double efficenzaS=layoutAdd->getEfficenzaS();
+        if(efficenzaS<0 || efficenzaS>1)
+            correctEfficenza(efficenzaS);
         std::string carburanteS=layoutAdd->getCarburanteS();
         Steam* train=new Steam(nome, costruttore, speed, peso, efficenzaS, carburanteS);
         modello->push_end(train);
     }else if(x==1){
         double efficenzaE=layoutAdd->getEfficenzaE();
+        if(efficenzaE<0 || efficenzaE>1)
+            correctEfficenza(efficenzaE);
         bool trasmissione=layoutAdd->getTrasmissione();
         Electric* train=new Electric(nome, costruttore, peso, speed, trasmissione, efficenzaE);
         modello->push_end(train);
     }else if(x==2){
         std::string carburanteIC=layoutAdd->getCarburanteIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
+        if(efficenzaIC<0 || efficenzaIC>1)
+            correctEfficenza(efficenzaIC);
         Internal_Combustion* train= new Internal_Combustion(nome, costruttore, peso, speed, efficenzaIC, carburanteIC);
         modello->push_end(train);
     }else if(x==3){
@@ -137,9 +153,13 @@ void MainWindow::slotInserisciTreno(){
         modello->push_end(train);
     }else{
         double efficenzaE=layoutAdd->getEfficenzaE();
+        if(efficenzaE<0 || efficenzaE>1)
+            correctEfficenza(efficenzaE);
         bool trasmissione=layoutAdd->getTrasmissione();
         std::string carburanteIC=layoutAdd->getCarburanteIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
+        if(efficenzaIC<0 || efficenzaIC>1)
+            correctEfficenza(efficenzaIC);
         bool primario=layoutAdd->getPrimario();
         Bimode* train= new Bimode(nome, costruttore, peso, speed, trasmissione, efficenzaE, efficenzaIC, carburanteIC, primario);
         modello->push_end(train);
@@ -150,7 +170,8 @@ void MainWindow::slotInserisciTreno(){
     layoutAdd->hide();
     delete layoutAdd;
 }
-void MainWindow::slotShowModificaTreno(){
+void MainWindow::slotShowModificaTreno() try{
+    if(layout->estraiTrenoSelezionato()==-1)   throw new NievaException("Seleziona un treno esistente da modificare");
     unsigned int indecs=layout->getList()->getIndex();
     Treno* TrenoDaModificare=modello->getTreno(indecs);
     std::string tipo=TrenoDaModificare->type();
@@ -190,13 +211,19 @@ void MainWindow::slotShowModificaTreno(){
     }
     else{
         //throw
+        throw new NievaException("Tipo del treno sbagliato");
     }
     layoutMod->setNome(TrenoDaModificare->getNome());
     layoutMod->setCostruttore(TrenoDaModificare->getCostruttore());
     layoutMod->setPeso(TrenoDaModificare->getPeso());
     layoutMod->setSpeed(TrenoDaModificare->getSpeed());
-
+    layoutMod->resize(250,350);
     layoutMod->show();
+}catch(NievaException* e){
+    QMessageBox *warning=new QMessageBox();
+    warning->setText(QString::fromStdString(e->getMessage()));
+    warning->setWindowTitle("Warning");
+    warning->show();
 }
 void MainWindow::slotModificaTreno(){
     unsigned int x=layoutMod->getInd();
@@ -208,17 +235,23 @@ void MainWindow::slotModificaTreno(){
     unsigned int pesoNew=layoutMod->getPeso();
     if(tip==0){
         double efficenzaSNew=layoutMod->getEfficenzaS();
+        if(efficenzaSNew<0 || efficenzaSNew>1)
+            correctEfficenza(efficenzaSNew);
         std::string carburanteSNew=layoutMod->getCarburanteS();
         Steam* trenoDaSostituire=new Steam(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaSNew, carburanteSNew);
         modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==1){
         double efficenzaENew=layoutMod->getEfficenzaE();
+        if(efficenzaENew<0 || efficenzaENew>1)
+            correctEfficenza(efficenzaENew);
         bool trasmissioneNew=layoutMod->getTrasmissione();
         Electric* trenoDaSostituire=new Electric(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew);
         modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==2){
         std::string carburanteICNew=layoutMod->getCarburanteIC();
         double efficenzaICNew=layoutMod->getEfficenzaIC();
+        if(efficenzaICNew<0 || efficenzaICNew>1)
+            correctEfficenza(efficenzaICNew);
         Internal_Combustion* trenoDaSostituire=new Internal_Combustion(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaICNew, carburanteICNew);
         modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==3){
@@ -229,6 +262,10 @@ void MainWindow::slotModificaTreno(){
         std::string carburanteICNew=layoutMod->getCarburanteIC();
         double efficenzaICNew=layoutMod->getEfficenzaIC();
         double efficenzaENew=layoutMod->getEfficenzaE();
+        if(efficenzaICNew<0 || efficenzaICNew>1)
+            correctEfficenza(efficenzaICNew);
+        if(efficenzaENew<0 || efficenzaENew>1)
+            correctEfficenza(efficenzaENew);
         bool trasmissioneNew=layoutMod->getTrasmissione();
         bool primarioNew=layoutMod->getPrimario();
         Bimode* trenoDaSostituire=new Bimode(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew, efficenzaICNew, carburanteICNew, primarioNew);

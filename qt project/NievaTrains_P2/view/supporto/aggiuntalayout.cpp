@@ -14,6 +14,8 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
     efficenzaIC->setText("Efficenza motore a combustione interna");
     speed->setText("Velocità massima");
     peso->setText("Peso");
+    carburanteS->setText("Carburante steam");
+    carburanteIC->setText("Carburante motore a combustione interna");
     carburanteIC->hide();
     efficenzaE->hide();
     trasmissione->hide();
@@ -69,7 +71,6 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
     connect(annulla, SIGNAL(clicked()), this, SLOT(close()));
     layoutPopUp->addWidget(annulla);
     layoutPopUp->addWidget(conferma);
-
 
     setLayout(layoutPopUp);
 }

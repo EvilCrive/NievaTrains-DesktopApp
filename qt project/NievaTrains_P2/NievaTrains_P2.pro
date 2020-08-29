@@ -28,19 +28,18 @@ SOURCES += \
     model/gerarchia/maglev.cpp \
     model/gerarchia/steam.cpp \
     model/gerarchia/treno.cpp \
-    view/supporto/aggiuntalayout.cpp \
+    view/aggiuntalayout.cpp \
     view/supporto/comboboxmotoreprimario.cpp \
     view/supporto/comboboxtech.cpp \
     view/supporto/comboboxtrasmissione.cpp \
     view/supporto/combofilter.cpp \
     view/supporto/combotype.cpp \
-    view/supporto/infolayout.cpp \
+    view/infolayout.cpp \
     view/mainlayout.cpp \
     view/mainwindow.cpp \
     view/menubartrain.cpp \
     view/supporto/nievaexception.cpp \
-    view/supporto/modificalayout.cpp \
-    view/supporto/ricercalayout.cpp \
+    view/modificalayout.cpp \
     view/supporto/trainlist.cpp
 
 HEADERS += \
@@ -52,19 +51,18 @@ HEADERS += \
     model/gerarchia/maglev.h \
     model/gerarchia/steam.h \
     model/gerarchia/treno.h \
-    view/supporto/aggiuntalayout.h \
+    view/aggiuntalayout.h \
     view/supporto/comboboxmotoreprimario.h \
     view/supporto/comboboxtech.h \
     view/supporto/comboboxtrasmissione.h \
     view/supporto/combofilter.h \
     view/supporto/combotype.h \
-    view/supporto/infolayout.h \
+    view/infolayout.h \
     view/mainlayout.h \
     view/mainwindow.h \
     view/menubartrain.h \
     view/supporto/nievaexception.h \
-    view/supporto/modificalayout.h \
-    view/supporto/ricercalayout.h \
+    view/modificalayout.h \
     view/supporto/trainlist.h
 
 # Default rules for deployment.

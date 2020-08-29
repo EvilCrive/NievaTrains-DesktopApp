@@ -12,10 +12,7 @@
 #include <QAction>
 #include <QVBoxLayout>
 #include <QLineEdit>
-#include "menubartrain.h"
 #include "supporto/trainlist.h"
-#include "model/model.h"
-#include "model/gerarchia/treno.h"
 #include <string>
 
 class MainLayout: public QWidget

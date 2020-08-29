@@ -22,7 +22,7 @@
         "nome": "Treno Gamma",
         "peso": 20,
         "speed": 140,
-        "tipo_carburanteIC": "Diesel",
+        "tipo_motoreIC": "Diesel",
         "type": "Internal_Combustion"
     },
     {
@@ -42,7 +42,7 @@
         "nome": "Treno Epsilon",
         "peso": 50,
         "speed": 39,
-        "tipo_carburanteIC": "Diesel",
+        "tipo_motoreIC": "Diesel",
         "tipo_trasmissioneElettrico": "Third_Rail",
         "type": "Bimode"
     }

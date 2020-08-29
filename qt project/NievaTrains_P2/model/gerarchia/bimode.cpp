@@ -16,9 +16,9 @@ void Bimode::setMotorePrimario(bool tr)
     motorePrimario=tr;
 }
 
-void Bimode::setCarburanteIC(std::string t)
+void Bimode::setMotoreIC(std::string t)
 {
-    Internal_Combustion::setCarburanteIC(t);
+    Internal_Combustion::setMotoreIC(t);
 }
 
 void Bimode::setEfficenzaIC(double e)
@@ -64,7 +64,7 @@ std::string Bimode::type() const
 void Bimode::print() const
 {
     Treno::print();
-    std::cout<<"\nMotore Primario: "<<getMotorePrimario()<<"\nTrasmissione Motore Elettrico: "<<Electric::getTrasmissioneElettrico()<<"\nEfficenza Motore Elettrico: "<<Electric::getEfficenzaElettrico()*100<<"%"<<"\nEfficenza Motore a Combustione Interna: "<<Internal_Combustion::getEfficenzaIC()*100<<"%"<<"\nCarburante Motore a Combustione Interna: "<<getCarburanteIC();
+    std::cout<<"\nMotore Primario: "<<getMotorePrimario()<<"\nTrasmissione Motore Elettrico: "<<Electric::getTrasmissioneElettrico()<<"\nEfficenza Motore Elettrico: "<<Electric::getEfficenzaElettrico()*100<<"%"<<"\nEfficenza Motore a Combustione Interna: "<<Internal_Combustion::getEfficenzaIC()*100<<"%"<<"\nCarburante Motore a Combustione Interna: "<<getMotoreIC();
 
 }
 std::string Bimode::treno2string() const{
@@ -79,7 +79,7 @@ std::string Bimode::treno2string() const{
     std::string tmp2="";
     if(Electric::getTrasmissioneElettrico()) tmp2="Third Rail";
     else tmp2="Overhead Line";
-    s.append("\nMotore Primario: "+tmp+"\nTrasmissione Motore Elettrico: "+tmp2+"\nEfficenza Motore Elettrico: "+efficenzaE+"%"+"\nEfficenza Motore a Combustione Interna: "+efficenzaIC+"%"+"\nCarburante Motore a Combustione Interna: "+getCarburanteIC());
+    s.append("\nMotore Primario: "+tmp+"\nTrasmissione Motore Elettrico: "+tmp2+"\nEfficenza Motore Elettrico: "+efficenzaE+"%"+"\nEfficenza Motore a Combustione Interna: "+efficenzaIC+"%"+"\nCarburante Motore a Combustione Interna: "+getMotoreIC());
     return s;
 }
 void Bimode::serialize(QJsonObject & json)
@@ -97,7 +97,7 @@ void Bimode::serialize(QJsonObject & json)
     else tmp2="Overhead Line";
     json["tipo_trasmissioneElettrico"]=QString::fromStdString(tmp2);
     json["efficenzaElettrico"]=getEfficenzaElettrico();
-    json["tipo_carburanteIC"]=QString::fromStdString(getCarburanteIC());
+    json["tipo_motoreIC"]=QString::fromStdString(getMotoreIC());
     json["efficenzaIC"]=getEfficenzaIC();
     json["motore_primario"]=QString::fromStdString(tmp);
 }

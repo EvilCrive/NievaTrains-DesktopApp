@@ -1,5 +1,5 @@
 #include "modificalayout.h"
-#include "nievaexception.h"
+#include "supporto/nievaexception.h"
 ModificaLayout::ModificaLayout(QWidget *parent, unsigned int tipo, unsigned int i): AggiuntaLayout(parent,tipo), ind(i), modifica(new QPushButton(this))
 {
     conferma->hide();
@@ -32,8 +32,8 @@ void ModificaLayout::setEfficenzaE(double x){
 void ModificaLayout::setCarburanteS(std::string str){
     carburanteS->setText(QString::fromStdString(str));
 }
-void ModificaLayout::setCarburanteIC(std::string str){
-    carburanteIC->setText(QString::fromStdString(str));
+void ModificaLayout::setMotoreIC(std::string str){
+    motoreIC->setText(QString::fromStdString(str));
 }
 void ModificaLayout::setPrimario(bool x){
     if(x==false) primario->setCurrentIndex(0);

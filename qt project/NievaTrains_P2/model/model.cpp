@@ -140,7 +140,7 @@ void Model::searchMotoreIC(std::string n){
     for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
         Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(*it);
         if(t){
-            if(n!=t->getCarburanteIC()){
+            if(n!=t->getMotoreIC()){
                 lista_ricerca.erase(*it);
                 --it;
             }

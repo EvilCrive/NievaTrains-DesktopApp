@@ -1,31 +1,31 @@
 #include "aggiuntalayout.h"
 
 AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(new QVBoxLayout(this)),nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), efficenzaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), efficenzaIC(new QLineEdit(this)), speed(new QLineEdit(this)),
-    peso(new QLineEdit(this)), carburanteS(new QLineEdit(this)),carburanteIC(new QLineEdit(this)),
+    peso(new QLineEdit(this)), carburanteS(new QLineEdit(this)),motoreIC(new QLineEdit(this)),
     tecnologia(new ComboBoxTech(this)),primario(new ComboBoxMotorePrimario(this)), trasmissione(new ComboBoxTrasmissione(this)), conferma(new QPushButton(this)), annulla(new QPushButton(this)), tipo(tipoT)
 {
     //inizializzazioni
     conferma->setText("Confirm");
     annulla->setText("Cancel");
     nome->setPlaceholderText("Nome treno");
-    nome->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
+    nome->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z ]{0,50}")));
     costruttore->setPlaceholderText("Costruttore treno");
     costruttore->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
     efficenzaE->setPlaceholderText("Efficenza motore elettrico");
-    efficenzaE->setValidator(new QRegExpValidator(QRegExp("[0]+[\\.][0-9]{0,5}")));
+    efficenzaE->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
     efficenzaS->setPlaceholderText("Efficenza motore a vapore");
-    efficenzaS->setValidator(new QRegExpValidator(QRegExp("[0]+[\\.][0-9]{0,5}")));
+    efficenzaS->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
     efficenzaIC->setPlaceholderText("Efficenza motore a combustione interna");
-    efficenzaIC->setValidator(new QRegExpValidator(QRegExp("[0]+[\\.][0-9]{0,5}")));
+    efficenzaIC->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
     speed->setPlaceholderText("Velocità massima");
     speed->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
     peso->setPlaceholderText("Peso");
     peso->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
     carburanteS->setPlaceholderText("Carburante steam");
     carburanteS->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
-    carburanteIC->setPlaceholderText("Nome e marca motore a combustione interna");
-    carburanteIC->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
-    carburanteIC->hide();
+    motoreIC->setPlaceholderText("Nome e marca motore a combustione interna");
+    motoreIC->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
+    motoreIC->hide();
     efficenzaE->hide();
     trasmissione->hide();
     primario->hide();
@@ -53,9 +53,9 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
         break;
     case 2:
         efficenzaIC->show();
-        carburanteIC->show();
+        motoreIC->show();
         layoutPopUp->addWidget(efficenzaIC);
-        layoutPopUp->addWidget(carburanteIC);
+        layoutPopUp->addWidget(motoreIC);
         break;
     case 3:
         tecnologia->show();
@@ -64,12 +64,12 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
     case 4:
         efficenzaE->show();
         efficenzaIC->show();
-        carburanteIC->show();
+        motoreIC->show();
         trasmissione->show();
         primario->show();
         layoutPopUp->addWidget(efficenzaE);
         layoutPopUp->addWidget(efficenzaIC);
-        layoutPopUp->addWidget(carburanteIC);
+        layoutPopUp->addWidget(motoreIC);
         layoutPopUp->addWidget(trasmissione);
         layoutPopUp->addWidget(primario);
         break;
@@ -109,8 +109,8 @@ unsigned int AggiuntaLayout::getPeso()const{
 std::string AggiuntaLayout::getCarburanteS()const{
     return carburanteS->text().toStdString();
 }
-std::string AggiuntaLayout::getCarburanteIC()const{
-    return carburanteIC->text().toStdString();
+std::string AggiuntaLayout::getMotoreIC()const{
+    return motoreIC->text().toStdString();
 }
 bool AggiuntaLayout::getTecnologia()const{
     return tecnologia->currentIndex();

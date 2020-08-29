@@ -17,7 +17,7 @@ public:
     void setEfficenzaS(double);
     void setEfficenzaE(double);
     void setCarburanteS(std::string);
-    void setCarburanteIC(std::string);
+    void setMotoreIC(std::string);
     void setPrimario(bool);
     void setTrasmissione(bool);
     void setTecnologia(bool);

@@ -7,9 +7,9 @@
 #include <QStringList>
 #include <QPushButton>
 #include <string>
-#include "comboboxmotoreprimario.h"
-#include "comboboxtech.h"
-#include "comboboxtrasmissione.h"
+#include "supporto/comboboxmotoreprimario.h"
+#include "supporto/comboboxtech.h"
+#include "supporto/comboboxtrasmissione.h"
 
 
 class AggiuntaLayout: public QDialog
@@ -17,7 +17,7 @@ class AggiuntaLayout: public QDialog
     Q_OBJECT
 protected:
     QVBoxLayout* layoutPopUp;
-    QLineEdit *nome, *costruttore, *efficenzaS, *efficenzaE, *efficenzaIC, *speed, *peso, *carburanteS, *carburanteIC;
+    QLineEdit *nome, *costruttore, *efficenzaS, *efficenzaE, *efficenzaIC, *speed, *peso, *carburanteS, *motoreIC;
     ComboBoxTech *tecnologia;
     ComboBoxMotorePrimario *primario;
     ComboBoxTrasmissione *trasmissione;
@@ -33,7 +33,7 @@ public:
     unsigned int getSpeed() const;
     unsigned int getPeso()const;
     std::string getCarburanteS()const;
-    std::string getCarburanteIC()const;
+    std::string getMotoreIC()const;
     bool getTecnologia()const;
     bool getPrimario()const;
     bool getTrasmissione()const;

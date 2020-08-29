@@ -13,7 +13,7 @@ public:
     bool getMotorePrimario() const;
 
     void setMotorePrimario(bool);
-    void setCarburanteIC(std::string);
+    void setMotoreIC(std::string);
     void setTrasmissioneIC(bool);
     void setEfficenzaIC(double);
     void setTrasmissioneElettrico(bool);

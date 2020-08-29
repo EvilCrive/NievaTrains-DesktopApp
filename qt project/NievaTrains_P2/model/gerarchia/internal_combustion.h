@@ -5,16 +5,16 @@
 class Internal_Combustion: virtual public Treno {
 protected:
     double efficenzaIC; // km/l
-    std::string carburanteIC;
+    std::string motoreIC;
 
 public:
     Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int =100, double efficenza=0.5, std::string ="diesel");
 
     double getEfficenzaIC() const;
-    std::string getCarburanteIC() const;
+    std::string getMotoreIC() const;
 
     void setEfficenzaIC(double);
-    void setCarburanteIC(std::string);
+    void setMotoreIC(std::string);
 
 
     virtual double carburanteNecessario(unsigned int) const; //input km

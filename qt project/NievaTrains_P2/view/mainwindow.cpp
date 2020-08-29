@@ -2,7 +2,7 @@
 #include "supporto/combotype.h"
 #include <QMessageBox>
 #include <QString>
-#include "supporto/infolayout.h"
+#include "infolayout.h"
 #include <iostream>
 #include <QFile>
 #include <QFileDialog>
@@ -141,11 +141,11 @@ void MainWindow::slotInserisciTreno(){
         Electric* train=new Electric(nome, costruttore, peso, speed, trasmissione, efficenzaE);
         modello->push_end(train);
     }else if(x==2){
-        std::string carburanteIC=layoutAdd->getCarburanteIC();
+        std::string motoreIC=layoutAdd->getMotoreIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
         if(efficenzaIC<0 || efficenzaIC>1)
             correctEfficenza(efficenzaIC);
-        Internal_Combustion* train= new Internal_Combustion(nome, costruttore, peso, speed, efficenzaIC, carburanteIC);
+        Internal_Combustion* train= new Internal_Combustion(nome, costruttore, peso, speed, efficenzaIC, motoreIC);
         modello->push_end(train);
     }else if(x==3){
         bool tecnologia=layoutAdd->getTecnologia();
@@ -156,12 +156,12 @@ void MainWindow::slotInserisciTreno(){
         if(efficenzaE<0 || efficenzaE>1)
             correctEfficenza(efficenzaE);
         bool trasmissione=layoutAdd->getTrasmissione();
-        std::string carburanteIC=layoutAdd->getCarburanteIC();
+        std::string motoreIC=layoutAdd->getMotoreIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
         if(efficenzaIC<0 || efficenzaIC>1)
             correctEfficenza(efficenzaIC);
         bool primario=layoutAdd->getPrimario();
-        Bimode* train= new Bimode(nome, costruttore, peso, speed, trasmissione, efficenzaE, efficenzaIC, carburanteIC, primario);
+        Bimode* train= new Bimode(nome, costruttore, peso, speed, trasmissione, efficenzaE, efficenzaIC, motoreIC, primario);
         modello->push_end(train);
     }
 
@@ -188,7 +188,7 @@ void MainWindow::slotShowModificaTreno() try{
         Bimode*tmp=dynamic_cast<Bimode*>(TrenoDaModificare);
         layoutMod->setPrimario(tmp->getMotorePrimario());
         layoutMod->setEfficenzaIC(tmp->getEfficenzaIC());
-        layoutMod->setCarburanteIC(tmp->getCarburanteIC());
+        layoutMod->setMotoreIC(tmp->getMotoreIC());
         layoutMod->setEfficenzaE(tmp->getEfficenzaElettrico());
         layoutMod->setTrasmissione(tmp->getTrasmissioneElettrico());
     }
@@ -202,7 +202,7 @@ void MainWindow::slotShowModificaTreno() try{
         layoutMod=new ModificaLayout(this,2,indecs);
         Internal_Combustion*tmp=dynamic_cast<Internal_Combustion*>(TrenoDaModificare);
         layoutMod->setEfficenzaIC(tmp->getEfficenzaIC());
-        layoutMod->setCarburanteIC(tmp->getCarburanteIC());
+        layoutMod->setMotoreIC(tmp->getMotoreIC());
     }
     else if (tipo=="Maglev"){
         layoutMod=new ModificaLayout(this,3,indecs);
@@ -248,18 +248,18 @@ void MainWindow::slotModificaTreno(){
         Electric* trenoDaSostituire=new Electric(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew);
         modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==2){
-        std::string carburanteICNew=layoutMod->getCarburanteIC();
+        std::string motoreICNew=layoutMod->getMotoreIC();
         double efficenzaICNew=layoutMod->getEfficenzaIC();
         if(efficenzaICNew<0 || efficenzaICNew>1)
             correctEfficenza(efficenzaICNew);
-        Internal_Combustion* trenoDaSostituire=new Internal_Combustion(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaICNew, carburanteICNew);
+        Internal_Combustion* trenoDaSostituire=new Internal_Combustion(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaICNew, motoreICNew);
         modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==3){
         bool tecnologiaNew=layoutMod->getTecnologia();
         Maglev* trenoDaSostituire=new Maglev(nomeNew, costruttoreNew, speedNew, pesoNew, tecnologiaNew);
         modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==4){
-        std::string carburanteICNew=layoutMod->getCarburanteIC();
+        std::string motoreICNew=layoutMod->getMotoreIC();
         double efficenzaICNew=layoutMod->getEfficenzaIC();
         double efficenzaENew=layoutMod->getEfficenzaE();
         if(efficenzaICNew<0 || efficenzaICNew>1)
@@ -268,7 +268,7 @@ void MainWindow::slotModificaTreno(){
             correctEfficenza(efficenzaENew);
         bool trasmissioneNew=layoutMod->getTrasmissione();
         bool primarioNew=layoutMod->getPrimario();
-        Bimode* trenoDaSostituire=new Bimode(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew, efficenzaICNew, carburanteICNew, primarioNew);
+        Bimode* trenoDaSostituire=new Bimode(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew, efficenzaICNew, motoreICNew, primarioNew);
         modello->sostituisci(trenoDaSostituire, x);
     }else{
         //throw

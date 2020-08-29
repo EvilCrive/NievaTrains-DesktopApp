@@ -123,16 +123,16 @@ Treno *Treno::unserialize(QJsonObject & json){
         static_cast<Maglev*>(t)->setTecnologia(x);
     }
     if(type=="Internal_Combustion"){
-        double efficenzaIC;string tipocarburanteIC, tipotrasmissioneIC;
+        double efficenzaIC;string tipomotoreIC, tipotrasmissioneIC;
 
         if(json["efficenzaIC"].isDouble())  efficenzaIC=(json["efficenzaIC"].toDouble());
         else    throw new NievaException("Valore illegale su efficenzaIC");
-        if(json["tipo_carburanteIC"].isString())    tipocarburanteIC=json["tipo_carburanteIC"].toString().toStdString();
-        else    throw new NievaException("Valore illegale su tipo_carburanteIC");
+        if(json["tipo_motoreIC"].isString())    tipomotoreIC=json["tipo_motoreIC"].toString().toStdString();
+        else    throw new NievaException("Valore illegale su tipo_motoreIC");
 
         t=new Internal_Combustion();
         dynamic_cast<Internal_Combustion*>(t)->setEfficenzaIC(efficenzaIC);
-        dynamic_cast<Internal_Combustion*>(t)->setCarburanteIC(tipocarburanteIC);
+        dynamic_cast<Internal_Combustion*>(t)->setMotoreIC(tipomotoreIC);
     }
     if(type=="Electric"){
         double efficenzaElettrico;string tipotrasmissioneElettrico;
@@ -150,7 +150,7 @@ Treno *Treno::unserialize(QJsonObject & json){
         dynamic_cast<Electric*>(t)->setTrasmissioneElettrico(x);
     }
     if(type=="Bimode"){
-        double efficenzaElettrico,efficenzaIC;string tipotrasmissioneElettrico,tipocarburanteIC,tipotrasmissioneIC,motorePrimario;
+        double efficenzaElettrico,efficenzaIC;string tipotrasmissioneElettrico,tipomotoreIC,tipotrasmissioneIC,motorePrimario;
 
         if(json["tipo_trasmissioneElettrico"].isString())   tipotrasmissioneElettrico=json["tipo_trasmissioneElettrico"].toString().toStdString();
         else    throw new NievaException("Valore illegale su tipo_trasmissioneElettrico");
@@ -158,8 +158,8 @@ Treno *Treno::unserialize(QJsonObject & json){
         else    throw new NievaException("Valore illegale su efficenzaElettrico");
         if(json["efficenzaIC"].isDouble())  efficenzaIC=(json["efficenzaIC"].toDouble());
         else    throw new NievaException("Valore illegale su efficenzaIC");
-        if(json["tipo_carburanteIC"].isString())    tipocarburanteIC=json["tipo_carburanteIC"].toString().toStdString();
-        else    throw new NievaException("Valore illegale su tipo_carburanteIC");
+        if(json["tipo_motoreIC"].isString())    tipomotoreIC=json["tipo_motoreIC"].toString().toStdString();
+        else    throw new NievaException("Valore illegale su tipo_motoreIC");
         if(json["motore_primario"].isString())  motorePrimario=json["motore_primario"].toString().toStdString();
         else    throw new NievaException("Valore illegale su motorePrimario");
 
@@ -170,7 +170,7 @@ Treno *Treno::unserialize(QJsonObject & json){
         else x=true;
         dynamic_cast<Bimode*>(t)->setTrasmissioneElettrico(x);
         dynamic_cast<Bimode*>(t)->setEfficenzaIC(efficenzaIC);
-        dynamic_cast<Bimode*>(t)->setCarburanteIC(tipocarburanteIC);
+        dynamic_cast<Bimode*>(t)->setMotoreIC(tipomotoreIC);
         bool y=false;
         if(motorePrimario=="Electric") y=true;
         else y=false;

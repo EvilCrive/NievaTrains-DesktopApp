@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QLabel>
-#include "supporto/combotype.h"
 #include <QListWidget>
 #include <QTextBrowser>
 #include <QPushButton>
@@ -12,13 +11,13 @@
 #include <QAction>
 #include <QVBoxLayout>
 #include <QLineEdit>
+
 #include "menubartrain.h"
 #include "supporto/trainlist.h"
 #include "mainlayout.h"
 #include "model/model.h"
-
-#include "supporto/aggiuntalayout.h"
-#include "supporto/modificalayout.h"
+#include "aggiuntalayout.h"
+#include "modificalayout.h"
 
 class MainWindow : public QWidget
 {
@@ -49,17 +48,5 @@ public slots:
     void slotModificaTreno();
     void slotCerca();
     void slotResetSearch();
-/*    void slotMostraTreno(Treno*);
-    void slotEsporta();
-    void slotImporta();
-
-    void slotModificaTreno(Treno*);
-    void slotShowInserisci();
-    void slotEliminaTreno(Treno*);
-    void slotCerca();
-    void slotAnnullaRicerca();
-
-    //void slotConfermaCreazione(VISTA::getDialogCreazione, VISTA::getTendina);
-    void slotAnnullaCreazione();*/
 };
 #endif // MAINWINDOW_H

@@ -15,15 +15,14 @@ using std::string;
 
 void Model::print(unsigned int i) const
 {
-    int numero=i+1;
-    cout<<"TRENO "<<numero<<": \n";
+    cout<<"Dati "<<": \n";
     list[i]->print();
     cout<<"\n\n\n";
 }
 std::string Model::treno2string(unsigned int i) const{
     int numero=i+1;
     std::string s="TRENO "+ std::to_string(numero)+": \n";
-    s.append(list[i]->treno2string());
+    s.append(lista_ricerca[i]->treno2string());
     s.append("\n\n\n");
     return s;
 }
@@ -39,15 +38,20 @@ Treno *Model::operator[](unsigned int i) const
 Treno* Model::getTreno(unsigned int i) const{
     return (*this)[i];
 }
+/**/
+Treno* Model::getTrenoDisplay(unsigned int i) const{
+    return (*this)[i];
+}
+/**/
 void Model::erase(unsigned int i)
 {
     list.pop(i);
-    lista_ricerca=list;
+    resetRicerca();
 }
 void Model::clear()
 {
     while(list.getSize()>0) erase(0);
-    lista_ricerca=list;
+    resetRicerca();
 }
 
 bool Model::isEmpty() const
@@ -97,7 +101,8 @@ unsigned int Model::getSpeedT() const
     return toRet;
 }
 void Model::sostituisci(Treno* x, unsigned int y){
-    if(x) list.switchItem(&x,y);lista_ricerca=list;
+    if(x) list.switchItem(&x,y);
+
 }
 unsigned int Model::numerotreni() const
 {
@@ -110,7 +115,7 @@ unsigned int Model::numerotreni() const
 void Model::push_end(Treno *t)
 {
     if(t)   list.push(&t);
-    if(!(lista_ricerca==list))  lista_ricerca=list;
+    resetRicerca();
 }
 
 void Model::resetRicerca()

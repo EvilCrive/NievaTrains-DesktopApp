@@ -28,7 +28,6 @@ private:
     MainLayout* layout;
     AggiuntaLayout *layoutAdd;
     ModificaLayout *layoutMod;
-    double correctEfficenza(double&);
 
 public:
     MainWindow(Model* m,QWidget *parent = nullptr);

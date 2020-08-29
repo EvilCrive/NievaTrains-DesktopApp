@@ -22,8 +22,10 @@ public:
     void print_all() const;
     Treno* operator[](unsigned int) const;
     Treno* getTreno(unsigned int) const;
+    Treno* getTrenoDisplay(unsigned int) const;
     void erase(unsigned int =0);
     void clear();
+    void equalizza();
     bool isEmpty() const;
 
     unsigned int getSpeedM() const;

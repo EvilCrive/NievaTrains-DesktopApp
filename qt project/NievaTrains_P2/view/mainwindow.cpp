@@ -9,14 +9,7 @@
 #include "supporto/nievaexception.h"
 using std::string;
 
-double MainWindow::correctEfficenza(double& e)
-{
-    QMessageBox* error= new QMessageBox();error->setText("Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
-    error->setWindowTitle("Warning");
-    error->show();
-    e=0.5;
-    return e;
-}
+
 
 MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new MenuBarTrain(this)), modello(m), layout(new MainLayout(this)), layoutAdd(nullptr), layoutMod(nullptr)
 {
@@ -29,7 +22,7 @@ MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new Men
 void MainWindow::refreshList(){
     layout->getList()->clear();
     for(unsigned int i=0; i<modello->numerotreni(); i++)
-        layout->getList()->addTrenoList(modello->getTreno(i));
+        layout->getList()->addTrenoList(modello->getTreno(i)); //asd123
 }
 void MainWindow::slotShowInfoGenerali(){
     //occhio che magari il puntatore viene cancellato all'uscita ma non l'oggetto
@@ -56,15 +49,18 @@ void MainWindow::slotCarica(){
     //reset ricerca?
         modello->clear();
         //eccezione
-        try{modello->load(file.toStdString());}catch(NievaException* e){QMessageBox* tmp=new QMessageBox();tmp->setText(QString::fromStdString(e->getMessage()));tmp->setWindowTitle("Warning");tmp->show();}
+        try{
+        modello->load(file.toStdString());
+
+        }catch(NievaException* e){QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));}
         if(modello->isEmpty()){
-            QMessageBox::warning(this,"Attenzione!","Il file e' vuoto.");
+            QMessageBox::warning(this,"Nieva Trains","Il file e' vuoto.");
         }
         else{
             refreshList();
         }
     }else{
-        QMessageBox* tmp=new QMessageBox();tmp->setText("Seleziona un file.");tmp->setWindowTitle("Warning");tmp->show();
+        QMessageBox::warning(this,"Nieva Trains","Seleziona un file.");
     }
 }
 //lista eccezioni
@@ -78,9 +74,9 @@ void MainWindow::slotSalva(){
     if(file!=""){
     //reset ricerca?
         //eccezione
-        try{modello->save(file.toStdString());}catch(NievaException* e){QMessageBox* tmp=new QMessageBox();tmp->setText(QString::fromStdString(e->getMessage()));tmp->setWindowTitle("Warning");tmp->show();}
+        try{modello->save(file.toStdString());}catch(NievaException* e){QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));}
     }else{
-        QMessageBox* tmp=new QMessageBox();tmp->setText("Seleziona un file.");tmp->setWindowTitle("Warning");tmp->show();
+        QMessageBox::warning(this,"Nieva Trains","Seleziona un file.");
     }
 }
 
@@ -106,7 +102,7 @@ void MainWindow::slotRemoveTreno()
 void MainWindow::slotShowTreno(){
     string str="";
     if(layout->estraiTrenoSelezionato()!=-1)
-        str=modello->treno2string(layout->estraiTrenoSelezionato());
+        str=modello->treno2string(layout->estraiTrenoSelezionato()); //asd123
     layout->stampaDettagliTreno(str);
 }
 void MainWindow::slotFlush(){
@@ -118,7 +114,7 @@ void MainWindow::slotShowInserimentoTreno(){
     int x=layout->getTrenoInserimento();
     layoutAdd=new AggiuntaLayout(this,x);
     layoutAdd->resize(250,350);
-    layoutAdd->show();
+    layoutAdd->exec();
 }
 void MainWindow::slotInserisciTreno(){
     unsigned int x=layoutAdd->getTipo();
@@ -128,23 +124,29 @@ void MainWindow::slotInserisciTreno(){
     unsigned int peso=layoutAdd->getPeso();
     if(x==0){
         double efficenzaS=layoutAdd->getEfficenzaS();
-        if(efficenzaS<0 || efficenzaS>1)
-            correctEfficenza(efficenzaS);
+        if(efficenzaS<0 || efficenzaS>1){
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaS=0.5;
+        }
         std::string carburanteS=layoutAdd->getCarburanteS();
         Steam* train=new Steam(nome, costruttore, speed, peso, efficenzaS, carburanteS);
         modello->push_end(train);
     }else if(x==1){
         double efficenzaE=layoutAdd->getEfficenzaE();
-        if(efficenzaE<0 || efficenzaE>1)
-            correctEfficenza(efficenzaE);
+        if(efficenzaE<0 || efficenzaE>1){
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaE=0.5;
+        }
         bool trasmissione=layoutAdd->getTrasmissione();
         Electric* train=new Electric(nome, costruttore, peso, speed, trasmissione, efficenzaE);
         modello->push_end(train);
     }else if(x==2){
         std::string motoreIC=layoutAdd->getMotoreIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
-        if(efficenzaIC<0 || efficenzaIC>1)
-            correctEfficenza(efficenzaIC);
+        if(efficenzaIC<0 || efficenzaIC>1){
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaIC=0.5;
+        }
         Internal_Combustion* train= new Internal_Combustion(nome, costruttore, peso, speed, efficenzaIC, motoreIC);
         modello->push_end(train);
     }else if(x==3){
@@ -153,21 +155,25 @@ void MainWindow::slotInserisciTreno(){
         modello->push_end(train);
     }else{
         double efficenzaE=layoutAdd->getEfficenzaE();
-        if(efficenzaE<0 || efficenzaE>1)
-            correctEfficenza(efficenzaE);
+        if(efficenzaE<0 || efficenzaE>1){
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaE=0.5;
+        }
         bool trasmissione=layoutAdd->getTrasmissione();
         std::string motoreIC=layoutAdd->getMotoreIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
-        if(efficenzaIC<0 || efficenzaIC>1)
-            correctEfficenza(efficenzaIC);
+        if(efficenzaIC<0 || efficenzaIC>1){
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaIC=0.5;
+        }
         bool primario=layoutAdd->getPrimario();
         Bimode* train= new Bimode(nome, costruttore, peso, speed, trasmissione, efficenzaE, efficenzaIC, motoreIC, primario);
         modello->push_end(train);
     }
 
-    layout->getList()->addTrenoList(modello->getTreno(modello->numerotreni()-1));
+    layout->getList()->addTrenoList(modello->getTreno(modello->numerotreni()-1)); //asd123
     //aggiornamento lista view
-    layoutAdd->hide();
+    layoutAdd->close();
     delete layoutAdd;
 }
 void MainWindow::slotShowModificaTreno() try{
@@ -218,12 +224,9 @@ void MainWindow::slotShowModificaTreno() try{
     layoutMod->setPeso(TrenoDaModificare->getPeso());
     layoutMod->setSpeed(TrenoDaModificare->getSpeed());
     layoutMod->resize(250,350);
-    layoutMod->show();
+    layoutMod->exec();
 }catch(NievaException* e){
-    QMessageBox *warning=new QMessageBox();
-    warning->setText(QString::fromStdString(e->getMessage()));
-    warning->setWindowTitle("Warning");
-    warning->show();
+    QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));
 }
 void MainWindow::slotModificaTreno(){
     unsigned int x=layoutMod->getInd();
@@ -235,23 +238,29 @@ void MainWindow::slotModificaTreno(){
     unsigned int pesoNew=layoutMod->getPeso();
     if(tip==0){
         double efficenzaSNew=layoutMod->getEfficenzaS();
-        if(efficenzaSNew<0 || efficenzaSNew>1)
-            correctEfficenza(efficenzaSNew);
+        if(efficenzaSNew<0 || efficenzaSNew>1){
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaSNew=0.5;
+        }
         std::string carburanteSNew=layoutMod->getCarburanteS();
         Steam* trenoDaSostituire=new Steam(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaSNew, carburanteSNew);
         modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==1){
         double efficenzaENew=layoutMod->getEfficenzaE();
-        if(efficenzaENew<0 || efficenzaENew>1)
-            correctEfficenza(efficenzaENew);
+        if(efficenzaENew<0 || efficenzaENew>1)    {
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaENew=0.5;
+        }
         bool trasmissioneNew=layoutMod->getTrasmissione();
         Electric* trenoDaSostituire=new Electric(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew);
         modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==2){
         std::string motoreICNew=layoutMod->getMotoreIC();
         double efficenzaICNew=layoutMod->getEfficenzaIC();
-        if(efficenzaICNew<0 || efficenzaICNew>1)
-            correctEfficenza(efficenzaICNew);
+        if(efficenzaICNew<0 || efficenzaICNew>1){
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaICNew=0.5;
+        }
         Internal_Combustion* trenoDaSostituire=new Internal_Combustion(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaICNew, motoreICNew);
         modello->sostituisci(trenoDaSostituire, x);
     }else if(tip==3){
@@ -262,10 +271,14 @@ void MainWindow::slotModificaTreno(){
         std::string motoreICNew=layoutMod->getMotoreIC();
         double efficenzaICNew=layoutMod->getEfficenzaIC();
         double efficenzaENew=layoutMod->getEfficenzaE();
-        if(efficenzaICNew<0 || efficenzaICNew>1)
-            correctEfficenza(efficenzaICNew);
-        if(efficenzaENew<0 || efficenzaENew>1)
-            correctEfficenza(efficenzaENew);
+        if(efficenzaICNew<0 || efficenzaICNew>1){
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaICNew=0.5;
+        }
+        if(efficenzaENew<0 || efficenzaENew>1){
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            efficenzaENew=0.5;
+        }
         bool trasmissioneNew=layoutMod->getTrasmissione();
         bool primarioNew=layoutMod->getPrimario();
         Bimode* trenoDaSostituire=new Bimode(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew, efficenzaICNew, motoreICNew, primarioNew);
@@ -283,7 +296,6 @@ void MainWindow::slotCerca(){
     try{
     unsigned int filtro=layout->getFiltro();
     std::string parametro=layout->getParametroRicerca();
-    std::cout<<layout->getFiltro();
     switch(filtro){
     case 0:
         modello->searchNome(parametro);
@@ -348,10 +360,9 @@ void MainWindow::slotCerca(){
         break;
 
     }
-    }catch(...){    QMessageBox *warning=new QMessageBox();
-        warning->setText("eccezione ricerca");
-        warning->setWindowTitle("Warning");
-        warning->show(); }
+    }catch(...){
+        QMessageBox::warning(this,"Nieva Trains","eccezione ricerca");
+    }
 
         //catcho le eccezioni dei cast errati
         //refresh lista

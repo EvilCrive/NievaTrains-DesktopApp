@@ -42,11 +42,12 @@ Treno* Model::getTreno(unsigned int i) const{
 void Model::erase(unsigned int i)
 {
     list.pop(i);
+    lista_ricerca=list;
 }
 void Model::clear()
 {
-    for(unsigned int i=0; i<list.getSize();i++) erase(0);
-    erase(0);
+    while(list.getSize()>0) erase(0);
+    lista_ricerca=list;
 }
 
 bool Model::isEmpty() const
@@ -96,7 +97,7 @@ unsigned int Model::getSpeedT() const
     return toRet;
 }
 void Model::sostituisci(Treno* x, unsigned int y){
-    if(x) list.switchItem(&x,y);
+    if(x) list.switchItem(&x,y);lista_ricerca=list;
 }
 unsigned int Model::numerotreni() const
 {
@@ -109,10 +110,175 @@ unsigned int Model::numerotreni() const
 void Model::push_end(Treno *t)
 {
     if(t)   list.push(&t);
+    if(!(lista_ricerca==list))  lista_ricerca=list;
+}
+
+void Model::resetRicerca()
+{
+    if(!(lista_ricerca==list))  lista_ricerca=list;
+}
+
+void Model::searchNome(std::string n)
+{
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        if(n!=(*it)->getNome()){
+            lista_ricerca.erase(*it);
+            --it;
+        }
+    }
+}
+void Model::searchCostruttore(std::string n)
+{
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        if(n!=(*it)->getCostruttore()){
+            lista_ricerca.erase(*it);
+            --it;
+        }
+    }
+}
+void Model::searchMotoreIC(std::string n){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(*it);
+        if(t){
+            if(n!=t->getCarburanteIC()){
+                lista_ricerca.erase(*it);
+                --it;
+            }
+        }
+    }
+}
+void Model::searchCarburantevapore(std::string n){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        if((*it)->type()=="Steam"){
+            Steam* t=static_cast<Steam*>(*it);
+            if(n!=t->getCarburanteSteam()){
+                lista_ricerca.erase(*it);
+                --it;
+            }
+        }
+    }
+}
+
+void Model::searchPeso(unsigned int n, bool b){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        if(b && (*it)->getPeso()<n){
+            //maggiore
+            lista_ricerca.erase(*it);
+            --it;
+        }else if(!b && (*it)->getPeso()>=n){
+            //minore
+            lista_ricerca.erase(*it);
+            --it;
+        }
+    }
+}
+void Model::searchVelocita(unsigned int n, bool b){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        if(b && (*it)->getSpeed()<n){
+            //maggiore
+            lista_ricerca.erase(*it);
+            --it;
+        }else if(!b && (*it)->getSpeed()>=n){
+            //minore
+            lista_ricerca.erase(*it);
+            --it;
+        }
+    }
+}
+
+
+void Model::searchEfficenzavapore(double n, bool b){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        if((*it)->type()=="Steam"){
+            Steam* t=static_cast<Steam*>(*it);
+            if(b && n<t->getEfficenzaSteam()){
+                lista_ricerca.erase(*it);
+                --it;
+            }else if(b && n>=t->getEfficenzaSteam()){
+                lista_ricerca.erase(*it);
+                --it;
+            }
+        }
+    }
+}
+void Model::searchEfficenzaelettrico(double n, bool b){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        Electric* t=dynamic_cast<Electric*>(*it);
+        if(t){
+            if(b && n<t->getEfficenzaElettrico()){
+                lista_ricerca.erase(*it);
+                --it;
+            }else if(b && n>=t->getEfficenzaElettrico()){
+                lista_ricerca.erase(*it);
+                --it;
+            }
+        }
+    }
+}
+void Model::searchEfficenzaIC(double n, bool b){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(*it);
+        if(t){
+            if(b && n<t->getEfficenzaIC()){
+                lista_ricerca.erase(*it);
+                --it;
+            }else if(b && n>=t->getEfficenzaIC()){
+                lista_ricerca.erase(*it);
+                --it;
+            }
+        }
+    }
+}
+void Model::searchTrasmissioneelettrico(std::string n){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        Electric* t=dynamic_cast<Electric*>(*it);
+        if(t){
+            bool  test;
+            if(n=="third rail") test=true;
+            else if(n=="overhead lines")    test=false;
+            //eccezione ?
+            else    return;
+            if(test!=t->getTrasmissioneElettrico()){
+                lista_ricerca.erase(*it);
+                --it;
+            }
+        }
+    }
+}
+void Model::searchMotoreprimario(std::string n){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        Bimode* t=dynamic_cast<Bimode*>(*it);
+        if(t){
+            bool test;
+            if(n=="ic") test=true;
+            else if(n=="electric")    test=false;
+            //eccezione ?
+            else    return;
+            if(test!=t->getMotorePrimario()){
+                lista_ricerca.erase(*it);
+                --it;
+            }
+        }
+    }
+}
+void Model::searchTecnologiamaglev(std::string n){
+    for(auto it=lista_ricerca.cbegin();it!=lista_ricerca.cend(); ++it){
+        if((*it)->type()=="Maglev"){
+            Maglev* t=static_cast<Maglev*>(*it);
+            bool test;
+            if(n=="eds") test=true;
+            else if(n=="ems")    test=false;
+            //eccezione ?
+            else return;
+            if(test!=t->getTecnologia()){
+                lista_ricerca.erase(*it);
+                --it;
+            }
+        }
+    }
 }
 
 // INPUT OUTPUT JSON
-
 //lista eccezioni
 void Model::load(std::string path) try{
     std::string errors="";
@@ -188,5 +354,6 @@ void Model::save(std::string path) const try{
 catch(NievaException* e){
     throw e;
 }
+
 
 

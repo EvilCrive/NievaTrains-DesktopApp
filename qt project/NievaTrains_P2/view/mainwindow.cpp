@@ -290,9 +290,9 @@ void MainWindow::slotCerca(){
         modello->searchCostruttore(parametro);
     case 2:
     if(parametro.substr(0,0)==">")
-        modello->searchVelocita(std::stoi(parametro.substr(1)), false);
+        modello->searchPeso(std::stoi(parametro.substr(1)), false);
     else if(parametro.substr(0,0)=="<")
-        modello->searchVelocita(std::stoi(parametro=parametro.substr(1)), true);
+        modello->searchPeso(std::stoi(parametro=parametro.substr(1)), true);
     else
         modello->searchPeso(std::stoi(parametro), false);
     case 3:
@@ -301,17 +301,16 @@ void MainWindow::slotCerca(){
     else if(parametro.substr(0,0)=="<")
         modello->searchVelocita(std::stoi(parametro=parametro.substr(1)), false);
     else
-        modello->searchPeso(std::stoi(parametro), false);
+        modello->searchVelocita(std::stoi(parametro), false);
     case 4:
-        modello->searchCarburantevapore(parametro);
+        modello->searchMotoreIC(parametro);
     case 5:
            if(parametro.substr(0,0)==">")
-
-               modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), true);
+               modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), true);
            else if(parametro.substr(0,0)=="<")
-               modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
+               modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
            else
-                modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
+               modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
     case 6:
         modello->searchTrasmissioneelettrico(parametro);
     case 7:
@@ -320,20 +319,21 @@ void MainWindow::slotCerca(){
            else if(parametro.substr(0,0)=="<")
                modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
            else
-               modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
+                modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
     case 8:
            if(parametro.substr(0,0)==">")
-               modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), true);
+               modello->searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), true);
            else if(parametro.substr(0,0)=="<")
-               modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
+               modello->searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
            else
-        modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
+        modello->searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
     case 9:
-        modello->searchMotoreIC(parametro);
+        modello->searchCarburantevapore(parametro);
     case 10:
-        modello->searchMotoreprimario(parametro);
-    case 11:
         modello->searchTecnologiamaglev(parametro);
+    case 11:
+        modello->searchMotoreprimario(parametro);
+
     }
         //catcho le eccezioni dei cast errati
         //refresh lista

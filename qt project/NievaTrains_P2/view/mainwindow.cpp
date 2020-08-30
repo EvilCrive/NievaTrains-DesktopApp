@@ -106,7 +106,7 @@ void MainWindow::slotRemoveTreno() try
 
 void MainWindow::slotShowTreno(){
     string str="";
-    if(layout->estraiTrenoSelezionato()!=-1)
+    if(layout->estraiTrenoSelezionato()!=-1 || layout->getList()->getItem())
         str=modello->treno2string(layout->getList()->getItem()->getRealIndex());
     layout->stampaDettagliTreno(str);
 }

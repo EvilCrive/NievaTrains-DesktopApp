@@ -16,7 +16,6 @@ TrainListWidgetItem* TrainListWidget::getItem() const
 Treno* TrainListWidget::getItemByIndex(unsigned int x) const
 {
     TrainListWidgetItem* it=static_cast<TrainListWidgetItem*>(item(x));
-    std::cout<<"gettando treni"<<std::endl;
     return it->getTreno();
 }
 bool TrainListWidget::isSelected() const
@@ -39,7 +38,6 @@ void TrainListWidget::clear()
 
 void TrainListWidget::erase(unsigned int x)
 {
-    std::cout<<"popped"<<std::endl;
     delete takeItem(x);
 }
 

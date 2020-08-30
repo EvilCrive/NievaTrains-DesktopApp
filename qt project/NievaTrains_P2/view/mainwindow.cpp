@@ -375,15 +375,22 @@ void MainWindow::slotCerca(){
 void MainWindow::slotResetSearch(){
     refreshList();
 }
-
+using std::cout;
 /*filtri*/
 void MainWindow::searchNome(std::string n)
 {
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
-        if(n!=layout->getList()->getItemByIndex(i)->getNome()){
-            layout->getList()->erase(i);
-            --i; --lun;
+        std::string nome=layout->getList()->getItemByIndex(i)->getNome();
+        transform(nome.begin(), nome.end(), nome.begin(),
+            [](unsigned char c){ return toupper(c); });
+        transform(n.begin(), n.end(), n.begin(),
+            [](unsigned char c){ return toupper(c); });
+        if(n!=nome){
+            if(nome.find(n)==std::string::npos){
+                layout->getList()->erase(i);
+                --i; --lun;
+            }
         }
     }
 }
@@ -391,35 +398,56 @@ void MainWindow::searchCostruttore(std::string n)
 {
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
+        std::string costruttore=layout->getList()->getItemByIndex(i)->getCostruttore();
+        transform(costruttore.begin(), costruttore.end(), costruttore.begin(),
+            [](unsigned char c){ return toupper(c); });
+        transform(n.begin(), n.end(), n.begin(),
+            [](unsigned char c){ return toupper(c); });
         if(n!=layout->getList()->getItemByIndex(i)->getCostruttore()){
-            layout->getList()->erase(i);
-            --i; --lun;
+            if(costruttore.find(n)==std::string::npos){
+                layout->getList()->erase(i);
+                --i; --lun;
+            }
         }
     }
 }
 void MainWindow::searchMotoreIC(std::string n){
-
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
-        Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i));
-        if(n!=t->getMotoreIC()){
-            layout->getList()->erase(i);
-            --i; --lun;
-        }
-        else{
-            layout->getList()->erase(i);
-            --i; --lun;
+        if(dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i))){
+            Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i));
+            std::string motore=t->getMotoreIC();
+            transform(motore.begin(), motore.end(), motore.begin(),
+                [](unsigned char c){ return toupper(c); });
+            transform(n.begin(), n.end(), n.begin(),
+                [](unsigned char c){ return toupper(c); });
+            if(n!=motore){
+                if(motore.find(n)==std::string::npos){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
+            }
+        }else{
+                layout->getList()->erase(i);
+                --i; --lun;
+            }
         }
     }
-}
 void MainWindow::searchCarburantevapore(std::string n){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Steam"){
             Steam* t=static_cast<Steam*>(layout->getList()->getItemByIndex(i));
-            if(n!=t->getCarburanteSteam()){
-                layout->getList()->erase(i);
-                --i; --lun;
+            std::string fuel=t->getCarburanteSteam();
+            transform(fuel.begin(), fuel.end(), fuel.begin(),
+                [](unsigned char c){ return toupper(c); });
+            transform(n.begin(), n.end(), n.begin(),
+                [](unsigned char c){ return toupper(c); });
+            if(n!=fuel){
+                if(fuel.find(n)==std::string::npos){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                };
             }
         }
         else{
@@ -527,13 +555,15 @@ void MainWindow::searchTrasmissioneelettrico(std::string n){
             Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i));
             if(t){
                 bool  test;
+                transform(n.begin(), n.end(), n.begin(),
+                    [](unsigned char c){ return tolower(c); });
                 if(n=="third rail") test=true;
-                else if(n=="overhead lines")    test=false;
+                else if(n=="overhead line")    test=false;
                 //eccezione ?
                 else    return;
                 if(test!=t->getTrasmissioneElettrico()){
-                    layout->getList()->erase(i);
-                    --i; --lun;
+                        layout->getList()->erase(i);
+                        --i; --lun;
                 }
             }
             else{
@@ -549,8 +579,10 @@ void MainWindow::searchMotoreprimario(std::string n){
         if(layout->getList()->getItemByIndex(i)->type()=="Bimode"){
             Bimode* t=dynamic_cast<Bimode*>(layout->getList()->getItemByIndex(i));
             if(t){
+                transform(n.begin(), n.end(), n.begin(),
+                    [](unsigned char c){ return tolower(c); });
                 bool test;
-                if(n=="ic") test=true;
+                if(n=="internal combustion") test=true;
                 else if(n=="electric")    test=false;
                 //eccezione ?
                 else    return;
@@ -572,6 +604,8 @@ void MainWindow::searchTecnologiamaglev(std::string n){
         if(layout->getList()->getItemByIndex(i)->type()=="Maglev"){
             Maglev* t=static_cast<Maglev*>(layout->getList()->getItemByIndex(i));
             bool test;
+            transform(n.begin(), n.end(), n.begin(),
+                [](unsigned char c){ return toupper(c); });
             if(n=="eds") test=true;
             else if(n=="ems")    test=false;
             //eccezione ?

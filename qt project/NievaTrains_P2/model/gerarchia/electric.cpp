@@ -49,7 +49,7 @@ std::string Electric::treno2string() const{
     efficenza.erase ( efficenza.find(".")+3, std::string::npos );
     std::string tmp="";
     if(getTrasmissioneElettrico()) tmp="Third Rail";
-    else tmp="Overhead Lines";
+    else tmp="Overhead Line";
     s.append("\nTrasmissione: "+tmp+"\nEfficenza: "+efficenza+"%");
     return s;
 }

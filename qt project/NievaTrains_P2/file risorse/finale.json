@@ -1,0 +1,140 @@
+[
+    {
+        "builder": "American Locomotive Company",
+        "efficenzaSteam": 0.4,
+        "nome": "Union Pacific FEF Series",
+        "peso": 40,
+        "speed": 100,
+        "tipo_carburanteSteam": "Coal",
+        "type": "Steam"
+    },
+    {
+        "builder": "Railway Technical Research Institute",
+        "nome": "SCMaglev",
+        "peso": 90,
+        "speed": 60,
+        "tipo_tecnologia": "EMS",
+        "type": "Maglev"
+    },
+    {
+        "builder": "Brown, Boveri & Cie",
+        "efficenzaIC": 0.3,
+        "nome": "British Rail 18000",
+        "peso": 30,
+        "speed": 145,
+        "tipo_motoreIC": "FPT Racing 420F3",
+        "type": "Internal_Combustion"
+    },
+    {
+        "builder": "Blazing Vigilant",
+        "efficenzaElettrico": 0.5,
+        "nome": "Blazing Vigilant 1",
+        "peso": 50,
+        "speed": 70,
+        "tipo_trasmissioneElettrico": "Overhead Lines",
+        "type": "Electric"
+    },
+    {
+        "builder": "Bombardier",
+        "efficenzaElettrico": 0.6,
+        "efficenzaIC": 0.2,
+        "motore_primario": "Electric",
+        "nome": "Talent 2",
+        "peso": 70,
+        "speed": 50,
+        "tipo_motoreIC": "Diesel",
+        "tipo_trasmissioneElettrico": "Overhead Line",
+        "type": "Bimode"
+    },
+    {
+        "builder": "Bombardier",
+        "efficenzaElettrico": 0.8,
+        "efficenzaIC": 0.4,
+        "motore_primario": "Electric",
+        "nome": "Electrostar",
+        "peso": 30,
+        "speed": 120,
+        "tipo_motoreIC": "BMW",
+        "tipo_trasmissioneElettrico": "Overhead Line",
+        "type": "Bimode"
+    },
+    {
+        "builder": "English Electric at Vulcan Foundry",
+        "efficenzaIC": 0.3,
+        "nome": "British Rail GT3",
+        "peso": 55,
+        "speed": 87,
+        "tipo_motoreIC": "Fiat",
+        "type": "Internal_Combustion"
+    },
+    {
+        "builder": "A1 Steam Locomotive Trust",
+        "efficenzaSteam": 0,
+        "nome": "Locomotiva A1 Peppercorn 60163 Tornado",
+        "peso": 40,
+        "speed": 80,
+        "tipo_carburanteSteam": "Oil",
+        "type": "Steam"
+    },
+    {
+        "builder": "London Midland and Scottish Railway",
+        "efficenzaSteam": 0,
+        "nome": "LMS Coronation Class",
+        "peso": 30,
+        "speed": 100,
+        "tipo_carburanteSteam": "Coal",
+        "type": "Steam"
+    },
+    {
+        "builder": "Blizzy",
+        "efficenzaElettrico": 0,
+        "nome": "Blizzy Class 90",
+        "peso": 40,
+        "speed": 60,
+        "tipo_trasmissioneElettrico": "Overhead Lines",
+        "type": "Electric"
+    },
+    {
+        "builder": "BGC",
+        "efficenzaIC": 0.6,
+        "nome": "Rhea",
+        "peso": 70,
+        "speed": 30,
+        "tipo_motoreIC": "Multijet",
+        "type": "Internal_Combustion"
+    },
+    {
+        "builder": "Magnetbahn GmbH",
+        "nome": "M-Bahn",
+        "peso": 80,
+        "speed": 50,
+        "tipo_tecnologia": "EMS",
+        "type": "Maglev"
+    },
+    {
+        "builder": "BGC",
+        "efficenzaElettrico": 0.2,
+        "nome": "Rouge",
+        "peso": 20,
+        "speed": 120,
+        "tipo_trasmissioneElettrico": "Overhead Lines",
+        "type": "Electric"
+    },
+    {
+        "builder": "General Motors Electro-Motive Division",
+        "efficenzaIC": 0,
+        "nome": "DDA40X Sterling R",
+        "peso": 50,
+        "speed": 90,
+        "tipo_motoreIC": "DD35",
+        "type": "Internal_Combustion"
+    },
+    {
+        "builder": "Deutsche Bundesbahn",
+        "nome": "Transrapid",
+        "peso": 70,
+        "speed": 40,
+        "tipo_tecnologia": "EMS",
+        "type": "Maglev"
+    }
+]

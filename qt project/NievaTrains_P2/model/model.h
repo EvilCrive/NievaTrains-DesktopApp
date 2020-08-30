@@ -10,7 +10,6 @@ class Model
 {
 private:
     Qontainer<Treno*> list;
-    Qontainer<Treno*> lista_ricerca;
 public:
     Model()=default;
     ~Model()=default;
@@ -25,7 +24,6 @@ public:
     Treno* getTrenoDisplay(unsigned int) const;
     void erase(unsigned int =0);
     void clear();
-    void equalizza();
     bool isEmpty() const;
 
     unsigned int getSpeedM() const;
@@ -50,8 +48,6 @@ public:
     void searchMotoreIC(std::string);
     void searchMotoreprimario(std::string);
     void searchTecnologiamaglev(std::string);
-
-    void resetRicerca();
 
 };
 

@@ -29,10 +29,25 @@ private:
     AggiuntaLayout *layoutAdd;
     ModificaLayout *layoutMod;
 
+    //filtri
+    void searchNome(std::string);
+    void searchCostruttore(std::string);
+    void searchPeso(unsigned int,bool);
+    void searchVelocita(unsigned int,bool);
+    void searchCarburantevapore(std::string);
+    void searchEfficenzavapore(double, bool);
+    void searchEfficenzaelettrico(double,bool);
+    void searchEfficenzaIC(double,bool);
+    void searchTrasmissioneelettrico(std::string);
+    void searchMotoreIC(std::string);
+    void searchMotoreprimario(std::string);
+    void searchTecnologiamaglev(std::string);
+
 public:
     MainWindow(Model* m,QWidget *parent = nullptr);
     ~MainWindow();
     void refreshList();
+
 public slots:
     void slotShowInfoGenerali();
     void slotCarica();

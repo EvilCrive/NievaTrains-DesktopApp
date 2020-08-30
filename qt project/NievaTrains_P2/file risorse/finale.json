@@ -31,14 +31,14 @@
         "nome": "Blazing Vigilant 1",
         "peso": 50,
         "speed": 70,
-        "tipo_trasmissioneElettrico": "Overhead Lines",
+        "tipo_trasmissioneElettrico": "Third Rail",
         "type": "Electric"
     },
     {
         "builder": "Bombardier",
         "efficenzaElettrico": 0.6,
         "efficenzaIC": 0.2,
-        "motore_primario": "Electric",
+        "motore_primario": "Internal Combustion",
         "nome": "Talent 2",
         "peso": 70,
         "speed": 50,
@@ -50,7 +50,7 @@
         "builder": "Bombardier",
         "efficenzaElettrico": 0.8,
         "efficenzaIC": 0.4,
-        "motore_primario": "Electric",
+        "motore_primario": "Internal Combustion",
         "nome": "Electrostar",
         "peso": 30,
         "speed": 120,
@@ -69,7 +69,7 @@
     },
     {
         "builder": "A1 Steam Locomotive Trust",
-        "efficenzaSteam": 0,
+        "efficenzaSteam": 0.3,
         "nome": "Locomotiva A1 Peppercorn 60163 Tornado",
         "peso": 40,
         "speed": 80,
@@ -78,7 +78,7 @@
     },
     {
         "builder": "London Midland and Scottish Railway",
-        "efficenzaSteam": 0,
+        "efficenzaSteam": 0.4,
         "nome": "LMS Coronation Class",
         "peso": 30,
         "speed": 100,
@@ -87,11 +87,11 @@
     },
     {
         "builder": "Blizzy",
-        "efficenzaElettrico": 0,
+        "efficenzaElettrico": 0.2,
         "nome": "Blizzy Class 90",
         "peso": 40,
         "speed": 60,
-        "tipo_trasmissioneElettrico": "Overhead Lines",
+        "tipo_trasmissioneElettrico": "Third Rail",
         "type": "Electric"
     },
     {
@@ -117,12 +117,12 @@
         "nome": "Rouge",
         "peso": 20,
         "speed": 120,
-        "tipo_trasmissioneElettrico": "Overhead Lines",
+        "tipo_trasmissioneElettrico": "Third Rail",
         "type": "Electric"
     },
     {
         "builder": "General Motors Electro-Motive Division",
-        "efficenzaIC": 0,
+        "efficenzaIC": 0.35,
         "nome": "DDA40X Sterling R",
         "peso": 50,
         "speed": 90,

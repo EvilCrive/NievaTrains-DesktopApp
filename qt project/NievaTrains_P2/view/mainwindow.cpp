@@ -305,65 +305,65 @@ void MainWindow::slotCerca(){
     std::string parametro=layout->getParametroRicerca();
     switch(filtro){
     case 0:
-        modello->searchNome(parametro);
+        searchNome(parametro);
         break;
     case 1:
-        modello->searchCostruttore(parametro);
+        searchCostruttore(parametro);
         break;
     case 2:
     if(parametro.substr(0,0)==">")
-        modello->searchPeso(std::stoi(parametro.substr(1)), false);
+        searchPeso(std::stoi(parametro.substr(1)), false);
     else if(parametro.substr(0,0)=="<")
-        modello->searchPeso(std::stoi(parametro=parametro.substr(1)), true);
+        searchPeso(std::stoi(parametro=parametro.substr(1)), true);
     else
-        modello->searchPeso(std::stoi(parametro), false);
+        searchPeso(std::stoi(parametro), false);
     break;
     case 3:
     if(parametro.substr(0,0)==">")
-        modello->searchVelocita(std::stoi(parametro.substr(1)), true);
+        searchVelocita(std::stoi(parametro.substr(1)), true);
     else if(parametro.substr(0,0)=="<")
-        modello->searchVelocita(std::stoi(parametro=parametro.substr(1)), false);
+        searchVelocita(std::stoi(parametro=parametro.substr(1)), false);
     else
-        modello->searchVelocita(std::stoi(parametro), false);
+        searchVelocita(std::stoi(parametro), false);
     break;
     case 4:
-        modello->searchMotoreIC(parametro);
+        searchMotoreIC(parametro);
         break;
     case 5:
            if(parametro.substr(0,0)==">")
-               modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), true);
+               searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), true);
            else if(parametro.substr(0,0)=="<")
-               modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
            else
-               modello->searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
            break;
     case 6:
-        modello->searchTrasmissioneelettrico(parametro);
+        searchTrasmissioneelettrico(parametro);
         break;
     case 7:
            if(parametro.substr(0,0)==">")
-               modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), true);
+               searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), true);
            else if(parametro.substr(0,0)=="<")
-               modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
            else
-                modello->searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
            break;
     case 8:
            if(parametro.substr(0,0)==">")
-               modello->searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), true);
+               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), true);
            else if(parametro.substr(0,0)=="<")
-               modello->searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
            else
-        modello->searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
+        searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
            break;
     case 9:
-        modello->searchCarburantevapore(parametro);
+        searchCarburantevapore(parametro);
         break;
     case 10:
-        modello->searchTecnologiamaglev(parametro);
+        searchTecnologiamaglev(parametro);
         break;
     case 11:
-        modello->searchMotoreprimario(parametro);
+        searchMotoreprimario(parametro);
         break;
 
     }
@@ -372,10 +372,190 @@ void MainWindow::slotCerca(){
     }
 
         //catcho le eccezioni dei cast errati
-        //refresh lista
 }
 void MainWindow::slotResetSearch(){
-    //modello->resettaEntrambeLeListe();
+    refreshList();
+}
+
+/*filtri*/
+void MainWindow::searchNome(std::string n)
+{
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(n!=layout->getList()->getItemByIndex(i)->getNome()){
+            layout->getList()->erase(i);
+            --i; --lun;
+        }
+    }
+}
+void MainWindow::searchCostruttore(std::string n)
+{
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        std::cout<<"lun: "<<lun<<"index: "<<i<<std::endl;
+        if(n!=layout->getList()->getItemByIndex(i)->getCostruttore()){
+            layout->getList()->erase(i);
+            --i; --lun;
+        }
+    }
+}
+void MainWindow::searchMotoreIC(std::string n){
+
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i));
+        if(n!=t->getMotoreIC()){
+            layout->getList()->erase(i);
+            --i; --lun;
+        }
+    }
+}
+void MainWindow::searchCarburantevapore(std::string n){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(layout->getList()->getItemByIndex(i)->type()=="Steam"){
+            Steam* t=static_cast<Steam*>(layout->getList()->getItemByIndex(i));
+            if(n!=t->getCarburanteSteam()){
+                layout->getList()->erase(i);
+                --i; --lun;
+            }
+        }
+    }
+}
+
+void MainWindow::searchPeso(unsigned int n, bool b){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(b && layout->getList()->getItemByIndex(i)->getPeso()<n){
+            //maggiore
+            layout->getList()->erase(i);
+            --i; --lun;
+        }else if(!b && layout->getList()->getItemByIndex(i)->getPeso()>=n){
+            //minore
+            layout->getList()->erase(i);
+            --i; --lun;
+        }
+    }
+}
+void MainWindow::searchVelocita(unsigned int n, bool b){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(b && layout->getList()->getItemByIndex(i)->getSpeed()<n){
+            //maggiore
+            layout->getList()->erase(i);
+            --i; --lun;
+        }else if(!b && layout->getList()->getItemByIndex(i)->getSpeed()>=n){
+            //minore
+            layout->getList()->erase(i);
+            --i; --lun;
+        }
+    }
+}
+
+
+void MainWindow::searchEfficenzavapore(double n, bool b){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(layout->getList()->getItemByIndex(i)->type()=="Steam"){
+            Steam* t=static_cast<Steam*>(layout->getList()->getItemByIndex(i));
+            if(b && n<t->getEfficenzaSteam()){
+                layout->getList()->erase(i);
+                --i; --lun;
+            }else if(b && n>=t->getEfficenzaSteam()){
+                layout->getList()->erase(i);
+                --i; --lun;
+            }
+        }
+    }
+}
+void MainWindow::searchEfficenzaelettrico(double n, bool b){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(layout->getList()->getItemByIndex(i)->type()=="Electric" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
+            Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i));
+            if(t){
+                if(b && n<t->getEfficenzaElettrico()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }else if(!b && n>=t->getEfficenzaElettrico()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
+            }
+        }
+    }
+}
+void MainWindow::searchEfficenzaIC(double n, bool b){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(layout->getList()->getItemByIndex(i)->type()=="Internal Combustion" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
+            Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i));
+            if(t){
+                if(b && n<t->getEfficenzaIC()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }else if(b && n>=t->getEfficenzaIC()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
+            }
+        }
+    }
+}
+void MainWindow::searchTrasmissioneelettrico(std::string n){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(layout->getList()->getItemByIndex(i)->type()=="Electric" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
+            Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i));
+            if(t){
+                bool  test;
+                if(n=="third rail") test=true;
+                else if(n=="overhead lines")    test=false;
+                //eccezione ?
+                else    return;
+                if(test!=t->getTrasmissioneElettrico()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
+            }
+        }
+    }
+}
+void MainWindow::searchMotoreprimario(std::string n){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(layout->getList()->getItemByIndex(i)->type()=="Bimode"){
+            Bimode* t=dynamic_cast<Bimode*>(layout->getList()->getItemByIndex(i));
+            if(t){
+                bool test;
+                if(n=="ic") test=true;
+                else if(n=="electric")    test=false;
+                //eccezione ?
+                else    return;
+                if(test!=t->getMotorePrimario()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
+            }
+        }
+    }
+}
+void MainWindow::searchTecnologiamaglev(std::string n){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(layout->getList()->getItemByIndex(i)->type()=="Maglev"){
+            Maglev* t=static_cast<Maglev*>(layout->getList()->getItemByIndex(i));
+            bool test;
+            if(n=="eds") test=true;
+            else if(n=="ems")    test=false;
+            //eccezione ?
+            else return;
+            if(test!=t->getTecnologia()){
+                layout->getList()->erase(i);
+                --i; --lun;
+            }
+        }
+    }
 }
 MainWindow::~MainWindow()
 {

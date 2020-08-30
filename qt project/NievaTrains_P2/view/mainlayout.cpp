@@ -73,7 +73,7 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     connect(inserisci, SIGNAL(clicked()),p,SLOT(slotShowInserimentoTreno()));
     connect(modifica, SIGNAL(clicked()),p,SLOT(slotShowModificaTreno()));
     connect(search, SIGNAL(clicked()), p, SLOT(slotCerca()));
-    connect(searchBar, SIGNAL(editingFinished()), p, SLOT(slotCerca()));
+    //connect(searchBar, SIGNAL(editingFinished()), p, SLOT(slotCerca()));
     connect(annulla, SIGNAL(clicked()), p, SLOT(slotResetSearch()));
 
 }

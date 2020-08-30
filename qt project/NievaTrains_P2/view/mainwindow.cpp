@@ -310,17 +310,17 @@ void MainWindow::slotCerca(){
         searchCostruttore(parametro);
         break;
     case 2:
-    if(parametro.substr(0,0)==">")
+    if(parametro.substr(0,1)=="<")
         searchPeso(std::stoi(parametro.substr(1)), false);
-    else if(parametro.substr(0,0)=="<")
+    else if(parametro.substr(0,1)==">")
         searchPeso(std::stoi(parametro=parametro.substr(1)), true);
     else
         searchPeso(std::stoi(parametro), false);
     break;
     case 3:
-    if(parametro.substr(0,0)==">")
+    if(parametro.substr(0,1)=="<")
         searchVelocita(std::stoi(parametro.substr(1)), true);
-    else if(parametro.substr(0,0)=="<")
+    else if(parametro.substr(0,1)==">")
         searchVelocita(std::stoi(parametro=parametro.substr(1)), false);
     else
         searchVelocita(std::stoi(parametro), false);
@@ -329,9 +329,9 @@ void MainWindow::slotCerca(){
         searchMotoreIC(parametro);
         break;
     case 5:
-           if(parametro.substr(0,0)==">")
+           if(parametro.substr(0,1)=="<")
                searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), true);
-           else if(parametro.substr(0,0)=="<")
+           else if(parametro.substr(0,1)==">")
                searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
            else
                searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
@@ -340,21 +340,20 @@ void MainWindow::slotCerca(){
         searchTrasmissioneelettrico(parametro);
         break;
     case 7:
-           if(parametro.substr(0,0)==">")
+           if(parametro.substr(0,1)=="<")
                searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), true);
-           else if(parametro.substr(0,0)=="<")
+           else if(parametro.substr(0,1)==">")
                searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
            else
                searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
            break;
     case 8:
-           if(parametro.substr(0,0)==">"){
-               std::cout<<"i'm in";
-               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), true);}
-           else if(parametro.substr(0,0)=="<")
+           if(parametro.substr(0,1)=="<")
+               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), true);
+           else if(parametro.substr(0,1)==">")
                searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
            else
-        searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
            break;
     case 9:
         searchCarburantevapore(parametro);
@@ -407,6 +406,10 @@ void MainWindow::searchMotoreIC(std::string n){
             layout->getList()->erase(i);
             --i; --lun;
         }
+        else{
+            layout->getList()->erase(i);
+            --i; --lun;
+        }
     }
 }
 void MainWindow::searchCarburantevapore(std::string n){
@@ -418,6 +421,10 @@ void MainWindow::searchCarburantevapore(std::string n){
                 layout->getList()->erase(i);
                 --i; --lun;
             }
+        }
+        else{
+            layout->getList()->erase(i);
+            --i; --lun;
         }
     }
 }
@@ -460,10 +467,14 @@ void MainWindow::searchEfficenzavapore(double n, bool b){
             if(b && n<t->getEfficenzaSteam()){
                 layout->getList()->erase(i);
                 --i; --lun;
-            }else if(b && n>=t->getEfficenzaSteam()){
+            }else if(!b && n>=t->getEfficenzaSteam()){
                 layout->getList()->erase(i);
                 --i; --lun;
             }
+        }
+        else{
+            layout->getList()->erase(i);
+            --i; --lun;
         }
     }
 }
@@ -481,6 +492,10 @@ void MainWindow::searchEfficenzaelettrico(double n, bool b){
                     --i; --lun;
                 }
             }
+            else{
+                layout->getList()->erase(i);
+                --i; --lun;
+            }
         }
     }
 }
@@ -493,10 +508,14 @@ void MainWindow::searchEfficenzaIC(double n, bool b){
                 if(b && n<t->getEfficenzaIC()){
                     layout->getList()->erase(i);
                     --i; --lun;
-                }else if(b && n>=t->getEfficenzaIC()){
+                }else if(!b && n>=t->getEfficenzaIC()){
                     layout->getList()->erase(i);
                     --i; --lun;
                 }
+            }
+            else{
+                layout->getList()->erase(i);
+                --i; --lun;
             }
         }
     }
@@ -516,6 +535,10 @@ void MainWindow::searchTrasmissioneelettrico(std::string n){
                     layout->getList()->erase(i);
                     --i; --lun;
                 }
+            }
+            else{
+                layout->getList()->erase(i);
+                --i; --lun;
             }
         }
     }
@@ -537,6 +560,10 @@ void MainWindow::searchMotoreprimario(std::string n){
                 }
             }
         }
+        else{
+            layout->getList()->erase(i);
+            --i; --lun;
+        }
     }
 }
 void MainWindow::searchTecnologiamaglev(std::string n){
@@ -553,6 +580,10 @@ void MainWindow::searchTecnologiamaglev(std::string n){
                 layout->getList()->erase(i);
                 --i; --lun;
             }
+        }
+        else{
+            layout->getList()->erase(i);
+            --i; --lun;
         }
     }
 }

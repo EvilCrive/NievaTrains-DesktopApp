@@ -31,7 +31,6 @@ void TrainListWidget::addTrenoList(Treno* treno, unsigned int x){
 void TrainListWidget::clear()
 {
     for(int i=0; i<count(); ){
-        //delete takeItem(0);
         erase(0);
     }
 }
@@ -49,6 +48,5 @@ unsigned int TrainListWidgetItem::getRealIndex() const{
     return realIndex;
 }
 Treno* TrainListWidgetItem::getTreno() const{
-    t->print();
     return t;
 }

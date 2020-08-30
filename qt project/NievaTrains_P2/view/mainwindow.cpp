@@ -251,7 +251,6 @@ void MainWindow::slotModificaTreno(){
         std::string carburanteSNew=layoutMod->getCarburanteS();
         Steam* trenoDaSostituire=new Steam(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaSNew, carburanteSNew);
         modello->sostituisci(trenoDaSostituire, x);
-        std::cout<<trenoDaSostituire->treno2string(); //debug
     }else if(tip==1){
         double efficenzaENew=layoutMod->getEfficenzaE();
         if(efficenzaENew<0 || efficenzaENew>1)    {
@@ -349,8 +348,9 @@ void MainWindow::slotCerca(){
                searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
            break;
     case 8:
-           if(parametro.substr(0,0)==">")
-               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), true);
+           if(parametro.substr(0,0)==">"){
+               std::cout<<"i'm in";
+               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), true);}
            else if(parametro.substr(0,0)=="<")
                searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
            else
@@ -392,7 +392,6 @@ void MainWindow::searchCostruttore(std::string n)
 {
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
-        std::cout<<"lun: "<<lun<<"index: "<<i<<std::endl;
         if(n!=layout->getList()->getItemByIndex(i)->getCostruttore()){
             layout->getList()->erase(i);
             --i; --lun;

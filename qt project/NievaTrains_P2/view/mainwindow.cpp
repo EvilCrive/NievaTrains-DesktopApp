@@ -22,7 +22,7 @@ MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new Men
 void MainWindow::refreshList(){
     layout->getList()->clear();
     for(unsigned int i=0; i<modello->numerotreni(); i++)
-        layout->getList()->addTrenoList(modello->getTreno(i)); //asd123
+        layout->getList()->addTrenoList(modello->getTreno(i),i); //asd123
 }
 void MainWindow::slotShowInfoGenerali(){
     //occhio che magari il puntatore viene cancellato all'uscita ma non l'oggetto
@@ -91,18 +91,23 @@ void MainWindow::slotAutori()
 }
 
 
-void MainWindow::slotRemoveTreno()
+void MainWindow::slotRemoveTreno() try
 {
-    unsigned int t=layout->estraiTrenoSelezionato();
-    layout->eliminaTreno(t);
-    modello->erase(t);
-    refreshList();
+    if(layout->estraiTrenoSelezionato()==-1)   throw new NievaException("Seleziona un treno esistente da eliminare");
+        unsigned int t=layout->estraiTrenoSelezionato();
+        unsigned int i=layout->getList()->getItem()->getRealIndex();
+        layout->eliminaTreno(t);
+        modello->erase(i);
+
+        refreshList();
+}catch(NievaException* e){
+    QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));
 }
 
 void MainWindow::slotShowTreno(){
     string str="";
     if(layout->estraiTrenoSelezionato()!=-1)
-        str=modello->treno2string(layout->estraiTrenoSelezionato()); //asd123
+        str=modello->treno2string(layout->getList()->getItem()->getRealIndex());
     layout->stampaDettagliTreno(str);
 }
 void MainWindow::slotFlush(){
@@ -170,15 +175,16 @@ void MainWindow::slotInserisciTreno(){
         Bimode* train= new Bimode(nome, costruttore, peso, speed, trasmissione, efficenzaE, efficenzaIC, motoreIC, primario);
         modello->push_end(train);
     }
-
-    layout->getList()->addTrenoList(modello->getTreno(modello->numerotreni()-1)); //asd123
+    //prende l'ultimo treno del modello e lo aggiunge alla lista
+    layout->getList()->addTrenoList(modello->getTreno(modello->numerotreni()-1),modello->numerotreni()-1); //asd123
+    layout->getList()->setCurrentRow(modello->numerotreni()-1);
     //aggiornamento lista view
     layoutAdd->close();
     delete layoutAdd;
 }
 void MainWindow::slotShowModificaTreno() try{
     if(layout->estraiTrenoSelezionato()==-1)   throw new NievaException("Seleziona un treno esistente da modificare");
-    unsigned int indecs=layout->getList()->getIndex();
+    unsigned int indecs=layout->getList()->getItem()->getRealIndex();
     Treno* TrenoDaModificare=modello->getTreno(indecs);
     std::string tipo=TrenoDaModificare->type();
     /*Vengono usati i dynamic cast dove è necessario poichè non c'è altro modo per estrarre i campi di tipi derivati senza andare a modificare la gerarchia con
@@ -229,7 +235,7 @@ void MainWindow::slotShowModificaTreno() try{
     QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));
 }
 void MainWindow::slotModificaTreno(){
-    unsigned int x=layoutMod->getInd();
+    unsigned int x=layoutMod->getInd(); //è l'indice reale
     unsigned int tip=layoutMod->getTipo();
     //in base al tipo identificato da tip creo un nuovo treno e lo inserisco nel modello
     std::string nomeNew=layoutMod->getNome();
@@ -245,6 +251,7 @@ void MainWindow::slotModificaTreno(){
         std::string carburanteSNew=layoutMod->getCarburanteS();
         Steam* trenoDaSostituire=new Steam(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaSNew, carburanteSNew);
         modello->sostituisci(trenoDaSostituire, x);
+        std::cout<<trenoDaSostituire->treno2string(); //debug
     }else if(tip==1){
         double efficenzaENew=layoutMod->getEfficenzaE();
         if(efficenzaENew<0 || efficenzaENew>1)    {
@@ -289,7 +296,7 @@ void MainWindow::slotModificaTreno(){
     //refresh lista
     refreshList();
     layout->getList()->setCurrentRow(x);
-    layoutMod->hide();
+    layoutMod->close();
     delete layoutMod;
 }
 void MainWindow::slotCerca(){

@@ -107,7 +107,6 @@ void MainWindow::slotRemoveTreno() try
 void MainWindow::slotShowTreno(){
     string str="";
     if(layout->estraiTrenoSelezionato()!=-1 && layout->getList()->getItem()){
-        std::cout<<" "<<layout->getList()->getItem()->getRealIndex();
         str=modello->treno2string(layout->getList()->getItem()->getRealIndex());
     }
     layout->stampaDettagliTreno(str);
@@ -372,10 +371,10 @@ void MainWindow::slotCerca(){
         QMessageBox::warning(this,"Nieva Trains","eccezione ricerca");
     }
 
-        //catcho le eccezioni dei cast errati
 }
 void MainWindow::slotResetSearch(){
     refreshList();
+
 }
 using std::cout;
 /*filtri*/

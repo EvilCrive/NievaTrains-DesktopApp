@@ -31,7 +31,7 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     text1->setText("Treni nel sistema");
     text2->setText("Informazioni specifiche");
     text3->setText("Inserisci treno");
-    text4->setText("Cerca per nome");
+    text4->setText("Cerca");
 
     flush->setText("Flush");
     search->setText("Search");

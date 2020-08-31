@@ -22,7 +22,8 @@ void Model::print(unsigned int i) const
 std::string Model::treno2string(unsigned int i) const{
     int numero=i+1;
     std::string s="TRENO "+ std::to_string(numero)+": \n";
-    s.append(list[i]->treno2string());
+    if(list[i])
+         s.append(list[i]->treno2string());
     s.append("\n\n\n");
     return s;
 }

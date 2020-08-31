@@ -106,8 +106,10 @@ void MainWindow::slotRemoveTreno() try
 
 void MainWindow::slotShowTreno(){
     string str="";
-    if(layout->estraiTrenoSelezionato()!=-1 || layout->getList()->getItem())
+    if(layout->estraiTrenoSelezionato()!=-1 && layout->getList()->getItem()){
+        std::cout<<" "<<layout->getList()->getItem()->getRealIndex();
         str=modello->treno2string(layout->getList()->getItem()->getRealIndex());
+    }
     layout->stampaDettagliTreno(str);
 }
 void MainWindow::slotFlush(){
@@ -619,6 +621,20 @@ void MainWindow::searchTecnologiamaglev(std::string n){
             layout->getList()->erase(i);
             --i; --lun;
         }
+    }
+}
+void MainWindow::slotKmPercorribili(){
+    if(layout->getList()->getItem()){
+        unsigned int mostra=layout->getList()->getItem()->getTreno()->kmPercorribili(layout->getCarb());
+        std::string str="I km percorribili dal treno selezionato con "+std::to_string(layout->getCarb())+" unità di carburante sono: "+std::to_string(mostra)+"km.";
+        QMessageBox::information(this,"Nieva Trains",QString::fromStdString(str));
+    }
+}
+void MainWindow::slotCarburanteNecessario(){
+    if(layout->getList()->getItem()){
+        unsigned int mostra=layout->getList()->getItem()->getTreno()->carburanteNecessario(layout->getKm());
+        std::string str="Le unità di carburante necessarie dal treno selezionato per percorrere "+std::to_string(layout->getKm())+"km sono: "+std::to_string(mostra);
+        QMessageBox::information(this,"Nieva Trains",QString::fromStdString(str));
     }
 }
 MainWindow::~MainWindow()

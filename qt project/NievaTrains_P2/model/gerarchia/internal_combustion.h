@@ -17,8 +17,8 @@ public:
     void setMotoreIC(std::string);
 
 
-    virtual double carburanteNecessario(unsigned int) const; //input km
-    virtual unsigned int kmPercorribili(unsigned int) const; //input l fuel
+    double carburanteNecessario(unsigned int) const; //input km
+    unsigned int kmPercorribili(unsigned int) const; //input l fuel
     std::string type() const;
     void print() const;
     std::string treno2string() const;

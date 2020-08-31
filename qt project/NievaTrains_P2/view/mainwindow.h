@@ -62,5 +62,7 @@ public slots:
     void slotModificaTreno();
     void slotCerca();
     void slotResetSearch();
+    void slotKmPercorribili();
+    void slotCarburanteNecessario();
 };
 #endif // MAINWINDOW_H

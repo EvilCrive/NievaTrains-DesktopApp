@@ -30,6 +30,9 @@ public:
     virtual std::string treno2string()const;
     virtual void serialize(QJsonObject&)=0;
     static Treno* unserialize(QJsonObject&);
+
+    virtual double carburanteNecessario(unsigned int) const =0;
+    virtual unsigned int kmPercorribili(unsigned int) const =0;
 };
 
 

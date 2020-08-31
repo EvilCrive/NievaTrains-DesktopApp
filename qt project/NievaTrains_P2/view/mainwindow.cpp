@@ -98,12 +98,11 @@ void MainWindow::slotRemoveTreno() try
         unsigned int i=layout->getList()->getItem()->getRealIndex();
         layout->eliminaTreno(t);
         modello->erase(i);
-
         refreshList();
 }catch(NievaException* e){
     QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));
 }
-
+catch(...){std::cout<<"ecc";}
 void MainWindow::slotShowTreno(){
     string str="";
     if(layout->estraiTrenoSelezionato()!=-1 || layout->getList()->getItem())

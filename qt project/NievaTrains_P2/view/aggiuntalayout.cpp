@@ -1,12 +1,24 @@
 #include "aggiuntalayout.h"
 
-AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(new QVBoxLayout(this)),nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), efficenzaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), efficenzaIC(new QLineEdit(this)), speed(new QLineEdit(this)),
+AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(new QVBoxLayout(this)),
+    nomeL(new QLabel(this)), costruttoreL(new QLabel(this)), efficenzaSL(new QLabel(this)), efficenzaEL(new QLabel(this)), efficenzaICL(new QLabel(this)), speedL(new QLabel(this)), pesoL(new QLabel(this)), carburanteSL(new QLabel(this)), motoreICL(new QLabel(this)),
+    nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), efficenzaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), efficenzaIC(new QLineEdit(this)), speed(new QLineEdit(this)),
     peso(new QLineEdit(this)), carburanteS(new QLineEdit(this)),motoreIC(new QLineEdit(this)),
     tecnologia(new ComboBoxTech(this)),primario(new ComboBoxMotorePrimario(this)), trasmissione(new ComboBoxTrasmissione(this)), conferma(new QPushButton(this)), annulla(new QPushButton(this)), tipo(tipoT)
+
 {
-    //inizializzazioni
     conferma->setText("Confirm");
     annulla->setText("Cancel");
+    nomeL->setText("Name");
+    pesoL->setText("Weight");
+    speedL->setText("Top speed");
+    costruttoreL->setText("Builder");
+    efficenzaSL->setText("Steam engine efficency");
+    efficenzaEL->setText("Electric engine efficency");
+    efficenzaICL->setText("Internal combustion engine efficency");
+    carburanteSL->setText("Steam engine fuel");
+    motoreICL->setText("Internal combustion engine name");
+
     nome->setPlaceholderText("Nome treno");
     nome->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z ]{0,50}")));
     costruttore->setPlaceholderText("Costruttore treno");
@@ -25,6 +37,7 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
     carburanteS->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
     motoreIC->setPlaceholderText("Nome e marca motore a combustione interna");
     motoreIC->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
+
     motoreIC->hide();
     efficenzaE->hide();
     trasmissione->hide();
@@ -33,28 +46,47 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
     efficenzaIC->hide();
     efficenzaS->hide();
     carburanteS->hide();
-    //aggiunte
+    efficenzaSL->hide();
+    efficenzaEL->hide();
+    efficenzaICL->hide();
+    motoreICL->hide();
+    carburanteSL->hide();
+
+    layoutPopUp->addWidget(nomeL);
     layoutPopUp->addWidget(nome);
+    layoutPopUp->addWidget(costruttoreL);
     layoutPopUp->addWidget(costruttore);
+    layoutPopUp->addWidget(speedL);
     layoutPopUp->addWidget(speed);
+    layoutPopUp->addWidget(pesoL);
     layoutPopUp->addWidget(peso);
     switch (tipoT) {
     case 0:
         efficenzaS->show();
         carburanteS->show();
+        efficenzaSL->show();
+        carburanteSL->show();
+        layoutPopUp->addWidget(efficenzaSL);
         layoutPopUp->addWidget(efficenzaS);
+        layoutPopUp->addWidget(carburanteSL);
         layoutPopUp->addWidget(carburanteS);
         break;
     case 1:
         efficenzaE->show();
         trasmissione->show();
+        efficenzaEL->show();
+        layoutPopUp->addWidget(efficenzaEL);
         layoutPopUp->addWidget(efficenzaE);
         layoutPopUp->addWidget(trasmissione);
         break;
     case 2:
         efficenzaIC->show();
+        efficenzaICL->show();
         motoreIC->show();
+        motoreICL->show();
+        layoutPopUp->addWidget(efficenzaICL);
         layoutPopUp->addWidget(efficenzaIC);
+        layoutPopUp->addWidget(motoreICL);
         layoutPopUp->addWidget(motoreIC);
         break;
     case 3:
@@ -65,10 +97,16 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
         efficenzaE->show();
         efficenzaIC->show();
         motoreIC->show();
+        efficenzaEL->show();
+        efficenzaICL->show();
+        motoreICL->show();
         trasmissione->show();
         primario->show();
+        layoutPopUp->addWidget(efficenzaEL);
         layoutPopUp->addWidget(efficenzaE);
+        layoutPopUp->addWidget(efficenzaICL);
         layoutPopUp->addWidget(efficenzaIC);
+        layoutPopUp->addWidget(motoreICL);
         layoutPopUp->addWidget(motoreIC);
         layoutPopUp->addWidget(trasmissione);
         layoutPopUp->addWidget(primario);

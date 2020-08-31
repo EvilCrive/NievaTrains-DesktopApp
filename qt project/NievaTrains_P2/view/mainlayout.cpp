@@ -60,8 +60,8 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     carbNecessarioBar->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,50}/i")));
     kmPerBar->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,50}/i")));
     searchField->addWidget(searchBar);
-    searchField->addWidget(search);
     searchField->addWidget(selectFilter);
+    searchField->addWidget(search);
     searchField->addWidget(annulla);
     bts2->addWidget(modifica);
     bts2->addWidget(elimina);

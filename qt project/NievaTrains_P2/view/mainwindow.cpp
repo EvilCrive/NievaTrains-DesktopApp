@@ -122,9 +122,10 @@ void MainWindow::slotShowInserimentoTreno(){
     layoutAdd->resize(250,350);
     layoutAdd->exec();
 }
-void MainWindow::slotInserisciTreno(){
+void MainWindow::slotInserisciTreno() try {
     unsigned int x=layoutAdd->getTipo();
     std::string nome=layoutAdd->getNome();
+    if(nome=="") throw new NievaException("Dai un nome al treno");
     std::string costruttore=layoutAdd->getCostruttore();
     unsigned int speed=layoutAdd->getSpeed();
     unsigned int peso=layoutAdd->getPeso();
@@ -182,7 +183,7 @@ void MainWindow::slotInserisciTreno(){
     //aggiornamento lista view
     layoutAdd->close();
     delete layoutAdd;
-}
+}catch(NievaException* e){QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));}
 void MainWindow::slotShowModificaTreno() try{
     if(layout->estraiTrenoSelezionato()==-1)   throw new NievaException("Seleziona un treno esistente da modificare");
     unsigned int indecs=layout->getList()->getItem()->getRealIndex();

@@ -93,12 +93,11 @@ void MainWindow::slotRemoveTreno() try
         unsigned int i=layout->getList()->getItem()->getRealIndex();
         layout->eliminaTreno(t);
         modello->erase(i);
-
         refreshList();
 }catch(NievaException* e){
     QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));
 }
-
+catch(...){std::cout<<"ecc";}
 void MainWindow::slotShowTreno(){
     string str="";
     if(layout->estraiTrenoSelezionato()!=-1 && layout->getList()->getItem()){
@@ -120,7 +119,10 @@ void MainWindow::slotShowInserimentoTreno(){
 void MainWindow::slotInserisciTreno() try {
     unsigned int x=layoutAdd->getTipo();
     std::string nome=layoutAdd->getNome();
-    if(nome=="") throw new NievaException("Dai un nome al treno");
+    std::string nome_trimmed=nome;
+    nome_trimmed.erase(nome_trimmed.begin(), std::find_if(nome_trimmed.begin(), nome_trimmed.end(),
+            std::not1(std::ptr_fun<int, int>(std::isspace))));
+    if(nome_trimmed=="") throw new NievaException("Dai un nome al treno");
     std::string costruttore=layoutAdd->getCostruttore();
     unsigned int speed=layoutAdd->getSpeed();
     unsigned int peso=layoutAdd->getPeso();

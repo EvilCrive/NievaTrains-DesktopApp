@@ -467,6 +467,8 @@ debug\moc_aggiuntalayout.cpp: E:\Qt\5.9.9\msvc2015\include\QtWidgets\QWidget \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qpushbutton.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qabstractbutton.h \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qicon.h \
+		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QLabel \
+		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qlabel.h \
 		..\NievaTrains_P2\view\supporto\comboboxmotoreprimario.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QComboBox \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qcombobox.h \
@@ -2349,6 +2351,8 @@ debug\aggiuntalayout.obj: ..\NievaTrains_P2\view\aggiuntalayout.cpp ../NievaTrai
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qpushbutton.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qabstractbutton.h \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qicon.h \
+		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QLabel \
+		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qlabel.h \
 		../NievaTrains_P2/view/supporto/comboboxmotoreprimario.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QComboBox \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qcombobox.h \
@@ -3700,6 +3704,8 @@ debug\modificalayout.obj: ..\NievaTrains_P2\view\modificalayout.cpp ../NievaTrai
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qpushbutton.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qabstractbutton.h \
 		E:\Qt\5.9.9\msvc2015\include\QtGui\qicon.h \
+		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QLabel \
+		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qlabel.h \
 		../NievaTrains_P2/view/supporto/comboboxmotoreprimario.h \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QComboBox \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qcombobox.h \

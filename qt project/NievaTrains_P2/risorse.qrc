@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>risorse/favicon.icon</file>
-		<file>risorse/InfoGenerali.jpg</file>
+        <file>risorse/favicon.ico</file>
+        <file>risorse/InfoGenerali.jpg</file>
     </qresource>
 </RCC>

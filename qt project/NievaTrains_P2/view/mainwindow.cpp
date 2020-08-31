@@ -42,7 +42,7 @@ void MainWindow::slotCarica(){
     QString file= QFileDialog::getOpenFileName(
                 this,
                 tr("Choose file"),
-                "../NievaTrains_P2/file risorse",
+                "../NievaTrains_P2/risorse",
                 "File JSON(*.json)"
                 );
     if(file!=""){
@@ -68,7 +68,7 @@ void MainWindow::slotSalva(){
     QString file= QFileDialog::getSaveFileName(
                 this,
                 tr("Choose file"),
-                "../NievaTrains_P2/file risorse",
+                "../NievaTrains_P2/risorse",
                 "File JSON(*.json)"
                 );
     if(file!=""){

@@ -82,12 +82,7 @@ void MainWindow::slotSalva(){
 
 void MainWindow::slotAutori()
 {
-    QDialog* info=new QDialog(this);
-    QLabel* text=new QLabel(info);
-    text->setText("Gli autori:\n Alberto Crivellari, Matteo Brosolo, Francesco Bugno.");
-    text->setMargin(5);
-    info->resize(300,50);
-    info->show();
+    QMessageBox::information(this,"Nieva Trains","Gli autori:\n Alberto Crivellari, Matteo Brosolo, Francesco Bugno.");
 }
 
 

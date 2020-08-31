@@ -15,8 +15,8 @@ public:
     void setEfficenzaSteam(double);
     void setCarburanteSteam(std::string);
 
-    virtual double carburanteNecessario(unsigned int) const;
-    virtual unsigned int kmPercorribili(unsigned int) const;
+    double carburanteNecessario(unsigned int) const;
+    unsigned int kmPercorribili(unsigned int) const;
     std::string type() const;
     void print() const;
     std::string treno2string() const;

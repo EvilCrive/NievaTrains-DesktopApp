@@ -33,7 +33,12 @@ std::string Maglev::treno2string() const{
     s.append("\nTecnologia Maglev: "+tmp);
     return s;
 }
-
+double Maglev::carburanteNecessario(unsigned int) const{
+    return 0;
+}
+unsigned int Maglev::kmPercorribili(unsigned int) const{
+    return 0;
+}
 void Maglev::serialize(QJsonObject & json)
 {
     json["type"]="Maglev";

@@ -38,6 +38,10 @@ class MainLayout: public QWidget
     QPushButton* inserisci;
     QLineEdit* searchBar;
 
+    QLineEdit* kmPerBar;
+    QLineEdit* carbNecessarioBar;
+    QPushButton* kmPer;
+    QPushButton* carbNecessario;
 
 public:
     int estraiTrenoSelezionato() const;
@@ -45,6 +49,8 @@ public:
     int getTrenoInserimento() const;
     int getFiltro() const;
     std::string getParametroRicerca() const;
+    unsigned int getKm() const;
+    unsigned int getCarb() const;
     void flushList();
     void eliminaTreno(unsigned int);
     MainLayout(QWidget * =nullptr);

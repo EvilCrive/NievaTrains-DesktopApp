@@ -31,7 +31,7 @@ void TrainListWidget::addTrenoList(Treno* treno, unsigned int x){
 void TrainListWidget::clear()
 {
     for(int i=0; i<count(); ){
-        erase(0);
+         delete takeItem(0);;
     }
 }
 

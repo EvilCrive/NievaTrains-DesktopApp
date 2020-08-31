@@ -105,8 +105,9 @@ void MainWindow::slotRemoveTreno() try
 catch(...){std::cout<<"ecc";}
 void MainWindow::slotShowTreno(){
     string str="";
-    if(layout->estraiTrenoSelezionato()!=-1 || layout->getList()->getItem())
+    if(layout->estraiTrenoSelezionato()!=-1 && layout->getList()->getItem()){
         str=modello->treno2string(layout->getList()->getItem()->getRealIndex());
+    }
     layout->stampaDettagliTreno(str);
 }
 void MainWindow::slotFlush(){
@@ -120,9 +121,10 @@ void MainWindow::slotShowInserimentoTreno(){
     layoutAdd->resize(250,350);
     layoutAdd->exec();
 }
-void MainWindow::slotInserisciTreno(){
+void MainWindow::slotInserisciTreno() try {
     unsigned int x=layoutAdd->getTipo();
     std::string nome=layoutAdd->getNome();
+    if(nome=="") throw new NievaException("Dai un nome al treno");
     std::string costruttore=layoutAdd->getCostruttore();
     unsigned int speed=layoutAdd->getSpeed();
     unsigned int peso=layoutAdd->getPeso();
@@ -180,7 +182,7 @@ void MainWindow::slotInserisciTreno(){
     //aggiornamento lista view
     layoutAdd->close();
     delete layoutAdd;
-}
+}catch(NievaException* e){QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));}
 void MainWindow::slotShowModificaTreno() try{
     if(layout->estraiTrenoSelezionato()==-1)   throw new NievaException("Seleziona un treno esistente da modificare");
     unsigned int indecs=layout->getList()->getItem()->getRealIndex();
@@ -369,10 +371,10 @@ void MainWindow::slotCerca(){
         QMessageBox::warning(this,"Nieva Trains","eccezione ricerca");
     }
 
-        //catcho le eccezioni dei cast errati
 }
 void MainWindow::slotResetSearch(){
     refreshList();
+
 }
 using std::cout;
 /*filtri*/
@@ -618,6 +620,20 @@ void MainWindow::searchTecnologiamaglev(std::string n){
             layout->getList()->erase(i);
             --i; --lun;
         }
+    }
+}
+void MainWindow::slotKmPercorribili(){
+    if(layout->getList()->getItem()){
+        unsigned int mostra=layout->getList()->getItem()->getTreno()->kmPercorribili(layout->getCarb());
+        std::string str="I km percorribili dal treno selezionato con "+std::to_string(layout->getCarb())+" unità di carburante sono: "+std::to_string(mostra)+"km.";
+        QMessageBox::information(this,"Nieva Trains",QString::fromStdString(str));
+    }
+}
+void MainWindow::slotCarburanteNecessario(){
+    if(layout->getList()->getItem()){
+        unsigned int mostra=layout->getList()->getItem()->getTreno()->carburanteNecessario(layout->getKm());
+        std::string str="Le unità di carburante necessarie dal treno selezionato per percorrere "+std::to_string(layout->getKm())+"km sono: "+std::to_string(mostra);
+        QMessageBox::information(this,"Nieva Trains",QString::fromStdString(str));
     }
 }
 MainWindow::~MainWindow()

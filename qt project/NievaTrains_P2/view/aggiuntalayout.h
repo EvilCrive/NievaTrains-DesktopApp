@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QStringList>
 #include <QPushButton>
+#include <QLabel>
 #include <string>
 #include "supporto/comboboxmotoreprimario.h"
 #include "supporto/comboboxtech.h"
@@ -17,13 +18,13 @@ class AggiuntaLayout: public QDialog
     Q_OBJECT
 protected:
     QVBoxLayout* layoutPopUp;
+    QLabel *nomeL, *costruttoreL, *efficenzaSL, *efficenzaEL, *efficenzaICL, *speedL, *pesoL, *carburanteSL, *motoreICL;
     QLineEdit *nome, *costruttore, *efficenzaS, *efficenzaE, *efficenzaIC, *speed, *peso, *carburanteS, *motoreIC;
     ComboBoxTech *tecnologia;
     ComboBoxMotorePrimario *primario;
     ComboBoxTrasmissione *trasmissione;
     QPushButton *conferma, *annulla;
     unsigned int tipo;
-
 public:
     std::string getNome() const;
     std::string getCostruttore()const;

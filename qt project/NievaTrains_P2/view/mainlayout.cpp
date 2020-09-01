@@ -41,8 +41,8 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     inserisci->setText("Inserisci");
     carbNecessario->setText("Calculate Fuel");
     kmPer->setText("Calculate Km");
-    carbNecessarioBar->setPlaceholderText("Insert Kilometers");
-    kmPerBar->setPlaceholderText("Insert fuel available");
+    carbNecessarioBar->setPlaceholderText("Insert fuel avaiable");
+    kmPerBar->setPlaceholderText("Insert Kilometers");
     QHBoxLayout* layout=new QHBoxLayout(this);
     QVBoxLayout* left=new QVBoxLayout(this);
     QVBoxLayout* right=new QVBoxLayout(this);

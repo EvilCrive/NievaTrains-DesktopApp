@@ -43,6 +43,7 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     kmPer->setText("Calcola Km");
     carbNecessarioBar->setPlaceholderText("Inserisci i Km da percorrere");
     kmPerBar->setPlaceholderText("Inserisci il carburante disponibile");
+
     QHBoxLayout* layout=new QHBoxLayout(this);
     QVBoxLayout* left=new QVBoxLayout(this);
     QVBoxLayout* right=new QVBoxLayout(this);

@@ -709,8 +709,8 @@ void MainWindow::searchTecnologiaMaglev(std::string n){
  */
 void MainWindow::slotKmPercorribili(){
     if(layout->getList()->getItem()){
-        unsigned int mostra=layout->getList()->getItem()->getTreno()->kmPercorribili(layout->getCarb());
-        std::string str="I km percorribili dal treno selezionato con "+std::to_string(layout->getCarb())+" unità di carburante sono: "+std::to_string(mostra)+"km.";
+        unsigned int mostra=layout->getList()->getItem()->getTreno()->kmPercorribili(layout->getKm());
+        std::string str="I km percorribili dal treno selezionato con "+std::to_string(layout->getKm())+" unità di carburante sono: "+std::to_string(mostra)+"km.";
         QMessageBox::information(this,"Nieva Trains",QString::fromStdString(str));
     }
 }
@@ -720,8 +720,8 @@ void MainWindow::slotKmPercorribili(){
  */
 void MainWindow::slotCarburanteNecessario(){
     if(layout->getList()->getItem()){
-        unsigned int mostra=layout->getList()->getItem()->getTreno()->carburanteNecessario(layout->getKm());
-        std::string str="Le unità di carburante necessarie dal treno selezionato per percorrere "+std::to_string(layout->getKm())+"km sono: "+std::to_string(mostra);
+        unsigned int mostra=layout->getList()->getItem()->getTreno()->carburanteNecessario(layout->getCarb());
+        std::string str="Le unità di carburante necessarie dal treno selezionato per percorrere "+std::to_string(layout->getCarb())+"km sono: "+std::to_string(mostra);
         QMessageBox::information(this,"Nieva Trains",QString::fromStdString(str));
     }
 }

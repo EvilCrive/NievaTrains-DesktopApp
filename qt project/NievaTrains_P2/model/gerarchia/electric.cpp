@@ -73,7 +73,7 @@ void Electric::serialize(QJsonObject & json)
     json["peso"]=static_cast<int>(getPeso());
     std::string tmp="";
     if(getTrasmissioneElettrico()) tmp="Third Rail";
-    else tmp="Overhead Lines";
+    else tmp="Overhead Line";
     json["tipo_trasmissioneElettrico"]=QString::fromStdString(tmp);
     json["efficenzaElettrico"]=getEfficenzaElettrico();
 }

@@ -79,7 +79,7 @@ std::string Treno::treno2string()const{
     string tr=type();
     transform(tr.begin(), tr.end(), tr.begin(),
         [](unsigned char c){ return toupper(c); });
-    std::string s="\nTipo: "+tr+"\nNome: "+getNome()+"\nCostruttore: "+getCostruttore()+"\nVelocita': "+std::to_string(getSpeed())+"km/h"+"\nPeso: "+std::to_string(getPeso())+"kg";
+    std::string s="\nTipo: "+tr+"\nNome: "+getNome()+"\nCostruttore: "+getCostruttore()+"\nVelocita': "+std::to_string(getSpeed())+"km/h"+"\nPeso: "+std::to_string(getPeso())+"t";
     return s;
 }
 /**

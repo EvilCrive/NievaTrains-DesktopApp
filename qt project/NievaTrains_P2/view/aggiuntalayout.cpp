@@ -7,35 +7,35 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
     tecnologia(new ComboBoxTech(this)),primario(new ComboBoxMotorePrimario(this)), trasmissione(new ComboBoxTrasmissione(this)), conferma(new QPushButton(this)), annulla(new QPushButton(this)), tipo(tipoT)
 
 {
-    conferma->setText("Confirm");
-    annulla->setText("Cancel");
-    nomeL->setText("Name");
-    pesoL->setText("Weight");
-    speedL->setText("Top speed");
-    costruttoreL->setText("Builder");
-    efficenzaSL->setText("Steam engine efficency");
-    efficenzaEL->setText("Electric engine efficency");
-    efficenzaICL->setText("Internal combustion engine efficency");
-    carburanteSL->setText("Steam engine fuel");
-    motoreICL->setText("Internal combustion engine name");
+    conferma->setText("Conferma");
+    annulla->setText("Cancella");
+    nomeL->setText("Nome");
+    pesoL->setText("Peso");
+    speedL->setText("Velocità massima");
+    costruttoreL->setText("Costruttore");
+    efficenzaSL->setText("Efficenza motore a vapore");
+    efficenzaEL->setText("Effcienza motore elettrico");
+    efficenzaICL->setText("Efficenza motore Diesel");
+    carburanteSL->setText("Carburante motore a vapore");
+    motoreICL->setText("Nome motore Diesel");
 
-    nome->setPlaceholderText("Nome treno");
+    nome->setPlaceholderText("Inserisci nome treno");
     nome->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z ]{0,50}")));
-    costruttore->setPlaceholderText("Costruttore treno");
+    costruttore->setPlaceholderText("Inserisci costruttore treno");
     costruttore->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
-    efficenzaE->setPlaceholderText("Efficenza motore elettrico");
+    efficenzaE->setPlaceholderText("Inserisci efficenza motore elettrico");
     efficenzaE->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
-    efficenzaS->setPlaceholderText("Efficenza motore a vapore");
+    efficenzaS->setPlaceholderText("Inserisci efficenza motore a vapore");
     efficenzaS->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
-    efficenzaIC->setPlaceholderText("Efficenza motore a combustione interna");
+    efficenzaIC->setPlaceholderText("Inserisci efficenza motore a combustione interna");
     efficenzaIC->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
-    speed->setPlaceholderText("Velocità massima");
+    speed->setPlaceholderText("Inserisci velocità massima");
     speed->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
-    peso->setPlaceholderText("Peso");
+    peso->setPlaceholderText("Inserisci peso");
     peso->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
-    carburanteS->setPlaceholderText("Carburante steam");
+    carburanteS->setPlaceholderText("Inserisci carburante steam");
     carburanteS->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
-    motoreIC->setPlaceholderText("Nome e marca motore a combustione interna");
+    motoreIC->setPlaceholderText("Inserisci nome e marca motore a combustione interna");
     motoreIC->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
 
     motoreIC->hide();

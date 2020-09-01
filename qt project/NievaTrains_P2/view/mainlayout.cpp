@@ -33,16 +33,16 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     text3->setText("Inserisci treno");
     text4->setText("Cerca");
 
-    flush->setText("Flush");
-    search->setText("Search");
+    flush->setText("Svuota");
+    search->setText("Cerca");
     annulla->setText("Annulla");
     modifica->setText("Modifica");
     elimina->setText("Elimina");
     inserisci->setText("Inserisci");
-    carbNecessario->setText("Calculate Fuel");
-    kmPer->setText("Calculate Km");
-    carbNecessarioBar->setPlaceholderText("Insert Kilometers");
-    kmPerBar->setPlaceholderText("Insert fuel available");
+    carbNecessario->setText("Calcola carburante");
+    kmPer->setText("Calcola Km");
+    carbNecessarioBar->setPlaceholderText("Inserisci i Km da percorrere");
+    kmPerBar->setPlaceholderText("Inserisci il carburante disponibile");
     QHBoxLayout* layout=new QHBoxLayout(this);
     QVBoxLayout* left=new QVBoxLayout(this);
     QVBoxLayout* right=new QVBoxLayout(this);

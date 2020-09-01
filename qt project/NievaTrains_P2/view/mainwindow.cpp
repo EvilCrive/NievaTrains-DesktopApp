@@ -93,7 +93,7 @@ void MainWindow::slotSalva(){
  */
 void MainWindow::slotAutori()
 {
-    QMessageBox::information(this,"Nieva Trains","Gli autori:\n Alberto Crivellari, Matteo Brosolo, Francesco Bugno.");
+    QMessageBox::information(this,"Nieva Trains","Gli autori:\nAlberto Crivellari, Matteo Brosolo, Francesco Bugno.");
 }
 /**
  * @brief slotRemoveTreno rimuove il treno selezionato nella lista dei treni
@@ -152,7 +152,7 @@ void MainWindow::slotInserisciTreno() try {
     if(x==0){
         double efficenzaS=layoutAdd->getEfficenzaS();
         if(efficenzaS<0 || efficenzaS>1){
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaS=0.5;
         }
         std::string carburanteS=layoutAdd->getCarburanteS();
@@ -161,7 +161,7 @@ void MainWindow::slotInserisciTreno() try {
     }else if(x==1){
         double efficenzaE=layoutAdd->getEfficenzaE();
         if(efficenzaE<0 || efficenzaE>1){
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaE=0.5;
         }
         bool trasmissione=layoutAdd->getTrasmissione();
@@ -171,7 +171,7 @@ void MainWindow::slotInserisciTreno() try {
         std::string motoreIC=layoutAdd->getMotoreIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
         if(efficenzaIC<0 || efficenzaIC>1){
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaIC=0.5;
         }
         Internal_Combustion* train= new Internal_Combustion(nome, costruttore, peso, speed, efficenzaIC, motoreIC);
@@ -183,14 +183,14 @@ void MainWindow::slotInserisciTreno() try {
     }else{
         double efficenzaE=layoutAdd->getEfficenzaE();
         if(efficenzaE<0 || efficenzaE>1){
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaE=0.5;
         }
         bool trasmissione=layoutAdd->getTrasmissione();
         std::string motoreIC=layoutAdd->getMotoreIC();
         double efficenzaIC=layoutAdd->getEfficenzaIC();
         if(efficenzaIC<0 || efficenzaIC>1){
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaIC=0.5;
         }
         bool primario=layoutAdd->getPrimario();
@@ -198,7 +198,7 @@ void MainWindow::slotInserisciTreno() try {
         modello->push_end(train);
     }
     //prende l'ultimo treno del modello e lo aggiunge alla lista
-    layout->getList()->addTrenoList(modello->getTreno(modello->numerotreni()-1),modello->numerotreni()-1); //asd123
+    layout->getList()->addTrenoList(modello->getTreno(modello->numerotreni()-1),modello->numerotreni()-1);
     layout->getList()->setCurrentRow(modello->numerotreni()-1);
     //aggiornamento lista view
     layoutAdd->close();
@@ -275,7 +275,7 @@ void MainWindow::slotModificaTreno(){
     if(tip==0){
         double efficenzaSNew=layoutMod->getEfficenzaS();
         if(efficenzaSNew<0 || efficenzaSNew>1){
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaSNew=0.5;
         }
         std::string carburanteSNew=layoutMod->getCarburanteS();
@@ -284,7 +284,7 @@ void MainWindow::slotModificaTreno(){
     }else if(tip==1){
         double efficenzaENew=layoutMod->getEfficenzaE();
         if(efficenzaENew<0 || efficenzaENew>1)    {
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaENew=0.5;
         }
         bool trasmissioneNew=layoutMod->getTrasmissione();
@@ -294,7 +294,7 @@ void MainWindow::slotModificaTreno(){
         std::string motoreICNew=layoutMod->getMotoreIC();
         double efficenzaICNew=layoutMod->getEfficenzaIC();
         if(efficenzaICNew<0 || efficenzaICNew>1){
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaICNew=0.5;
         }
         Internal_Combustion* trenoDaSostituire=new Internal_Combustion(nomeNew, costruttoreNew, speedNew, pesoNew, efficenzaICNew, motoreICNew);
@@ -308,19 +308,17 @@ void MainWindow::slotModificaTreno(){
         double efficenzaICNew=layoutMod->getEfficenzaIC();
         double efficenzaENew=layoutMod->getEfficenzaE();
         if(efficenzaICNew<0 || efficenzaICNew>1){
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaICNew=0.5;
         }
         if(efficenzaENew<0 || efficenzaENew>1){
-            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5");
+            QMessageBox::warning(this,"Nieva Trains","Efficenza dev'essere compresa tra 0 e 1.\nVerra' settata a 0.5 e potrà essere modificata");
             efficenzaENew=0.5;
         }
         bool trasmissioneNew=layoutMod->getTrasmissione();
         bool primarioNew=layoutMod->getPrimario();
         Bimode* trenoDaSostituire=new Bimode(nomeNew, costruttoreNew, speedNew, pesoNew, trasmissioneNew, efficenzaENew, efficenzaICNew, motoreICNew, primarioNew);
         modello->sostituisci(trenoDaSostituire, x);
-    }else{
-        //throw
     }
     //refresh lista
     refreshList();
@@ -400,7 +398,7 @@ void MainWindow::slotCerca(){
 
     }
     }catch(...){
-        QMessageBox::warning(this,"Nieva Trains","eccezione ricerca");
+        QMessageBox::warning(this,"Nieva Trains","Qualcosa è andato storto, controlla i parametri di ricerca e riprova");
     }
 
 }

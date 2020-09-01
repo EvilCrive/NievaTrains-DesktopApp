@@ -1,7 +1,6 @@
 #include "combotype.h"
 
-ComboType::ComboType(QWidget* parent):
-    QComboBox (parent)
+ComboType::ComboType(QWidget* p): QComboBox (p)
 {
     addItem("Vapore");
     addItem("Elettrico");

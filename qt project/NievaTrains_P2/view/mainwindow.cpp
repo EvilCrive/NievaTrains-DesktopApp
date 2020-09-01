@@ -19,11 +19,17 @@ MainWindow::MainWindow(Model* m, QWidget *parent): QWidget(parent), menu(new Men
     mainLayout->setMenuBar(menu);
     setLayout(mainLayout);
 }
+/**
+ * @brief refreshList svuota la lista dei treni e la riempie con i treni presenti nel modello
+ */
 void MainWindow::refreshList(){
     layout->getList()->clear();
     for(unsigned int i=0; i<modello->numerotreni(); i++)
-        layout->getList()->addTrenoList(modello->getTreno(i),i); //asd123
+        layout->getList()->addTrenoList(modello->getTreno(i),i);
 }
+/**
+ * @brief slotShowInfoGenerali mostra una finestra popup in cui sono presenti delle informazioni riguardanti l'insieme dei treni nel sistema
+ */
 void MainWindow::slotShowInfoGenerali(){
     //occhio che magari il puntatore viene cancellato all'uscita ma non l'oggetto
     QString str1= "La quantità di treni presenti nel sistema è:  "+QString::number(modello->numerotreni())+"treni";
@@ -33,11 +39,12 @@ void MainWindow::slotShowInfoGenerali(){
     QString str5= "La velocità maggiore registrata è:  "+QString::number(modello->getSpeedT())+"km/h";
 
     InfoLayout* info=new InfoLayout(this,str1,str2,str3,str4,str5);
-    info->setMargin(13);
-    info->setDimensioni(300,250);
-    info->show();
+    info->setMargin(8);
+    info->exec();
 }
-//lista eccezioni
+/**
+ * @brief slotCarica carica un file json esterno per riempire il sistema con i treni contenuti in esso
+ */
 void MainWindow::slotCarica(){
     QString file= QFileDialog::getOpenFileName(
                 this,
@@ -63,7 +70,9 @@ void MainWindow::slotCarica(){
         QMessageBox::warning(this,"Nieva Trains","Seleziona un file.");
     }
 }
-//lista eccezioni
+/**
+ * @brief slotSalva esporta in un documento json i file del sistema
+ */
 void MainWindow::slotSalva(){
     QString file= QFileDialog::getSaveFileName(
                 this,
@@ -79,13 +88,16 @@ void MainWindow::slotSalva(){
         QMessageBox::warning(this,"Nieva Trains","Seleziona un file.");
     }
 }
-
+/**
+ * @brief slotAutori mostra in una finestra di dialogo gli autori del programma
+ */
 void MainWindow::slotAutori()
 {
     QMessageBox::information(this,"Nieva Trains","Gli autori:\n Alberto Crivellari, Matteo Brosolo, Francesco Bugno.");
 }
-
-
+/**
+ * @brief slotRemoveTreno rimuove il treno selezionato nella lista dei treni
+ */
 void MainWindow::slotRemoveTreno() try
 {
     if(layout->estraiTrenoSelezionato()==-1)   throw new NievaException("Seleziona un treno esistente da eliminare");
@@ -98,6 +110,9 @@ void MainWindow::slotRemoveTreno() try
     QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));
 }
 catch(...){std::cout<<"ecc";}
+/**
+ * @brief slotShowTreno mostra le caratteristiche del treno selezionato nella lista dei treni nell'apposito spazio
+ */
 void MainWindow::slotShowTreno(){
     string str="";
     if(layout->estraiTrenoSelezionato()!=-1 && layout->getList()->getItem()){
@@ -105,17 +120,25 @@ void MainWindow::slotShowTreno(){
     }
     layout->stampaDettagliTreno(str);
 }
+/**
+ * @brief slotFlush svuota la lista dei treni ed il modello
+ */
 void MainWindow::slotFlush(){
     layout->flushList();
     modello->clear();
 }
-
+/**
+ * @brief slotShowInserimentoTreno fa comparire la finestra di inserimento treno del tipo selezionato dall'utente
+ */
 void MainWindow::slotShowInserimentoTreno(){
     int x=layout->getTrenoInserimento();
     layoutAdd=new AggiuntaLayout(this,x);
     layoutAdd->resize(250,350);
     layoutAdd->exec();
 }
+/**
+ * @brief slotInserisciTreno crea un nuovo treno con le informazioni date dall'utente e lo inserisce nel modello
+ */
 void MainWindow::slotInserisciTreno() try {
     unsigned int x=layoutAdd->getTipo();
     std::string nome=layoutAdd->getNome();
@@ -181,13 +204,18 @@ void MainWindow::slotInserisciTreno() try {
     layoutAdd->close();
     delete layoutAdd;
 }catch(NievaException* e){QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));}
+/**
+ * @brief slotShowModificaTreno fa comparire la finestra di modifica del treno selezionato precompilando i valori del treno
+ */
 void MainWindow::slotShowModificaTreno() try{
     if(layout->estraiTrenoSelezionato()==-1)   throw new NievaException("Seleziona un treno esistente da modificare");
     unsigned int indecs=layout->getList()->getItem()->getRealIndex();
     Treno* TrenoDaModificare=modello->getTreno(indecs);
     std::string tipo=TrenoDaModificare->type();
-    /*Vengono usati i dynamic cast dove è necessario poichè non c'è altro modo per estrarre i campi di tipi derivati senza andare a modificare la gerarchia con
-    metodi ad hoc*/
+    /*
+     * Vengono usati i dynamic cast dove è necessario poichè non c'è altro modo per estrarre i campi di tipi derivati senza andare a modificare la gerarchia con
+     * metodi ad hoc (si usano per questo i normali get)
+     */
     if(tipo=="Electric"){
         layoutMod=new ModificaLayout(this,1,indecs);
         Electric*tmp=dynamic_cast<Electric*>(TrenoDaModificare);
@@ -233,6 +261,9 @@ void MainWindow::slotShowModificaTreno() try{
 }catch(NievaException* e){
     QMessageBox::warning(this,"Nieva Trains",QString::fromStdString(e->getMessage()));
 }
+/**
+ * @brief slotModificaTreno crea un nuovo treno con le informazioni date dall'utente e lo inserisce nel modello al posto del precedente
+ */
 void MainWindow::slotModificaTreno(){
     unsigned int x=layoutMod->getInd(); //è l'indice reale
     unsigned int tip=layoutMod->getTipo();
@@ -297,6 +328,9 @@ void MainWindow::slotModificaTreno(){
     layoutMod->close();
     delete layoutMod;
 }
+/**
+ * @brief slotCerca filtra la lista dei treni a seconda del parametro e dell'ambito scelti dall'utente
+ */
 void MainWindow::slotCerca(){
     try{
     unsigned int filtro=layout->getFiltro();
@@ -336,32 +370,32 @@ void MainWindow::slotCerca(){
                searchEfficenzaIC(std::atof(parametro.substr(1).c_str()), false);
            break;
     case 6:
-        searchTrasmissioneelettrico(parametro);
+        searchTrasmissioneElettrico(parametro);
         break;
     case 7:
            if(parametro.substr(0,1)=="<")
-               searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), true);
+               searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str()), true);
            else if(parametro.substr(0,1)==">")
-               searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str()), false);
            else
-               searchEfficenzaelettrico(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str()), false);
            break;
     case 8:
            if(parametro.substr(0,1)=="<")
-               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), true);
+               searchEfficenzaVapore(std::atof(parametro.substr(1).c_str()), true);
            else if(parametro.substr(0,1)==">")
-               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzaVapore(std::atof(parametro.substr(1).c_str()), false);
            else
-               searchEfficenzavapore(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzaVapore(std::atof(parametro.substr(1).c_str()), false);
            break;
     case 9:
-        searchCarburantevapore(parametro);
+        searchCarburanteVapore(parametro);
         break;
     case 10:
-        searchTecnologiamaglev(parametro);
+        searchTecnologiaMaglev(parametro);
         break;
     case 11:
-        searchMotoreprimario(parametro);
+        searchMotorePrimario(parametro);
         break;
 
     }
@@ -370,12 +404,17 @@ void MainWindow::slotCerca(){
     }
 
 }
+/**
+ * @brief slotResetSearch annulla il filtraggio applicato alla lista dei treni se presente
+ */
 void MainWindow::slotResetSearch(){
     refreshList();
-
 }
 using std::cout;
-/*filtri*/
+/**
+ * @brief searchNome filtra la lista dei treni mantenendo solo i treni aventi il nome simile al parametro inserito dall'utente
+ * @param n= stringa inserita dall'utente
+ */
 void MainWindow::searchNome(std::string n)
 {
     unsigned int lun=layout->getList()->count();
@@ -393,6 +432,10 @@ void MainWindow::searchNome(std::string n)
         }
     }
 }
+/**
+ * @brief searchCostruttore filtra la lista dei treni mantenendo solo i treni aventi il costruttore simile al parametro inserito dall'utente
+ * @param n= stringa inserita dall'utente
+ */
 void MainWindow::searchCostruttore(std::string n)
 {
     unsigned int lun=layout->getList()->count();
@@ -410,6 +453,10 @@ void MainWindow::searchCostruttore(std::string n)
         }
     }
 }
+/**
+ * @brief searchMotoreIC filtra la lista dei treni mantenendo solo i treni a combustione interna aventi il nome del motore simile al parametro inserito dall'utente
+ * @param n= stringa inserita dall'utente
+ */
 void MainWindow::searchMotoreIC(std::string n){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
@@ -429,10 +476,14 @@ void MainWindow::searchMotoreIC(std::string n){
         }else{
                 layout->getList()->erase(i);
                 --i; --lun;
-            }
         }
     }
-void MainWindow::searchCarburantevapore(std::string n){
+}
+/**
+ * @brief searchCarburanteVapore filtra la lista dei treni mantenendo solo i treni a vapore aventi il carburante simile al parametro inserito dall'utente
+ * @param n= stringa inserita dall'utente
+ */
+void MainWindow::searchCarburanteVapore(std::string n){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Steam"){
@@ -455,7 +506,11 @@ void MainWindow::searchCarburantevapore(std::string n){
         }
     }
 }
-
+/**
+ * @brief searchPeso filtra la lista dei treni mantenendo solo i treni aventi il peso maggiore o minore del parametro inserito dall'utente
+ * @param n= peso inserito dall'utente
+ * @param b= scelta se selezionare solo i maggiori o solo i minori
+ */
 void MainWindow::searchPeso(unsigned int n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
@@ -470,6 +525,11 @@ void MainWindow::searchPeso(unsigned int n, bool b){
         }
     }
 }
+/**
+ * @brief searchVelocita filtra la lista dei treni mantenendo solo i treni aventi la velocità maggiore o minore del parametro inserito dall'utente
+ * @param n= velocita inserito dall'utente
+ * @param b= scelta se selezionare solo i maggiori o solo i minori
+ */
 void MainWindow::searchVelocita(unsigned int n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
@@ -484,9 +544,12 @@ void MainWindow::searchVelocita(unsigned int n, bool b){
         }
     }
 }
-
-
-void MainWindow::searchEfficenzavapore(double n, bool b){
+/**
+ * @brief searchEfficenzaVapore filtra la lista dei treni mantenendo sol i treni a vapore aventi l'efficenza del motore a vapore maggiore o minore del parametro inserito dall'utente
+ * @param n= efficenza inserita dall'utente
+ * @param b= scelta se selezionare solo i maggiori o solo i minori
+ */
+void MainWindow::searchEfficenzaVapore(double n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Steam"){
@@ -505,7 +568,12 @@ void MainWindow::searchEfficenzavapore(double n, bool b){
         }
     }
 }
-void MainWindow::searchEfficenzaelettrico(double n, bool b){
+/**
+ * @brief searchEfficenzaElettrico filtra la lista dei treni mantenendo sol i treni elettrici aventi l'efficenza del motore elettrico maggiore o minore del parametro inserito dall'utente
+ * @param n= efficenza inserita dall'utente
+ * @param b= scelta se selezionare solo i maggiori o solo i minori
+ */
+void MainWindow::searchEfficenzaElettrico(double n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Electric" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
@@ -526,6 +594,11 @@ void MainWindow::searchEfficenzaelettrico(double n, bool b){
         }
     }
 }
+/**
+ * @brief searchEfficenzaIC filtra la lista dei treni mantenendo sol i treni a combustione interna aventi l'efficenza del motore diesel maggiore o minore del parametro inserito dall'utente
+ * @param n= efficenza inserita dall'utente
+ * @param b= scelta se selezionare solo i maggiori o solo i minori
+ */
 void MainWindow::searchEfficenzaIC(double n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
@@ -547,7 +620,11 @@ void MainWindow::searchEfficenzaIC(double n, bool b){
         }
     }
 }
-void MainWindow::searchTrasmissioneelettrico(std::string n){
+/**
+ * @brief searchTrasmissioneElettrico filtra la lista dei treni mantenendo sol i treni elettrici aventi il tipo di trasmissione uguale al parametro inserito dall'utente
+ * @param n= stringa inserita dall'utente
+ */
+void MainWindow::searchTrasmissioneElettrico(std::string n){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Electric" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
@@ -572,7 +649,11 @@ void MainWindow::searchTrasmissioneelettrico(std::string n){
         }
     }
 }
-void MainWindow::searchMotoreprimario(std::string n){
+/**
+ * @brief searchMotorePrimario filtra la lista dei treni mantenendo sol i treni Bimode aventi il motore primario uguale al parametro inserito dall'utente
+ * @param n= stringa inserita dall'utente
+ */
+void MainWindow::searchMotorePrimario(std::string n){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Bimode"){
@@ -597,7 +678,11 @@ void MainWindow::searchMotoreprimario(std::string n){
         }
     }
 }
-void MainWindow::searchTecnologiamaglev(std::string n){
+/**
+ * @brief searchTecnologiaMaglev filtra la lista dei treni mantenendo sol i treni Maglev utilizzanti la tecnologia uguale al parametro inserito dall'utente
+ * @param n= stringa inserita dall'utente
+ */
+void MainWindow::searchTecnologiaMaglev(std::string n){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Maglev"){
@@ -620,6 +705,10 @@ void MainWindow::searchTecnologiamaglev(std::string n){
         }
     }
 }
+/**
+ * @brief slotKmPercorribili mostra una finestra pop up contenente i km percorribili dal treno selezionato nella lista dei treni con le unità di carburante indicate nell'apposita barra dall'utente.
+ * Nel caso un treno non utilizzi carburante come per esempio i Maglev, sarà bloccato a 0
+ */
 void MainWindow::slotKmPercorribili(){
     if(layout->getList()->getItem()){
         unsigned int mostra=layout->getList()->getItem()->getTreno()->kmPercorribili(layout->getCarb());
@@ -627,6 +716,10 @@ void MainWindow::slotKmPercorribili(){
         QMessageBox::information(this,"Nieva Trains",QString::fromStdString(str));
     }
 }
+/**
+ * @brief slotCarburanteNecessario mostra una finestra pop up contenente il carburante necessario per il treno selezionato nella lista dei treni per percorrere i km indicati nell'apposita barra dall'utente.
+ * Nel caso un treno non utilizzi carburante come per esempio i Maglev, sarà bloccato a 0
+ */
 void MainWindow::slotCarburanteNecessario(){
     if(layout->getList()->getItem()){
         unsigned int mostra=layout->getList()->getItem()->getTreno()->carburanteNecessario(layout->getKm());

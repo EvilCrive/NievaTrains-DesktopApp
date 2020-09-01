@@ -25,12 +25,20 @@ void Internal_Combustion::setMotoreIC(std::string tr)
 {
     motoreIC=tr;
 }
-
+/**
+ * @brief carburanteNecessario calcola quante unità di carburante sono necessarie perchè il treno compia un determinato numero di km
+ * @param km da percorrere
+ * @return carburante necessario
+ */
 double Internal_Combustion::carburanteNecessario(unsigned int km) const
 {
     return km/efficenzaIC;
 }
-
+/**
+ * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante
+ * @param unità di carburante
+ * @return km percorribili
+ */
 unsigned int Internal_Combustion::kmPercorribili(unsigned int l) const
 {
     return static_cast<unsigned int>(efficenzaIC*l);
@@ -53,6 +61,10 @@ std::string Internal_Combustion::treno2string() const{
     s.append("\nCarburante: "+getMotoreIC()+"\nEfficenza: "+efficenza+"%");
     return s;
 }
+/**
+ * @brief serialize trasforma il treno nella sua rappresentazione in json
+ * @param oggetto json
+ */
 void Internal_Combustion::serialize(QJsonObject & json)
 {
     json["type"]="Internal_Combustion";

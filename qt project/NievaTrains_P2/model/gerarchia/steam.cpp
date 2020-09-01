@@ -25,12 +25,20 @@ void Steam::setCarburanteSteam(std::string tr)
 {
     carburanteSteam=tr;
 }
-
+/**
+ * @brief carburanteNecessario calcola quante unità di carburante sono necessarie perchè il treno compia un determinato numero di km
+ * @param km da percorrere
+ * @return carburante necessario
+ */
 double Steam::carburanteNecessario(unsigned int km) const
 {
     return km/efficenzaSteam;
 }
-
+/**
+ * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante
+ * @param unità di carburante
+ * @return km percorribili
+ */
 unsigned int Steam::kmPercorribili(unsigned int kg) const
 {
     return static_cast<unsigned int>(efficenzaSteam*kg);
@@ -53,7 +61,10 @@ std::string Steam::treno2string() const{
     s.append("\nEfficenza: "+efficenza+"%"+"\nCarburante: "+getCarburanteSteam());
     return s;
 }
-
+/**
+ * @brief serialize trasforma il treno nella sua rappresentazione in json
+ * @param oggetto json
+ */
 void Steam::serialize(QJsonObject & json)
 {
     json["type"]="Steam";

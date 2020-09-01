@@ -1,14 +1,7 @@
 #include "nievaexception.h"
 
-/*NievaException::NievaException(QString m, QObject *parent) : message(m), QObject(parent)
-{
-
-}*/
-
-NievaException::NievaException(std::string m, QObject *parent): message(QString::fromStdString(m)), QObject(parent)
-{
-
-}
+NievaException::NievaException(std::string m, QObject *parent):  QObject(parent), message(QString::fromStdString(m))
+{}
 
 void NievaException::setMessage(std::string m)
 {

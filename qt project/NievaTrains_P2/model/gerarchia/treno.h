@@ -22,8 +22,6 @@ public:
     void setCostruttore(std::string);
     void setSpeed(unsigned int);
     void setPeso(unsigned int);
-    void setTipo_rotaia(std::string);
-    void setTipo_treno(std::string);
 
     virtual std::string type() const;
     virtual void print()const;

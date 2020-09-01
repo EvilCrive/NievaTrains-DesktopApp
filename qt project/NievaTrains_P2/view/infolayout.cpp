@@ -6,7 +6,8 @@ InfoLayout::InfoLayout(QWidget* p, QString str1, QString str2, QString str3, QSt
     second(new QLabel(this)),
     third(new QLabel(this)),
     fourth(new QLabel(this)),
-    fifth(new QLabel(this))
+    fifth(new QLabel(this)),
+    img(new QPixmap(":/risorse/InfoGenerali.jpg"))
 {
     first->setText(str1);
     second->setText(str2);
@@ -15,6 +16,7 @@ InfoLayout::InfoLayout(QWidget* p, QString str1, QString str2, QString str3, QSt
     fifth->setText(str5);
 
     QVBoxLayout* ilayout(new QVBoxLayout(this));
+    QHBoxLayout* imgLayout(new QHBoxLayout());
     setWindowTitle("Informazioni Generali");
 
     ilayout->addWidget(first);
@@ -22,7 +24,19 @@ InfoLayout::InfoLayout(QWidget* p, QString str1, QString str2, QString str3, QSt
     ilayout->addWidget(third);
     ilayout->addWidget(fourth);
     ilayout->addWidget(fifth);
-    setLayout(ilayout);
+
+    QLabel* image = new QLabel(this);
+    image->setPixmap(*img);
+    image->resize(300,250);
+    imgLayout->addWidget(image);
+
+    QHBoxLayout* infoLayout(new QHBoxLayout(this));
+    infoLayout->addLayout(imgLayout);
+    infoLayout->addLayout(ilayout);
+
+    setLayout(infoLayout);
+
+    resize(500,500);
 }
 
 void InfoLayout::setMargin(int margin)
@@ -34,8 +48,5 @@ void InfoLayout::setMargin(int margin)
     fifth->setMargin(margin);
 }
 
-void InfoLayout::setDimensioni(int width, int height)
-{
-     resize(width,height);
-}
+
 

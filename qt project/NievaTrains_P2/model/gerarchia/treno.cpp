@@ -53,14 +53,17 @@ void Treno::setPeso(unsigned int p)
 {
     peso=p;
 }
-
-
-
+/**
+ * @brief type ritorna il tipo del treno
+ * @return stringa rappresentante il tipo del treno
+ */
 string Treno::type() const
 {
  return "Treno";
 }
-
+/**
+ * @brief stampa tramite cout alcune informazioni sul treno (usata per debugging)
+ */
 void Treno::print() const
 {
     string tr=type();
@@ -68,6 +71,10 @@ void Treno::print() const
         [](unsigned char c){ return toupper(c); });
     cout<<"\nTipo: "<<tr<<"\nNome: "<<getNome()<<"\nCostruttore: "<<getCostruttore()<<"\nVelocita': "<<getSpeed()<<"km/h";
 }
+/**
+  * @brief utilizzata per rappresentazre in forma di stringa un treno
+  * @return stringa contentente le informazioni riguardanti il treno
+  */
 std::string Treno::treno2string()const{
     string tr=type();
     transform(tr.begin(), tr.end(), tr.begin(),
@@ -75,8 +82,11 @@ std::string Treno::treno2string()const{
     std::string s="\nTipo: "+tr+"\nNome: "+getNome()+"\nCostruttore: "+getCostruttore()+"\nVelocita': "+std::to_string(getSpeed())+"km/h"+"\nPeso: "+std::to_string(getPeso())+"kg";
     return s;
 }
-
-//lista eccezioni
+/**
+ * @brief unserialize trasforma un oggetto treno rappresentato in json in un oggetto di tipo treno
+ * @param oggetto json
+ * @return oggetto treno
+ */
 Treno *Treno::unserialize(QJsonObject & json){
     Treno* t=nullptr;
     string type=json["type"].toString().toStdString();

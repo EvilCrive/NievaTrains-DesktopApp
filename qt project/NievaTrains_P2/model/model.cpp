@@ -12,13 +12,21 @@
 using std::cout;
 using std::string;
 
-
+/**
+ * @brief print stampa alcuni dati appartenenti al treno in posizione i (usata per debugging)
+ * @param i= index nel contenitore
+ */
 void Model::print(unsigned int i) const
 {
     cout<<"Dati "<<": \n";
     list[i]->print();
     cout<<"\n\n\n";
 }
+/**
+ * @brief treno2string rappresenta le informazioni del treno in posizione i tramite una stringa
+ * @param i= index nel contenitore
+ * @return stringa contenente la rappresentazione del treno in questo formato
+ */
 std::string Model::treno2string(unsigned int i) const{
     int numero=i+1;
     std::string s="TRENO "+ std::to_string(numero)+": \n";
@@ -27,6 +35,9 @@ std::string Model::treno2string(unsigned int i) const{
     s.append("\n\n\n");
     return s;
 }
+/**
+ * @brief utilizza print per stampare alcune informazioni di tutti i treni all'interno del contenitore
+ */
 void Model::print_all() const
 {
     for(unsigned int i=0; i<list.getSize();i++) print(i);
@@ -39,26 +50,34 @@ Treno *Model::operator[](unsigned int i) const
 Treno* Model::getTreno(unsigned int i) const{
     return (*this)[i];
 }
-/**/
-Treno* Model::getTrenoDisplay(unsigned int i) const{
-    return (*this)[i];
-}
-/**/
+/**
+ * @brief erase elimina il treno in posizione i
+ * @param i= index nel contenitore
+ */
 void Model::erase(unsigned int i)
 {
     list.pop(i);
 }
+/**
+ * @brief clear elimina tutti i treni dal contenitore
+ */
 void Model::clear()
 {
     while(list.getSize()>0) erase(0);
 }
-
+/**
+ * @brief isEmpty verifica se il contenitore è vuoto o meno
+ * @return booleano
+ */
 bool Model::isEmpty() const
 {
     if(list.getSize()==0)   return 1;
     else    return 0;
 }
-
+/**
+  * @brief getSpeedM calcola la velocità massima media tra tutti i treni nel contenitore
+  * @return intero rappresentante la velocità massima media tra tutti i treni
+  */
  unsigned int  Model::getSpeedM() const
 {
      unsigned int count=0;
@@ -69,7 +88,10 @@ bool Model::isEmpty() const
      if(!count)  return 0;
      else    return count/i;
 }
-
+ /**
+   * @brief getPesoM calcola il peso medio tra tutti i treni nel contenitore
+   * @return intero rappresentante il peso medio tra tutti i treni
+   */
 double Model::getPesoM() const
 {
     double count=0;
@@ -81,6 +103,10 @@ double Model::getPesoM() const
     if(!count)  return 0;
     else    return count/i;
 }
+/**
+ * @brief getPesoT cerca il peso più alto tra i treni del contenitore
+ * @return double rappresentante il peso più alto
+ */
 double Model::getPesoT() const
 {
     double toRet=0;
@@ -90,6 +116,10 @@ double Model::getPesoT() const
     }
     return toRet;
 }
+/**
+ * @brief getSpeedT cerca la velocità massima più alta tra i treni del contenitore
+ * @return intero rappresentante la velocità massima più alta
+ */
 unsigned int Model::getSpeedT() const
 {
     double toRet=0;
@@ -99,185 +129,37 @@ unsigned int Model::getSpeedT() const
     }
     return toRet;
 }
+/**
+ * @brief sostituisce il treno in posizione y con un nuovo treno
+ * @param x= treno da sostituire al posto di quello presente nel contenitore
+ * @param y= indice del treno da eliminare
+ */
 void Model::sostituisci(Treno* x, unsigned int y){
     if(x) list.switchItem(&x,y);
 
 }
+/**
+ * @brief numerotreni ritorna la quantità di treni nel contenitore
+ * @return
+ */
 unsigned int Model::numerotreni() const
 {
-    int count=0;
-    for(unsigned int i=0; i<list.getSize();i++){
-        count++;
-    }
-    return count;
+    return list.getSize();
 }
+/**
+ * @brief push_end aggiunge un treno in coda al contenitore
+ * @param t= treno da aggiungere
+ */
 void Model::push_end(Treno *t)
 {
     if(t)   list.push(&t);
 }
 
-void Model::searchNome(std::string n)
-{
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        if(n!=(*it)->getNome()){
-            list.erase(*it);
-            --it;
-        }
-    }
-}
-void Model::searchCostruttore(std::string n)
-{
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        if(n!=(*it)->getCostruttore()){
-            list.erase(*it);
-            --it;
-        }
-    }
-}
-void Model::searchMotoreIC(std::string n){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(*it);
-        if(t){
-            if(n!=t->getMotoreIC()){
-                list.erase(*it);
-                --it;
-            }
-        }
-    }
-}
-void Model::searchCarburantevapore(std::string n){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        if((*it)->type()=="Steam"){
-            Steam* t=static_cast<Steam*>(*it);
-            if(n!=t->getCarburanteSteam()){
-                list.erase(*it);
-                --it;
-            }
-        }
-    }
-}
-
-void Model::searchPeso(unsigned int n, bool b){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        if(b && (*it)->getPeso()<n){
-            //maggiore
-            list.erase(*it);
-            --it;
-        }else if(!b && (*it)->getPeso()>=n){
-            //minore
-            list.erase(*it);
-            --it;
-        }
-    }
-}
-void Model::searchVelocita(unsigned int n, bool b){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        if(b && (*it)->getSpeed()<n){
-            //maggiore
-            list.erase(*it);
-            --it;
-        }else if(!b && (*it)->getSpeed()>=n){
-            //minore
-            list.erase(*it);
-            --it;
-        }
-    }
-}
-
-
-void Model::searchEfficenzavapore(double n, bool b){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        if((*it)->type()=="Steam"){
-            Steam* t=static_cast<Steam*>(*it);
-            if(b && n<t->getEfficenzaSteam()){
-                list.erase(*it);
-                --it;
-            }else if(b && n>=t->getEfficenzaSteam()){
-                list.erase(*it);
-                --it;
-            }
-        }
-    }
-}
-void Model::searchEfficenzaelettrico(double n, bool b){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        Electric* t=dynamic_cast<Electric*>(*it);
-        if(t){
-            if(b && n<t->getEfficenzaElettrico()){
-                list.erase(*it);
-                --it;
-            }else if(!b && n>=t->getEfficenzaElettrico()){
-                list.erase(*it);
-                --it;
-            }
-        }
-    }
-}
-void Model::searchEfficenzaIC(double n, bool b){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(*it);
-        if(t){
-            if(b && n<t->getEfficenzaIC()){
-                list.erase(*it);
-                --it;
-            }else if(b && n>=t->getEfficenzaIC()){
-                list.erase(*it);
-                --it;
-            }
-        }
-    }
-}
-void Model::searchTrasmissioneelettrico(std::string n){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        Electric* t=dynamic_cast<Electric*>(*it);
-        if(t){
-            bool  test;
-            if(n=="third rail") test=true;
-            else if(n=="overhead lines")    test=false;
-            //eccezione ?
-            else    return;
-            if(test!=t->getTrasmissioneElettrico()){
-                list.erase(*it);
-                --it;
-            }
-        }
-    }
-}
-void Model::searchMotoreprimario(std::string n){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        Bimode* t=dynamic_cast<Bimode*>(*it);
-        if(t){
-            bool test;
-            if(n=="ic") test=true;
-            else if(n=="electric")    test=false;
-            //eccezione ?
-            else    return;
-            if(test!=t->getMotorePrimario()){
-                list.erase(*it);
-                --it;
-            }
-        }
-    }
-}
-void Model::searchTecnologiamaglev(std::string n){
-    for(auto it=list.cbegin();it!=list.cend(); ++it){
-        if((*it)->type()=="Maglev"){
-            Maglev* t=static_cast<Maglev*>(*it);
-            bool test;
-            if(n=="eds") test=true;
-            else if(n=="ems")    test=false;
-            //eccezione ?
-            else return;
-            if(test!=t->getTecnologia()){
-                list.erase(*it);
-                --it;
-            }
-        }
-    }
-}
-
 // INPUT OUTPUT JSON
-//lista eccezioni
+/**
+ * @brief load carica da un file json rappresentante dei treni, gli stessi treni nel contenitore svuotando il contenuto precedente
+ * @param path= percorso in cui si trova il file json
+ */
 void Model::load(std::string path) try{
     std::string errors="";
 
@@ -330,8 +212,10 @@ void Model::load(std::string path) try{
     //rithrowo le eccezioni al chiamante(controller)
     throw e;
 }
-
-//lista eccezioni
+/**
+ * @brief save salva i treni del contenitore in un file esterno in formato json
+ * @param path= percorso in cui salvare il file
+ */
 void Model::save(std::string path) const try{
     QFile saveFile(QString::fromStdString(path));
     if(!saveFile.open(QIODevice::WriteOnly)){

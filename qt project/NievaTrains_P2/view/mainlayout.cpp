@@ -95,21 +95,31 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     connect(carbNecessario, SIGNAL(clicked()), p, SLOT(slotCarburanteNecessario()));
 
 }
+/**
+ * @brief estraiTrenoSelezionato ritorna l'indice del treno selezionato nella lista dei treni
+ * @return intero rappresentante un indice
+ */
 int MainLayout::estraiTrenoSelezionato() const{
     return trainList->getIndex();
 }
 TrainListWidget* MainLayout::getList() const{
     return trainList;
 }
+/**
+ * @brief stampaDettagliTreno stampa nell'apposito spazio la stringa che gli viene passata (che rappresenterà un treno in questo formato)
+ * @param s= treno in formato stringa
+ */
 void MainLayout::stampaDettagliTreno(std::string s) const{
     infoTrain->clear();
     infoTrain->setText(QString::fromStdString(s));
 }
+/**
+ * @brief flushList svuota la lista dei treni
+ */
 void MainLayout::flushList(){
     infoTrain->clear();
     trainList->clear();
 }
-
 void MainLayout::eliminaTreno(unsigned int t)
 {
     trainList->erase(t);

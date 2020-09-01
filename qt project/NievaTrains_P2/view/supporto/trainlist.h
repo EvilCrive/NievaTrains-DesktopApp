@@ -18,6 +18,7 @@ public:
     Treno* getTreno() const;
 
 };
+
 class TrainListWidget : public QListWidget
 {
     Q_OBJECT
@@ -25,15 +26,11 @@ public:
     TrainListWidget(QWidget * =nullptr);
 
     unsigned int getIndex() const;
-    bool isSelected() const;
     TrainListWidgetItem* getItem() const;
     Treno* getItemByIndex(unsigned int x) const;
     void addTrenoList(Treno* , unsigned int=0);
     void clear();
     void erase(unsigned int);
-
-
-
 };
 
 #endif // TRAINLIST_H

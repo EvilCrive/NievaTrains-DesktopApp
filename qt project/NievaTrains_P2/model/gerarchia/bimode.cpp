@@ -35,7 +35,11 @@ void Bimode::setEfficenzaElettrico(double e)
 {
     Electric::setEfficenzaElettrico(e);
 }
-
+/**
+ * @brief carburanteNecessario calcola quante unità di carburante sono necessarie perchè il treno compia un determinato numero di km
+ * @param km da percorrere
+ * @return carburante necessario
+ */
 double Bimode::carburanteNecessario(unsigned int km) const
 {
     double result=0;
@@ -45,7 +49,11 @@ double Bimode::carburanteNecessario(unsigned int km) const
         result= (((km/efficenzaElettrico)*0.25)+((km/efficenzaIC)*0.75));
     return result;
 }
-
+/**
+ * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante
+ * @param unità di carburante
+ * @return km percorribili
+ */
 unsigned int Bimode::kmPercorribili(unsigned int f) const
 {
     unsigned int result=0;
@@ -55,18 +63,26 @@ unsigned int Bimode::kmPercorribili(unsigned int f) const
         result= static_cast<unsigned int>(efficenzaIC*f);
     return result;
 }
-
+/**
+ * @brief type ritorna il tipo del treno
+ * @return stringa rappresentante il tipo del treno
+ */
 std::string Bimode::type() const
 {
     return "Bimode";
 }
-
+/**
+ * @brief stampa tramite cout alcune informazioni sul treno (usata per debugging)
+ */
 void Bimode::print() const
 {
     Treno::print();
     std::cout<<"\nMotore Primario: "<<getMotorePrimario()<<"\nTrasmissione Motore Elettrico: "<<Electric::getTrasmissioneElettrico()<<"\nEfficenza Motore Elettrico: "<<Electric::getEfficenzaElettrico()*100<<"%"<<"\nEfficenza Motore a Combustione Interna: "<<Internal_Combustion::getEfficenzaIC()*100<<"%"<<"\nCarburante Motore a Combustione Interna: "<<getMotoreIC();
-
 }
+/**
+  * @brief utilizzata per rappresentazre in forma di stringa un treno
+  * @return stringa contentente le informazioni riguardanti il treno
+  */
 std::string Bimode::treno2string() const{
     std::string s=Treno::treno2string();
     std::string efficenzaIC=std::to_string(getEfficenzaIC()*100);
@@ -82,6 +98,10 @@ std::string Bimode::treno2string() const{
     s.append("\nMotore Primario: "+tmp+"\nTrasmissione Motore Elettrico: "+tmp2+"\nEfficenza Motore Elettrico: "+efficenzaE+"%"+"\nEfficenza Motore a Combustione Interna: "+efficenzaIC+"%"+"\nCarburante Motore a Combustione Interna: "+getMotoreIC());
     return s;
 }
+/**
+ * @brief serialize trasforma il treno nella sua rappresentazione in json
+ * @param oggetto json
+ */
 void Bimode::serialize(QJsonObject & json)
 {
     json["type"]="Bimode";

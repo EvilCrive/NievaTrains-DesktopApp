@@ -13,6 +13,7 @@ class InfoLayout: public QDialog
     QLabel* third;
     QLabel* fourth;
     QLabel* fifth;
+    QPixmap* img;
 public:
     InfoLayout(QWidget * =nullptr, QString prima ="", QString seconda ="",QString terza ="",QString quarta ="",QString quinta ="");
     void setMargin(int margin =20);

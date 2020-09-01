@@ -34,14 +34,14 @@ private:
     void searchCostruttore(std::string);
     void searchPeso(unsigned int,bool);
     void searchVelocita(unsigned int,bool);
-    void searchCarburantevapore(std::string);
-    void searchEfficenzavapore(double, bool);
-    void searchEfficenzaelettrico(double,bool);
+    void searchCarburanteVapore(std::string);
+    void searchEfficenzaVapore(double, bool);
+    void searchEfficenzaElettrico(double,bool);
     void searchEfficenzaIC(double,bool);
-    void searchTrasmissioneelettrico(std::string);
+    void searchTrasmissioneElettrico(std::string);
     void searchMotoreIC(std::string);
-    void searchMotoreprimario(std::string);
-    void searchTecnologiamaglev(std::string);
+    void searchMotorePrimario(std::string);
+    void searchTecnologiaMaglev(std::string);
 
 public:
     MainWindow(Model* m,QWidget *parent = nullptr);

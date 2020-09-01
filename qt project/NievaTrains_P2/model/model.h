@@ -21,7 +21,6 @@ public:
     void print_all() const;
     Treno* operator[](unsigned int) const;
     Treno* getTreno(unsigned int) const;
-    Treno* getTrenoDisplay(unsigned int) const;
     void erase(unsigned int =0);
     void clear();
     bool isEmpty() const;
@@ -33,22 +32,6 @@ public:
     unsigned int numerotreni() const;
     void load(std::string);
     void save(std::string) const;
-
-    //ricerca
-    void searchNome(std::string);
-    void searchCostruttore(std::string);
-    void searchPeso(unsigned int,bool);
-    void searchVelocita(unsigned int,bool);
-    void searchCarburantevapore(std::string);
-    void searchEfficenzavapore(double, bool);
-    void searchEfficenzaelettrico(double,bool);
-    void searchEfficenzaIC(double,bool);
-
-    void searchTrasmissioneelettrico(std::string);
-    void searchMotoreIC(std::string);
-    void searchMotoreprimario(std::string);
-    void searchTecnologiamaglev(std::string);
-
 };
 
 #endif // MODEL_H

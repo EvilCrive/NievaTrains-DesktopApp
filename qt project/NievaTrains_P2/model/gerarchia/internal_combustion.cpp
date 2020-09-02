@@ -52,7 +52,7 @@ std::string Internal_Combustion::type() const
 void Internal_Combustion::print() const
 {
     Treno::print();
-    std::cout<<"\nCarburante: "<<getMotoreIC()<<"\nEfficenza: "<<getEfficenzaIC()*100<<"%";
+    std::cout<<"\nMotore: "<<getMotoreIC()<<"\nEfficenza: "<<getEfficenzaIC()*100<<"%";
 }
 std::string Internal_Combustion::treno2string() const{
     std::string s=Treno::treno2string();

@@ -95,7 +95,7 @@ std::string Bimode::treno2string() const{
     std::string tmp2="";
     if(Electric::getTrasmissioneElettrico()) tmp2="Third Rail";
     else tmp2="Overhead Line";
-    s.append("\nMotore Primario: "+tmp+"\nTrasmissione Motore Elettrico: "+tmp2+"\nEfficenza Motore Elettrico: "+efficenzaE+"%"+"\nEfficenza Motore a Combustione Interna: "+efficenzaIC+"%"+"\nCarburante Motore a Combustione Interna: "+getMotoreIC());
+    s.append("\nMotore Primario: "+tmp+"\nTrasmissione Motore Elettrico: "+tmp2+"\nEfficenza Motore Elettrico: "+efficenzaE+"%"+"\nEfficenza Motore a Combustione Interna: "+efficenzaIC+"%"+"\nMotore a Combustione Interna: "+getMotoreIC());
     return s;
 }
 /**

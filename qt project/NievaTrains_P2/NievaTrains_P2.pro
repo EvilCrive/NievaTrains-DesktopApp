@@ -29,7 +29,7 @@ SOURCES += \
     view/supporto/comboboxtrasmissione.cpp \
     view/supporto/combofilter.cpp \
     view/supporto/combotype.cpp \
-    view/infolayout.cpp \
+    view/supporto/infolayout.cpp \
     view/mainlayout.cpp \
     view/mainwindow.cpp \
     view/menubartrain.cpp \
@@ -52,7 +52,7 @@ HEADERS += \
     view/supporto/comboboxtrasmissione.h \
     view/supporto/combofilter.h \
     view/supporto/combotype.h \
-    view/infolayout.h \
+    view/supporto/infolayout.h \
     view/mainlayout.h \
     view/mainwindow.h \
     view/menubartrain.h \

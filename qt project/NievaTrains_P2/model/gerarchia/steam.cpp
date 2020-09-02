@@ -32,7 +32,9 @@ void Steam::setCarburanteSteam(std::string tr)
  */
 double Steam::carburanteNecessario(unsigned int km) const
 {
-    return km/temperaturaOperativa;
+    if(temperaturaOperativa==0) return 0;
+    else if(temperaturaOperativa>1000)      return km;
+    else return km/(temperaturaOperativa/1000);
 }
 /**
  * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante
@@ -41,7 +43,9 @@ double Steam::carburanteNecessario(unsigned int km) const
  */
 unsigned int Steam::kmPercorribili(unsigned int kg) const
 {
-    return static_cast<unsigned int>(temperaturaOperativa*kg);
+    if(temperaturaOperativa==0) return 0;
+    else if(temperaturaOperativa>1000)      return kg;
+    else return kg*(temperaturaOperativa/1000);
 }
 
 std::string Steam::type() const

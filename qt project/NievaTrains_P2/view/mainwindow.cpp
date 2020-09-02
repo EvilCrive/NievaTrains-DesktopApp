@@ -727,6 +727,7 @@ void MainWindow::slotCarburanteNecessario(){
 }
 MainWindow::~MainWindow()
 {
+    delete modello;
 }
 
 

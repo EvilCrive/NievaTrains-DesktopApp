@@ -88,8 +88,8 @@ std::string Bimode::treno2string() const{
     std::string efficenzaE=std::to_string(getEfficenzaElettrico()*100);
     efficenzaE.erase ( efficenzaE.find(".")+3, std::string::npos );
     std::string tmp="";
-    if(getMotorePrimario()) tmp="Internal Combustion";
-    else tmp="Electric";
+    if(getMotorePrimario())tmp="Electric" ;
+    else tmp="Internal Combustion" ;
     std::string tmp2="";
     if(Electric::getTrasmissioneElettrico()) tmp2="Third Rail";
     else tmp2="Overhead Line";

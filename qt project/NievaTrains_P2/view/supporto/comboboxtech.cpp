@@ -2,6 +2,6 @@
 
 ComboBoxTech::ComboBoxTech(QWidget *p): QComboBox(p)
 {
-    addItem("EDS");
     addItem("EMS");
+    addItem("EDS");
 }

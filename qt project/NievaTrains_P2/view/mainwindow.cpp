@@ -559,8 +559,7 @@ void MainWindow::searchEfficenzaVapore(double n, bool b){
                 layout->getList()->erase(i);
                 --i; --lun;
             }
-        }
-        else{
+        }else{
             layout->getList()->erase(i);
             --i; --lun;
         }
@@ -575,8 +574,7 @@ void MainWindow::searchEfficenzaElettrico(double n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Electric" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
-            Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i));
-            if(t){
+            if(Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i))){
                 if(b && n<t->getEfficenzaElettrico()){
                     layout->getList()->erase(i);
                     --i; --lun;
@@ -600,9 +598,8 @@ void MainWindow::searchEfficenzaElettrico(double n, bool b){
 void MainWindow::searchEfficenzaIC(double n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
-        if(layout->getList()->getItemByIndex(i)->type()=="Internal Combustion" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
-            Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i));
-            if(t){
+        if(layout->getList()->getItemByIndex(i)->type()=="Internal Combustion" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){            
+            if(Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i))){
                 if(b && n<t->getEfficenzaIC()){
                     layout->getList()->erase(i);
                     --i; --lun;
@@ -626,8 +623,7 @@ void MainWindow::searchTrasmissioneElettrico(std::string n){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Electric" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
-            Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i));
-            if(t){
+            if(Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i))){
                 bool  test;
                 transform(n.begin(), n.end(), n.begin(),
                     [](unsigned char c){ return tolower(c); });

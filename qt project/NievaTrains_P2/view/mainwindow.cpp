@@ -506,12 +506,39 @@ void MainWindow::searchPeso(unsigned int n, bool b){
 void MainWindow::searchVelocita(unsigned int n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
-        if(b && layout->getList()->getItemByIndex(i)->getSpeed()<n){
+        if(b && layout->getList()->getItemByIndex(i)->getSpeed()>=n){
             //maggiore
             layout->getList()->erase(i);
             --i; --lun;
-        }else if(!b && layout->getList()->getItemByIndex(i)->getSpeed()>=n){
+        }else if(!b && layout->getList()->getItemByIndex(i)->getSpeed()<n){
             //minore
+            layout->getList()->erase(i);
+            --i; --lun;
+        }
+    }
+}
+/**
+ * @brief searchPotenzaIC filtra la lista dei treni mantenendo sol i treni a combustione interna aventi la potenza specifica del motore diesel maggiore o minore del parametro inserito dall'utente
+ * @param n= potenza specifica inserita dall'utente
+ * @param b= scelta se selezionare solo i maggiori o solo i minori
+ */
+void MainWindow::searchPotenzaIC(unsigned int n, bool b){
+    unsigned int lun=layout->getList()->count();
+    for(unsigned int i=0; i<lun; ++i){
+        if(layout->getList()->getItemByIndex(i)->type()=="Internal Combustion" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
+            if(Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i))){
+                if(b && n<t->getPotenzaIC()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }else if(!b && n>=t->getPotenzaIC()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
+            }else{
+                        layout->getList()->erase(i);
+                        --i; --lun;
+            }
+        }else{
             layout->getList()->erase(i);
             --i; --lun;
         }
@@ -526,11 +553,15 @@ void MainWindow::searchTemperaturaVapore(unsigned int n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Steam"){
-            Steam* t=static_cast<Steam*>(layout->getList()->getItemByIndex(i));
+            if(Steam* t=static_cast<Steam*>(layout->getList()->getItemByIndex(i))){
             if(b && n<t->getTemperaturaOperativa()){
                 layout->getList()->erase(i);
                 --i; --lun;
             }else if(!b && n>=t->getTemperaturaOperativa()){
+                layout->getList()->erase(i);
+                --i; --lun;
+            }
+            }else{
                 layout->getList()->erase(i);
                 --i; --lun;
             }
@@ -558,37 +589,14 @@ void MainWindow::searchEfficenzaElettrico(double n, bool b){
                     --i; --lun;
                 }
             }
-            else{
-                layout->getList()->erase(i);
-                --i; --lun;
-            }
         }
-    }
-}
-/**
- * @brief searchPotenzaIC filtra la lista dei treni mantenendo sol i treni a combustione interna aventi la potenza specifica del motore diesel maggiore o minore del parametro inserito dall'utente
- * @param n= potenza specifica inserita dall'utente
- * @param b= scelta se selezionare solo i maggiori o solo i minori
- */
-void MainWindow::searchPotenzaIC(unsigned int n, bool b){
-    unsigned int lun=layout->getList()->count();
-    for(unsigned int i=0; i<lun; ++i){
-        if(layout->getList()->getItemByIndex(i)->type()=="Internal Combustion" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){            
-            if(Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i))){
-                if(b && n<t->getPotenzaIC()){
-                    layout->getList()->erase(i);
-                    --i; --lun;
-                }else if(!b && n>=t->getPotenzaIC()){
-                    layout->getList()->erase(i);
-                    --i; --lun;
-                }
-            }
-        }else{
+        else{
             layout->getList()->erase(i);
             --i; --lun;
         }
     }
 }
+
 /**
  * @brief searchTrasmissioneElettrico filtra la lista dei treni mantenendo sol i treni elettrici aventi il tipo di trasmissione uguale al parametro inserito dall'utente
  * @param n= stringa inserita dall'utente
@@ -629,8 +637,8 @@ void MainWindow::searchMotorePrimario(std::string n){
                 transform(n.begin(), n.end(), n.begin(),
                     [](unsigned char c){ return tolower(c); });
                 bool test;
-                if(n=="internal combustion") test=true;
-                else if(n=="electric")    test=false;
+                if(n=="internal combustion") test=false;
+                else if(n=="electric")    test=true;
                 //eccezione ?
                 else    return;
                 if(test!=t->getMotorePrimario()){

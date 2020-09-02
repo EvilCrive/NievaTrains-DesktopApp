@@ -52,12 +52,12 @@ std::string Internal_Combustion::type() const
 void Internal_Combustion::print() const
 {
     Treno::print();
-    std::cout<<"\nMotore: "<<getMotoreIC()<<"\nPotenza specifica: "<<getPotenzaIC()<<"%";
+    std::cout<<"\nMotore Diesel: "<<getMotoreIC()<<"\nPotenza specifica: "<<getPotenzaIC()<<"%";
 }
 std::string Internal_Combustion::treno2string() const{
     std::string s=Treno::treno2string();
     std::string potenza=std::to_string(getPotenzaIC());
-    s.append("\nCarburante: "+getMotoreIC()+"\nPotenza specifica: "+potenza+"kW/l");
+    s.append("\nMotore Diesel: "+getMotoreIC()+"\nPotenza specifica: "+potenza+"kW/l");
     return s;
 }
 /**

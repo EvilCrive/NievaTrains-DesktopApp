@@ -1,41 +1,41 @@
 #include "aggiuntalayout.h"
 
 AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(new QVBoxLayout(this)),
-    nomeL(new QLabel(this)), costruttoreL(new QLabel(this)), efficenzaSL(new QLabel(this)), efficenzaEL(new QLabel(this)), efficenzaICL(new QLabel(this)), speedL(new QLabel(this)), pesoL(new QLabel(this)), carburanteSL(new QLabel(this)), motoreICL(new QLabel(this)),
-    nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), efficenzaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), efficenzaIC(new QLineEdit(this)), speed(new QLineEdit(this)),
+    nomeL(new QLabel(this)), costruttoreL(new QLabel(this)), temperaturaSL(new QLabel(this)), efficenzaEL(new QLabel(this)), potenzaICL(new QLabel(this)), speedL(new QLabel(this)), pesoL(new QLabel(this)), carburanteSL(new QLabel(this)), motoreICL(new QLabel(this)),
+    nome(new QLineEdit(this)), costruttore(new QLineEdit(this)), temperaturaS(new QLineEdit(this)), efficenzaE(new QLineEdit(this)), potenzaIC(new QLineEdit(this)), speed(new QLineEdit(this)),
     peso(new QLineEdit(this)), carburanteS(new QLineEdit(this)),motoreIC(new QLineEdit(this)),
     tecnologia(new ComboBoxTech(this)),primario(new ComboBoxMotorePrimario(this)), trasmissione(new ComboBoxTrasmissione(this)), conferma(new QPushButton(this)), annulla(new QPushButton(this)), tipo(tipoT)
 
 {
-    conferma->setText("Confirm");
-    annulla->setText("Cancel");
-    nomeL->setText("Name");
-    pesoL->setText("Weight");
-    speedL->setText("Top speed");
-    costruttoreL->setText("Builder");
-    efficenzaSL->setText("Steam engine efficency");
-    efficenzaEL->setText("Electric engine efficency");
-    efficenzaICL->setText("Internal combustion engine efficency");
-    carburanteSL->setText("Steam engine fuel");
-    motoreICL->setText("Internal combustion engine name");
+    conferma->setText("Conferma");
+    annulla->setText("Cancella");
+    nomeL->setText("Nome");
+    pesoL->setText("Peso");
+    speedL->setText("Velocità massima");
+    costruttoreL->setText("Costruttore");
+    temperaturaSL->setText("Temperatura operativa motore a vapore");
+    efficenzaEL->setText("Effcienza motore elettrico");
+    potenzaICL->setText("Potenza motore Diesel");
+    carburanteSL->setText("Carburante motore a vapore");
+    motoreICL->setText("Nome motore Diesel");
 
-    nome->setPlaceholderText("Nome treno");
+    nome->setPlaceholderText("Inserisci nome treno");
     nome->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z ]{0,50}")));
-    costruttore->setPlaceholderText("Costruttore treno");
+    costruttore->setPlaceholderText("Inserisci costruttore treno");
     costruttore->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
-    efficenzaE->setPlaceholderText("Efficenza motore elettrico");
+    efficenzaE->setPlaceholderText("Inserisci efficenza motore elettrico");
     efficenzaE->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
-    efficenzaS->setPlaceholderText("Efficenza motore a vapore");
-    efficenzaS->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
-    efficenzaIC->setPlaceholderText("Efficenza motore a combustione interna");
-    efficenzaIC->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
-    speed->setPlaceholderText("Velocità massima");
+    temperaturaS->setPlaceholderText("Inserisci temperatura operativa del motore a vapore");
+    temperaturaS->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
+    potenzaIC->setPlaceholderText("Inserisci la potenza motore a combustione interna");
+    potenzaIC->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
+    speed->setPlaceholderText("Inserisci velocità massima");
     speed->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
-    peso->setPlaceholderText("Peso");
+    peso->setPlaceholderText("Inserisci peso");
     peso->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
-    carburanteS->setPlaceholderText("Carburante steam");
+    carburanteS->setPlaceholderText("Inserisci carburante steam");
     carburanteS->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
-    motoreIC->setPlaceholderText("Nome e marca motore a combustione interna");
+    motoreIC->setPlaceholderText("Inserisci nome e marca motore a combustione interna");
     motoreIC->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
 
     motoreIC->hide();
@@ -43,12 +43,12 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
     trasmissione->hide();
     primario->hide();
     tecnologia->hide();
-    efficenzaIC->hide();
-    efficenzaS->hide();
+    potenzaIC->hide();
+    temperaturaS->hide();
     carburanteS->hide();
-    efficenzaSL->hide();
+    temperaturaSL->hide();
     efficenzaEL->hide();
-    efficenzaICL->hide();
+    potenzaICL->hide();
     motoreICL->hide();
     carburanteSL->hide();
 
@@ -62,12 +62,12 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
     layoutPopUp->addWidget(peso);
     switch (tipoT) {
     case 0:
-        efficenzaS->show();
+        temperaturaS->show();
         carburanteS->show();
-        efficenzaSL->show();
+        temperaturaSL->show();
         carburanteSL->show();
-        layoutPopUp->addWidget(efficenzaSL);
-        layoutPopUp->addWidget(efficenzaS);
+        layoutPopUp->addWidget(temperaturaSL);
+        layoutPopUp->addWidget(temperaturaS);
         layoutPopUp->addWidget(carburanteSL);
         layoutPopUp->addWidget(carburanteS);
         break;
@@ -80,12 +80,12 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
         layoutPopUp->addWidget(trasmissione);
         break;
     case 2:
-        efficenzaIC->show();
-        efficenzaICL->show();
+        potenzaIC->show();
+        potenzaICL->show();
         motoreIC->show();
         motoreICL->show();
-        layoutPopUp->addWidget(efficenzaICL);
-        layoutPopUp->addWidget(efficenzaIC);
+        layoutPopUp->addWidget(potenzaICL);
+        layoutPopUp->addWidget(potenzaIC);
         layoutPopUp->addWidget(motoreICL);
         layoutPopUp->addWidget(motoreIC);
         break;
@@ -95,17 +95,17 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
         break;
     case 4:
         efficenzaE->show();
-        efficenzaIC->show();
+        potenzaIC->show();
         motoreIC->show();
         efficenzaEL->show();
-        efficenzaICL->show();
+        potenzaICL->show();
         motoreICL->show();
         trasmissione->show();
         primario->show();
         layoutPopUp->addWidget(efficenzaEL);
         layoutPopUp->addWidget(efficenzaE);
-        layoutPopUp->addWidget(efficenzaICL);
-        layoutPopUp->addWidget(efficenzaIC);
+        layoutPopUp->addWidget(potenzaICL);
+        layoutPopUp->addWidget(potenzaIC);
         layoutPopUp->addWidget(motoreICL);
         layoutPopUp->addWidget(motoreIC);
         layoutPopUp->addWidget(trasmissione);
@@ -128,15 +128,15 @@ std::string AggiuntaLayout::getCostruttore()const{
     return costruttore->text().toStdString();
 }
 
-double AggiuntaLayout::getEfficenzaS()const{
-    return efficenzaS->text().toDouble();
+unsigned int AggiuntaLayout::getTemperaturaS()const{
+    return temperaturaS->text().toInt();
 }
 
 double AggiuntaLayout::getEfficenzaE()const{
     return efficenzaE->text().toDouble();
 }
-double AggiuntaLayout::getEfficenzaIC()const{
-    return efficenzaIC->text().toDouble();
+unsigned int AggiuntaLayout::getPotenzaIC()const{
+    return potenzaIC->text().toInt();
 }
 unsigned int AggiuntaLayout::getSpeed() const{
     return speed->text().toInt();

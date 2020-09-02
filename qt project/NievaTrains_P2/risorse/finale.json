@@ -1,7 +1,7 @@
 [
     {
         "builder": "American Locomotive Company",
-        "efficenzaSteam": 0.4,
+        "temperaturaOperativa": 1000,
         "nome": "Union Pacific FEF Series",
         "peso": 40,
         "speed": 100,
@@ -18,7 +18,7 @@
     },
     {
         "builder": "Brown, Boveri & Cie",
-        "efficenzaIC": 0.3,
+        "potenzaIC": 3000,
         "nome": "British Rail 18000",
         "peso": 30,
         "speed": 145,
@@ -37,7 +37,7 @@
     {
         "builder": "Bombardier",
         "efficenzaElettrico": 0.6,
-        "efficenzaIC": 0.2,
+        "potenzaIC": 2000,
         "motore_primario": "Internal Combustion",
         "nome": "Talent 2",
         "peso": 70,
@@ -49,7 +49,7 @@
     {
         "builder": "Bombardier",
         "efficenzaElettrico": 0.8,
-        "efficenzaIC": 0.4,
+        "potenzaIC": 4000,
         "motore_primario": "Internal Combustion",
         "nome": "Electrostar",
         "peso": 30,
@@ -60,7 +60,7 @@
     },
     {
         "builder": "English Electric at Vulcan Foundry",
-        "efficenzaIC": 0.3,
+        "potenzaIC": 3000,
         "nome": "British Rail GT3",
         "peso": 55,
         "speed": 87,
@@ -69,7 +69,7 @@
     },
     {
         "builder": "A1 Steam Locomotive Trust",
-        "efficenzaSteam": 0.3,
+        "temperaturaOperativa": 0.3,
         "nome": "Locomotiva A1 Peppercorn 60163 Tornado",
         "peso": 40,
         "speed": 80,
@@ -78,7 +78,7 @@
     },
     {
         "builder": "London Midland and Scottish Railway",
-        "efficenzaSteam": 0.4,
+        "temperaturaOperativa": 0.4,
         "nome": "LMS Coronation Class",
         "peso": 30,
         "speed": 100,
@@ -96,7 +96,7 @@
     },
     {
         "builder": "BGC",
-        "efficenzaIC": 0.6,
+        "potenzaIC": 6000,
         "nome": "Rhea",
         "peso": 70,
         "speed": 30,
@@ -122,7 +122,7 @@
     },
     {
         "builder": "General Motors Electro-Motive Division",
-        "efficenzaIC": 0.35,
+        "potenzaIC": 3500,
         "nome": "DDA40X Sterling R",
         "peso": 50,
         "speed": 90,

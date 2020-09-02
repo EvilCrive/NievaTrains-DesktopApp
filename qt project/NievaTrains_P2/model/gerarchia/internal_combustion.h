@@ -4,16 +4,16 @@
 
 class Internal_Combustion: virtual public Treno {
 protected:
-    double efficenzaIC; // km/l
+    unsigned int potenzaIC;
     std::string motoreIC;
 
 public:
-    Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int =100, double efficenza=0.5, std::string ="diesel");
+    Internal_Combustion(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int =100, unsigned int =1000, std::string ="diesel");
 
-    double getEfficenzaIC() const;
+    unsigned int getPotenzaIC() const;
     std::string getMotoreIC() const;
 
-    void setEfficenzaIC(double);
+    void setPotenzaIC(unsigned int);
     void setMotoreIC(std::string);
 
 

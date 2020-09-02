@@ -35,9 +35,9 @@ private:
     void searchPeso(unsigned int,bool);
     void searchVelocita(unsigned int,bool);
     void searchCarburanteVapore(std::string);
-    void searchEfficenzaVapore(double, bool);
+    void searchTemperaturaVapore(unsigned int, bool);
     void searchEfficenzaElettrico(double,bool);
-    void searchEfficenzaIC(double,bool);
+    void searchPotenzaIC(unsigned int,bool);
     void searchTrasmissioneElettrico(std::string);
     void searchMotoreIC(std::string);
     void searchMotorePrimario(std::string);

@@ -2,6 +2,6 @@
 
 ComboBoxTrasmissione::ComboBoxTrasmissione(QWidget *p): QComboBox(p)
 {
-    addItem("overhead lines");
-    addItem("third rail");
+    addItem("Overhead Lines");
+    addItem("Third Rail");
 }

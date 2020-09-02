@@ -33,29 +33,30 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     text3->setText("Inserisci treno");
     text4->setText("Cerca");
 
-    flush->setText("Flush");
-    search->setText("Search");
+    flush->setText("Svuota");
+    search->setText("Cerca");
     annulla->setText("Annulla");
     modifica->setText("Modifica");
     elimina->setText("Elimina");
     inserisci->setText("Inserisci");
-    carbNecessario->setText("Calculate Fuel");
-    kmPer->setText("Calculate Km");
-    carbNecessarioBar->setPlaceholderText("Insert fuel avaiable");
-    kmPerBar->setPlaceholderText("Insert Kilometers");
+    carbNecessario->setText("Calcola carburante");
+    kmPer->setText("Calcola Km");
+    carbNecessarioBar->setPlaceholderText("Inserisci i Km da percorrere");
+    kmPerBar->setPlaceholderText("Inserisci il carburante disponibile");
+
     QHBoxLayout* layout=new QHBoxLayout(this);
-    QVBoxLayout* left=new QVBoxLayout(this);
-    QVBoxLayout* right=new QVBoxLayout(this);
-    QHBoxLayout* searchField=new QHBoxLayout(this);
-    QHBoxLayout* bts2=new QHBoxLayout(this);
-    QHBoxLayout* bts3=new QHBoxLayout(this);
-    QHBoxLayout* km=new QHBoxLayout(this);
-    QHBoxLayout* carb=new QHBoxLayout(this);
+    QVBoxLayout* left=new QVBoxLayout();
+    QVBoxLayout* right=new QVBoxLayout();
+    QHBoxLayout* searchField=new QHBoxLayout();
+    QHBoxLayout* bts2=new QHBoxLayout();
+    QHBoxLayout* bts3=new QHBoxLayout();
+    QHBoxLayout* km=new QHBoxLayout();
+    QHBoxLayout* carb=new QHBoxLayout();
 
     left->addWidget(text1);
     left->addWidget(trainList);
     left->addWidget(flush);
-    searchBar->setPlaceholderText("Search");
+    searchBar->setPlaceholderText("Cerca");
     searchBar->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z<>=. ]{0,50}/i")));
     carbNecessarioBar->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,50}/i")));
     kmPerBar->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,50}/i")));

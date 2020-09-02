@@ -7,10 +7,10 @@ ComboFilter::ComboFilter(QWidget* p): QComboBox(p)
     addItem("Peso");
     addItem("Velocità");
     addItem("Motore IC");
-    addItem("Efficenza IC");
+    addItem("Potenza IC");
     addItem("Trasmissione Elettrico");
-    addItem("Efficenza Electric");
-    addItem("Efficenza Vapore");
+    addItem("Efficenza Elettrico");
+    addItem("Temperatura Vapore");
     addItem("Carburante Vapore");
     addItem("Tecnologia Maglev");
     addItem("Motore primario Bimode");

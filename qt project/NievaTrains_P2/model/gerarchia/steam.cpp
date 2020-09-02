@@ -4,11 +4,11 @@
 #include <iostream>
 #include <math.h>
 
-Steam::Steam(const std::string & n, const std::string & c, unsigned int s, unsigned int p, double e, std::string tfs): Treno(n,c,s,p),efficenzaSteam(e),carburanteSteam(tfs){}
+Steam::Steam(const std::string & n, const std::string & c, unsigned int s, unsigned int p, unsigned int t, std::string tfs): Treno(n,c,s,p),temperaturaOperativa(t),carburanteSteam(tfs){}
 
-double Steam::getEfficenzaSteam() const
+unsigned int Steam::getTemperaturaOperativa() const
 {
-    return efficenzaSteam;
+    return temperaturaOperativa;
 }
 
 std::string Steam::getCarburanteSteam() const
@@ -16,9 +16,9 @@ std::string Steam::getCarburanteSteam() const
     return carburanteSteam;
 }
 
-void Steam::setEfficenzaSteam(double e)
+void Steam::setTemperaturaOperativa(unsigned int t)
 {
-    efficenzaSteam=e;
+    temperaturaOperativa=t;
 }
 
 void Steam::setCarburanteSteam(std::string tr)
@@ -32,7 +32,7 @@ void Steam::setCarburanteSteam(std::string tr)
  */
 double Steam::carburanteNecessario(unsigned int km) const
 {
-    return km/efficenzaSteam;
+    return km/temperaturaOperativa;
 }
 /**
  * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante
@@ -41,7 +41,7 @@ double Steam::carburanteNecessario(unsigned int km) const
  */
 unsigned int Steam::kmPercorribili(unsigned int kg) const
 {
-    return static_cast<unsigned int>(efficenzaSteam*kg);
+    return static_cast<unsigned int>(temperaturaOperativa*kg);
 }
 
 std::string Steam::type() const
@@ -52,13 +52,12 @@ std::string Steam::type() const
 void Steam::print() const
 {
     Treno::print();
-    std::cout<<"\nEfficenza: "<<getEfficenzaSteam()*100<<"%"<<"\nCarburante: "<<getCarburanteSteam();
+    std::cout<<"\nTemperatura operativa: "<<getTemperaturaOperativa()<<"%"<<"\nCarburante: "<<getCarburanteSteam();
 }
 std::string Steam::treno2string() const{
     std::string s=Treno::treno2string();
-    std::string efficenza=std::to_string(getEfficenzaSteam()*100);
-    efficenza.erase ( efficenza.find(".")+3, std::string::npos );
-    s.append("\nEfficenza: "+efficenza+"%"+"\nCarburante: "+getCarburanteSteam());
+    std::string temperatura=std::to_string(getTemperaturaOperativa());
+    s.append("\nTemperatura operativa: "+temperatura+" C"+"\nCarburante: "+getCarburanteSteam());
     return s;
 }
 /**
@@ -73,6 +72,6 @@ void Steam::serialize(QJsonObject & json)
     json["speed"]=static_cast<int>(getSpeed());
     json["peso"]=static_cast<int>(getPeso());
 
-    json["efficenzaSteam"]=getEfficenzaSteam();
+    json["temperaturaOperativa"]=static_cast<int>(getTemperaturaOperativa());
     json["tipo_carburanteSteam"]=QString::fromStdString(getCarburanteSteam());
 }

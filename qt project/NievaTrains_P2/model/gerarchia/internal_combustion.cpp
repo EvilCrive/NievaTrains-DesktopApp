@@ -3,11 +3,11 @@
 #include <cctype>
 #include <iostream>
 
-Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, unsigned int p, double eff, std::string tf): Treno(n,c,s,p), efficenzaIC(eff), motoreIC(tf){}
+Internal_Combustion::Internal_Combustion(const std::string & n, const std::string & c, unsigned int s, unsigned int p, unsigned int pot, std::string tf): Treno(n,c,s,p), potenzaIC(pot), motoreIC(tf){}
 
-double Internal_Combustion::getEfficenzaIC() const
+unsigned int Internal_Combustion::getPotenzaIC() const
 {
-    return efficenzaIC;
+    return potenzaIC;
 }
 
 std::string Internal_Combustion::getMotoreIC() const
@@ -16,9 +16,9 @@ std::string Internal_Combustion::getMotoreIC() const
 }
 
 
-void Internal_Combustion::setEfficenzaIC(double e)
+void Internal_Combustion::setPotenzaIC(unsigned int p)
 {
-    efficenzaIC=e;
+    potenzaIC=p;
 }
 
 void Internal_Combustion::setMotoreIC(std::string tr)
@@ -32,7 +32,7 @@ void Internal_Combustion::setMotoreIC(std::string tr)
  */
 double Internal_Combustion::carburanteNecessario(unsigned int km) const
 {
-    return km/efficenzaIC;
+    return km/potenzaIC;
 }
 /**
  * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante
@@ -41,7 +41,7 @@ double Internal_Combustion::carburanteNecessario(unsigned int km) const
  */
 unsigned int Internal_Combustion::kmPercorribili(unsigned int l) const
 {
-    return static_cast<unsigned int>(efficenzaIC*l);
+    return static_cast<unsigned int>(potenzaIC*l);
 }
 
 std::string Internal_Combustion::type() const
@@ -52,13 +52,12 @@ std::string Internal_Combustion::type() const
 void Internal_Combustion::print() const
 {
     Treno::print();
-    std::cout<<"\nMotore: "<<getMotoreIC()<<"\nEfficenza: "<<getEfficenzaIC()*100<<"%";
+    std::cout<<"\nMotore: "<<getMotoreIC()<<"\nPotenza specifica: "<<getPotenzaIC()<<"%";
 }
 std::string Internal_Combustion::treno2string() const{
     std::string s=Treno::treno2string();
-    std::string efficenza=std::to_string(getEfficenzaIC()*100);
-    efficenza.erase ( efficenza.find(".")+3, std::string::npos );
-    s.append("\nCarburante: "+getMotoreIC()+"\nEfficenza: "+efficenza+"%");
+    std::string potenza=std::to_string(getPotenzaIC());
+    s.append("\nCarburante: "+getMotoreIC()+"\nPotenza specifica: "+potenza+"kW/l");
     return s;
 }
 /**
@@ -74,5 +73,5 @@ void Internal_Combustion::serialize(QJsonObject & json)
     json["peso"]=static_cast<int>(getPeso());
 
     json["tipo_motoreIC"]=QString::fromStdString(getMotoreIC());
-    json["efficenzaIC"]=getEfficenzaIC();
+    json["PotenzaIC"]=static_cast<int>(getPotenzaIC());
 }

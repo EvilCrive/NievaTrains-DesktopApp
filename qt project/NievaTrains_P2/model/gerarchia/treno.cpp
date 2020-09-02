@@ -108,16 +108,16 @@ Treno *Treno::unserialize(QJsonObject & json){
 
     if(type=="Steam"){
         //campi dati di steam e eccezione relative
-        string tipo_carburanteSteam;double efficenzaSteam;
+        string tipo_carburanteSteam;unsigned int temperaturaOperativa;
 
         if(json["tipo_carburanteSteam"].isString())
             tipo_carburanteSteam=json["tipo_carburanteSteam"].toString().toStdString();
         else    throw new NievaException("Valore illegale su tipo_carburante_Steam");
-        if(json["efficenzaSteam"].isDouble())   efficenzaSteam=(json["efficenzaSteam"].toDouble());
-        else    throw new NievaException("Valore illegale su efficenzaSteam");
+        if(json["temperaturaOperativa"].isDouble())   temperaturaOperativa=(json["temperaturaOperativa"].toInt());
+        else    throw new NievaException("Valore illegale su temperaturaOperativa");
 
         t=new Steam();
-        static_cast<Steam*>(t)->setEfficenzaSteam(efficenzaSteam);
+        static_cast<Steam*>(t)->setTemperaturaOperativa(temperaturaOperativa);
         static_cast<Steam*>(t)->setCarburanteSteam(tipo_carburanteSteam);
     }
     if(type=="Maglev"){
@@ -133,15 +133,15 @@ Treno *Treno::unserialize(QJsonObject & json){
         static_cast<Maglev*>(t)->setTecnologia(x);
     }
     if(type=="Internal_Combustion"){
-        double efficenzaIC;string tipomotoreIC, tipotrasmissioneIC;
+        unsigned int potenzaIC;string tipomotoreIC, tipotrasmissioneIC;
 
-        if(json["efficenzaIC"].isDouble())  efficenzaIC=(json["efficenzaIC"].toDouble());
-        else    throw new NievaException("Valore illegale su efficenzaIC");
+        if(json["potenzaIC"].isDouble())  potenzaIC=(json["potenzaIC"].toInt());
+        else    throw new NievaException("Valore illegale su potenzaIC");
         if(json["tipo_motoreIC"].isString())    tipomotoreIC=json["tipo_motoreIC"].toString().toStdString();
         else    throw new NievaException("Valore illegale su tipo_motoreIC");
 
         t=new Internal_Combustion();
-        dynamic_cast<Internal_Combustion*>(t)->setEfficenzaIC(efficenzaIC);
+        dynamic_cast<Internal_Combustion*>(t)->setPotenzaIC(potenzaIC);
         dynamic_cast<Internal_Combustion*>(t)->setMotoreIC(tipomotoreIC);
     }
     if(type=="Electric"){
@@ -160,14 +160,14 @@ Treno *Treno::unserialize(QJsonObject & json){
         dynamic_cast<Electric*>(t)->setTrasmissioneElettrico(x);
     }
     if(type=="Bimode"){
-        double efficenzaElettrico,efficenzaIC;string tipotrasmissioneElettrico,tipomotoreIC,tipotrasmissioneIC,motorePrimario;
+        double efficenzaElettrico;unsigned int potenzaIC;string tipotrasmissioneElettrico,tipomotoreIC,tipotrasmissioneIC,motorePrimario;
 
         if(json["tipo_trasmissioneElettrico"].isString())   tipotrasmissioneElettrico=json["tipo_trasmissioneElettrico"].toString().toStdString();
         else    throw new NievaException("Valore illegale su tipo_trasmissioneElettrico");
         if(json["efficenzaElettrico"].isDouble())   efficenzaElettrico=(json["efficenzaElettrico"].toDouble());
         else    throw new NievaException("Valore illegale su efficenzaElettrico");
-        if(json["efficenzaIC"].isDouble())  efficenzaIC=(json["efficenzaIC"].toDouble());
-        else    throw new NievaException("Valore illegale su efficenzaIC");
+        if(json["potenzaIC"].isDouble())  potenzaIC=(json["potenzaIC"].toInt());
+        else    throw new NievaException("Valore illegale su potenzaIC");
         if(json["tipo_motoreIC"].isString())    tipomotoreIC=json["tipo_motoreIC"].toString().toStdString();
         else    throw new NievaException("Valore illegale su tipo_motoreIC");
         if(json["motore_primario"].isString())  motorePrimario=json["motore_primario"].toString().toStdString();
@@ -179,7 +179,7 @@ Treno *Treno::unserialize(QJsonObject & json){
         if(tipotrasmissioneElettrico=="Overhead Line") x=false;
         else x=true;
         dynamic_cast<Bimode*>(t)->setTrasmissioneElettrico(x);
-        dynamic_cast<Bimode*>(t)->setEfficenzaIC(efficenzaIC);
+        dynamic_cast<Bimode*>(t)->setPotenzaIC(potenzaIC);
         dynamic_cast<Bimode*>(t)->setMotoreIC(tipomotoreIC);
         bool y=false;
         if(motorePrimario=="Electric") y=true;

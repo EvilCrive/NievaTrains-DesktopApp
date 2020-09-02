@@ -4,15 +4,15 @@
 
 class Steam: public Treno {
 private:
-    double efficenzaSteam;        // km/kg
+    unsigned int temperaturaOperativa;
     std::string carburanteSteam;  //tipo carburante (kg)
 public:
-    Steam(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int p=100, double =0.7, std::string ="coal");
+    Steam(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100, unsigned int p=100, unsigned int =100, std::string ="coal");
 
-    double getEfficenzaSteam() const;
+    unsigned int getTemperaturaOperativa() const;
     std::string getCarburanteSteam() const;
 
-    void setEfficenzaSteam(double);
+    void setTemperaturaOperativa(unsigned int);
     void setCarburanteSteam(std::string);
 
     double carburanteNecessario(unsigned int) const;

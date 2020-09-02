@@ -20,11 +20,11 @@ void ModificaLayout::setSpeed(unsigned int x){
 void ModificaLayout::setPeso(unsigned int x){
      peso->setText(QString::number(x));
 }
-void ModificaLayout::setEfficenzaIC(double x){
-    efficenzaIC->setText(QString::number(x));
+void ModificaLayout::setPotenzaIC(unsigned int x){
+    potenzaIC->setText(QString::number(x));
 }
-void ModificaLayout::setEfficenzaS(double x){
-    efficenzaS->setText(QString::number(x));
+void ModificaLayout::setTemperaturaS(unsigned int x){
+    temperaturaS->setText(QString::number(x));
 }
 void ModificaLayout::setEfficenzaE(double x){
      efficenzaE->setText(QString::number(x));

@@ -13,8 +13,8 @@ public:
     void setCostruttore(std::string);
     void setSpeed(unsigned int);
     void setPeso(unsigned int);
-    void setEfficenzaIC(double);
-    void setEfficenzaS(double);
+    void setPotenzaIC(unsigned int);
+    void setTemperaturaS(unsigned int);
     void setEfficenzaE(double);
     void setCarburanteS(std::string);
     void setMotoreIC(std::string);

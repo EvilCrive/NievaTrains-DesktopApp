@@ -18,8 +18,8 @@ class AggiuntaLayout: public QDialog
     Q_OBJECT
 protected:
     QVBoxLayout* layoutPopUp;
-    QLabel *nomeL, *costruttoreL, *efficenzaSL, *efficenzaEL, *efficenzaICL, *speedL, *pesoL, *carburanteSL, *motoreICL;
-    QLineEdit *nome, *costruttore, *efficenzaS, *efficenzaE, *efficenzaIC, *speed, *peso, *carburanteS, *motoreIC;
+    QLabel *nomeL, *costruttoreL, *temperaturaSL, *efficenzaEL, *potenzaICL, *speedL, *pesoL, *carburanteSL, *motoreICL;
+    QLineEdit *nome, *costruttore, *temperaturaS, *efficenzaE, *potenzaIC, *speed, *peso, *carburanteS, *motoreIC;
     ComboBoxTech *tecnologia;
     ComboBoxMotorePrimario *primario;
     ComboBoxTrasmissione *trasmissione;
@@ -28,9 +28,9 @@ protected:
 public:
     std::string getNome() const;
     std::string getCostruttore()const;
-    double getEfficenzaS()const;
+    unsigned int getTemperaturaS()const;
     double getEfficenzaE()const;
-    double getEfficenzaIC()const;
+    unsigned int getPotenzaIC()const;
     unsigned int getSpeed() const;
     unsigned int getPeso()const;
     std::string getCarburanteS()const;

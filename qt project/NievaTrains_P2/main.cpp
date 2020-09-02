@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     MainWindow w(new Model());
     w.show();
     a.setWindowIcon(QIcon(":/risorse/favicon.ico"));
-    a.exec();
+    return a.exec();
 
 }
 

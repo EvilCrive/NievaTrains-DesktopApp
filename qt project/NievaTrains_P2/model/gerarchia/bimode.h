@@ -8,19 +8,19 @@ private:
     bool motorePrimario;
 public:
 
-    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int =100,bool =false, double =0.7, double =0.4, std::string ="diesel", bool =false);
+    Bimode(const std::string& = "NoName", const std::string& ="NoBuilder", unsigned int =100,  unsigned int =100,bool =false, double =0.7, unsigned int =1000, std::string ="diesel", bool =false);
 
     bool getMotorePrimario() const;
 
     void setMotorePrimario(bool);
     void setMotoreIC(std::string);
     void setTrasmissioneIC(bool);
-    void setEfficenzaIC(double);
+    void setPotenzaIC(unsigned int);
     void setTrasmissioneElettrico(bool);
     void setEfficenzaElettrico(double);
 
-    double carburanteNecessario(unsigned int) const;  //input km da percorrere
-    unsigned int kmPercorribili(unsigned int) const; //input kw o kg di carburante(in base al motore primario)(se hybrid e' fuel kg)
+    double carburanteNecessario(unsigned int) const;
+    unsigned int kmPercorribili(unsigned int) const;
     std::string type() const;
     void print() const;
     std::string treno2string() const;

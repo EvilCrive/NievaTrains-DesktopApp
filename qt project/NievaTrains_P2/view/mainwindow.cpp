@@ -372,7 +372,13 @@ void MainWindow::slotCerca(){
         break;
 
     }
-    }catch(...){
+    }
+    catch(NievaException* e){
+        if(e->getMessage()=="ricerca sbagliata"){
+            for(int i=0;i<layout->getList()->count();)   layout->getList()->erase(i);
+        }
+    }
+    catch(...){
         QMessageBox::warning(this,"Nieva Trains","Qualcosa è andato storto, controlla i parametri di ricerca e riprova");
     }
 
@@ -612,10 +618,7 @@ void MainWindow::searchTrasmissioneElettrico(std::string n){
                 if(n=="third rail") test=true;
                 else if(n=="overhead line")    test=false;
                 //eccezione ?
-                else{
-                    layout->getList()->erase(i);
-                    --i; --lun;
-                }
+                else throw new NievaException("ricerca sbagliata");
                 if(test!=t->getTrasmissioneElettrico()){
                         layout->getList()->erase(i);
                         --i; --lun;
@@ -643,10 +646,7 @@ void MainWindow::searchMotorePrimario(std::string n){
                 if(n=="internal combustion") test=false;
                 else if(n=="electric")    test=true;
                 //eccezione ?
-                else{
-                    layout->getList()->erase(i);
-                    --i; --lun;
-                }
+                else throw new NievaException("ricerca sbagliata");
                 if(test!=t->getMotorePrimario()){
                     layout->getList()->erase(i);
                     --i; --lun;
@@ -675,10 +675,7 @@ void MainWindow::searchTecnologiaMaglev(std::string n){
                 if(n=="EDS") test=true;
                 else if(n=="EMS")    test=false;
                 //eccezione ?
-                else{
-                    layout->getList()->erase(i);
-                    --i; --lun;
-                }
+                else throw new NievaException("ricerca sbagliata");
                 if(test!=t->getTecnologia()){
                     layout->getList()->erase(i);
                     --i; --lun;

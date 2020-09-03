@@ -2,6 +2,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 
+
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -28,7 +29,7 @@ SOURCES += \
     view/supporto/comboboxtrasmissione.cpp \
     view/supporto/combofilter.cpp \
     view/supporto/combotype.cpp \
-    view/infolayout.cpp \
+    view/supporto/infolayout.cpp \
     view/mainlayout.cpp \
     view/mainwindow.cpp \
     view/menubartrain.cpp \
@@ -51,7 +52,7 @@ HEADERS += \
     view/supporto/comboboxtrasmissione.h \
     view/supporto/combofilter.h \
     view/supporto/combotype.h \
-    view/infolayout.h \
+    view/supporto/infolayout.h \
     view/mainlayout.h \
     view/mainwindow.h \
     view/menubartrain.h \

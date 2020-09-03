@@ -42,12 +42,11 @@ void Bimode::setEfficenzaElettrico(double e)
  */
 double Bimode::carburanteNecessario(unsigned int km) const
 {
-    double result=0;
+
     if(motorePrimario)
-        result= (((km/efficenzaElettrico)*0.75)+((km/potenzaIC)*0.25));
+        return Electric::carburanteNecessario(km);
     else
-        result= (((km/efficenzaElettrico)*0.25)+((km/potenzaIC)*0.75));
-    return result;
+        return Internal_Combustion::carburanteNecessario(km);
 }
 /**
  * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante
@@ -56,12 +55,11 @@ double Bimode::carburanteNecessario(unsigned int km) const
  */
 unsigned int Bimode::kmPercorribili(unsigned int f) const
 {
-    unsigned int result=0;
     if(motorePrimario)
-        result= static_cast<unsigned int>(efficenzaElettrico*f);
+        return Electric::kmPercorribili(f);
     else
-        result= static_cast<unsigned int>(potenzaIC*f);
-    return result;
+        return Internal_Combustion::kmPercorribili(f);
+
 }
 /**
  * @brief type ritorna il tipo del treno

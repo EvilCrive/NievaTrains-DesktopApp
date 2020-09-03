@@ -684,24 +684,35 @@ void MainWindow::searchTecnologiaMaglev(std::string n){
  * @brief slotKmPercorribili mostra una finestra pop up contenente i km percorribili dal treno selezionato nella lista dei treni con le unità di carburante indicate nell'apposita barra dall'utente.
  * Nel caso un treno non utilizzi carburante come per esempio i Maglev, sarà bloccato a 0
  */
-void MainWindow::slotKmPercorribili(){
+void MainWindow::slotKmPercorribili() try{
     if(layout->getList()->getItem()){
         unsigned int mostra=layout->getList()->getItem()->getTreno()->kmPercorribili(layout->getKm());
         std::string str="I km percorribili dal treno selezionato con "+std::to_string(layout->getKm())+" unità di carburante sono: "+std::to_string(mostra)+"km.";
         QMessageBox::information(this,"Nieva Trains",QString::fromStdString(str));
     }
 }
+catch(NievaException* e){
+    if(e->getMessage()=="Maglev")   QMessageBox::information(this,"Nieva Trains","Questa operazione non puo' essere eseguita con il treno Maglev");
+}
+catch(...){}
+
 /**
  * @brief slotCarburanteNecessario mostra una finestra pop up contenente il carburante necessario per il treno selezionato nella lista dei treni per percorrere i km indicati nell'apposita barra dall'utente.
  * Nel caso un treno non utilizzi carburante come per esempio i Maglev, sarà bloccato a 0
  */
-void MainWindow::slotCarburanteNecessario(){
+void MainWindow::slotCarburanteNecessario()
+    try{
     if(layout->getList()->getItem()){
         unsigned int mostra=layout->getList()->getItem()->getTreno()->carburanteNecessario(layout->getCarb());
         std::string str="Le unità di carburante necessarie dal treno selezionato per percorrere "+std::to_string(layout->getCarb())+"km sono: "+std::to_string(mostra);
         QMessageBox::information(this,"Nieva Trains",QString::fromStdString(str));
     }
-}
+    }
+    catch(NievaException* e){
+        if(e->getMessage()=="Maglev")   QMessageBox::information(this,"Nieva Trains","Questa operazione non puo' essere eseguita con il treno Maglev");
+    }
+    catch(...){}
+
 MainWindow::~MainWindow()
 {
     delete modello;

@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cctype>
 #include <iostream>
+#include "view/supporto/nievaexception.h"
 
 Maglev::Maglev(const std::string & n, const std::string & c, unsigned int s, unsigned int p, bool ttt): Treno(n,c,s,p), tecnologia(ttt){}
 
@@ -19,8 +20,10 @@ void Maglev::setTecnologia(bool tr)
  * @param km da percorrere
  * @return carburante necessario
  */
+//eccezione
+//lista eccezioni
 double Maglev::carburanteNecessario(unsigned int) const{
-    return 0;
+    throw new NievaException("Maglev");
 }
 /**
  * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante
@@ -28,7 +31,7 @@ double Maglev::carburanteNecessario(unsigned int) const{
  * @return km percorribili
  */
 unsigned int Maglev::kmPercorribili(unsigned int) const{
-    return 0;
+    throw new NievaException("Maglev");
 }
 std::string Maglev::type() const
 {

@@ -340,7 +340,7 @@ void MainWindow::slotCerca(){
            else if(parametro.substr(0,1)==">")
                searchPotenzaIC(std::atof(parametro.substr(1).c_str()), false);
            else
-               searchPotenzaIC(std::atof(parametro.substr(1).c_str()), false);
+               searchPotenzaIC(std::atof(parametro.substr(0).c_str()), false);
            break;
     case 6:
         searchTrasmissioneElettrico(parametro);
@@ -351,15 +351,15 @@ void MainWindow::slotCerca(){
            else if(parametro.substr(0,1)==">")
                searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str()), false);
            else
-               searchEfficenzaElettrico(std::atof(parametro.substr(1).c_str()), false);
+               searchEfficenzaElettrico(std::atof(parametro.substr(0).c_str()), false);
            break;
     case 8:
            if(parametro.substr(0,1)=="<")
                searchTemperaturaVapore(std::atof(parametro.substr(1).c_str()), true);
            else if(parametro.substr(0,1)==">")
                searchTemperaturaVapore(std::atof(parametro.substr(1).c_str()), false);
-           else
-               searchTemperaturaVapore(std::atof(parametro.substr(1).c_str()), false);
+           else{
+               searchTemperaturaVapore(std::atof(parametro.substr(0).c_str()), false);}
            break;
     case 9:
         searchCarburanteVapore(parametro);
@@ -525,7 +525,7 @@ void MainWindow::searchVelocita(unsigned int n, bool b){
 void MainWindow::searchPotenzaIC(unsigned int n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
-        if(layout->getList()->getItemByIndex(i)->type()=="Internal Combustion" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
+        if(layout->getList()->getItemByIndex(i)->type()=="Internal_Combustion" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
             if(Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i))){
                 if(!b && n<t->getPotenzaIC()){
                     layout->getList()->erase(i);
@@ -554,13 +554,13 @@ void MainWindow::searchTemperaturaVapore(unsigned int n, bool b){
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Steam"){
             if(Steam* t=static_cast<Steam*>(layout->getList()->getItemByIndex(i))){
-            if(b && n<t->getTemperaturaOperativa()){
-                layout->getList()->erase(i);
-                --i; --lun;
-            }else if(!b && n>=t->getTemperaturaOperativa()){
-                layout->getList()->erase(i);
-                --i; --lun;
-            }
+                if(b && n<t->getTemperaturaOperativa()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }else if(!b && n>=t->getTemperaturaOperativa()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
             }else{
                 layout->getList()->erase(i);
                 --i; --lun;

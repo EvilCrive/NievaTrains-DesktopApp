@@ -13,5 +13,6 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon(":/risorse/favicon.ico"));
     return a.exec();
 
+
 }
 

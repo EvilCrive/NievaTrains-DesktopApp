@@ -57,9 +57,9 @@ MainLayout::MainLayout(QWidget* p): QWidget(p),
     left->addWidget(trainList);
     left->addWidget(flush);
     searchBar->setPlaceholderText("Cerca");
-    searchBar->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z<>=, ]{0,50}/i")));
+    searchBar->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z<>=, ]{0,50}/i")));//aggiungere il . se si vuole usare la rierca dell'efficenza elettrico su windows
     carbNecessarioBar->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,50}/i")));
-    kmPerBar->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,50}/i")));
+    kmPerBar->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,50}/i"))); 
     searchField->addWidget(searchBar);
     searchField->addWidget(selectFilter);
     searchField->addWidget(search);

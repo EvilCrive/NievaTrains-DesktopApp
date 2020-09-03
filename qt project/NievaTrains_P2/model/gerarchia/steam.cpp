@@ -34,7 +34,7 @@ double Steam::carburanteNecessario(unsigned int km) const
 {
     if(temperaturaOperativa==0) return 0;
     else if(temperaturaOperativa>1000)      return km;
-    else return (km/temperaturaOperativa)*1000;
+    else return (km*1000)/temperaturaOperativa;
 }
 /**
  * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante

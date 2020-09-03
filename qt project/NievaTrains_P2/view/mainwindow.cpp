@@ -612,7 +612,10 @@ void MainWindow::searchTrasmissioneElettrico(std::string n){
                 if(n=="third rail") test=true;
                 else if(n=="overhead line")    test=false;
                 //eccezione ?
-                else    return;
+                else{
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
                 if(test!=t->getTrasmissioneElettrico()){
                         layout->getList()->erase(i);
                         --i; --lun;
@@ -640,7 +643,10 @@ void MainWindow::searchMotorePrimario(std::string n){
                 if(n=="internal combustion") test=false;
                 else if(n=="electric")    test=true;
                 //eccezione ?
-                else    return;
+                else{
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
                 if(test!=t->getMotorePrimario()){
                     layout->getList()->erase(i);
                     --i; --lun;
@@ -663,17 +669,20 @@ void MainWindow::searchTecnologiaMaglev(std::string n){
         if(layout->getList()->getItemByIndex(i)->type()=="Maglev"){
             Maglev* t=static_cast<Maglev*>(layout->getList()->getItemByIndex(i));
             if(t){
-            transform(n.begin(), n.end(), n.begin(),
-                [](unsigned char c){ return toupper(c); });
-            bool test;
-            if(n=="eds") test=true;
-            else if(n=="ems")    test=false;
-            //eccezione ?
-            else return;
-            if(test!=t->getTecnologia()){
-                layout->getList()->erase(i);
-                --i; --lun;
-            }
+                transform(n.begin(), n.end(), n.begin(),
+                    [](unsigned char c){ return toupper(c); });
+                bool test;
+                if(n=="EDS") test=true;
+                else if(n=="EMS")    test=false;
+                //eccezione ?
+                else{
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
+                if(test!=t->getTecnologia()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
             }
         }
         else{

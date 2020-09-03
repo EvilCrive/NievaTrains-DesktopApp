@@ -3442,6 +3442,7 @@ release\mainwindow.obj: ..\NievaTrains_P2\view\mainwindow.cpp ../NievaTrains_P2/
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QMessageBox \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qmessagebox.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\QString \
+		../NievaTrains_P2/view/supporto/infolayout.h \
 		E:\Qt\5.9.9\msvc2015\include\QtCore\QFile \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\QFileDialog \
 		E:\Qt\5.9.9\msvc2015\include\QtWidgets\qfiledialog.h \

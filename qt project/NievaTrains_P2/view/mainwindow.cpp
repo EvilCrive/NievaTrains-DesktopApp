@@ -2,7 +2,7 @@
 #include "supporto/combotype.h"
 #include <QMessageBox>
 #include <QString>
-#include "infolayout.h"
+#include "supporto/infolayout.h"
 #include <iostream>
 #include <QFile>
 #include <QFileDialog>
@@ -94,7 +94,7 @@ void MainWindow::slotSalva(){
  */
 void MainWindow::slotAutori()
 {
-    QMessageBox::information(this,"Nieva Trains","Gli autori:\nAlberto Crivellari, Matteo Brosolo, Francesco Bugno.");
+    QMessageBox::information(this,"Nieva Trains","Gli autori:\nAlberto Crivellari, Matteo Brosolo.");
 }
 /**
  * @brief slotRemoveTreno rimuove il treno selezionato nella lista dei treni
@@ -527,10 +527,10 @@ void MainWindow::searchPotenzaIC(unsigned int n, bool b){
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Internal Combustion" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
             if(Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i))){
-                if(b && n<t->getPotenzaIC()){
+                if(!b && n<t->getPotenzaIC()){
                     layout->getList()->erase(i);
                     --i; --lun;
-                }else if(!b && n>=t->getPotenzaIC()){
+                }else if(b && n>=t->getPotenzaIC()){
                     layout->getList()->erase(i);
                     --i; --lun;
                 }
@@ -662,9 +662,10 @@ void MainWindow::searchTecnologiaMaglev(std::string n){
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Maglev"){
             Maglev* t=static_cast<Maglev*>(layout->getList()->getItemByIndex(i));
-            bool test;
+            if(t){
             transform(n.begin(), n.end(), n.begin(),
                 [](unsigned char c){ return toupper(c); });
+            bool test;
             if(n=="eds") test=true;
             else if(n=="ems")    test=false;
             //eccezione ?
@@ -672,6 +673,7 @@ void MainWindow::searchTecnologiaMaglev(std::string n){
             if(test!=t->getTecnologia()){
                 layout->getList()->erase(i);
                 --i; --lun;
+            }
             }
         }
         else{

@@ -61,7 +61,7 @@ void Internal_Combustion::print() const
 std::string Internal_Combustion::treno2string() const{
     std::string s=Treno::treno2string();
     std::string potenza=std::to_string(getPotenzaIC());
-    s.append("\nMotore Diesel: "+getMotoreIC()+"\nPotenza specifica: "+potenza+"kW/l");
+    s.append("\nMotore Diesel: "+getMotoreIC()+"\nPotenza specifica: "+potenza+" kW/l");
     return s;
 }
 /**

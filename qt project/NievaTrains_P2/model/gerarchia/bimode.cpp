@@ -83,8 +83,7 @@ void Bimode::print() const
   */
 std::string Bimode::treno2string() const{
     std::string s=Treno::treno2string();
-    std::string potenzaIC=std::to_string(getPotenzaIC()*100);
-    potenzaIC.erase ( potenzaIC.find(".")+3, std::string::npos );
+    std::string potenzaIC=std::to_string(getPotenzaIC());
     std::string efficenzaE=std::to_string(getEfficenzaElettrico()*100);
     efficenzaE.erase ( efficenzaE.find(".")+3, std::string::npos );
     std::string tmp="";

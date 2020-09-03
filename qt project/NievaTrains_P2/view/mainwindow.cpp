@@ -623,6 +623,9 @@ void MainWindow::searchTrasmissioneElettrico(std::string n){
                         layout->getList()->erase(i);
                         --i; --lun;
                 }
+            }                else{
+                layout->getList()->erase(i);
+                --i; --lun;
             }
         }else{
             layout->getList()->erase(i);
@@ -651,6 +654,9 @@ void MainWindow::searchMotorePrimario(std::string n){
                     layout->getList()->erase(i);
                     --i; --lun;
                 }
+            }else{
+                layout->getList()->erase(i);
+                --i; --lun;
             }
         }
         else{
@@ -680,6 +686,9 @@ void MainWindow::searchTecnologiaMaglev(std::string n){
                     layout->getList()->erase(i);
                     --i; --lun;
                 }
+            }else{
+                layout->getList()->erase(i);
+                --i; --lun;
             }
         }
         else{

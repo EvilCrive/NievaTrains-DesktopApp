@@ -45,7 +45,7 @@ unsigned int Internal_Combustion::kmPercorribili(unsigned int l) const
 {
     if(potenzaIC==0) return 0;
     else if(potenzaIC>10000)      return l;
-    else return l*(potenzaIC/10000);
+    else return (l*potenzaIC)/10000;
 }
 
 std::string Internal_Combustion::type() const

@@ -671,7 +671,7 @@ void MainWindow::searchTecnologiaMaglev(std::string n){
             if(t){
                 transform(n.begin(), n.end(), n.begin(),
                     [](unsigned char c){ return toupper(c); });
-                bool test;
+                bool test=true;
                 if(n=="EDS") test=true;
                 else if(n=="EMS")    test=false;
                 //eccezione ?

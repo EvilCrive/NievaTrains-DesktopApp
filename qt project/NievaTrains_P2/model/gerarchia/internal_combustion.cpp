@@ -34,7 +34,7 @@ double Internal_Combustion::carburanteNecessario(unsigned int km) const
 {
     if(potenzaIC==0) return 0;
     else if(potenzaIC>10000)      return km;
-    else return km/(potenzaIC/10000);
+    else return 10000*km/(potenzaIC);
 }
 /**
  * @brief kmPercorribili calcola quanti km sono percorribili dal treno considerando la disponibilità di un determinato numero di unità di carburante

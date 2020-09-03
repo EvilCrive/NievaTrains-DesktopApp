@@ -73,5 +73,5 @@ void Internal_Combustion::serialize(QJsonObject & json)
     json["peso"]=static_cast<int>(getPeso());
 
     json["tipo_motoreIC"]=QString::fromStdString(getMotoreIC());
-    json["PotenzaIC"]=static_cast<int>(getPotenzaIC());
+    json["potenzaIC"]=static_cast<int>(getPotenzaIC());
 }

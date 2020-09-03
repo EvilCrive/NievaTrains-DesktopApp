@@ -535,8 +535,8 @@ void MainWindow::searchPotenzaIC(unsigned int n, bool b){
                     --i; --lun;
                 }
             }else{
-                        layout->getList()->erase(i);
-                        --i; --lun;
+                layout->getList()->erase(i);
+                --i; --lun;
             }
         }else{
             layout->getList()->erase(i);

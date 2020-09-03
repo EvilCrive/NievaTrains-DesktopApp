@@ -594,6 +594,14 @@ void MainWindow::searchEfficenzaElettrico(double n, bool b){
                     layout->getList()->erase(i);
                     --i; --lun;
                 }
+            }else if(Bimode* t=dynamic_cast<Bimode*>(layout->getList()->getItemByIndex(i))){
+                if(b && n<t->getEfficenzaElettrico()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }else if(!b && n>=t->getEfficenzaElettrico()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
             }
         }
         else{

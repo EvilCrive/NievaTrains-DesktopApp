@@ -606,7 +606,7 @@ void MainWindow::searchTrasmissioneElettrico(std::string n){
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Electric" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
             if(Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i))){
-                bool  test;
+                bool  test=true;
                 transform(n.begin(), n.end(), n.begin(),
                     [](unsigned char c){ return tolower(c); });
                 if(n=="third rail") test=true;
@@ -639,7 +639,7 @@ void MainWindow::searchMotorePrimario(std::string n){
             if(t){
                 transform(n.begin(), n.end(), n.begin(),
                     [](unsigned char c){ return tolower(c); });
-                bool test;
+                bool test=true;
                 if(n=="internal combustion") test=false;
                 else if(n=="electric")    test=true;
                 //eccezione ?

@@ -585,8 +585,9 @@ void MainWindow::searchTemperaturaVapore(unsigned int n, bool b){
 void MainWindow::searchEfficenzaElettrico(double n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
-        if(layout->getList()->getItemByIndex(i)->type()=="Electric"){
-            if(Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i))){
+        if(layout->getList()->getItemByIndex(i)->type()=="Electric" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
+            Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i));
+            if(t){
                 if(b && n<t->getEfficenzaElettrico()){
                     layout->getList()->erase(i);
                     --i; --lun;
@@ -594,6 +595,9 @@ void MainWindow::searchEfficenzaElettrico(double n, bool b){
                     layout->getList()->erase(i);
                     --i; --lun;
                 }
+            }else{
+                layout->getList()->erase(i);
+                --i; --lun;
             }
         }
         else{
@@ -602,6 +606,8 @@ void MainWindow::searchEfficenzaElettrico(double n, bool b){
         }
     }
 }
+
+
 
 /**
  * @brief searchTrasmissioneElettrico filtra la lista dei treni mantenendo sol i treni elettrici aventi il tipo di trasmissione uguale al parametro inserito dall'utente

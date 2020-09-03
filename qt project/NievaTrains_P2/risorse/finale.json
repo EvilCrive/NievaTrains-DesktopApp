@@ -1,10 +1,10 @@
 [
     {
         "builder": "American Locomotive Company",
-        "temperaturaOperativa": 1000,
         "nome": "Union Pacific FEF Series",
         "peso": 40,
         "speed": 100,
+        "temperaturaOperativa": 160,
         "tipo_carburanteSteam": "Coal",
         "type": "Steam"
     },
@@ -18,9 +18,9 @@
     },
     {
         "builder": "Brown, Boveri & Cie",
-        "potenzaIC": 3000,
         "nome": "British Rail 18000",
         "peso": 30,
+        "potenzaIC": 3000,
         "speed": 145,
         "tipo_motoreIC": "FPT Racing 420F3",
         "type": "Internal_Combustion"
@@ -37,10 +37,10 @@
     {
         "builder": "Bombardier",
         "efficenzaElettrico": 0.6,
-        "potenzaIC": 2000,
         "motore_primario": "Internal Combustion",
         "nome": "Talent 2",
         "peso": 70,
+        "potenzaIC": 2000,
         "speed": 50,
         "tipo_motoreIC": "Diesel",
         "tipo_trasmissioneElettrico": "Overhead Line",
@@ -49,10 +49,10 @@
     {
         "builder": "Bombardier",
         "efficenzaElettrico": 0.8,
-        "potenzaIC": 4000,
         "motore_primario": "Internal Combustion",
         "nome": "Electrostar",
         "peso": 30,
+        "potenzaIC": 4000,
         "speed": 120,
         "tipo_motoreIC": "BMW",
         "tipo_trasmissioneElettrico": "Overhead Line",
@@ -60,28 +60,28 @@
     },
     {
         "builder": "English Electric at Vulcan Foundry",
-        "potenzaIC": 3000,
         "nome": "British Rail GT3",
         "peso": 55,
+        "potenzaIC": 3000,
         "speed": 87,
         "tipo_motoreIC": "Fiat",
         "type": "Internal_Combustion"
     },
     {
         "builder": "A1 Steam Locomotive Trust",
-        "temperaturaOperativa": 0.3,
         "nome": "Locomotiva A1 Peppercorn 60163 Tornado",
         "peso": 40,
         "speed": 80,
+        "temperaturaOperativa": 150,
         "tipo_carburanteSteam": "Oil",
         "type": "Steam"
     },
     {
         "builder": "London Midland and Scottish Railway",
-        "temperaturaOperativa": 0.4,
         "nome": "LMS Coronation Class",
         "peso": 30,
         "speed": 100,
+        "temperaturaOperativa": 140,
         "tipo_carburanteSteam": "Coal",
         "type": "Steam"
     },
@@ -96,9 +96,9 @@
     },
     {
         "builder": "BGC",
-        "potenzaIC": 6000,
         "nome": "Rhea",
         "peso": 70,
+        "potenzaIC": 6000,
         "speed": 30,
         "tipo_motoreIC": "Multijet",
         "type": "Internal_Combustion"
@@ -122,9 +122,9 @@
     },
     {
         "builder": "General Motors Electro-Motive Division",
-        "potenzaIC": 3500,
         "nome": "DDA40X Sterling R",
         "peso": 50,
+        "potenzaIC": 3500,
         "speed": 90,
         "tipo_motoreIC": "DD35",
         "type": "Internal_Combustion"

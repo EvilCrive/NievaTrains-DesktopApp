@@ -586,8 +586,15 @@ void MainWindow::searchEfficenzaElettrico(double n, bool b){
     unsigned int lun=layout->getList()->count();
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Electric" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
-            Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i));
-            if(t){
+            if(Bimode* t=dynamic_cast<Bimode*>(layout->getList()->getItemByIndex(i))){
+                if(b && n<t->getEfficenzaElettrico()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }else if(!b && n>=t->getEfficenzaElettrico()){
+                    layout->getList()->erase(i);
+                    --i; --lun;
+                }
+            }else if(Electric* t=dynamic_cast<Electric*>(layout->getList()->getItemByIndex(i))){
                 if(b && n<t->getEfficenzaElettrico()){
                     layout->getList()->erase(i);
                     --i; --lun;

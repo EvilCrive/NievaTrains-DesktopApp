@@ -527,10 +527,10 @@ void MainWindow::searchPotenzaIC(unsigned int n, bool b){
     for(unsigned int i=0; i<lun; ++i){
         if(layout->getList()->getItemByIndex(i)->type()=="Internal_Combustion" || layout->getList()->getItemByIndex(i)->type()=="Bimode"){
             if(Internal_Combustion* t=dynamic_cast<Internal_Combustion*>(layout->getList()->getItemByIndex(i))){
-                if(!b && n<t->getPotenzaIC()){
+                if(b && n<t->getPotenzaIC()){
                     layout->getList()->erase(i);
                     --i; --lun;
-                }else if(b && n>=t->getPotenzaIC()){
+                }else if(!b && n>=t->getPotenzaIC()){
                     layout->getList()->erase(i);
                     --i; --lun;
                 }

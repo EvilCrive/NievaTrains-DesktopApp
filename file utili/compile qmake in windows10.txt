@@ -5,3 +5,10 @@ Apri minGW (qt 5.9.9) e vai sulla directory del progetto
 3)mingw32-make install
 4)cd release
 5)windeployqt tris.exe 
+
+
+
+se non hai il.pro
+
+qmake -project
+  inoltre aggiungere qt+=widgets

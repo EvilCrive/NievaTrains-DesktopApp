@@ -1,14 +1,15 @@
+se non hai il.pro:
+1)qmake -project
+  inoltre aggiungere flag qt+=widgets core gui
+  
 Apri minGW (qt 5.9.9) e vai sulla directory del progetto
 
-1)qmake tris.pro
+1)qmake
 2)mingw32-make
 3)mingw32-make install
 4)cd release
-5)windeployqt tris.exe 
+5)windeployqt [nomefile].exe 
 
 
 
-se non hai il.pro
-
-qmake -project
-  inoltre aggiungere qt+=widgets
+cambiare qregexpvalidator e qregexp con qregularexpressionvalidator

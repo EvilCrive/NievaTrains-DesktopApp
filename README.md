@@ -1,36 +1,19 @@
-# P2_PROJECT_19/20
-## COSE DA FARE
-* eccezioni
-* modifica
-* ricerca
+# Nieva Trains - Desktop Application
 
+# To build
+* First off, go inside the correct folder from this repository: `cd qt project` -> `cd NievaTrains_P2`
+* `qmake -project` Create the .pro file (add flag qt+=widgets core gui)
+* `LINUX` If you have linux :
+  * `qmake`
+  * `make`
+* `WINDOWS` If you have windows :
+  * `qmake`
+  * `mingw32-make`
+  * `mingw32-make install`
+  * `cd release`
+  * `windeployqt [nomefile].exe`
 
+This was working with QT 5.9.9, I will soon update it for the latest version. 
+Apri minGW (qt 5.9.9) e vai sulla directory del progetto
 
-## Cartelle
-* file utili
-  * come compilare progetto qt con win10
-  * password per macchina virtuale
-  * link moodle, specifiche e macchina virtuale
-  * progetto chinafit, del semestre scorso per prendere spunto
-* progettazione
-* qt project
-## Progettazione
-* mvc
-* gerarchia
-* altri progetti 
-* scheletro file
-## Progetto QT
-### Lista file:
-* Gerarchia
-  * Treno
-  * Steam
-  * Internal_Combustion
-  * Electric
-  * Maglev
-  * Bimode
-* Model
-* View
-* Controller
-* Main
-* Risorse
-* File progetto (*.pro)
+P.S. : A few patches ago of QT, they replaced `qregexpvalidator` and `qregexp` with `qregularexpressionvalidator`

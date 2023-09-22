@@ -18,10 +18,14 @@ Follow these steps to compile our application and obtain the .out file :
 1. `qmake6` Create the MakeFile, it will display a few warnings: that's ok, ignore them
 1. `make` Executes the MakeFile, compiling .cpp files and linking the QT signals to their slots, using MOC, and deploys the x-executable file (name like name of .pro file)
 # Execute
-Once built the project, inside the 'release' folder there will be the executable file, that can be run as a normal application. (in Windows .exe, in Linux x-executable, without apparent format)
-
 In case of a pc without QT installed (Qt libraries not on PATH), the executive file needs the Qt library files (.dll files) : for portability you have to copy them along with the executive file.
+## Windows
+Once built the project, inside the 'release' folder there will be the .exe file, that can be run as a normal application, for example by double clicking. 
+## Linux
+Once built the project, in the main folder, we will find a mess of files, between those we can find the x-executable application, that can be run as a normal application, using ./[name file].
 # Clean
 There is a python script for the clean-up: `clean-script.py`.
 
 Be careful that this script also removes the build folder, containing the .exe (or .out in Linux).
+
+P.S. : I will probably do bash and bat versions soon

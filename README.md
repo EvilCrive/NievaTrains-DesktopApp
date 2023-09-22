@@ -18,7 +18,7 @@ Follow these steps to compile our application and obtain the .out file :
 # Execute
 Once built the project, inside the 'release' folder there will be the .exe file (or .out in Linux), that can be run as a normal application.
 
-The executive file needs the Qt library files (.dll files), so for portability you have to copy them along with the executive file.
+In case of a pc without QT installed (Qt libraries not on PATH), the executive file needs the Qt library files (.dll files) : for portability you have to copy them along with the executive file.
 # Clean
 There is a python script for the clean-up: `clean-script.py`.
 

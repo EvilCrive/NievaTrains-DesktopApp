@@ -1,19 +1,25 @@
-# Nieva Trains - Desktop Application
+# Build  
+First of all make sure to download QT and put `qmake`, `mingw32-make` and `g++` in the PATH environmental variable.
+This was working with `QT 6.5.2`, it might not work with newer versions of QT. 
+## Windows
+Follow these steps to compile our application and obtain the .exe file :
+1. `qmake -project QT+=widgets` Creates the .pro file (filename is that of the parent folder's name)
+1. `qmake` Create the MakeFile, it will display a few warnings: that's ok, ignore them
+1. `mingw32-make` Executes the MakeFile, compiling .cpp files and linking the QT signals to their slots, using MOC
+1. `cd release` This project creates the build files in the 'release' folder
+1. `windeployqt.exe [namefile].exe` Deploy the application for Windows, namefile will be the same as the name of the .pro file generated at step 1
+## Linux
+Follow these steps to compile our application and obtain the .out file :
+1. `qmake -project QT+=widgets` Creates the .pro file (filename is that of the parent folder's name)
+1. `qmake` Create the MakeFile, it will display a few warnings: that's ok, ignore them
+1. `make` Executes the MakeFile, compiling .cpp files and linking the QT signals to their slots, using MOC
+1. `cd release` This project creates the build files in the 'release' folder
+1. `windeployqt.exe [namefile].exe` Deploy the application for Windows, namefile will be the same as the name of the .pro file generated at step 1
+# Execute
+Once built the project, inside the 'release' folder there will be the .exe file (or .out in Linux), that can be run as a normal application.
 
-# To build
-* First off, go inside the correct folder from this repository: `cd qt project` -> `cd NievaTrains_P2`
-* `qmake -project` Create the .pro file (add flag qt+=widgets core gui)
-* `LINUX` If you have linux :
-  * `qmake`
-  * `make`
-* `WINDOWS` If you have windows :
-  * `qmake`
-  * `mingw32-make`
-  * `mingw32-make install`
-  * `cd release`
-  * `windeployqt [nomefile].exe`
+The executive file needs the Qt library files (.dll files), so for portability you have to copy them along with the executive file.
+# Clean
+There is a python script for the clean-up: `clean-script.py`.
 
-This was working with QT 5.9.9, I will soon update it for the latest version. 
-Apri minGW (qt 5.9.9) e vai sulla directory del progetto
-
-P.S. : A few patches ago of QT, they replaced `qregexpvalidator` and `qregexp` with `qregularexpressionvalidator`
+Be careful that this script also removes the build folder, containing the .exe (or .out in Linux).

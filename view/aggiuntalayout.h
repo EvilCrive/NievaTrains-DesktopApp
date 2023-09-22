@@ -7,6 +7,7 @@
 #include <QStringList>
 #include <QPushButton>
 #include <QLabel>
+#include <QRegularExpressionValidator>
 #include <string>
 #include "supporto/comboboxmotoreprimario.h"
 #include "supporto/comboboxtech.h"

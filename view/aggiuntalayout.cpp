@@ -20,23 +20,24 @@ AggiuntaLayout::AggiuntaLayout(QWidget* p, int tipoT): QDialog(p), layoutPopUp(n
     motoreICL->setText("Nome motore Diesel");
 
     nome->setPlaceholderText("Inserisci nome treno");
-    nome->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z ]{0,50}")));
+    //new QRegularExpressionValidator(QRegularExpression())
+    nome->setValidator(new QRegularExpressionValidator(QRegularExpression("[A-Z0-9a-z ]{0,50}")));
     costruttore->setPlaceholderText("Inserisci costruttore treno");
-    costruttore->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
+    costruttore->setValidator(new QRegularExpressionValidator(QRegularExpression("[A-Z0-9a-z]{0,50}")));
     efficenzaE->setPlaceholderText("Inserisci efficenza motore elettrico");
-    efficenzaE->setValidator(new QRegExpValidator(QRegExp("[0-9.]{0,5}")));
+    efficenzaE->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9.]{0,5}")));
     temperaturaS->setPlaceholderText("Inserisci temperatura operativa del motore a vapore");
-    temperaturaS->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
+    temperaturaS->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{0,5}")));
     potenzaIC->setPlaceholderText("Inserisci la potenza motore a combustione interna");
-    potenzaIC->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
+    potenzaIC->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{0,5}")));
     speed->setPlaceholderText("Inserisci velocità massima");
-    speed->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
+    speed->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{0,5}")));
     peso->setPlaceholderText("Inserisci peso");
-    peso->setValidator(new QRegExpValidator(QRegExp("[0-9]{0,5}")));
+    peso->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9]{0,5}")));
     carburanteS->setPlaceholderText("Inserisci carburante steam");
-    carburanteS->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
+    carburanteS->setValidator(new QRegularExpressionValidator(QRegularExpression("[A-Z0-9a-z]{0,50}")));
     motoreIC->setPlaceholderText("Inserisci nome e marca motore a combustione interna");
-    motoreIC->setValidator(new QRegExpValidator(QRegExp("[A-Z0-9a-z]{0,50}")));
+    motoreIC->setValidator(new QRegularExpressionValidator(QRegularExpression("[A-Z0-9a-z]{0,50}")));
 
     motoreIC->hide();
     efficenzaE->hide();

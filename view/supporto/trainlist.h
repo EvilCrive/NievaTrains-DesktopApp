@@ -2,9 +2,7 @@
 #define TRAINLIST_H
 #include <QListWidgetItem>
 #include <QListWidget>
-#include "../NievaTrains_P2/model/gerarchia/treno.h"
-#include "Qontainer.h"
-
+#include "../../model/gerarchia/treno.h"
 
 class TrainListWidgetItem : public QListWidgetItem
 {
